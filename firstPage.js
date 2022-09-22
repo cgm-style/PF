@@ -1,3 +1,5 @@
 function firstPage()    {
-    console.log("on!")
+    setTimeout(() => {
+        
+    }, 1000);
 }
