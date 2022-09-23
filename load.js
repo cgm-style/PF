@@ -1,4 +1,30 @@
 //기본설정
+// weather.js
+const COORDS = "coords";
+
+function saveCoords(coordsObj) { // localStorage에 저장
+    localStorage.setItem(COORDS, JSON.stringify(coordsObj));
+}
+
+function handleGeoSucces(position) { // 요청 수락
+    const latitude = position.coords.latitude; 
+    const longitude = position.coords.longitude;
+    const coordsObj = {
+        latitude,
+        longitude,
+    };
+    saveCoords(coordsObj); // localStorage에 저장 함수
+}
+
+function handleGeoError() { // 요청 거절
+    
+}
+
+function askForCoords() { // 사용자 위치 요청 (요청 수락, 요청 거절)
+    navigator.geolocation.getCurrentPosition(handleGeoSucces, handleGeoError);
+}
+
+
 let nextNum = 0;
 let runEvent = true;
 let time = Intl.DateTimeFormat('kr',{dateStyle:'full', timeStyle: 'full'}).format(new Date);
@@ -16,6 +42,7 @@ const mainWrap = document.querySelector("#wrap");   // 화면 전체 dom
     const stickyBarBottom = document.createElement("div");  // 플레이트의 아랫부분
 
 function loadBar() {
+
     stickyBarTop.id = "stickyBarTop";   // 각 dom마다 컨트롤 하기 쉽게 선택자 입력
     firstBg.id = "firstBg";
     firstUl.id = "firstUl";
@@ -65,7 +92,7 @@ const mainBarEvent = () => {    // 플레이트 컷 이벤트 내용
 }
 loadBar();
 
-function autoText(_, counter = 0)   {
+function autoText(_, counter = 0,json)   {
     function autoTyping(text, textContainer,textNum) {  // 넘겨받을 텍스트, 해당 텍스트를 보여줄 dom,중지할 이벤트 이름
         counter=0;
         let intervalEvent = setInterval((e) => {
@@ -154,12 +181,12 @@ function autoText(_, counter = 0)   {
     function nextText(nextNum){
         runEvent = true;
         let num1 = [
-            [2,"사용가능 스킬"],
-            [3,"HTML5"],
-            [4,"CSS3"],
-            [5,"JAVASCRIPT"],
+            [2,"사용가능 스킬 : Html5,Css3,VanilaJavascript"],
+            [3,"공부하고 있는 스킬 : React,TypeScript"],
+            [4,"E-mail : developercgm@gmail.com"],
+            [5,"Phone : 010-7242-4787"],
             [6,"더블클릭하면 내용을 수정할수있습니다."],
-            [7,"하단의 입력창에 입력시 추가할수있습니다."]
+            [7,"하단의 입력창에 입력시 내용을 추가할수있습니다."]
         ]
         if(num1[nextNum] === undefined)   {
             runEvent = false;
@@ -167,12 +194,10 @@ function autoText(_, counter = 0)   {
         }
         addTextListLi(num1[nextNum][0],num1[nextNum][1]);
         nextNum =+1;
-
-        // 아래 내용은 P클릭시 발생하는 이벤트들 
-        
     }
 
     firstliLast.addEventListener("submit",(firstliLastEvent)=>{
+        
         firstliLastEvent.preventDefault();
 
         let inputTypingText = firstliLastEvent.target[0].value;
@@ -209,11 +234,41 @@ function autoText(_, counter = 0)   {
             firstliLastEvent.target[0].value="";
             return false;
         }else if(inputTypingText === "날씨")  {
+
+            const API_KEY = "c65eec58bb72eba4ba267415b3d37432";
+            function getWeather(lat, lng) {
+                fetch(
+                    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`
+                )
+                    .then(function (response) { // .then = fetch가 완료 된 후 실행됨
+                        return response.json(); // json형태로 변환
+                    })
+                    .then(function (json) { 
+                        const temperature = json.main.temp; 
+                        const place = json.name;
+                        const nowWeather = json.weather[0].main;
+
+                        runEvent = true;
+                        setTimeout(() => {
+                            addTextListLi(document.querySelectorAll(`.firstLi`).length+1,`현재 지역은 ${place} 이며 날씨는 ${nowWeather}, 기온은 ${temperature.toFixed()}도 입니다.`);
+                        }, 1000);
+                    });
+                }
+
+            function weatherLoadCoords() {
+                const loadedCoords = localStorage.getItem(COORDS); // localStorage에서 위치정보 가져옴
+                if (loadedCoords === null) { // 위치 정보가 없으면
+                    askForCoords(); // 위치 정보 요청 함수
+                } else {
+                    const parseCoords = JSON.parse(loadedCoords); // json형식을 객체 타입으로 바꿔서 저장
+                    getWeather(parseCoords.latitude, parseCoords.longitude); // 날씨 요청 함수
+                }
+            }
+            weatherLoadCoords();
+
+            
+
             addTextListLi(document.querySelectorAll(`.firstLi`).length+1,inputTypingText);
-            runEvent = true;
-            setTimeout(() => {
-                addTextListLi(document.querySelectorAll(`.firstLi`).length+1,`${time}입니다.`);
-            }, 1000);
             firstliLastEvent.target[0].value="";
             return false;
         }else if(inputTypingText === "추가예정")  {
