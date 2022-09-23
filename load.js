@@ -27,6 +27,7 @@ function askForCoords() { // 사용자 위치 요청 (요청 수락, 요청 거�
 
 let nextNum = 0;
 let runEvent = true;
+let loadText = true;
 let time = Intl.DateTimeFormat('kr',{dateStyle:'full', timeStyle: 'full'}).format(new Date);
 
 const mainWrap = document.querySelector("#wrap");   // 화면 전체 dom
@@ -92,14 +93,13 @@ const mainBarEvent = () => {    // 플레이트 컷 이벤트 내용
 }
 loadBar();
 
-function autoText(_, counter = 0,json)   {
+function autoText(_, counter = 0)   {
     function autoTyping(text, textContainer,textNum) {  // 넘겨받을 텍스트, 해당 텍스트를 보여줄 dom,중지할 이벤트 이름
         counter=0;
         let intervalEvent = setInterval((e) => {
-            // 글자가 모두 출력되면 setInterval을 멈출 것
             if (text.length === counter) {
                 if(textNum === undefined){
-                    textNum = document.querySelectorAll(".firstLi").length
+                    textNum = document.querySelectorAll(".firstLi").length;
                     return false;
                 }
                 clearInterval(intervalEvent);
@@ -112,12 +112,12 @@ function autoText(_, counter = 0,json)   {
                 }
                 return false;
             };
-
             // 문자열 하나하나 h2의 텍스트 컨텐츠로 추가한다 
             textContainer.textContent += text[counter];
             // 카운터 증산
             counter++;
         }, 50); 
+        
     }
 
     function addTextListLi(textLiNum,text)  {    // list 생성하는 함수
@@ -181,15 +181,14 @@ function autoText(_, counter = 0,json)   {
     function nextText(nextNum){
         runEvent = true;
         let num1 = [
-            [2,"사용가능 스킬 : Html5,Css3,VanilaJavascript"],
-            [3,"공부하고 있는 스킬 : React,TypeScript"],
-            [4,"E-mail : developercgm@gmail.com"],
-            [5,"Phone : 010-7242-4787"],
-            [6,"더블클릭하면 내용을 수정할수있습니다."],
-            [7,"하단의 입력창에 입력시 내용을 추가할수있습니다."]
+            [2,"E-mail : developercgm@gmail.com"],
+            [3,"더블클릭하면 내용을 수정할수있습니다."],
+            [4,"하단의 입력창에 내용을 입력시 내용을 추가할수있습니다."],
+            [5,"자세히보기를 입력시 위 이벤트를 무시하고 메인창으로 갈 수 있습니다."]
         ]
         if(num1[nextNum] === undefined)   {
             runEvent = false;
+            loadText = false;
             return false;
         }
         addTextListLi(num1[nextNum][0],num1[nextNum][1]);
@@ -250,6 +249,7 @@ function autoText(_, counter = 0,json)   {
 
                         runEvent = true;
                         setTimeout(() => {
+                            runEvent = true;
                             addTextListLi(document.querySelectorAll(`.firstLi`).length+1,`현재 지역은 ${place} 이며 날씨는 ${nowWeather}, 기온은 ${temperature.toFixed()}도 입니다.`);
                         }, 1000);
                     });
@@ -265,9 +265,6 @@ function autoText(_, counter = 0,json)   {
                 }
             }
             weatherLoadCoords();
-
-            
-
             addTextListLi(document.querySelectorAll(`.firstLi`).length+1,inputTypingText);
             firstliLastEvent.target[0].value="";
             return false;

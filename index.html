@@ -9,79 +9,119 @@
     <!-- 첫 로드시 화면 -->
     <link rel="stylesheet" href="load.css"/>
     <style>
-        #firstBg    {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: black;
-            overflow-y: scroll;
-        }
-        .firstLi    {
-            color: chartreuse;
-            display: flex;
-            position: relative;
-            width: 100%;
-        }
-        .firstLiDiv    {
-            width: 20px;
-            text-align: right;
-            padding-right: 10px;
-            margin: 1px 0;
-            border-right: 1px solid gray;
-            margin-right: 10px;
-        }
-        .firstLiP   {
-            width:100%;
-        }
-        
-        .changeLineText {
-            background: black;
-            color: chartreuse;
-            width: 100%;
-            border: 0px;
-            font-size: 16px;
-        }
-        .changeLineText:focus {
-            outline: none;
-        }
-
-        #firstUl li:last-child {
-            margin-bottom: 35px;
-        }
-
-        #firstLastLi    {
+        #menubtn    {
             position: absolute;
-            bottom: 0px;
-            left: 0px;
-            height: 35px;
-            width: 100%;
-            display: flex;
-        }
-        #firstliLastInput   {
-            height: 100%;
-            width: 95%;
-            background: black;
-            color: aquamarine;
+            top: 25px;
+            left: 25px;
+            border: 1px solid slategray;
+            border-radius: 5px;
             font-size: 2vh;
-            padding-left: 10px;
+            font-weight: 600;
+            padding: 4px 8px;
+            cursor: pointer;
+            z-index: 10;
         }
-        #firstliLastInput::placeholder {
-            color:gray;
-        }
-        #firstliLastInput:focus {
-            outline: none;
-        }
-        #firstliLastButton   {
-            width: 100px;
+
+        #menuNav    {
+            position: fixed;
+            width: 100%;
             height: 100%;
-            background: black;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            border: 1px solid cadetblue;
-            box-sizing: border-box;
+            left: 0;
+            top: 0;
+        }
+        #menuNavUl  {
+            text-align: center;
+            position: relative;
+            top: 25%;
+            transition:all 1s;
+            z-index: 2;
+        }
+        #menuNavUl:hover li a   {
+            color: rgba(245, 245, 245, 0.133);
+        }
+        .menuNavLi  {
+            
+        }
+        .menuNavLi:hover a  {
+            color: #fff !important;
+            background: transparent;
+        }
+        .menuNavLiA {
+            color: rgb(206, 206, 206);
+            text-decoration: none;
+            font-size: 3em;
+            padding: 5px 20px;
+            display: inline-flex;
+            font-weight: 700;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+
+        .menuNavLiA:before  {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5em;
+            color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 500px;
+            transition: letter-spacing 0.5s, left 0.5s;
+        }
+        .menuNavLiA:hover:before {
+            content: attr(data-text);
+            opacity: 1;
+            left: 50%;
+            letter-spacing: 10px;
+            width: 1800px;
+            height: 1800px;
+        }
+
+        #menuNavUl li:nth-child(4n + 1) a:before {
+            background: #0470fe;
+        }
+        #menuNavUl li:nth-child(4n + 2) a:before {
+            background: #ff7675;
+        }
+        #menuNavUl li:nth-child(4n + 3) a:before {
+            background: #1582fe;
+        }
+        #menuNavUl li:nth-child(4n + 4) a:before {
+            background: #a29bfe;
+        }
+
+        #menuLine   {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+        .menuLineDiv    {
+            position: absolute;
+            width: 200%;
+            height: 0px;
+            z-index: 100;
+            transform: rotate(37deg);
+            transition: all 0.5s cubic-bezier(.55,0,.1,1);
+            background: dimgray;
+        }
+        #menuLineDiv1   {
+            left: -27%;
+        }
+        #menuLineDiv2   {
+            left: -86%;
+        }
+        #menuLineDiv3   {
+            left: -137%;
         }
     </style>
 
