@@ -64,6 +64,7 @@ function firstPage()    {
         menuNavLi4.appendChild(menuNavLi4A);
 
         menuNavUl.style.opacity = 0;
+        menuLine.className = "open";
 
         setTimeout(() => {
             menuLineDiv1.style.height = "100px";
