@@ -139,7 +139,7 @@ const mainBarEvent = () => {    // 플레이트 컷 이벤트 내용
 loadBar();
 
 UIBox.addEventListener("mousedown", function(e){    // 퀵 버튼 부분 move 이벤트
-    UIBox.style.zIndex = "4";
+    UIBox.style.zIndex = "5";
     let shiftX = e.clientX - UIBox.getBoundingClientRect().left;
     let shiftY = e.clientY - UIBox.getBoundingClientRect().top;
 
@@ -151,9 +151,9 @@ UIBox.addEventListener("mousedown", function(e){    // 퀵 버튼 부분 move �
         UIBox.style.top = e.pageY - shiftY + 'px';
     })
 
-    UIBox.addEventListener("dragend",function(e) {
+    UIBox.addEventListener("mouseup",function(e) {
         UIBox.style.cursor = "pointer";
-        UIBox.style.zIndex = "3";
+        UIBox.style.zIndex = "4";
     })
 })
 
@@ -459,7 +459,7 @@ function autoText(_, counter = 0)   {
                         calculatorUl.appendChild(calculatorLi17);
 
         calculatorWrap.addEventListener("mousedown", function(e) {   // 계산기 버튼 창 move Event
-            calculatorWrap.style.zIndex = "4";
+            calculatorWrap.style.zIndex = "5";
             let calculatorshiftX = e.clientX - calculatorWrap.getBoundingClientRect().left;
             let calculatorshiftY = e.clientY - calculatorWrap.getBoundingClientRect().top;
 
@@ -473,7 +473,7 @@ function autoText(_, counter = 0)   {
 
             calculatorWrap.addEventListener("dragend",function(e) {
                 calculatorWrap.style.cursor = "pointer";
-                calculatorWrap.style.zIndex = "3";
+                calculatorWrap.style.zIndex = "4";
             })
             calculatorWrap.addEventListener("mouseup",() => {
                 calculatorWrap.style.cursor = "pointer";

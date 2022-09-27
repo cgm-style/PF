@@ -245,15 +245,15 @@
 }
 
 #calculatorWrap {
-    width: 400px;
+    width: 320px;
     height: auto;
     position: absolute;
-    right: 800px;
+    right: 0px;
     top: 60px;
     background: white;
     border-radius: 5px;
     box-sizing: border-box;
-    z-index: 3;
+    z-index: 4;
     cursor: pointer;
     border-top: 25px solid gray;
     overflow: hidden;
@@ -307,5 +307,5 @@
 }
 .calculatorLi:nth-of-type(16)   {width: 50%;}
 
-#calculatorTopDiv   {margin-left: 355px;}
-#calculatorTopDivClose  {margin-left: 375px; background: coral;}
+#calculatorTopDiv   {margin-left: 275px;}
+#calculatorTopDivClose  {margin-left: 295px; background: coral;}
