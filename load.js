@@ -29,6 +29,8 @@ let nextNum = 0;
 let runEvent = true;
 let loadText = true;
 let time = Intl.DateTimeFormat('kr',{dateStyle:'full', timeStyle: 'full'}).format(new Date);
+let calculatorAnswerValue = [];
+let calculatorSet = false;
 
 const mainWrap = document.querySelector("#wrap");   // 화면 전체 dom
     const innerWrap = document.createElement("div");    // 아래 모든 영역을 포함한 dom
@@ -106,7 +108,7 @@ function loadBar() {
     UIBoxInnerDiv2.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M10.25 0a.75.75 0 000 1.5h1v1.278a9.955 9.955 0 00-5.635 2.276L4.28 3.72a.75.75 0 00-1.06 1.06l1.315 1.316A9.962 9.962 0 002 12.75c0 5.523 4.477 10 10 10s10-4.477 10-10a9.962 9.962 0 00-2.535-6.654L20.78 4.78a.75.75 0 00-1.06-1.06l-1.334 1.334a9.955 9.955 0 00-5.636-2.276V1.5h1a.75.75 0 000-1.5h-3.5zM12 21.25a8.5 8.5 0 100-17 8.5 8.5 0 000 17zm4.03-12.53a.75.75 0 010 1.06l-2.381 2.382a1.75 1.75 0 11-1.06-1.06l2.38-2.382a.75.75 0 011.061 0z"></path></svg>`;
     UIBoxInnerDiv3.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M12 17.5a5.5 5.5 0 100-11 5.5 5.5 0 000 11zm0 1.5a7 7 0 100-14 7 7 0 000 14zm12-7a.75.75 0 01-.75.75h-2.5a.75.75 0 010-1.5h2.5A.75.75 0 0124 12zM4 12a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h2.5A.75.75 0 014 12zm16.485-8.485a.75.75 0 010 1.06l-1.768 1.768a.75.75 0 01-1.06-1.06l1.767-1.768a.75.75 0 011.061 0zM6.343 17.657a.75.75 0 010 1.06l-1.768 1.768a.75.75 0 11-1.06-1.06l1.767-1.768a.75.75 0 011.061 0zM12 0a.75.75 0 01.75.75v2.5a.75.75 0 01-1.5 0V.75A.75.75 0 0112 0zm0 20a.75.75 0 01.75.75v2.5a.75.75 0 01-1.5 0v-2.5A.75.75 0 0112 20zM3.515 3.515a.75.75 0 011.06 0l1.768 1.768a.75.75 0 11-1.06 1.06L3.515 4.575a.75.75 0 010-1.06zm14.142 14.142a.75.75 0 011.06 0l1.768 1.768a.75.75 0 01-1.06 1.06l-1.768-1.767a.75.75 0 010-1.061z"></path></svg>`;
     UIBoxInnerDiv4.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M8.114 2.094a.75.75 0 01.386.656V9h1.252a.75.75 0 110 1.5H5.75a.75.75 0 010-1.5H7V4.103l-.853.533a.75.75 0 01-.795-1.272l2-1.25a.75.75 0 01.762-.02zm4.889 5.66a.75.75 0 01.75-.75h5.232a.75.75 0 01.53 1.28l-2.776 2.777c.55.097 1.057.253 1.492.483.905.477 1.504 1.284 1.504 2.418 0 .966-.471 1.75-1.172 2.27-.687.511-1.587.77-2.521.77-1.367 0-2.274-.528-2.667-.756a.75.75 0 01.755-1.297c.331.193.953.553 1.912.553.673 0 1.243-.188 1.627-.473.37-.275.566-.635.566-1.067 0-.5-.219-.836-.703-1.091-.538-.284-1.375-.443-2.471-.443a.75.75 0 01-.53-1.28l2.643-2.644h-3.421a.75.75 0 01-.75-.75zM7.88 15.215a1.4 1.4 0 00-1.446.83.75.75 0 01-1.37-.61 2.9 2.9 0 012.986-1.71 2.565 2.565 0 011.557.743c.434.446.685 1.058.685 1.778 0 1.641-1.254 2.437-2.12 2.986-.538.341-1.18.694-1.495 1.273H9.75a.75.75 0 010 1.5h-4a.75.75 0 01-.75-.75c0-1.799 1.337-2.63 2.243-3.21 1.032-.659 1.55-1.031 1.55-1.8 0-.355-.116-.584-.26-.732a1.068 1.068 0 00-.652-.298z"></path></svg>`;
-    UIBoxInnerDiv5.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M9.036 7.976a.75.75 0 00-1.06 1.06L10.939 12l-2.963 2.963a.75.75 0 101.06 1.06L12 13.06l2.963 2.964a.75.75 0 001.061-1.06L13.061 12l2.963-2.964a.75.75 0 10-1.06-1.06L12 10.939 9.036 7.976z"></path><path fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM2.5 12a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z"></path></svg>`;
+    UIBoxInnerDiv5.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M0 3.75A.75.75 0 01.75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.496 4.496 0 0115.75 3h7.5a.75.75 0 01.75.75v15.063a.75.75 0 01-.755.75l-7.682-.052a3 3 0 00-2.142.878l-.89.891a.75.75 0 01-1.061 0l-.902-.901a3 3 0 00-2.121-.879H.75a.75.75 0 01-.75-.75v-15zm11.247 3.747a3 3 0 00-3-2.997H1.5V18h6.947a4.5 4.5 0 012.803.98l-.003-11.483zm1.503 11.485V7.5a3 3 0 013-3h6.75v13.558l-6.927-.047a4.5 4.5 0 00-2.823.971z"></path></svg>`;
     UIBoxInnerDiv6.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M9.036 7.976a.75.75 0 00-1.06 1.06L10.939 12l-2.963 2.963a.75.75 0 101.06 1.06L12 13.06l2.963 2.964a.75.75 0 001.061-1.06L13.061 12l2.963-2.964a.75.75 0 10-1.06-1.06L12 10.939 9.036 7.976z"></path><path fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM2.5 12a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z"></path></svg>`;
 
     UIBox.draggable = true;
@@ -246,7 +248,8 @@ function autoText(_, counter = 0)   {
             [2,"E-mail : developercgm@gmail.com"],
             [3,"더블클릭하면 내용을 수정할수있습니다."],
             [4,"하단의 입력창에 내용을 입력시 내용을 추가할수있습니다."],
-            [5,"자세히보기를 입력시 위 이벤트를 무시하고 메인창으로 갈 수 있습니다."]
+            [5,"이 페이지는 하드코딩으로 제작한 페이지 입니다."],
+            [6,"이 페이지의 html5는 <main id='wrap'></main> 하나이며 전부 동적 생성되었습니다."]
         ]
         if(num1[nextNum] === undefined)   {
             runEvent = false;
@@ -408,8 +411,8 @@ function autoText(_, counter = 0)   {
         calculatorTopP.innerText = "Calculator";
         calculatorInput.type = "text";
         calculatorInput.autocomplete = "off";
-        calculatorInput.value = "1+1";
-        calculatorLi1.innerText = "n2";
+        calculatorInput.placeholder = "1+1";
+        calculatorLi1.innerText = "C";
         calculatorLi2.innerText = "/";
         calculatorLi3.innerText = "*";
         calculatorLi4.innerText = "-";
@@ -477,6 +480,7 @@ function autoText(_, counter = 0)   {
             })
         })
 
+        calculatorForm.addEventListener("submit",(e)=>{e.preventDefault();})    // 계산기의 submit이벤트 막기
         calculatorTopDiv.addEventListener("click",function() {      // 계산기 최소화 이벤트
             if (this.className === "close") {
                 calculatorWrapCotainer.style.height = `485px`;
@@ -491,12 +495,118 @@ function autoText(_, counter = 0)   {
             e.target.parentElement.parentElement.remove();
         })
 
-        calculatorUl.addEventListener("click",function(e){  // 계산기 클릭 이벤트
-            calculatorInput.value = calculatorInput.value + e.target.innerText;
+        let allKey = document.querySelectorAll(".calculatorLi");    // 계산기 클릭시 색 변경 이벤트
+        allKey.forEach((allKey) => {
+            allKey.addEventListener("click",function(){
+                allKey.style.background = "dimgrey";
+                setTimeout(() => {
+                    allKey.style.background = `linear-gradient(135deg, #2a2a2a, #000000)`
+                }, 100);
+            })
         })
-        calculatorLi15.addEventListener("click",function(e) {
 
+        calculatorUl.addEventListener("click",function(e){  // 계산기 클릭 이벤트
+            let checkInputOper = e.target.innerText;
+            if(checkInputOper === "+" || checkInputOper === "-" || checkInputOper === "*" || checkInputOper === "/" || checkInputOper === "c" || checkInputOper === "="){
+                calculatorAnswer(calculatorInput.value,e.target.innerText);
+                return;
+            }else{
+                calculatorInput.value = calculatorInput.value + e.target.innerText;
+            }
+            calculatorAnswer(calculatorInput.value,e.target.innerText);
         })
+        calculatorInput.addEventListener("keydown",function(e){ // 계산기 클릭이 아니라 키보드로 입력할때 
+
+            let allKey = document.querySelectorAll(".calculatorLi");
+            
+            function keyDown(){
+                let downKey = e.key;
+                if(downKey === "Enter") {   // enter의 값을 = 랑 같도록 설정
+                    downKey = "=";
+                }
+                allKey.forEach((allKey) => {
+                    if(downKey === allKey.innerText)  {
+                        allKey.style.background = "dimgrey";
+                        setTimeout(() => {
+                            allKey.style.background = `linear-gradient(135deg, #2a2a2a, #000000)`
+                        }, 100);
+                        
+                    }
+                })
+                calculatorAnswer(calculatorInput.value,downKey)
+            }
+            keyDown();
+        })
+
+        function calculatorAnswer(value,set){
+            if(set === "+" || set === "-" || set === "*" || set === "/") {  // 이상한 입력값 막기
+                if(calculatorSet === true){
+                    alert("올바른 값을 입력해주세요");
+                    calculatorInput.value = "";
+                    calculatorSet = true;
+                    return false;
+                }
+
+                calculatorSet = true;
+                if(value.slice(0,1) === "-" || value.slice(0,1) === "+" || value.slice(0,1) === "*" || value.slice(0,1) === "/")    {  
+                    value = value.slice(1,value.length);
+                }
+                calculatorAnswerValue.push(value,set);
+                setTimeout(() => {
+                    calculatorInput.value="";
+                }, 100);
+            }else if (!isNaN(set))  {
+                calculatorSet = false;
+            }
+            if(set === "=") {   // 계산 결과 도출 이벤트
+                calculatorAnswerValue.push(value);
+                calculatorAnswerValue.map((list) =>{
+                    if(list === "") {   // 값이 비어있다면
+                        calculatorInput.value = "";
+                        alert("올바른 값을 입력해주세요");
+                        calculatorAnswerValue = [];
+                        return false;
+                    }
+                })
+
+                let calculatorCounter = calculatorAnswerValue.length/2-0.5;   // 연산 횟수 
+                for(counter=1; counter <= calculatorCounter; counter++) {   //실제 연산 영역
+                    
+                    if(calculatorAnswerValue[1] === "+")    {
+                        console.log(calculatorAnswerValue);
+                        let answer = Number(calculatorAnswerValue[0]) + Number(calculatorAnswerValue[2]);
+                        calculatorAnswerValue[2] = answer;
+                        calculatorAnswerValue.shift();
+                        calculatorAnswerValue.shift();
+                    }else if(calculatorAnswerValue[1] === "-")  {
+                        let answer = Number(calculatorAnswerValue[0]) - Number(calculatorAnswerValue[2]);
+                        calculatorAnswerValue[2] = answer;
+                        calculatorAnswerValue.shift();
+                        calculatorAnswerValue.shift();
+                    }else if(calculatorAnswerValue[1] === "*")  {
+                        let answer = Number(calculatorAnswerValue[0]) * Number(calculatorAnswerValue[2]);
+                        calculatorAnswerValue[2] = answer;
+                        calculatorAnswerValue.shift();
+                        calculatorAnswerValue.shift();
+                    }else if(calculatorAnswerValue[1] === "/")  {
+                        let answer = Number(calculatorAnswerValue[0]) / Number(calculatorAnswerValue[2]);
+                        calculatorAnswerValue[2] = answer;
+                        calculatorAnswerValue.shift();
+                        calculatorAnswerValue.shift();
+                    }
+                    
+                }
+                calculatorInput.value = calculatorAnswerValue;  // 연산된 값 출력
+                calculatorAnswerValue = []; // 출력후 값으 저장되었던 배열 삭제
+            }
+        }
+        calculatorLi1.addEventListener("click",function(e){ // 초기화 버튼 액션
+            calculatorAnswerValue = [];
+            setTimeout(() => {
+                calculatorInput.value = "";
+            }, 10);
+        })
+        
     }
 
     // 퀵 버튼 이벤트 부분
@@ -554,6 +664,13 @@ function autoText(_, counter = 0)   {
         return false;
     });
     UIBoxInnerDiv4.addEventListener("click",calculator);
+    UIBoxInnerDiv5.addEventListener("click",()=>{
+        if(runEvent === true)   {
+            alert("아직 이벤트가 진행중입니다.");
+            return false;
+        }
+        addTextListLi(document.querySelectorAll(`.firstLi`).length+1,`입력가능한 명력어는 '시간','날씨','추가예정'등이 있습니다.`);
+    })
 
 }
 window.addEventListener('load', autoText);

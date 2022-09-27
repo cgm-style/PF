@@ -39,7 +39,7 @@ function firstPage()    {
     menuNavLi4A.className = "menuNavLiA";
 
     function addMenu()  {
-        menuNavLi1A.innerText ="Menu1";
+        menuNavLi1A.innerText ="Code Page";
         menuNavLi1A.setAttribute("data-text",`${menuNavLi1A.innerText}`);
         menuNavLi2A.innerText ="Menu2";
         menuNavLi2A.setAttribute("data-text",`${menuNavLi1A.innerText}`);
