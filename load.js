@@ -32,6 +32,15 @@ let time = Intl.DateTimeFormat('kr',{dateStyle:'full', timeStyle: 'full'}).forma
 let calculatorAnswerValue = [];
 let calculatorSet = false;
 
+
+const user = navigator.userAgent;   // Pc/Mobile 체크
+let isCheck = false;
+
+if ( user.indexOf("iPhone") > -1 || user.indexOf("Android") > -1 ) {
+    isCheck = true;
+}
+
+
 const mainWrap = document.querySelector("#wrap");   // 화면 전체 dom
     const innerWrap = document.createElement("div");    // 아래 모든 영역을 포함한 dom
     const firstBg = document.createElement("form");  // 메인 화면에서의 컨텐츠
@@ -138,24 +147,45 @@ const mainBarEvent = () => {    // 플레이트 컷 이벤트 내용
 }
 loadBar();
 
-UIBox.addEventListener("mousedown", function(e){    // 퀵 버튼 부분 move 이벤트
-    UIBox.style.zIndex = "5";
-    let shiftX = e.clientX - UIBox.getBoundingClientRect().left;
-    let shiftY = e.clientY - UIBox.getBoundingClientRect().top;
-
-    UIBox.style.cursor = "grabbing";
-
-    UIBox.addEventListener("dragover",function(e) {
+if(isCheck === true){
+    UIBox.addEventListener("touchstart", function(e){    // 퀵 버튼 부분 move 이벤트
+        UIBox.style.zIndex = "5";
+        let shiftX = e.clientX - UIBox.getBoundingClientRect().left;
+        let shiftY = e.clientY - UIBox.getBoundingClientRect().top;
+    
         UIBox.style.cursor = "grabbing";
-        UIBox.style.left = e.pageX - shiftX + 'px';
-        UIBox.style.top = e.pageY - shiftY + 'px';
+    
+        UIBox.addEventListener("touchmove",function(e) {
+            UIBox.style.cursor = "grabbing";
+            UIBox.style.left = e.pageX - shiftX + 'px';
+            UIBox.style.top = e.pageY - shiftY + 'px';
+        })
+    
+        UIBox.addEventListener("touchend",function(e) {
+            UIBox.style.cursor = "pointer";
+            UIBox.style.zIndex = "4";
+        })
     })
-
-    UIBox.addEventListener("mouseup",function(e) {
-        UIBox.style.cursor = "pointer";
-        UIBox.style.zIndex = "4";
+}else{
+    UIBox.addEventListener("mousedown", function(e){    // 퀵 버튼 부분 move 이벤트
+        UIBox.style.zIndex = "5";
+        let shiftX = e.clientX - UIBox.getBoundingClientRect().left;
+        let shiftY = e.clientY - UIBox.getBoundingClientRect().top;
+    
+        UIBox.style.cursor = "grabbing";
+    
+        UIBox.addEventListener("dragover",function(e) {
+            UIBox.style.cursor = "grabbing";
+            UIBox.style.left = e.pageX - shiftX + 'px';
+            UIBox.style.top = e.pageY - shiftY + 'px';
+        })
+    
+        UIBox.addEventListener("mouseup",function(e) {
+            UIBox.style.cursor = "pointer";
+            UIBox.style.zIndex = "4";
+        })
     })
-})
+}
 
 function autoText(_, counter = 0)   {
     function autoTyping(text, textContainer,textNum) {  // 넘겨받을 텍스트, 해당 텍스트를 보여줄 dom,중지할 이벤트 이름
