@@ -8,8 +8,8 @@
 
     <!-- 외부 연결 링크 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Yellowtail&display=swap" rel="stylesheet">
 
     <!-- 첫 로드시 화면 -->
     <link rel="stylesheet" href="load.css"/>
@@ -33,6 +33,7 @@
             height: 100%;
             left: 0;
             top: 0;
+            z-index: 2;
         }
         #menuNavUl  {
             text-align: center;
@@ -127,6 +128,69 @@
         }
         #menuLineDiv3   {
             left: -137%;
+        }
+        #cgmStyleWrap   {
+            transition: all 1s;
+            opacity: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mainTextVideo  {
+            position: absolute;
+            opacity: 0;
+            transition: all 1s;
+            width: 100%;
+        }
+        #mainText_C_Video {
+            -webkit-clip-path: url(#mainText_C);
+            clip-path: url(#mainText_C);
+        }
+        
+        .mainText   {
+            font-weight: bold;
+        }
+
+        .moMainTitle    {
+            z-index: 1;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: white;
+            color: black;
+            mix-blend-mode: lighten;
+            font-size: 8vh;
+            text-align: center;
+            line-height: 1040%;
+            transform: scaleY(1.5);
+        }
+        .moMainTitle span{
+            color: black;
+            position: absolute;
+            top: 55px;
+            font-size: 5vh;
+            left: 30%;
+        }
+
+
+        /* 스크롤 화면 css */
+        #scrollPageWrap   {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+        }
+        #scrollPage1    {
+            position:absolute;
+            top:0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #scrollPage1P   {
+
         }
     </style>
 

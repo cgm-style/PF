@@ -42,7 +42,14 @@ if ( user.indexOf("iPhone") > -1 || user.indexOf("Android") > -1 ) {
 
 
 const mainWrap = document.querySelector("#wrap");   // 화면 전체 dom
-    const innerWrap = document.createElement("div");    // 아래 모든 영역을 포함한 dom
+    const mainWrapBg = document.createElement("div");
+        const mainWrapBgGradient = document.createElement("div");
+        const mainWrapBgTree = document.createElement("div");
+        const mainWrapBgLines = document.createElement("div");
+        const mainWrapBgText = document.createElement("p");
+    const footerWrap = document.createElement("div");   // 화면 하단의 footer
+        const footerWrapTime = document.createElement("div");
+    const codeWrap = document.createElement("div");    // 아래 모든 영역을 포함한 dom
     const firstBg = document.createElement("form");  // 메인 화면에서의 컨텐츠
         const firstUl = document.createElement("ui");
             const firstliLast = document.createElement("form");
@@ -53,141 +60,189 @@ const mainWrap = document.querySelector("#wrap");   // 화면 전체 dom
     const stickyBarTop = document.createElement("div"); // 플레이트의 윗 부분
     const stickyBarBottom = document.createElement("div");  // 플레이트의 아랫부분
 
-    const UIBox = document.createElement("div"); // 기능 : 창 크기 자유 변경 - 각 기능에 대한 버튼
-        const UIBoxTop = document.createElement("div");
-            const UIBoxTopP = document.createElement("p");
-            const UIBoxTopDiv = document.createElement("div");
+    const UIBox = document.createElement("div"); // 퀵버튼
         const UIBoxInner = document.createElement("div");
             const UIBoxInnerDiv1 = document.createElement("div");
             const UIBoxInnerDiv2 = document.createElement("div");
             const UIBoxInnerDiv3 = document.createElement("div");
             const UIBoxInnerDiv4 = document.createElement("div");
-            const UIBoxInnerDiv5 = document.createElement("div");
-            const UIBoxInnerDiv6 = document.createElement("div");
 
-function loadBar() {
-
+function loadBar() {    // 기본 창들 생성
+    mainWrapBg.id = "mainWrapBg";
+    mainWrapBgGradient.id = "mainWrapBgGradient";
+    mainWrapBgTree.id = "mainWrapBgTree";
+    mainWrapBgLines.id = "mainWrapBgLines";
+    mainWrapBgText.id = "mainWrapBgText";
+    footerWrap.id = "footerWrap";
+    footerWrapTime.id = "footerWrapTime";
     stickyBarTop.id = "stickyBarTop";   // 각 dom마다 컨트롤 하기 쉽게 선택자 입력
     firstBg.id = "firstBg";
     UIBox.id = "UIBox";
-        UIBoxTop.id = "UIBoxTop";
-            UIBoxTopP.id = "UIBoxTopP";
-            UIBoxTopDiv.id = "UIBoxTopDiv";
+    UIBox.className =  "moveWrap";
         UIBoxInner.id ="UIBoxInner";
             UIBoxInnerDiv1.className = "UIBoxInnerDiv";
             UIBoxInnerDiv2.className = "UIBoxInnerDiv";
             UIBoxInnerDiv3.className = "UIBoxInnerDiv";
             UIBoxInnerDiv4.className = "UIBoxInnerDiv";
-            UIBoxInnerDiv5.className = "UIBoxInnerDiv";
-            UIBoxInnerDiv6.className = "UIBoxInnerDiv";
     firstUl.id = "firstUl";
     firstliLast.id = "firstLastLi";
         firstliLastInput.id = "firstliLastInput";
         firstliLastButton.id = "firstliLastButton";
     stickyBarBottom.id = "stickyBarBottom";
-    innerWrap.id = "innerWrap";
+    codeWrap.id = "codeWrap";
+    codeWrap.className = "moveWrap";
     innerContainer.id = "innerContainer";
 
-    mainWrap.appendChild(innerWrap);    // 실제 dom 생성
-    innerWrap.appendChild(firstBg);
-        firstBg.appendChild(UIBox);
-            UIBox.appendChild(UIBoxTop);
-                UIBoxTop.appendChild(UIBoxTopP);
-                UIBoxTop.appendChild(UIBoxTopDiv);
-            UIBox.appendChild(UIBoxInner);
-                UIBoxInner.appendChild(UIBoxInnerDiv1);
-                UIBoxInner.appendChild(UIBoxInnerDiv2);
-                UIBoxInner.appendChild(UIBoxInnerDiv3);
-                UIBoxInner.appendChild(UIBoxInnerDiv4);
-                UIBoxInner.appendChild(UIBoxInnerDiv5);
-                UIBoxInner.appendChild(UIBoxInnerDiv6);
+    mainWrap.appendChild(footerWrap);
+    footerWrap.appendChild(footerWrapTime);
+    mainWrap.appendChild(mainWrapBg);
+        mainWrapBg.appendChild(mainWrapBgGradient);
+        mainWrapBg.appendChild(mainWrapBgTree);
+        mainWrapBg.appendChild(mainWrapBgLines);
+        mainWrapBg.appendChild(mainWrapBgText);
+    mainWrap.appendChild(codeWrap);    // 실제 dom 생성
+    codeWrap.appendChild(firstBg);
+    mainWrap.appendChild(UIBox);
+        UIBox.appendChild(UIBoxInner);
+            UIBoxInner.appendChild(UIBoxInnerDiv1);
+            UIBoxInner.appendChild(UIBoxInnerDiv2);
+            UIBoxInner.appendChild(UIBoxInnerDiv3);
+            UIBoxInner.appendChild(UIBoxInnerDiv4);
         firstBg.appendChild(firstUl);
-        innerWrap.appendChild(firstliLast);
+        codeWrap.appendChild(firstliLast);
             firstliLast.appendChild(firstliLastInput);
             firstliLast.appendChild(firstliLastButton);
-    innerWrap.appendChild(innerContainer);
-    innerWrap.appendChild(stickyBarTop);
-    innerWrap.appendChild(stickyBarBottom);
+    codeWrap.appendChild(innerContainer);
+    codeWrap.appendChild(stickyBarTop);
+    codeWrap.appendChild(stickyBarBottom);
     
+    mainWrapBgText.innerText = "CGM Style";
     firstliLastButton.innerText = "입력";
     firstliLastInput.autocomplete="off";
     firstliLastInput.placeholder = "'자세히보기'또는 '도움말'이라고 입력해주세요";
-    UIBoxTopP.innerText = "Quick Button";
+    UIBoxInnerDiv1.style = "--i:0;--x:0;--y:0;"
+    UIBoxInnerDiv2.style = "--i:1;--x:2;--y:0;"
+    UIBoxInnerDiv3.style = "--i:2;--x:0;--y:2;"
+    UIBoxInnerDiv4.style = "--i:3;--x:2;--y:2;"
     UIBoxInnerDiv1.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M15.5 2.25a.75.75 0 01.75-.75h5.5a.75.75 0 01.75.75v5.5a.75.75 0 01-1.5 0V4.06l-6.22 6.22a.75.75 0 11-1.06-1.06L19.94 3h-3.69a.75.75 0 01-.75-.75z"></path><path d="M2.5 4.25c0-.966.784-1.75 1.75-1.75h8.5a.75.75 0 010 1.5h-8.5a.25.25 0 00-.25.25v15.5c0 .138.112.25.25.25h15.5a.25.25 0 00.25-.25v-8.5a.75.75 0 011.5 0v8.5a1.75 1.75 0 01-1.75 1.75H4.25a1.75 1.75 0 01-1.75-1.75V4.25z"></path></svg>`;
     UIBoxInnerDiv2.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M10.25 0a.75.75 0 000 1.5h1v1.278a9.955 9.955 0 00-5.635 2.276L4.28 3.72a.75.75 0 00-1.06 1.06l1.315 1.316A9.962 9.962 0 002 12.75c0 5.523 4.477 10 10 10s10-4.477 10-10a9.962 9.962 0 00-2.535-6.654L20.78 4.78a.75.75 0 00-1.06-1.06l-1.334 1.334a9.955 9.955 0 00-5.636-2.276V1.5h1a.75.75 0 000-1.5h-3.5zM12 21.25a8.5 8.5 0 100-17 8.5 8.5 0 000 17zm4.03-12.53a.75.75 0 010 1.06l-2.381 2.382a1.75 1.75 0 11-1.06-1.06l2.38-2.382a.75.75 0 011.061 0z"></path></svg>`;
     UIBoxInnerDiv3.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M12 17.5a5.5 5.5 0 100-11 5.5 5.5 0 000 11zm0 1.5a7 7 0 100-14 7 7 0 000 14zm12-7a.75.75 0 01-.75.75h-2.5a.75.75 0 010-1.5h2.5A.75.75 0 0124 12zM4 12a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h2.5A.75.75 0 014 12zm16.485-8.485a.75.75 0 010 1.06l-1.768 1.768a.75.75 0 01-1.06-1.06l1.767-1.768a.75.75 0 011.061 0zM6.343 17.657a.75.75 0 010 1.06l-1.768 1.768a.75.75 0 11-1.06-1.06l1.767-1.768a.75.75 0 011.061 0zM12 0a.75.75 0 01.75.75v2.5a.75.75 0 01-1.5 0V.75A.75.75 0 0112 0zm0 20a.75.75 0 01.75.75v2.5a.75.75 0 01-1.5 0v-2.5A.75.75 0 0112 20zM3.515 3.515a.75.75 0 011.06 0l1.768 1.768a.75.75 0 11-1.06 1.06L3.515 4.575a.75.75 0 010-1.06zm14.142 14.142a.75.75 0 011.06 0l1.768 1.768a.75.75 0 01-1.06 1.06l-1.768-1.767a.75.75 0 010-1.061z"></path></svg>`;
     UIBoxInnerDiv4.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M8.114 2.094a.75.75 0 01.386.656V9h1.252a.75.75 0 110 1.5H5.75a.75.75 0 010-1.5H7V4.103l-.853.533a.75.75 0 01-.795-1.272l2-1.25a.75.75 0 01.762-.02zm4.889 5.66a.75.75 0 01.75-.75h5.232a.75.75 0 01.53 1.28l-2.776 2.777c.55.097 1.057.253 1.492.483.905.477 1.504 1.284 1.504 2.418 0 .966-.471 1.75-1.172 2.27-.687.511-1.587.77-2.521.77-1.367 0-2.274-.528-2.667-.756a.75.75 0 01.755-1.297c.331.193.953.553 1.912.553.673 0 1.243-.188 1.627-.473.37-.275.566-.635.566-1.067 0-.5-.219-.836-.703-1.091-.538-.284-1.375-.443-2.471-.443a.75.75 0 01-.53-1.28l2.643-2.644h-3.421a.75.75 0 01-.75-.75zM7.88 15.215a1.4 1.4 0 00-1.446.83.75.75 0 01-1.37-.61 2.9 2.9 0 012.986-1.71 2.565 2.565 0 011.557.743c.434.446.685 1.058.685 1.778 0 1.641-1.254 2.437-2.12 2.986-.538.341-1.18.694-1.495 1.273H9.75a.75.75 0 010 1.5h-4a.75.75 0 01-.75-.75c0-1.799 1.337-2.63 2.243-3.21 1.032-.659 1.55-1.031 1.55-1.8 0-.355-.116-.584-.26-.732a1.068 1.068 0 00-.652-.298z"></path></svg>`;
-    UIBoxInnerDiv5.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M0 3.75A.75.75 0 01.75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.496 4.496 0 0115.75 3h7.5a.75.75 0 01.75.75v15.063a.75.75 0 01-.755.75l-7.682-.052a3 3 0 00-2.142.878l-.89.891a.75.75 0 01-1.061 0l-.902-.901a3 3 0 00-2.121-.879H.75a.75.75 0 01-.75-.75v-15zm11.247 3.747a3 3 0 00-3-2.997H1.5V18h6.947a4.5 4.5 0 012.803.98l-.003-11.483zm1.503 11.485V7.5a3 3 0 013-3h6.75v13.558l-6.927-.047a4.5 4.5 0 00-2.823.971z"></path></svg>`;
-    UIBoxInnerDiv6.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M9.036 7.976a.75.75 0 00-1.06 1.06L10.939 12l-2.963 2.963a.75.75 0 101.06 1.06L12 13.06l2.963 2.964a.75.75 0 001.061-1.06L13.061 12l2.963-2.964a.75.75 0 10-1.06-1.06L12 10.939 9.036 7.976z"></path><path fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM2.5 12a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z"></path></svg>`;
 
     UIBox.draggable = true;
+    codeWrap.draggable = true;
 }
 
 
+
+function addTopBtns(Wrap,text)   { // 창들의 상단 타이틀,최소화,닫기 버튼을 생성하는 함수
+    const addTopBtnContainer = document.createElement("div");
+        const addTopBtnContainerTitle = document.createElement("p");
+        const addTopBtnContainerMin = document.createElement("div");
+        const addTopBtnContainerClose = document.createElement("div");
+    
+    addTopBtnContainer.className = "addTopBtnContainer";
+    addTopBtnContainerTitle.className = "addTopBtnContainerTitle";
+    addTopBtnContainerMin.className = "addTopBtnContainerMin";
+    addTopBtnContainerClose.className = "addTopBtnContainerClose";
+
+    Wrap.appendChild(addTopBtnContainer);
+    addTopBtnContainer.appendChild(addTopBtnContainerTitle);
+    addTopBtnContainer.appendChild(addTopBtnContainerMin);
+    addTopBtnContainer.appendChild(addTopBtnContainerClose);
+
+    addTopBtnContainerTitle.innerText = text;   // 창의 이름
+
+    addTopBtnContainerClose.addEventListener("click",()=>{  // 닫기버튼 클릭시
+        Wrap.remove();
+    })
+    addTopBtnContainerMin.addEventListener("click",(e)=>{   // 최소화 버튼 클릭시
+
+        e.path[2].classList.toggle("min");
+        if(!e.path[2].classList.contains("min")){    //
+            e.path[2].style.height = null;
+            return false;
+        }
+
+        e.path[2].style.height = "24px";
+    })
+}
+
+// 창 상단 부분 생성
+addTopBtns(codeWrap,"Text-Program");
+
+function addPlayer()    {
+    
+}
 
 const mainBarEvent = () => {    // 플레이트 컷 이벤트 내용
     stickyBarTop.style.transform = "rotate(0deg)";
     stickyBarBottom.style.bottom = "0%"
     stickyBarTop.style.bottom = "12.6%";
-    innerWrap.style.transform = "scale(0.5)rotate(180deg)";
+    codeWrap.style.transform = "scale(0.5)rotate(180deg)";
 
     setTimeout(() => {
         stickyBarTop.style.transform = "rotate(90deg)";
         stickyBarBottom.style.bottom = "-14.9%"
         stickyBarTop.style.bottom = "0";
-        innerWrap.style.transform = "scale(1)";
+        codeWrap.style.transform = "scale(1)";
         firstBg.remove();
         firstPage();
-    }, 2000);
+    }, 4000);
     setTimeout(() => {
         stickyBarTop.remove();
         stickyBarBottom.remove();
-    },4000)
+    },5000)
 
 }
 loadBar();
+UIBox.addEventListener("click",function(e){
+    UIBox.classList.toggle("active");
+})
 
-if(isCheck === true){
-    UIBox.addEventListener("touchstart", function(e){    // 퀵 버튼 부분 move 이벤트
-        console.log(e);
-        UIBox.style.zIndex = "5";
-        let shiftX = e.changedTouches[0].clientX - UIBox.getBoundingClientRect().left;
-        let shiftY = e.changedTouches[0].clientY - UIBox.getBoundingClientRect().top;
-    
-        UIBox.style.cursor = "grabbing";
-    
-        UIBox.addEventListener("touchmove",function(e) {
-            console.log(e);
-            UIBox.style.cursor = "grabbing";
-            UIBox.style.left = e.changedTouches[0].pageX - shiftX + 'px';
-            UIBox.style.top = e.changedTouches[0].pageY - shiftY + 'px';
-        })
-    
-        UIBox.addEventListener("touchend",function(e) {
-            UIBox.style.cursor = "pointer";
-            UIBox.style.zIndex = "4";
-        })
-    })
-}else{
-    UIBox.addEventListener("mousedown", function(e){    // 퀵 버튼 부분 move 이벤트
-        UIBox.style.zIndex = "5";
-        let shiftX = e.clientX - UIBox.getBoundingClientRect().left;
-        let shiftY = e.clientY - UIBox.getBoundingClientRect().top;
-    
-        UIBox.style.cursor = "grabbing";
-    
-        UIBox.addEventListener("dragover",function(e) {
-            UIBox.style.cursor = "grabbing";
-            UIBox.style.left = e.pageX - shiftX + 'px';
-            UIBox.style.top = e.pageY - shiftY + 'px';
-        })
-    
-        UIBox.addEventListener("mouseup",function(e) {
-            UIBox.style.cursor = "pointer";
-            UIBox.style.zIndex = "4";
-        })
+function moveWrapAction(){
+    let moveWrap = document.querySelectorAll(".moveWrap");
+    moveWrap.forEach((move)=>{  // moveWrap이라는 클래스를 가지면 움직일수있음
+        if(isCheck === true){
+            move.addEventListener("touchstart", function(e){    // 모바일 퀵 버튼 부분 move 이벤트
+                codeWrap.style.zIndex = "5";
+                let shiftX = e.changedTouches[0].clientX - move.getBoundingClientRect().left;
+                let shiftY = e.changedTouches[0].clientY - move.getBoundingClientRect().top;
+            
+                move.addEventListener("touchmove",function(e) {
+                    move.style.left = e.changedTouches[0].pageX - shiftX + 'px';
+                    move.style.top = e.changedTouches[0].pageY - shiftY + 'px';
+                })
+            
+                move.addEventListener("touchend",function(e) {
+                    move.style.zIndex = "4";
+                })
+            })
+        }else{
+            move.addEventListener("mousedown", function(e){    // pc 퀵 버튼 부분 move 이벤트
+                move.style.zIndex = "5";
+                let shiftX = e.clientX - move.getBoundingClientRect().left;
+                let shiftY = e.clientY - move.getBoundingClientRect().top;
+            
+                move.style.cursor = "grabbing";
+            
+                this.addEventListener("dragover",function(e) {
+                    console.dir(move);
+                    move.style.cursor = "grabbing";
+                    move.style.left = e.pageX - shiftX + 'px';
+                    move.style.top = e.pageY - shiftY + 'px';
+                })
+            
+                this.addEventListener("mouseup",function(e) {
+                    move.style.cursor = "pointer";
+                    move.style.zIndex = "4";
+                })
+            })
+        }
     })
 }
+moveWrapAction();
+
 
 function autoText(_, counter = 0)   {
     function autoTyping(text, textContainer,textNum) {  // 넘겨받을 텍스트, 해당 텍스트를 보여줄 dom,중지할 이벤트 이름
@@ -273,6 +328,7 @@ function autoText(_, counter = 0)   {
             firstBg.addEventListener("submit",checkInputText);
         }   
     }
+
     addTextListLi(1,"안녕하세요"); // 맨 처음 첫줄의 텍스트
     function nextText(nextNum){
         runEvent = true;
@@ -385,9 +441,6 @@ function autoText(_, counter = 0)   {
     function calculator() {
         const calculatorWrap = document.createElement("div"),
             calculatorTop = document.createElement("div"),
-                calculatorTopP = document.createElement("p"),
-                calculatorTopDiv = document.createElement("div"),
-                calculatorTopDivClose = document.createElement("div"),
             calculatorWrapCotainer = document.createElement("div"),
                 calculatorForm = document.createElement("form"),
                     calculatorInput = document.createElement("input"),
@@ -412,10 +465,8 @@ function autoText(_, counter = 0)   {
                         calculatorLi17 = document.createElement("li");
 
         calculatorWrap.id = "calculatorWrap";
+        calculatorWrap.className = "moveWrap";
             calculatorTop.id = "calculatorTop";
-                calculatorTopP.id = "calculatorTopP";
-                calculatorTopDiv.id = "calculatorTopDiv";
-                calculatorTopDivClose.id = "calculatorTopDivClose";
             calculatorWrapCotainer.id = "calculatorWrapCotainer";
                 calculatorForm.id = "calculatorForm";
                     calculatorInput.id = "calculatorInput";
@@ -440,7 +491,6 @@ function autoText(_, counter = 0)   {
                         calculatorLi17.className ="calculatorLi";
         
         calculatorWrap.draggable = true;
-        calculatorTopP.innerText = "Calculator";
         calculatorInput.type = "text";
         calculatorInput.autocomplete = "off";
         calculatorInput.placeholder = "1+1";
@@ -462,11 +512,9 @@ function autoText(_, counter = 0)   {
         calculatorLi16.innerText = "0";
         calculatorLi17.innerText = ".";
 
-        innerWrap.appendChild(calculatorWrap);
+        addTopBtns(calculatorWrap,"calculator",2);
+        mainWrap.appendChild(calculatorWrap);
             calculatorWrap.appendChild(calculatorTop);
-                calculatorTop.appendChild(calculatorTopP);
-                calculatorTop.appendChild(calculatorTopDiv);
-                calculatorTop.appendChild(calculatorTopDivClose);
             calculatorWrap.appendChild(calculatorWrapCotainer);
                 calculatorWrapCotainer.appendChild(calculatorForm);
                     calculatorForm.appendChild(calculatorInput);
@@ -490,42 +538,8 @@ function autoText(_, counter = 0)   {
                         calculatorUl.appendChild(calculatorLi16);
                         calculatorUl.appendChild(calculatorLi17);
 
-        calculatorWrap.addEventListener("mousedown", function(e) {   // 계산기 버튼 창 move Event
-            calculatorWrap.style.zIndex = "5";
-            let calculatorshiftX = e.clientX - calculatorWrap.getBoundingClientRect().left;
-            let calculatorshiftY = e.clientY - calculatorWrap.getBoundingClientRect().top;
-
-            calculatorWrap.style.cursor = "grabbing";
-
-            calculatorWrap.addEventListener("dragover",function(e) {
-                calculatorWrap.style.cursor = "grabbing";
-                calculatorWrap.style.left = e.pageX - calculatorshiftX + 'px';
-                calculatorWrap.style.top = e.pageY - calculatorshiftY + 'px';
-            })
-
-            calculatorWrap.addEventListener("dragend",function(e) {
-                calculatorWrap.style.cursor = "pointer";
-                calculatorWrap.style.zIndex = "4";
-            })
-            calculatorWrap.addEventListener("mouseup",() => {
-                calculatorWrap.style.cursor = "pointer";
-            })
-        })
-
+        moveWrapAction();   // 창 이동 이벤트 재 할당
         calculatorForm.addEventListener("submit",(e)=>{e.preventDefault();})    // 계산기의 submit이벤트 막기
-        calculatorTopDiv.addEventListener("click",function() {      // 계산기 최소화 이벤트
-            if (this.className === "close") {
-                calculatorWrapCotainer.style.height = `485px`;
-                this.className = "";
-                return false;
-            }
-            calculatorWrapCotainer.style.height = `0px`;
-            this.className = "close";
-        })
-
-        calculatorTopDivClose.addEventListener("click",(e) => { // 계산기 닫기 이벤트
-            e.target.parentElement.parentElement.remove();
-        })
 
         let allKey = document.querySelectorAll(".calculatorLi");    // 계산기 클릭시 색 변경 이벤트
         allKey.forEach((allKey) => {
@@ -641,17 +655,6 @@ function autoText(_, counter = 0)   {
         
     }
 
-    // 퀵 버튼 이벤트 부분
-    UIBoxTopDiv.addEventListener("click",function() {
-        if (this.className === "close") {
-            UIBoxInner.style.height = `190px`;
-            this.className = "";
-            return false;
-        }
-        UIBoxInner.style.height = `0px`;
-        this.className = "close";
-    })
-
     UIBoxInnerDiv1.addEventListener("click",mainBarEvent);
     UIBoxInnerDiv2.addEventListener("click",() => {
         if(runEvent === true)   {
@@ -696,15 +699,37 @@ function autoText(_, counter = 0)   {
         return false;
     });
     UIBoxInnerDiv4.addEventListener("click",calculator);
-    UIBoxInnerDiv5.addEventListener("click",()=>{
-        if(runEvent === true)   {
-            alert("아직 이벤트가 진행중입니다.");
-            return false;
-        }
-        addTextListLi(document.querySelectorAll(`.firstLi`).length+1,`입력가능한 명력어는 '시간','날씨','추가예정'등이 있습니다.`);
-    })
+
+    // 하단 퀵 버튼 생성 함수
+    function footerQuick(Wrapnum,wrapThis,Icon)  {
+        footerWrap.appendChild(eval(`footerIconWrap${Wrapnum} = document.createElement("div")`));
+        eval(`footerIconWrap${Wrapnum}`).appendChild(eval(`footerIconWrapDiv${Wrapnum} = document.createElement("div")`));
+
+        eval(`footerIconWrap${Wrapnum}`).className = `footerIconWrap`;
+        eval(`footerIconWrapDiv${Wrapnum}`).className = `footerIconWrapDiv`;
+
+        eval(`footerIconWrapDiv${Wrapnum}`).innerHTML = `${Icon}`;
+
+        eval(`footerIconWrap${Wrapnum}`).addEventListener("click",()=>{
+            if(Wrapnum === 1)   {
+                calculator();
+            }
+        })
+    }
+
+    // 화면 하단 퀵 버튼
+    footerQuick(1,null,`<?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg enable-background="new 0 0 128 128" version="1.1" viewBox="0 0 128 128" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Layer_1"><rect fill="#F4F5F5" height="1520" opacity="0" width="727.938" x="-59.984" y="-541"/></g><g id="Layer_2"><g><circle cx="64" cy="64" fill="#2597CE" r="64"/><g><defs><circle cx="64" cy="64" id="SVGID_35_" r="64"/></defs><clipPath id="SVGID_2_"><use overflow="visible" xlink:href="#SVGID_35_"/></clipPath><polygon clip-path="url(#SVGID_2_)" fill="#1389C9" points="101.864,27.092 128,53.215 128,128 53.333,128 26.813,101.273      35.004,68.722 26.929,60.646 61.417,27.092 66.786,32.462    "/></g><g><defs><circle cx="64" cy="64" id="SVGID_37_" r="64"/></defs><clipPath id="SVGID_4_"><use overflow="visible" xlink:href="#SVGID_37_"/></clipPath><polygon clip-path="url(#SVGID_4_)" fill="#0082C5" points="26.94,61.284 89.952,124.296 110.11,112.138 124.423,89.992      61.381,27.036    "/></g><path d="M62,57.692C62,60.071,60.071,62,57.692,62H29.308C26.929,62,25,60.071,25,57.692V29.308    C25,26.929,26.929,25,29.308,25h28.385C60.071,25,62,26.929,62,29.308V57.692z" fill="#FFF1E5"/><path d="M103,57.692c0,2.379-1.929,4.308-4.308,4.308H70.308C67.929,62,66,60.071,66,57.692V29.308    C66,26.929,67.929,25,70.308,25h28.385c2.379,0,4.308,1.929,4.308,4.308V57.692z" fill="#FFF1E5"/><path d="M62,98.692c0,2.379-1.929,4.308-4.308,4.308H29.308C26.929,103,25,101.071,25,98.692V70.308    C25,67.929,26.929,66,29.308,66h28.385C60.071,66,62,67.929,62,70.308V98.692z" fill="#FFF1E5"/><path d="M103,98.692c0,2.379-1.929,4.308-4.308,4.308H70.308C67.929,103,66,101.071,66,98.692V70.308    C66,67.929,67.929,66,70.308,66h28.385c2.379,0,4.308,1.929,4.308,4.308V98.692z" fill="#FFF1E5"/><g><defs><path d="M103,57.692c0,2.379-1.929,4.308-4.308,4.308H70.308C67.929,62,66,60.071,66,57.692V29.308      C66,26.929,67.929,25,70.308,25h28.385c2.379,0,4.308,1.929,4.308,4.308V57.692z" id="SVGID_39_"/></defs><clipPath id="SVGID_6_"><use overflow="visible" xlink:href="#SVGID_39_"/></clipPath><polygon clip-path="url(#SVGID_6_)" fill="#DED3CD" points="92.45,42.383 75.898,45.734 93.08,63 103,63 103,52.899    "/></g><g><defs><path d="M103,98.692c0,2.379-1.929,4.308-4.308,4.308H70.308C67.929,103,66,101.071,66,98.692V70.308      C66,67.929,67.929,66,70.308,66h28.385c2.379,0,4.308,1.929,4.308,4.308V98.692z" id="SVGID_41_"/></defs><clipPath id="SVGID_8_"><use overflow="visible" xlink:href="#SVGID_41_"/></clipPath><polygon clip-path="url(#SVGID_8_)" fill="#DED3CD" points="92.607,78.245 79.068,79.263 75.692,81.076 81.266,86.68      75.883,90.391 88.485,103 103,103 102.872,88.613    "/></g><g><defs><path d="M62,98.692c0,2.379-1.929,4.308-4.308,4.308H29.308C26.929,103,25,101.071,25,98.692V70.308      C25,67.929,26.929,66,29.308,66h28.385C60.071,66,62,67.929,62,70.308V98.692z" id="SVGID_43_"/></defs><clipPath id="SVGID_10_"><use overflow="visible" xlink:href="#SVGID_43_"/></clipPath><polygon clip-path="url(#SVGID_10_)" fill="#DED3CD" points="49.8,78.391 37.725,90.465 50.235,103 63,103 63,90.451      50.262,77.728    "/></g><g><defs><path d="M62,57.692C62,60.071,60.071,62,57.692,62H29.308C26.929,62,25,60.071,25,57.692V29.308      C25,26.929,26.929,25,29.308,25h28.385C60.071,25,62,26.929,62,29.308V57.692z" id="SVGID_45_"/></defs><clipPath id="SVGID_12_"><use overflow="visible" xlink:href="#SVGID_45_"/></clipPath><polygon clip-path="url(#SVGID_12_)" fill="#DED3CD" points="44.108,43.932 35.731,45.684 53.027,63 63,63 63,52.952      45.785,35.813    "/></g><g><g><g><path d="M50.386,41.438h-3.949v-3.949c0-1.372-1.122-2.494-2.494-2.494h0c-1.372,0-2.494,1.122-2.494,2.494       v3.949h-3.949c-1.372,0-2.494,1.122-2.494,2.494c0,1.372,1.122,2.494,2.494,2.494h3.949v3.949c0,1.372,1.122,2.494,2.494,2.494       h0c1.372,0,2.494-1.122,2.494-2.494v-3.949h3.949c1.372,0,2.494-1.122,2.494-2.494C52.88,42.56,51.758,41.438,50.386,41.438z" fill="#59515C"/></g></g><g><path d="M90.501,46.426H77.614c-1.372,0-2.494-1.122-2.494-2.494l0,0c0-1.372,1.122-2.494,2.494-2.494h12.887      c1.372,0,2.494,1.122,2.494,2.494l0,0C92.996,45.304,91.873,46.426,90.501,46.426z" fill="#59515C"/></g><g><path d="M50.262,81.255l-9.113,9.112c-0.97,0.97-2.557,0.97-3.527,0l0,0c-0.97-0.97-0.97-2.557,0-3.527      l9.112-9.113c0.97-0.97,2.557-0.97,3.527,0l0,0C51.232,78.698,51.232,80.285,50.262,81.255z" fill="#59515C"/><path d="M41.15,77.728l9.113,9.113c0.97,0.97,0.97,2.557,0,3.527l0,0c-0.97,0.97-2.557,0.97-3.527,0      l-9.112-9.112c-0.97-0.97-0.97-2.557,0-3.527l0,0C38.592,76.758,40.18,76.758,41.15,77.728z" fill="#59515C"/></g><g><g><path d="M90.501,86.107H77.614c-1.372,0-2.494,1.122-2.494,2.494c0,1.372,1.122,2.494,2.494,2.494h12.887       c1.372,0,2.494-1.122,2.494-2.494C92.996,87.229,91.873,86.107,90.501,86.107z M77.614,81.989h12.887       c1.372,0,2.494-1.122,2.494-2.494c0-1.372-1.122-2.494-2.494-2.494H77.614c-1.372,0-2.494,1.122-2.494,2.494       C75.12,80.867,76.242,81.989,77.614,81.989z" fill="#59515C"/></g></g></g></g></g></svg>`);
+    footerQuick(2,null,`<?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg enable-background="new 0 0 128 128" version="1.1" viewBox="0 0 128 128" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Layer_1"><rect fill="#F4F5F5" height="1520" opacity="0" width="727.938" x="-539.984" y="-731"/></g><g id="Layer_2"><g><circle cx="64" cy="64" fill="#F54F33" r="64"/><g><defs><circle cx="64" cy="64" id="SVGID_31_" r="64"/></defs><clipPath id="SVGID_2_"><use overflow="visible" xlink:href="#SVGID_31_"/></clipPath><polygon clip-path="url(#SVGID_2_)" fill="#DD2C24" points="20.161,96.119 52.036,128 128,128 128,52.536 108.115,32.622    "/></g><path d="M104.944,96.947H23.056c-2.209,0-4-1.791-4-4V35.053c0-2.209,1.791-4,4-4h81.888c2.209,0,4,1.791,4,4    v57.894C108.944,95.156,107.153,96.947,104.944,96.947z" fill="#FFFFFF"/><g><path d="M108.944,42.054v-7.001c0-2.209-1.791-4-4-4H23.056c-2.209,0-4,1.791-4,4v7.001H108.944z" fill="#E1E3E9"/></g><circle cx="25" cy="36.553" fill="#F24B45" r="3"/><circle cx="34" cy="36.553" fill="#FFB202" r="3"/><circle cx="43.001" cy="36.553" fill="#4CBB41" r="3"/><g><defs><path d="M104.944,96.947H23.056c-2.209,0-4-1.791-4-4V35.053c0-2.209,1.791-4,4-4h81.888c2.209,0,4,1.791,4,4      v57.894C108.944,95.156,107.153,96.947,104.944,96.947z" id="SVGID_33_"/></defs><clipPath id="SVGID_4_"><use overflow="visible" xlink:href="#SVGID_33_"/></clipPath><polygon clip-path="url(#SVGID_4_)" fill="#E1E3E9" opacity="0.8" points="30.866,70.855 57.438,97.5 110,97.5 110,79.563      97.134,66.663 84.469,63.719 71.795,51.056 64.376,67.188 53.475,56.3 31.937,68.83    "/></g><g><path d="M30.866,66.804L53.475,56.3v4.993l-17.099,7.49v0.094l17.099,7.489v4.993L30.866,70.855V66.804z" fill="#53899F"/><path d="M56.958,85.206l10.08-34.15h4.758l-10.081,34.15H56.958z" fill="#53899F"/><path d="M97.134,70.997L74.525,81.359v-4.993L92,68.877v-0.094l-17.476-7.49V56.3l22.609,10.363V70.997z" fill="#53899F"/></g></g></g></svg>`);
+
 
 }
+// 화면 최하단 우측 시간 부분
+footerWrapTime.innerHTML = `${time.slice(0,time.length-7)}`; // 첫 실행
+setInterval(() => { // 실행 후 1분 마다 리셋
+    time = Intl.DateTimeFormat('kr',{dateStyle:'full', timeStyle: 'full'}).format(new Date);
+    footerWrapTime.innerHTML = `${time.slice(0,time.length-7)}`; 
+}, 1000);
+
 window.addEventListener('load', autoText);
 
 // mainWrap.addEventListener("click", mainBarEvent,{ once : true}); 추후 input에 submit할 경우 실행으로 바꿔보자  
