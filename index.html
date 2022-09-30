@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="kr">
 <head>
@@ -202,4 +203,146 @@
     <script type="text/javascript" src="firstPage.js"></script>
     <script>
     </script>
+=======
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FP</title>
+
+    <!-- 외부 연결 링크 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- 첫 로드시 화면 -->
+    <link rel="stylesheet" href="load.css"/>
+    <style>
+        #menubtn    {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            border: 1px solid slategray;
+            border-radius: 5px;
+            font-size: 2vh;
+            font-weight: 600;
+            padding: 4px 8px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        #menuNav    {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+        #menuNavUl  {
+            text-align: center;
+            position: relative;
+            top: 25%;
+            transition:all 1s;
+            z-index: 2;
+        }
+        #menuNavUl:hover li a   {
+            color: rgba(245, 245, 245, 0.133);
+        }
+        .menuNavLi  {
+            
+        }
+        .menuNavLi:hover a  {
+            color: #fff !important;
+            background: transparent;
+        }
+        .menuNavLiA {
+            color: rgb(206, 206, 206);
+            text-decoration: none;
+            font-size: 3em;
+            padding: 5px 20px;
+            display: inline-flex;
+            font-weight: 700;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+
+        .menuNavLiA:before  {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5em;
+            color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 500px;
+            transition: letter-spacing 0.5s, left 0.5s;
+        }
+        .menuNavLiA:hover:before {
+            content: attr(data-text);
+            opacity: 1;
+            left: 50%;
+            letter-spacing: 10px;
+            width: 1800px;
+            height: 1800px;
+        }
+
+        #menuNavUl li:nth-child(4n + 1) a:before {
+            background: #0470fe;
+        }
+        #menuNavUl li:nth-child(4n + 2) a:before {
+            background: #ff7675;
+        }
+        #menuNavUl li:nth-child(4n + 3) a:before {
+            background: #1582fe;
+        }
+        #menuNavUl li:nth-child(4n + 4) a:before {
+            background: #a29bfe;
+        }
+
+        #menuLine   {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+        .menuLineDiv    {
+            position: absolute;
+            width: 200%;
+            height: 0px;
+            z-index: 100;
+            transform: rotate(37deg);
+            transition: all 0.5s cubic-bezier(.55,0,.1,1);
+            background: dimgray;
+        }
+        #menuLineDiv1   {
+            left: -27%;
+        }
+        #menuLineDiv2   {
+            left: -86%;
+        }
+        #menuLineDiv3   {
+            left: -137%;
+        }
+    </style>
+
+</head>
+<body>
+    <main id="wrap"></main>
+</body>
+    <script type="text/javascript" src="load.js"></script>
+    <script type="text/javascript" src="firstPage.js"></script>
+    <script>
+    </script>
+>>>>>>> 796ce6062344a7c004907db59db984f179bd2654
 </html>
