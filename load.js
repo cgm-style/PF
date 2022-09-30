@@ -149,16 +149,18 @@ loadBar();
 
 if(isCheck === true){
     UIBox.addEventListener("touchstart", function(e){    // 퀵 버튼 부분 move 이벤트
+        console.log(e);
         UIBox.style.zIndex = "5";
-        let shiftX = e.clientX - UIBox.getBoundingClientRect().left;
-        let shiftY = e.clientY - UIBox.getBoundingClientRect().top;
+        let shiftX = e.changedTouches[0].clientX - UIBox.getBoundingClientRect().left;
+        let shiftY = e.changedTouches[0].clientY - UIBox.getBoundingClientRect().top;
     
         UIBox.style.cursor = "grabbing";
     
         UIBox.addEventListener("touchmove",function(e) {
+            console.log(e);
             UIBox.style.cursor = "grabbing";
-            UIBox.style.left = e.pageX - shiftX + 'px';
-            UIBox.style.top = e.pageY - shiftY + 'px';
+            UIBox.style.left = e.changedTouches[0].pageX - shiftX + 'px';
+            UIBox.style.top = e.changedTouches[0].pageY - shiftY + 'px';
         })
     
         UIBox.addEventListener("touchend",function(e) {
