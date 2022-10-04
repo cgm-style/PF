@@ -7,9 +7,9 @@ function saveCoords(coordsObj) { // localStorage에 저장
 }
 
 function handleGeoSucces(position) { // 요청 수락
-    const latitude = position.coords.latitude; 
-    const longitude = position.coords.longitude;
-    const coordsObj = {
+    const latitude = position.coords.latitude,
+        longitude = position.coords.longitude,
+        coordsObj = {
         latitude,
         longitude,
     };
@@ -25,12 +25,12 @@ function askForCoords() { // 사용자 위치 요청 (요청 수락, 요청 거�
 }
 
 // 각종 기초값 셋팅부분
-let nextNum = 0;
-let runEvent = true;
-let loadText = true;
-let time = Intl.DateTimeFormat('kr',{dateStyle:'full', timeStyle: 'full'}).format(new Date);
-let calculatorAnswerValue = [];
-let calculatorSet = false;
+let nextNum = 0,
+    runEvent = false,
+    loadText = true,
+    time = Intl.DateTimeFormat('kr',{dateStyle:'full', timeStyle: 'full'}).format(new Date),
+    calculatorAnswerValue = [],
+    calculatorSet = false;
 
 
 const user = navigator.userAgent;   // Pc/Mobile 체크
@@ -41,31 +41,24 @@ if ( user.indexOf("iPhone") > -1 || user.indexOf("Android") > -1 ) {
 }
 
 
-const mainWrap = document.querySelector("#wrap");   // 화면 전체 dom
-    const mainWrapBg = document.createElement("div");
-        const mainWrapBgGradient = document.createElement("div");
-        const mainWrapBgTree = document.createElement("div");
-        const mainWrapBgLines = document.createElement("div");
-        const mainWrapBgText = document.createElement("p");
-    const footerWrap = document.createElement("div");   // 화면 하단의 footer
-        const footerWrapTime = document.createElement("div");
-    const codeWrap = document.createElement("div");    // 아래 모든 영역을 포함한 dom
-    const firstBg = document.createElement("form");  // 메인 화면에서의 컨텐츠
-        const firstUl = document.createElement("ui");
-            const firstliLast = document.createElement("form");
-                const firstliLastInput = document.createElement("input");
-                const firstliLastButton = document.createElement("button");
-    const innerContainer = document.createElement("div");   // 실제 화면에서 보여지는 영역
+const mainWrap = document.querySelector("#wrap"),   // 화면 전체 dom
+    mainWrapBg = document.createElement("div"),
+        mainWrapBgGradient = document.createElement("div"),
+        mainWrapBgTree = document.createElement("div"),
+        mainWrapBgLines = document.createElement("div"),
+        mainWrapBgText = document.createElement("p"),
+    footerWrap = document.createElement("div"),   // 화면 하단의 footer
+        footerWrapTime = document.createElement("div"),
+    innerContainer = document.createElement("div"),   // 실제 화면에서 보여지는 영역
+    stickyBarTop = document.createElement("div"), // 플레이트의 윗 부분
+    stickyBarBottom = document.createElement("div"),  // 플레이트의 아랫부분
+    UIBox = document.createElement("div"), // 퀵버튼
+        UIBoxInner = document.createElement("div"),
+            UIBoxInnerDiv1 = document.createElement("div"),
+            UIBoxInnerDiv2 = document.createElement("div"),
+            UIBoxInnerDiv3 = document.createElement("div"),
+            UIBoxInnerDiv4 = document.createElement("div");
 
-    const stickyBarTop = document.createElement("div"); // 플레이트의 윗 부분
-    const stickyBarBottom = document.createElement("div");  // 플레이트의 아랫부분
-
-    const UIBox = document.createElement("div"); // 퀵버튼
-        const UIBoxInner = document.createElement("div");
-            const UIBoxInnerDiv1 = document.createElement("div");
-            const UIBoxInnerDiv2 = document.createElement("div");
-            const UIBoxInnerDiv3 = document.createElement("div");
-            const UIBoxInnerDiv4 = document.createElement("div");
 
 function loadBar() {    // 기본 창들 생성
     mainWrapBg.id = "mainWrapBg";
@@ -76,7 +69,6 @@ function loadBar() {    // 기본 창들 생성
     footerWrap.id = "footerWrap";
     footerWrapTime.id = "footerWrapTime";
     stickyBarTop.id = "stickyBarTop";   // 각 dom마다 컨트롤 하기 쉽게 선택자 입력
-    firstBg.id = "firstBg";
     UIBox.id = "UIBox";
     UIBox.className =  "moveWrap";
         UIBoxInner.id ="UIBoxInner";
@@ -84,13 +76,7 @@ function loadBar() {    // 기본 창들 생성
             UIBoxInnerDiv2.className = "UIBoxInnerDiv";
             UIBoxInnerDiv3.className = "UIBoxInnerDiv";
             UIBoxInnerDiv4.className = "UIBoxInnerDiv";
-    firstUl.id = "firstUl";
-    firstliLast.id = "firstLastLi";
-        firstliLastInput.id = "firstliLastInput";
-        firstliLastButton.id = "firstliLastButton";
     stickyBarBottom.id = "stickyBarBottom";
-    codeWrap.id = "codeWrap";
-    codeWrap.className = "moveWrap";
     innerContainer.id = "innerContainer";
 
     mainWrap.appendChild(footerWrap);
@@ -100,26 +86,14 @@ function loadBar() {    // 기본 창들 생성
         mainWrapBg.appendChild(mainWrapBgTree);
         mainWrapBg.appendChild(mainWrapBgLines);
         mainWrapBg.appendChild(mainWrapBgText);
-    mainWrap.appendChild(codeWrap);    // 실제 dom 생성
-    codeWrap.appendChild(firstBg);
     mainWrap.appendChild(UIBox);
         UIBox.appendChild(UIBoxInner);
             UIBoxInner.appendChild(UIBoxInnerDiv1);
             UIBoxInner.appendChild(UIBoxInnerDiv2);
             UIBoxInner.appendChild(UIBoxInnerDiv3);
             UIBoxInner.appendChild(UIBoxInnerDiv4);
-        firstBg.appendChild(firstUl);
-        codeWrap.appendChild(firstliLast);
-            firstliLast.appendChild(firstliLastInput);
-            firstliLast.appendChild(firstliLastButton);
-    codeWrap.appendChild(innerContainer);
-    codeWrap.appendChild(stickyBarTop);
-    codeWrap.appendChild(stickyBarBottom);
     
     mainWrapBgText.innerText = "CGM Style";
-    firstliLastButton.innerText = "입력";
-    firstliLastInput.autocomplete="off";
-    firstliLastInput.placeholder = "'자세히보기'또는 '도움말'이라고 입력해주세요";
     UIBoxInnerDiv1.style = "--i:0;--x:0;--y:0;"
     UIBoxInnerDiv2.style = "--i:1;--x:2;--y:0;"
     UIBoxInnerDiv3.style = "--i:2;--x:0;--y:2;"
@@ -130,16 +104,13 @@ function loadBar() {    // 기본 창들 생성
     UIBoxInnerDiv4.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M8.114 2.094a.75.75 0 01.386.656V9h1.252a.75.75 0 110 1.5H5.75a.75.75 0 010-1.5H7V4.103l-.853.533a.75.75 0 01-.795-1.272l2-1.25a.75.75 0 01.762-.02zm4.889 5.66a.75.75 0 01.75-.75h5.232a.75.75 0 01.53 1.28l-2.776 2.777c.55.097 1.057.253 1.492.483.905.477 1.504 1.284 1.504 2.418 0 .966-.471 1.75-1.172 2.27-.687.511-1.587.77-2.521.77-1.367 0-2.274-.528-2.667-.756a.75.75 0 01.755-1.297c.331.193.953.553 1.912.553.673 0 1.243-.188 1.627-.473.37-.275.566-.635.566-1.067 0-.5-.219-.836-.703-1.091-.538-.284-1.375-.443-2.471-.443a.75.75 0 01-.53-1.28l2.643-2.644h-3.421a.75.75 0 01-.75-.75zM7.88 15.215a1.4 1.4 0 00-1.446.83.75.75 0 01-1.37-.61 2.9 2.9 0 012.986-1.71 2.565 2.565 0 011.557.743c.434.446.685 1.058.685 1.778 0 1.641-1.254 2.437-2.12 2.986-.538.341-1.18.694-1.495 1.273H9.75a.75.75 0 010 1.5h-4a.75.75 0 01-.75-.75c0-1.799 1.337-2.63 2.243-3.21 1.032-.659 1.55-1.031 1.55-1.8 0-.355-.116-.584-.26-.732a1.068 1.068 0 00-.652-.298z"></path></svg>`;
 
     UIBox.draggable = true;
-    codeWrap.draggable = true;
 }
 
-
-
 function addTopBtns(Wrap,text)   { // 창들의 상단 타이틀,최소화,닫기 버튼을 생성하는 함수
-    const addTopBtnContainer = document.createElement("div");
-        const addTopBtnContainerTitle = document.createElement("p");
-        const addTopBtnContainerMin = document.createElement("div");
-        const addTopBtnContainerClose = document.createElement("div");
+    const addTopBtnContainer = document.createElement("div"),
+        addTopBtnContainerTitle = document.createElement("p"),
+        addTopBtnContainerMin = document.createElement("div"),
+        addTopBtnContainerClose = document.createElement("div");
     
     addTopBtnContainer.className = "addTopBtnContainer";
     addTopBtnContainerTitle.className = "addTopBtnContainerTitle";
@@ -155,6 +126,18 @@ function addTopBtns(Wrap,text)   { // 창들의 상단 타이틀,최소화,닫�
 
     addTopBtnContainerClose.addEventListener("click",()=>{  // 닫기버튼 클릭시
         Wrap.remove();
+
+        let checkCodeWrap = document.querySelector(".codeWrap"),   // 코드창 있는지 확인
+            checkCalculator = document.querySelector("#calculatorWrap"),    // 계산기가 있는지 체크
+            footerWrap = document.querySelector("#footerWrap");
+
+        if(!checkCalculator){
+            footerWrap.childNodes[1].style.background= "transparent";
+        }
+        if(!checkCodeWrap){
+            footerWrap.childNodes[2].style.background= "transparent";
+        }
+        
     })
     addTopBtnContainerMin.addEventListener("click",(e)=>{   // 최소화 버튼 클릭시
 
@@ -163,88 +146,49 @@ function addTopBtns(Wrap,text)   { // 창들의 상단 타이틀,최소화,닫�
             e.path[2].style.height = null;
             return false;
         }
-
         e.path[2].style.height = "24px";
     })
 }
 
-// 창 상단 부분 생성
-addTopBtns(codeWrap,"Text-Program");
+function addCodeWrap()  {
+    if(runEvent === true){
+        alert("아직 이벤트 중입니다.");
+        return false;
+    }
 
-function addPlayer()    {
-    
-}
+    const codeWrap = document.createElement("div"),    // 아래 모든 영역을 포함한 dom
+        firstBg = document.createElement("form"),  // 메인 화면에서의 컨텐츠
+            firstUl = document.createElement("ui"),
+            firstliLast = document.createElement("form"),
+                firstliLastInput = document.createElement("input"),
+                firstliLastButton = document.createElement("button");
 
-const mainBarEvent = () => {    // 플레이트 컷 이벤트 내용
-    stickyBarTop.style.transform = "rotate(0deg)";
-    stickyBarBottom.style.bottom = "0%"
-    stickyBarTop.style.bottom = "12.6%";
-    codeWrap.style.transform = "scale(0.5)rotate(180deg)";
+    firstBg.id = "firstBg";
 
-    setTimeout(() => {
-        stickyBarTop.style.transform = "rotate(90deg)";
-        stickyBarBottom.style.bottom = "-14.9%"
-        stickyBarTop.style.bottom = "0";
-        codeWrap.style.transform = "scale(1)";
-        firstBg.remove();
-        firstPage();
-    }, 4000);
-    setTimeout(() => {
-        stickyBarTop.remove();
-        stickyBarBottom.remove();
-    },5000)
+    firstUl.id = "firstUl";
+    firstliLast.id = "firstLastLi";
+        firstliLastInput.id = "firstliLastInput";
+        firstliLastButton.id = "firstliLastButton";
 
-}
-loadBar();
-UIBox.addEventListener("click",function(e){
-    UIBox.classList.toggle("active");
-})
+    codeWrap.classList = "codeWrap";
+    codeWrap.classList += " moveWrap";
 
-function moveWrapAction(){
-    let moveWrap = document.querySelectorAll(".moveWrap");
-    moveWrap.forEach((move)=>{  // moveWrap이라는 클래스를 가지면 움직일수있음
-        if(isCheck === true){
-            move.addEventListener("touchstart", function(e){    // 모바일 퀵 버튼 부분 move 이벤트
-                codeWrap.style.zIndex = "5";
-                let shiftX = e.changedTouches[0].clientX - move.getBoundingClientRect().left;
-                let shiftY = e.changedTouches[0].clientY - move.getBoundingClientRect().top;
-            
-                move.addEventListener("touchmove",function(e) {
-                    move.style.left = e.changedTouches[0].pageX - shiftX + 'px';
-                    move.style.top = e.changedTouches[0].pageY - shiftY + 'px';
-                })
-            
-                move.addEventListener("touchend",function(e) {
-                    move.style.zIndex = "4";
-                })
-            })
-        }else{
-            move.addEventListener("mousedown", function(e){    // pc 퀵 버튼 부분 move 이벤트
-                move.style.zIndex = "5";
-                let shiftX = e.clientX - move.getBoundingClientRect().left;
-                let shiftY = e.clientY - move.getBoundingClientRect().top;
-            
-                move.style.cursor = "grabbing";
-            
-                this.addEventListener("dragover",function(e) {
-                    console.dir(move);
-                    move.style.cursor = "grabbing";
-                    move.style.left = e.pageX - shiftX + 'px';
-                    move.style.top = e.pageY - shiftY + 'px';
-                })
-            
-                this.addEventListener("mouseup",function(e) {
-                    move.style.cursor = "pointer";
-                    move.style.zIndex = "4";
-                })
-            })
-        }
-    })
-}
-moveWrapAction();
+    addTopBtns(codeWrap,"Text-Program"); //창의 상단 부분 생성
+    mainWrap.appendChild(codeWrap);    // 실제 dom 생성
+    codeWrap.appendChild(firstBg);
 
+    firstBg.appendChild(firstUl);
+        codeWrap.appendChild(firstliLast);
+            firstliLast.appendChild(firstliLastInput);
+            firstliLast.appendChild(firstliLastButton);
+    codeWrap.appendChild(innerContainer);
+    codeWrap.appendChild(stickyBarTop);
+    codeWrap.appendChild(stickyBarBottom);
 
-function autoText(_, counter = 0)   {
+    firstliLastButton.innerText = "입력";
+    firstliLastInput.autocomplete="off";
+    firstliLastInput.placeholder = "'자세히보기'또는 '도움말'이라고 입력해주세요";
+
     function autoTyping(text, textContainer,textNum) {  // 넘겨받을 텍스트, 해당 텍스트를 보여줄 dom,중지할 이벤트 이름
         counter=0;
         let intervalEvent = setInterval((e) => {
@@ -280,8 +224,7 @@ function autoText(_, counter = 0)   {
             eval(`firstli${textLiNum}div`).className = `firstLiDiv`;
             eval(`firstli${textLiNum}p`).className = `firstLiP`;
 
-        eval(`firstli${textLiNum}div`).innerText = `${textLiNum}`
-
+            eval(`firstli${textLiNum}div`).innerText = `${eval(`firstli${textLiNum}div`).parentElement.parentElement.childElementCount}`// list의 갯수를 파악후 +1
         autoTyping(text,eval(`firstli${textLiNum}p`,textLiNum)); // 기본 텍스트
 
         // list의 텍스트 클릭시 이벤트
@@ -396,9 +339,9 @@ function autoText(_, counter = 0)   {
                         return response.json(); // json형태로 변환
                     })
                     .then(function (json) { 
-                        const temperature = json.main.temp; 
-                        const place = json.name;
-                        const nowWeather = json.weather[0].main;
+                        const temperature = json.main.temp,
+                            place = json.name,
+                            nowWeather = json.weather[0].main;
 
                         runEvent = true;
                         setTimeout(() => {
@@ -430,17 +373,230 @@ function autoText(_, counter = 0)   {
             firstliLastEvent.target[0].value="";
             return false;
         }else if (inputTypingText === "계산" || inputTypingText === "계산기")   {
-            calculator();
+            footerQuick(1,null,`<?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg enable-background="new 0 0 128 128" version="1.1" viewBox="0 0 128 128" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Layer_1"><rect fill="#F4F5F5" height="1520" opacity="0" width="727.938" x="-59.984" y="-541"/></g><g id="Layer_2"><g><circle cx="64" cy="64" fill="#2597CE" r="64"/><g><defs><circle cx="64" cy="64" id="SVGID_35_" r="64"/></defs><clipPath id="SVGID_2_"><use overflow="visible" xlink:href="#SVGID_35_"/></clipPath><polygon clip-path="url(#SVGID_2_)" fill="#1389C9" points="101.864,27.092 128,53.215 128,128 53.333,128 26.813,101.273      35.004,68.722 26.929,60.646 61.417,27.092 66.786,32.462    "/></g><g><defs><circle cx="64" cy="64" id="SVGID_37_" r="64"/></defs><clipPath id="SVGID_4_"><use overflow="visible" xlink:href="#SVGID_37_"/></clipPath><polygon clip-path="url(#SVGID_4_)" fill="#0082C5" points="26.94,61.284 89.952,124.296 110.11,112.138 124.423,89.992      61.381,27.036    "/></g><path d="M62,57.692C62,60.071,60.071,62,57.692,62H29.308C26.929,62,25,60.071,25,57.692V29.308    C25,26.929,26.929,25,29.308,25h28.385C60.071,25,62,26.929,62,29.308V57.692z" fill="#FFF1E5"/><path d="M103,57.692c0,2.379-1.929,4.308-4.308,4.308H70.308C67.929,62,66,60.071,66,57.692V29.308    C66,26.929,67.929,25,70.308,25h28.385c2.379,0,4.308,1.929,4.308,4.308V57.692z" fill="#FFF1E5"/><path d="M62,98.692c0,2.379-1.929,4.308-4.308,4.308H29.308C26.929,103,25,101.071,25,98.692V70.308    C25,67.929,26.929,66,29.308,66h28.385C60.071,66,62,67.929,62,70.308V98.692z" fill="#FFF1E5"/><path d="M103,98.692c0,2.379-1.929,4.308-4.308,4.308H70.308C67.929,103,66,101.071,66,98.692V70.308    C66,67.929,67.929,66,70.308,66h28.385c2.379,0,4.308,1.929,4.308,4.308V98.692z" fill="#FFF1E5"/><g><defs><path d="M103,57.692c0,2.379-1.929,4.308-4.308,4.308H70.308C67.929,62,66,60.071,66,57.692V29.308      C66,26.929,67.929,25,70.308,25h28.385c2.379,0,4.308,1.929,4.308,4.308V57.692z" id="SVGID_39_"/></defs><clipPath id="SVGID_6_"><use overflow="visible" xlink:href="#SVGID_39_"/></clipPath><polygon clip-path="url(#SVGID_6_)" fill="#DED3CD" points="92.45,42.383 75.898,45.734 93.08,63 103,63 103,52.899    "/></g><g><defs><path d="M103,98.692c0,2.379-1.929,4.308-4.308,4.308H70.308C67.929,103,66,101.071,66,98.692V70.308      C66,67.929,67.929,66,70.308,66h28.385c2.379,0,4.308,1.929,4.308,4.308V98.692z" id="SVGID_41_"/></defs><clipPath id="SVGID_8_"><use overflow="visible" xlink:href="#SVGID_41_"/></clipPath><polygon clip-path="url(#SVGID_8_)" fill="#DED3CD" points="92.607,78.245 79.068,79.263 75.692,81.076 81.266,86.68      75.883,90.391 88.485,103 103,103 102.872,88.613    "/></g><g><defs><path d="M62,98.692c0,2.379-1.929,4.308-4.308,4.308H29.308C26.929,103,25,101.071,25,98.692V70.308      C25,67.929,26.929,66,29.308,66h28.385C60.071,66,62,67.929,62,70.308V98.692z" id="SVGID_43_"/></defs><clipPath id="SVGID_10_"><use overflow="visible" xlink:href="#SVGID_43_"/></clipPath><polygon clip-path="url(#SVGID_10_)" fill="#DED3CD" points="49.8,78.391 37.725,90.465 50.235,103 63,103 63,90.451      50.262,77.728    "/></g><g><defs><path d="M62,57.692C62,60.071,60.071,62,57.692,62H29.308C26.929,62,25,60.071,25,57.692V29.308      C25,26.929,26.929,25,29.308,25h28.385C60.071,25,62,26.929,62,29.308V57.692z" id="SVGID_45_"/></defs><clipPath id="SVGID_12_"><use overflow="visible" xlink:href="#SVGID_45_"/></clipPath><polygon clip-path="url(#SVGID_12_)" fill="#DED3CD" points="44.108,43.932 35.731,45.684 53.027,63 63,63 63,52.952      45.785,35.813    "/></g><g><g><g><path d="M50.386,41.438h-3.949v-3.949c0-1.372-1.122-2.494-2.494-2.494h0c-1.372,0-2.494,1.122-2.494,2.494       v3.949h-3.949c-1.372,0-2.494,1.122-2.494,2.494c0,1.372,1.122,2.494,2.494,2.494h3.949v3.949c0,1.372,1.122,2.494,2.494,2.494       h0c1.372,0,2.494-1.122,2.494-2.494v-3.949h3.949c1.372,0,2.494-1.122,2.494-2.494C52.88,42.56,51.758,41.438,50.386,41.438z" fill="#59515C"/></g></g><g><path d="M90.501,46.426H77.614c-1.372,0-2.494-1.122-2.494-2.494l0,0c0-1.372,1.122-2.494,2.494-2.494h12.887      c1.372,0,2.494,1.122,2.494,2.494l0,0C92.996,45.304,91.873,46.426,90.501,46.426z" fill="#59515C"/></g><g><path d="M50.262,81.255l-9.113,9.112c-0.97,0.97-2.557,0.97-3.527,0l0,0c-0.97-0.97-0.97-2.557,0-3.527      l9.112-9.113c0.97-0.97,2.557-0.97,3.527,0l0,0C51.232,78.698,51.232,80.285,50.262,81.255z" fill="#59515C"/><path d="M41.15,77.728l9.113,9.113c0.97,0.97,0.97,2.557,0,3.527l0,0c-0.97,0.97-2.557,0.97-3.527,0      l-9.112-9.112c-0.97-0.97-0.97-2.557,0-3.527l0,0C38.592,76.758,40.18,76.758,41.15,77.728z" fill="#59515C"/></g><g><g><path d="M90.501,86.107H77.614c-1.372,0-2.494,1.122-2.494,2.494c0,1.372,1.122,2.494,2.494,2.494h12.887       c1.372,0,2.494-1.122,2.494-2.494C92.996,87.229,91.873,86.107,90.501,86.107z M77.614,81.989h12.887       c1.372,0,2.494-1.122,2.494-2.494c0-1.372-1.122-2.494-2.494-2.494H77.614c-1.372,0-2.494,1.122-2.494,2.494       C75.12,80.867,76.242,81.989,77.614,81.989z" fill="#59515C"/></g></g></g></g></g></svg>`);
         }
 
         addTextListLi(document.querySelectorAll(`.firstLi`).length+1,`${inputTypingText}`);
         firstliLastEvent.target[0].value="";
     })
 
+    moveWrapAction();
+    codeWrap.draggable = true;
+}
+
+addCodeWrap();
+
+
+function addPlayer()    {   // 플레이어 생성
+    const playerWrap = document.createElement("div"),
+            playerContainer = document.createElement("div"),
+                playerContainerUrlBox = document.createElement("div"),
+                    playerContainerUrlInner = document.createElement("div"),
+                        playerContainerUrlInnerDiv = document.createElement("div"),
+                        playerContainerUrlInnerInput = document.createElement("input"),
+                playerContainerUrlTitel = document.createElement("div"),
+                    playerContainerUrlTitelP = document.createElement("p"),
+                    playerContainerUrlTitelTime = document.createElement("p"),
+                playerContainerController = document.createElement("div"),
+                    playerContainerControllerPrev = document.createElement("div"),
+                    playerContainerControllerOnOff = document.createElement("div"),
+                    playerContainerControllerNext = document.createElement("div");
+
+    playerWrap.classList = "playerWrap";
+    playerWrap.classList += " moveWrap";
+    playerContainer.className = "playerContainer";
+    playerContainerUrlBox.className = "playerContainerUrlBox";
+    playerContainerUrlInner.className = "playerContainerUrlInner";
+    playerContainerUrlInnerDiv.className = "playerContainerUrlInnerDiv";
+    playerContainerUrlInnerInput.className = "playerContainerUrlInnerInput";
+    playerContainerUrlTitel.className = "playerContainerUrlTitel";
+    playerContainerUrlTitelP.className = "playerContainerUrlTitelP";
+    playerContainerUrlTitelTime.className = "playerContainerUrlTitelTime";
+    playerContainerController.className = "playerContainerController";
+    playerContainerControllerPrev.className = "playerContainerControllerPrev";
+    playerContainerControllerOnOff.className = "playerContainerControllerOnOff";
+    playerContainerControllerNext.className = "playerContainerControllerNext";
+
+    mainWrap.appendChild(playerWrap);
+    addTopBtns(playerWrap,"Player",4);
+        playerWrap.appendChild(playerContainer);
+            playerContainer.appendChild(playerContainerUrlBox);
+                playerContainerUrlBox.appendChild(playerContainerUrlInner);
+                    playerContainerUrlInner.appendChild(playerContainerUrlInnerDiv);
+                    playerContainerUrlInner.appendChild(playerContainerUrlInnerInput);
+            playerContainer.appendChild(playerContainerUrlTitel);
+                playerContainerUrlTitel.appendChild(playerContainerUrlTitelP);
+                playerContainerUrlTitel.appendChild(playerContainerUrlTitelTime);
+            playerContainer.appendChild(playerContainerController);
+                playerContainerController.appendChild(playerContainerControllerPrev);
+                playerContainerController.appendChild(playerContainerControllerOnOff);
+                playerContainerController.appendChild(playerContainerControllerNext);
+
+
+    playerContainerUrlInnerDiv.innerHTML = `<?xml version="1.0" ?><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.11,15.39,8.23,19.27a2.52,2.52,0,0,1-3.5,0,2.47,2.47,0,0,1,0-3.5l3.88-3.88a1,1,0,1,0-1.42-1.42L3.31,14.36a4.48,4.48,0,0,0,6.33,6.33l3.89-3.88a1,1,0,0,0-1.42-1.42ZM20.69,3.31a4.49,4.49,0,0,0-6.33,0L10.47,7.19a1,1,0,1,0,1.42,1.42l3.88-3.88a2.52,2.52,0,0,1,3.5,0,2.47,2.47,0,0,1,0,3.5l-3.88,3.88a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3.88-3.89A4.49,4.49,0,0,0,20.69,3.31ZM8.83,15.17a1,1,0,0,0,.71.29,1,1,0,0,0,.71-.29l4.92-4.92a1,1,0,1,0-1.42-1.42L8.83,13.75A1,1,0,0,0,8.83,15.17Z" fill="#f26600"/></svg>`;
+
+    playerWrap.draggable = true;
+
+    var audio = new Audio("music/A Typical Ride Out - Noir Et Blanc Vie.mp3");
+    
+    audio.play();
+
+    playerContainerUrlInnerDiv.addEventListener("click",(e)=>{
+        playerContainerUrlInnerDiv.classList.toggle("rotate");
+        playerContainerUrlInnerInput.classList.toggle("open");
+    })
+    moveWrapAction();   // 창 이동 이벤트 재 할당
+}
+addPlayer()
+
+const mainBarEvent = () => {    // 플레이트 컷 이벤트 내용
+    stickyBarTop.style.transform = "rotate(0deg)";
+    stickyBarBottom.style.bottom = "0%"
+    stickyBarTop.style.bottom = "12.6%";
+    codeWrap.style.transform = "scale(0.5)rotate(180deg)";
+
+    setTimeout(() => {
+        stickyBarTop.style.transform = "rotate(90deg)";
+        stickyBarBottom.style.bottom = "-14.9%"
+        stickyBarTop.style.bottom = "0";
+        codeWrap.style.transform = "scale(1)";
+        firstBg.remove();
+        firstPage();
+    }, 4000);
+    setTimeout(() => {
+        stickyBarTop.remove();
+        stickyBarBottom.remove();
+    },5000)
+
+}
+loadBar();
+
+
+UIBox.addEventListener("click",function(e){
+    UIBox.classList.toggle("active");
+})
+
+function moveWrapAction(){  // 창 이동 함수
+    let moveWrap = document.querySelectorAll(".moveWrap");
+    moveWrap.forEach((move)=>{  // moveWrap이라는 클래스를 가지면 움직일수있음
+        if(isCheck === true){
+            move.addEventListener("touchstart", function(e){    // 모바일 퀵 버튼 부분 move 이벤트
+                codeWrap.style.zIndex = "5";
+                let shiftX = e.changedTouches[0].clientX - move.getBoundingClientRect().left,
+                    shiftY = e.changedTouches[0].clientY - move.getBoundingClientRect().top;
+            
+                this.parentElement.addEventListener("touchmove",function(e) {
+                    move.style.left = e.changedTouches[0].pageX - shiftX + 'px';
+                    move.style.top = e.changedTouches[0].pageY - shiftY + 'px';
+                })
+            
+                this.addEventListener("touchend",function(e) {
+                    move.style.zIndex = "4";
+                })
+            })
+        }else{
+            move.addEventListener("mousedown", function(e){    // pc 퀵 버튼 부분 move 이벤트
+                moveWrap.forEach((move)=>{  // 클릭한 창 외의 움직이는 창들의 z-index를 4로 하여 뒤로
+                    move.style.zIndex = "4";
+                })
+                this.style.zIndex = "5";
+
+                let shiftX = e.clientX+80 - move.getBoundingClientRect().left,
+                    shiftY = e.clientY+70 - move.getBoundingClientRect().top;
+            
+                move.style.cursor = "grabbing";
+            
+                this.addEventListener("dragover",function(e) {
+                    move.style.cursor = "grabbing";
+                    move.style.left = e.pageX - shiftX+10 + 'px';
+                    move.style.top = e.pageY - shiftY + 'px';
+                })
+            
+                this.addEventListener("mouseup",function() {
+                    move.style.cursor = "pointer";
+                    e.stopImmediatePropagation;
+                })
+            })
+        }
+    })
+}
+moveWrapAction();
+
+
+function addWeatherBox()    {   // 날씨 Wrap 생성
+    const API_KEY = "c65eec58bb72eba4ba267415b3d37432";
+        function getWeather(lat, lng) {
+            fetch(
+                `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`
+            )
+                .then(function (response) { // .then = fetch가 완료 된 후 실행됨
+                    return response.json(); // json형태로 변환
+                })
+                .then(function (json) { 
+                    const temperature = json.main.temp,
+                        place = json.name,
+                        nowWeather = json.weather[0].main;
+
+                    const weatherWrap = document.createElement("div"),      // 날씨 wrap 생성
+                    weatherWrapContainer = document.createElement("div"),
+                    weatherWrapTemperature = document.createElement("p"),
+                    weatherWrapWeacther = document.createElement("div"),
+                    weatherWrapPlace = document.createElement("p");
+                
+                    weatherWrap.classList = "weatherWrap";
+                    weatherWrap.classList += " moveWrap";
+                    weatherWrapContainer.className = "weatherWrapContainer";
+                    weatherWrapTemperature.className = "weatherWrapTemperature";
+                    weatherWrapWeacther.className = "weatherWrapWeacther";
+                    weatherWrapPlace.className = "weatherWrapPlace";
+
+                    mainWrap.appendChild(weatherWrap);
+                    addTopBtns(weatherWrap,"Weather",3);
+                    weatherWrap.appendChild(weatherWrapContainer);
+                    weatherWrapContainer.appendChild(weatherWrapTemperature);
+                    weatherWrapContainer.appendChild(weatherWrapWeacther);
+                    weatherWrapContainer.appendChild(weatherWrapPlace);
+                    
+                    console.dir(json.weather[0]);
+
+                    weatherWrapTemperature.innerText = `${temperature.toFixed()}`;
+                    if(nowWeather === "Clouds") {   // 구름
+                        weatherWrapWeacther.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
+                    }else if((nowWeather).indexOf("rain")) {   // 비
+                        weatherWrapWeacther.innerHTML = `<i class="fa-solid fa-cloud-rain"></i>`;
+                    }else if((nowWeather).indexOf("sun")) {   // 맑음
+                        weatherWrapWeacther.innerHTML = `<i class="fa-solid fa-sun"></i>`;
+                    }else if((nowWeather).indexOf("snow")) {   // 눈
+                        weatherWrapWeacther.innerHTML = `<i class="fa-solid fa-snowflake"></i>`;
+                    }else if((nowWeather).indexOf("strom")) {   // 천둥
+                        weatherWrapWeacther.innerHTML = `<i class="fa-solid fa-cloud-rain"></i>`;
+                    }
+                    weatherWrapPlace.innerText = `${place}`;
+
+                    weatherWrap.draggable = true;
+                
+                    moveWrapAction();   // 창 이동 이벤트 재 할당
+                });
+            }
+
+        function weatherLoadCoords() {
+            const loadedCoords = localStorage.getItem(COORDS); // localStorage에서 위치정보 가져옴
+            if (loadedCoords === null) { // 위치 정보가 없으면
+                askForCoords(); // 위치 정보 요청 함수
+            } else {
+                const parseCoords = JSON.parse(loadedCoords); // json형식을 객체 타입으로 바꿔서 저장
+                getWeather(parseCoords.latitude, parseCoords.longitude); // 날씨 요청 함수
+            }
+        }
+        weatherLoadCoords();
+}
+
+
+function autoText(_, counter = 0)   {
+
     // 계산기 부분
     function calculator() {
         const calculatorWrap = document.createElement("div"),
-            calculatorTop = document.createElement("div"),
             calculatorWrapCotainer = document.createElement("div"),
                 calculatorForm = document.createElement("form"),
                     calculatorInput = document.createElement("input"),
@@ -466,7 +622,6 @@ function autoText(_, counter = 0)   {
 
         calculatorWrap.id = "calculatorWrap";
         calculatorWrap.className = "moveWrap";
-            calculatorTop.id = "calculatorTop";
             calculatorWrapCotainer.id = "calculatorWrapCotainer";
                 calculatorForm.id = "calculatorForm";
                     calculatorInput.id = "calculatorInput";
@@ -514,7 +669,6 @@ function autoText(_, counter = 0)   {
 
         addTopBtns(calculatorWrap,"calculator",2);
         mainWrap.appendChild(calculatorWrap);
-            calculatorWrap.appendChild(calculatorTop);
             calculatorWrap.appendChild(calculatorWrapCotainer);
                 calculatorWrapCotainer.appendChild(calculatorForm);
                     calculatorForm.appendChild(calculatorInput);
@@ -663,45 +817,11 @@ function autoText(_, counter = 0)   {
         }
         addTextListLi(document.querySelectorAll(`.firstLi`).length+1,`${time}입니다.`);
     });
-    UIBoxInnerDiv3.addEventListener("click",() => {
-        if(runEvent === true)   {
-            alert("아직 이벤트가 진행중입니다.");
-            return false;
-        }
-        const API_KEY = "c65eec58bb72eba4ba267415b3d37432";
-        function getWeather(lat, lng) {
-            fetch(
-                `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`
-            )
-                .then(function (response) { // .then = fetch가 완료 된 후 실행됨
-                    return response.json(); // json형태로 변환
-                })
-                .then(function (json) { 
-                    const temperature = json.main.temp; 
-                    const place = json.name;
-                    const nowWeather = json.weather[0].main;
-
-                    runEvent = true;
-                    addTextListLi(document.querySelectorAll(`.firstLi`).length+1,`현재 지역은 ${place} 이며 날씨는 ${nowWeather}, 기온은 ${temperature.toFixed()}도 입니다.`);
-                });
-            }
-
-        function weatherLoadCoords() {
-            const loadedCoords = localStorage.getItem(COORDS); // localStorage에서 위치정보 가져옴
-            if (loadedCoords === null) { // 위치 정보가 없으면
-                askForCoords(); // 위치 정보 요청 함수
-            } else {
-                const parseCoords = JSON.parse(loadedCoords); // json형식을 객체 타입으로 바꿔서 저장
-                getWeather(parseCoords.latitude, parseCoords.longitude); // 날씨 요청 함수
-            }
-        }
-        weatherLoadCoords();
-        return false;
-    });
+    UIBoxInnerDiv3.addEventListener("click",addWeatherBox);
     UIBoxInnerDiv4.addEventListener("click",calculator);
 
     // 하단 퀵 버튼 생성 함수
-    function footerQuick(Wrapnum,wrapThis,Icon)  {
+    function footerQuick(Wrapnum,readyOn,Icon)  {
         footerWrap.appendChild(eval(`footerIconWrap${Wrapnum} = document.createElement("div")`));
         eval(`footerIconWrap${Wrapnum}`).appendChild(eval(`footerIconWrapDiv${Wrapnum} = document.createElement("div")`));
 
@@ -709,18 +829,34 @@ function autoText(_, counter = 0)   {
         eval(`footerIconWrapDiv${Wrapnum}`).className = `footerIconWrapDiv`;
 
         eval(`footerIconWrapDiv${Wrapnum}`).innerHTML = `${Icon}`;
+        
+        if(readyOn === true)    {
+            eval(`footerIconWrap${Wrapnum}`).style.background = "rgba(100,100,255,0.3)";
+        }
 
         eval(`footerIconWrap${Wrapnum}`).addEventListener("click",()=>{
             if(Wrapnum === 1)   {
                 calculator();
+                eval(`footerIconWrap${Wrapnum}`).style.background = "rgba(100,100,255,0.3)";
+            }else if(Wrapnum === 2) {
+                if(runEvent === true)   {
+                    alert("초기 이벤트를 아직 진행중입니다.")
+                    return false;
+                }
+                addCodeWrap();
+                eval(`footerIconWrap${Wrapnum}`).style.background = "rgba(100,100,255,0.3)";
+            }else if(Wrapnum === 3) {
+                addWeatherBox();
+                eval(`footerIconWrap${Wrapnum}`).style.background = "rgba(100,100,255,0.3)";
             }
         })
     }
 
     // 화면 하단 퀵 버튼
-    footerQuick(1,null,`<?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg enable-background="new 0 0 128 128" version="1.1" viewBox="0 0 128 128" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Layer_1"><rect fill="#F4F5F5" height="1520" opacity="0" width="727.938" x="-59.984" y="-541"/></g><g id="Layer_2"><g><circle cx="64" cy="64" fill="#2597CE" r="64"/><g><defs><circle cx="64" cy="64" id="SVGID_35_" r="64"/></defs><clipPath id="SVGID_2_"><use overflow="visible" xlink:href="#SVGID_35_"/></clipPath><polygon clip-path="url(#SVGID_2_)" fill="#1389C9" points="101.864,27.092 128,53.215 128,128 53.333,128 26.813,101.273      35.004,68.722 26.929,60.646 61.417,27.092 66.786,32.462    "/></g><g><defs><circle cx="64" cy="64" id="SVGID_37_" r="64"/></defs><clipPath id="SVGID_4_"><use overflow="visible" xlink:href="#SVGID_37_"/></clipPath><polygon clip-path="url(#SVGID_4_)" fill="#0082C5" points="26.94,61.284 89.952,124.296 110.11,112.138 124.423,89.992      61.381,27.036    "/></g><path d="M62,57.692C62,60.071,60.071,62,57.692,62H29.308C26.929,62,25,60.071,25,57.692V29.308    C25,26.929,26.929,25,29.308,25h28.385C60.071,25,62,26.929,62,29.308V57.692z" fill="#FFF1E5"/><path d="M103,57.692c0,2.379-1.929,4.308-4.308,4.308H70.308C67.929,62,66,60.071,66,57.692V29.308    C66,26.929,67.929,25,70.308,25h28.385c2.379,0,4.308,1.929,4.308,4.308V57.692z" fill="#FFF1E5"/><path d="M62,98.692c0,2.379-1.929,4.308-4.308,4.308H29.308C26.929,103,25,101.071,25,98.692V70.308    C25,67.929,26.929,66,29.308,66h28.385C60.071,66,62,67.929,62,70.308V98.692z" fill="#FFF1E5"/><path d="M103,98.692c0,2.379-1.929,4.308-4.308,4.308H70.308C67.929,103,66,101.071,66,98.692V70.308    C66,67.929,67.929,66,70.308,66h28.385c2.379,0,4.308,1.929,4.308,4.308V98.692z" fill="#FFF1E5"/><g><defs><path d="M103,57.692c0,2.379-1.929,4.308-4.308,4.308H70.308C67.929,62,66,60.071,66,57.692V29.308      C66,26.929,67.929,25,70.308,25h28.385c2.379,0,4.308,1.929,4.308,4.308V57.692z" id="SVGID_39_"/></defs><clipPath id="SVGID_6_"><use overflow="visible" xlink:href="#SVGID_39_"/></clipPath><polygon clip-path="url(#SVGID_6_)" fill="#DED3CD" points="92.45,42.383 75.898,45.734 93.08,63 103,63 103,52.899    "/></g><g><defs><path d="M103,98.692c0,2.379-1.929,4.308-4.308,4.308H70.308C67.929,103,66,101.071,66,98.692V70.308      C66,67.929,67.929,66,70.308,66h28.385c2.379,0,4.308,1.929,4.308,4.308V98.692z" id="SVGID_41_"/></defs><clipPath id="SVGID_8_"><use overflow="visible" xlink:href="#SVGID_41_"/></clipPath><polygon clip-path="url(#SVGID_8_)" fill="#DED3CD" points="92.607,78.245 79.068,79.263 75.692,81.076 81.266,86.68      75.883,90.391 88.485,103 103,103 102.872,88.613    "/></g><g><defs><path d="M62,98.692c0,2.379-1.929,4.308-4.308,4.308H29.308C26.929,103,25,101.071,25,98.692V70.308      C25,67.929,26.929,66,29.308,66h28.385C60.071,66,62,67.929,62,70.308V98.692z" id="SVGID_43_"/></defs><clipPath id="SVGID_10_"><use overflow="visible" xlink:href="#SVGID_43_"/></clipPath><polygon clip-path="url(#SVGID_10_)" fill="#DED3CD" points="49.8,78.391 37.725,90.465 50.235,103 63,103 63,90.451      50.262,77.728    "/></g><g><defs><path d="M62,57.692C62,60.071,60.071,62,57.692,62H29.308C26.929,62,25,60.071,25,57.692V29.308      C25,26.929,26.929,25,29.308,25h28.385C60.071,25,62,26.929,62,29.308V57.692z" id="SVGID_45_"/></defs><clipPath id="SVGID_12_"><use overflow="visible" xlink:href="#SVGID_45_"/></clipPath><polygon clip-path="url(#SVGID_12_)" fill="#DED3CD" points="44.108,43.932 35.731,45.684 53.027,63 63,63 63,52.952      45.785,35.813    "/></g><g><g><g><path d="M50.386,41.438h-3.949v-3.949c0-1.372-1.122-2.494-2.494-2.494h0c-1.372,0-2.494,1.122-2.494,2.494       v3.949h-3.949c-1.372,0-2.494,1.122-2.494,2.494c0,1.372,1.122,2.494,2.494,2.494h3.949v3.949c0,1.372,1.122,2.494,2.494,2.494       h0c1.372,0,2.494-1.122,2.494-2.494v-3.949h3.949c1.372,0,2.494-1.122,2.494-2.494C52.88,42.56,51.758,41.438,50.386,41.438z" fill="#59515C"/></g></g><g><path d="M90.501,46.426H77.614c-1.372,0-2.494-1.122-2.494-2.494l0,0c0-1.372,1.122-2.494,2.494-2.494h12.887      c1.372,0,2.494,1.122,2.494,2.494l0,0C92.996,45.304,91.873,46.426,90.501,46.426z" fill="#59515C"/></g><g><path d="M50.262,81.255l-9.113,9.112c-0.97,0.97-2.557,0.97-3.527,0l0,0c-0.97-0.97-0.97-2.557,0-3.527      l9.112-9.113c0.97-0.97,2.557-0.97,3.527,0l0,0C51.232,78.698,51.232,80.285,50.262,81.255z" fill="#59515C"/><path d="M41.15,77.728l9.113,9.113c0.97,0.97,0.97,2.557,0,3.527l0,0c-0.97,0.97-2.557,0.97-3.527,0      l-9.112-9.112c-0.97-0.97-0.97-2.557,0-3.527l0,0C38.592,76.758,40.18,76.758,41.15,77.728z" fill="#59515C"/></g><g><g><path d="M90.501,86.107H77.614c-1.372,0-2.494,1.122-2.494,2.494c0,1.372,1.122,2.494,2.494,2.494h12.887       c1.372,0,2.494-1.122,2.494-2.494C92.996,87.229,91.873,86.107,90.501,86.107z M77.614,81.989h12.887       c1.372,0,2.494-1.122,2.494-2.494c0-1.372-1.122-2.494-2.494-2.494H77.614c-1.372,0-2.494,1.122-2.494,2.494       C75.12,80.867,76.242,81.989,77.614,81.989z" fill="#59515C"/></g></g></g></g></g></svg>`);
-    footerQuick(2,null,`<?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg enable-background="new 0 0 128 128" version="1.1" viewBox="0 0 128 128" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Layer_1"><rect fill="#F4F5F5" height="1520" opacity="0" width="727.938" x="-539.984" y="-731"/></g><g id="Layer_2"><g><circle cx="64" cy="64" fill="#F54F33" r="64"/><g><defs><circle cx="64" cy="64" id="SVGID_31_" r="64"/></defs><clipPath id="SVGID_2_"><use overflow="visible" xlink:href="#SVGID_31_"/></clipPath><polygon clip-path="url(#SVGID_2_)" fill="#DD2C24" points="20.161,96.119 52.036,128 128,128 128,52.536 108.115,32.622    "/></g><path d="M104.944,96.947H23.056c-2.209,0-4-1.791-4-4V35.053c0-2.209,1.791-4,4-4h81.888c2.209,0,4,1.791,4,4    v57.894C108.944,95.156,107.153,96.947,104.944,96.947z" fill="#FFFFFF"/><g><path d="M108.944,42.054v-7.001c0-2.209-1.791-4-4-4H23.056c-2.209,0-4,1.791-4,4v7.001H108.944z" fill="#E1E3E9"/></g><circle cx="25" cy="36.553" fill="#F24B45" r="3"/><circle cx="34" cy="36.553" fill="#FFB202" r="3"/><circle cx="43.001" cy="36.553" fill="#4CBB41" r="3"/><g><defs><path d="M104.944,96.947H23.056c-2.209,0-4-1.791-4-4V35.053c0-2.209,1.791-4,4-4h81.888c2.209,0,4,1.791,4,4      v57.894C108.944,95.156,107.153,96.947,104.944,96.947z" id="SVGID_33_"/></defs><clipPath id="SVGID_4_"><use overflow="visible" xlink:href="#SVGID_33_"/></clipPath><polygon clip-path="url(#SVGID_4_)" fill="#E1E3E9" opacity="0.8" points="30.866,70.855 57.438,97.5 110,97.5 110,79.563      97.134,66.663 84.469,63.719 71.795,51.056 64.376,67.188 53.475,56.3 31.937,68.83    "/></g><g><path d="M30.866,66.804L53.475,56.3v4.993l-17.099,7.49v0.094l17.099,7.489v4.993L30.866,70.855V66.804z" fill="#53899F"/><path d="M56.958,85.206l10.08-34.15h4.758l-10.081,34.15H56.958z" fill="#53899F"/><path d="M97.134,70.997L74.525,81.359v-4.993L92,68.877v-0.094l-17.476-7.49V56.3l22.609,10.363V70.997z" fill="#53899F"/></g></g></g></svg>`);
-
+    footerQuick(1,false,`<?xml version="1.0" ?><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.5,8H6v.5a1,1,0,0,0,2,0V8h.5a1,1,0,0,0,0-2H8V5.5a1,1,0,0,0-2,0V6H5.5a1,1,0,0,0,0,2ZM4.88,19.12a1,1,0,0,0,1.41,0L7,18.41l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41L8.41,17l.71-.71a1,1,0,0,0-1.41-1.41L7,15.59l-.71-.71a1,1,0,0,0-1.41,1.41l.71.71-.71.71A1,1,0,0,0,4.88,19.12ZM20,1H4A3,3,0,0,0,1,4V20a3,3,0,0,0,3,3H20a3,3,0,0,0,3-3V4A3,3,0,0,0,20,1ZM11,21H4a1,1,0,0,1-1-1V13h8Zm0-10H3V4A1,1,0,0,1,4,3h7Zm10,9a1,1,0,0,1-1,1H13V13h8Zm0-9H13V3h7a1,1,0,0,1,1,1Zm-5.5,5.5h3a1,1,0,0,0,0-2h-3a1,1,0,0,0,0,2ZM18.5,6h-3a1,1,0,0,0,0,2h3a1,1,0,0,0,0-2Zm-3,13.5h3a1,1,0,0,0,0-2h-3a1,1,0,0,0,0,2Z" fill="#764ba2"/></svg>`);
+    footerQuick(2,true,`<?xml version="1.0" ?><svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M13.325 3.05011L8.66741 20.4323L10.5993 20.9499L15.2568 3.56775L13.325 3.05011Z" fill="#764ba2"/><path d="M7.61197 18.3608L8.97136 16.9124L8.97086 16.8933L3.87657 12.1121L8.66699 7.00798L7.20868 5.63928L1.04956 12.2017L7.61197 18.3608Z" fill="#764ba2"/><path d="M16.388 18.3608L15.0286 16.9124L15.0291 16.8933L20.1234 12.1121L15.333 7.00798L16.7913 5.63928L22.9504 12.2017L16.388 18.3608Z" fill="#764ba2"/></svg>`);
+    footerQuick(3,false,`<?xml version="1.0" ?><svg height="32px" version="1.1" viewBox="0 0 32 32" width="32px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Sunny" stroke="none" stroke-width="1"><g stroke="#764ba2" stroke-width="2" transform="translate(2.000000, 2.000000)"><circle cx="14" cy="14" id="Oval-4" r="8"/><path d="M14,0 L14,3 M23.8994949,4.10050506 L21.7781746,6.22182541 M28,14 L25,14 M23.8994949,23.8994949 L21.7781746,21.7781746 M14,28 L14,25 M4.10050506,23.8994949 L6.22182541,21.7781746 M3.83475851e-17,14 L3,14 M4.10050506,4.10050506 L6.22182541,6.22182541" id="Path-7" stroke-linecap="round"/></g></g></svg>`);
+    footerQuick(4,true,`<?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg id="Layer_1" style="enable-background:new 0 0 64 64;" version="1.1" viewBox="0 0 64 64" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style type="text/css">.st0{fill:#764ba2;}</style><g><g id="Icon-Play" transform="translate(128.000000, 278.000000)"><path class="st0" d="M-95.9-222c-13.2,0-23.9-10.7-23.9-23.9s10.7-23.9,23.9-23.9S-72-259.1-72-245.9     S-82.7-222-95.9-222L-95.9-222z M-95.9-267.2c-11.7,0-21.3,9.6-21.3,21.3c0,11.7,9.6,21.3,21.3,21.3s21.3-9.6,21.3-21.3     C-74.6-257.7-84.2-267.2-95.9-267.2L-95.9-267.2z" id="Fill-124"/><path class="st0" d="M-103-233.6v-24.7l21.2,12.4L-103-233.6L-103-233.6z M-100.2-253.4v14.9l12.7-7.4     L-100.2-253.4L-100.2-253.4z" id="Fill-125"/></g></g></svg>`);
 
 }
 // 화면 최하단 우측 시간 부분

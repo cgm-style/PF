@@ -7,6 +7,8 @@
     top: 0;
     left: 0;
     background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 70px solid darksalmon;
+    box-sizing: border-box;
 }
 
 #footerWrap {
@@ -39,6 +41,9 @@
     cursor: pointer;
     transition: all 0.5s;
 }
+#footerWrap div.footerIconWrap:nth-of-type(3) svg  {
+    margin-top: 9px;
+}
 .footerIconWrap:hover   {
     background: rgba(100,100,255,0.3);
 }
@@ -52,14 +57,13 @@
 }
 
 #mainWrapBg {
-    width: 66vmin;
-    height: 66vmin;
-    top: 13%;
+    width: 56vmin;
+    height: 56vmin;
+    top: 11%;
     position: relative;
     overflow: hidden;
     border-radius: 50%;
     margin: 0 auto;
-    filter: blur(1px);
     box-shadow: 0px 0px 50px 0px #c0c;
 }
 #mainWrapBgGradient {
@@ -85,8 +89,8 @@
     width: 110%;
     height: 110%;
     background: repeating-linear-gradient(
-        rgba(0, 0, 0, .725),
-        rgba(0, 0, 0, .725) 2.5%,
+        rgba(0, 0, 0, .125),
+        rgba(0, 0, 0, .125) 2.5%,
         transparent 2.5%,
         transparent 5.25%
     );
@@ -141,6 +145,7 @@
     position: relative;
     height: 24px;
     z-index: 1;
+    width: 100%;
 }
 .addTopBtnContainerTitle    {
     color: white;
@@ -168,12 +173,12 @@
     cursor: pointer;
 }
 
-#codeWrap {
+.codeWrap {
     position: absolute;
     width: 38%;
     height: 88%;
-    top: 5%;
-    right: 7%;
+    top: 3%;
+    right: 2%;
     z-index: 2;
     overflow: hidden;
     border-radius: 5px;
@@ -320,6 +325,8 @@
     box-sizing: border-box;
 }
 
+/* 계산기 css */
+
 #UIBox  {
     width: 66px;
     height: 63px;
@@ -348,7 +355,8 @@
     position: relative;
     height: auto;
     text-align: center;
-    transition: all 0.5s;
+    transition:0.5s;
+    transition-property: width,height;
 }
 .UIBoxInnerDiv {
     width: 10px;
@@ -491,3 +499,142 @@
 
 #calculatorTopDiv   {margin-left: 275px;}
 #calculatorTopDivClose  {margin-left: 295px; background: coral;}
+
+/* 날씨 css */
+
+.weatherWrap    {
+    position: absolute;
+    width: 17%;
+    height: 30%;
+    bottom: 55%;
+    left: 30px;
+    overflow: hidden;
+    border-radius: 5px;
+    border: 3px solid gray;
+    z-index: 5;
+    -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+.weatherWrapContainer   {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: black;
+}
+.weatherWrap div,.weatherWrap p    {
+    position: absolute;
+}
+.weatherWrapTemperature {
+    background-image: linear-gradient(to top, #3f51b1 0%, #5a55ae 13%, #7b5fac 25%, #8f6aae 38%, #a86aa4 50%, #cc6b8e 62%, #f18271 75%, #f3a469 87%, #f7c978 100%);
+    color: transparent;
+    -webkit-background-clip: text;
+    top: -21px;
+    left: 8%;
+    font-weight: 400;
+    font-size: 152px;
+    font-family: 'EB Garamond';
+}
+.weatherWrapWeacther    {
+    bottom: 10px;
+    right: 5%;
+}
+.weatherWrapWeacther i  {
+    background-image: linear-gradient(to top, #3f51b1 0%, #5a55ae 13%, #7b5fac 25%, #8f6aae 38%, #a86aa4 50%, #cc6b8e 62%, #f18271 75%, #f3a469 87%, #f7c978 100%);
+    color: transparent;
+    -webkit-background-clip: text;
+    font-size: 150px;
+}
+.weatherWrapPlace   {
+    bottom: 10px;
+    left: 10px;
+    color: white;
+    font-weight: 500;
+    font-size: 2vh;
+}
+
+/* 플레이어 css */
+.playerWrap {
+    position: absolute;
+    width: 30%;
+    height: 40%;
+    top: 49%;
+    left: 2%;
+    z-index: 2;
+    overflow: hidden;
+    border-radius: 40px;
+    border: 1px solid #fff3eb;
+    box-shadow: 0 2px 2px rgb(255 107 0 / 25%), 0 4px 4px rgb(255 107 0 / 20%), 0 8px 8px rgb(255 107 0 / 15%), 0 16px 16px rgb(255 107 0 / 10%), 0 24px 24px rgb(255 107 0 / 5%);
+}
+.playerWrap .addTopBtnContainer {
+    padding: 0 35px;
+    box-sizing: border-box;
+    background: #fffaee;
+}
+.playerWrap .addTopBtnContainerTitle    {display: none;}
+.playerWrap .addTopBtnContainerMin  {
+    right: 42px;
+    top: 17px;
+}
+.playerWrap .addTopBtnContainerClose    {
+    right: 22px;
+    top: 17px;
+}
+.playerContainer    {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #fffaee;
+}
+.playerContainerUrlBox  {
+    position: relative;
+}
+.playerContainerUrlInner    {
+    padding-top: 25px;
+    text-align: right;
+}
+.playerContainerUrlInnerDiv {
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 50%;
+    padding: 10px;
+    border: 2px solid #f26600;
+    cursor: pointer;
+    margin-right: 20px;
+    z-index: 3;
+    position: absolute;
+    right: 0;
+    transform: rotate(0deg);
+    transition: all 0.5s;
+}
+.playerContainerUrlInnerDiv.rotate  {
+    transform: rotate(180deg);
+}
+.playerContainerUrlInnerInput   {
+    border: 2px solid #f26600;
+    height: 54px;
+    border-radius: 50px;
+    width: 10%;
+    font-size: 2vh;
+    padding-left: 20px;
+    box-sizing: border-box;
+    margin-right: 20px;
+    transition: all 0.5s;
+}
+.playerContainerUrlInnerInput.open   {
+    width: 92%;
+}
+.playerContainerUrlTitel    {
+    position: relative;
+    width: 100%;
+    height: 30%;
+    text-align: center;
+}
+.playerContainerUrlTitelP   {}
+.playerContainerUrlTitelTime    {}
+.playerContainerController  {}
+.playerContainerControllerPrev  {}
+.playerContainerControllerOnOff {}
+.playerContainerControllerNext  {}
