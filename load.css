@@ -175,8 +175,8 @@
 
 .codeWrap {
     position: absolute;
-    width: 38%;
-    height: 88%;
+    width: 35%;
+    height: 85%;
     top: 3%;
     right: 2%;
     z-index: 2;
@@ -398,23 +398,17 @@
     opacity: 1;
     visibility:visible;
 }
-.UIBoxInnerDiv:nth-of-type(1)::before   {
+#UIBox.active .UIBoxInnerDiv:nth-of-type(1)::before   {
     content: "바로가기";
 }
-.UIBoxInnerDiv:nth-of-type(2)::before   {
+#UIBox.active .UIBoxInnerDiv:nth-of-type(2)::before   {
     content: "시간보기";
 }
-.UIBoxInnerDiv:nth-of-type(3)::before   {
+#UIBox.active .UIBoxInnerDiv:nth-of-type(3)::before   {
     content: "날씨보기";
 }
-.UIBoxInnerDiv:nth-of-type(4)::before   {
+#UIBox.active .UIBoxInnerDiv:nth-of-type(4)::before   {
     content: "계산기";
-}
-.UIBoxInnerDiv:nth-of-type(5)::before   {
-    content: "도움말";
-}
-.UIBoxInnerDiv:nth-of-type(6)::before   {
-    content: "기능없음";
 }
 #UIBox.active .UIBoxInnerDiv:hover {
     box-shadow: 3px 3px 9px lightgrey;
@@ -507,15 +501,18 @@
     width: 17%;
     height: 30%;
     bottom: 55%;
-    left: 30px;
+    top: 8%;
+    left: 15%;
     overflow: hidden;
     border-radius: 5px;
     border: 3px solid gray;
     z-index: 5;
     -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    transition: 0.5s;
+    transition-property: width,height;
 }
 .weatherWrapContainer   {
     position: relative;
@@ -566,20 +563,27 @@
     border-radius: 40px;
     border: 1px solid #fff3eb;
     box-shadow: 0 2px 2px rgb(255 107 0 / 25%), 0 4px 4px rgb(255 107 0 / 20%), 0 8px 8px rgb(255 107 0 / 15%), 0 16px 16px rgb(255 107 0 / 10%), 0 24px 24px rgb(255 107 0 / 5%);
+    transition: 0.5s;
+    transition-property: width,height,transform;
 }
 .playerWrap .addTopBtnContainer {
     padding: 0 35px;
     box-sizing: border-box;
     background: #fffaee;
 }
-.playerWrap .addTopBtnContainerTitle    {display: none;}
+.playerWrap .addTopBtnContainerTitle    {
+    background-image: linear-gradient(to top, #3f51b1 0%, #5a55ae 13%, #7b5fac 25%, #8f6aae 38%, #a86aa4 50%, #cc6b8e 62%, #f18271 75%, #f3a469 87%, #f7c978 100%);
+    color: transparent;
+    -webkit-background-clip: text;
+    font-weight: bold;
+}
 .playerWrap .addTopBtnContainerMin  {
     right: 42px;
-    top: 17px;
+    top: 7px;
 }
 .playerWrap .addTopBtnContainerClose    {
     right: 22px;
-    top: 17px;
+    top: 7px;
 }
 .playerContainer    {
     position: relative;
@@ -632,9 +636,96 @@
     height: 30%;
     text-align: center;
 }
-.playerContainerUrlTitelP   {}
+.playerContainerUrlTitelP   {
+    font-size: 2.5vh;
+    color: coral;
+}
 .playerContainerUrlTitelTime    {}
-.playerContainerController  {}
-.playerContainerControllerPrev  {}
-.playerContainerControllerOnOff {}
-.playerContainerControllerNext  {}
+.playerContainerController  {
+    width: 100%;
+    text-align: center;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.playerContainerController div {
+    transition: all 0.2s;
+    cursor: pointer;
+}
+.playerContainerController div:hover{
+    background: white;
+    box-shadow: 0 0px 2px rgb(255 107 0 / 25%), 0 0px 4px rgb(255 107 0 / 20%), 0 0px 8px rgb(255 107 0 / 15%), 0 0px 16px rgb(255 107 0 / 10%), 0 0px 24px rgb(255 107 0 / 5%);
+}
+.playerContainerControllerPrev  {
+    width: 40px;
+    height: 40px;
+    transform: rotate(180deg);
+    border-radius: 50px;
+    padding: 10px;
+    background: linear-gradient(to bottom left, #fff8e7, #ffe1cc);
+}
+.playerContainerControllerOnOff {
+    width: 60px;
+    height: 60px;
+    padding: 10px;
+    border-radius: 50px;
+    background: white;
+    border: 2px solid coral;
+    margin: 0 20px;
+    transition: all 0.7s ease-in-out;
+}
+.playerContainerControllerNext  {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    padding: 10px;
+    background: linear-gradient(to bottom left, #fff8e7, #ffe1cc);
+}
+
+/* 플레이어 url 부분 */
+.UrlContainer   {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #fffaee;
+}
+.UrlContainerForm   {
+    padding-top: 25px;
+    text-align: right;
+    position: relative;
+}
+.UrlContainerFormIcon   {
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 50%;
+    padding: 10px;
+    border: 2px solid #f26600;
+    cursor: pointer;
+    margin-right: 20px;
+    z-index: 3;
+    position: absolute;
+    right: 0;
+    transform: rotate(0deg);
+    transition: all 0.5s;
+}
+.UrlContainerFormIcon.rotate  {
+    transform: rotate(180deg);
+}
+.UrlContainerFormInput  {
+    border: 2px solid #f26600;
+    height: 54px;
+    border-radius: 50px;
+    width: 10%;
+    font-size: 2vh;
+    padding-left: 20px;
+    box-sizing: border-box;
+    margin-right: 20px;
+    transition: all 0.5s;
+}
+.UrlContainerFormInput.open   {
+    width: 92%;
+}
+.UrlContainerObj    {}
+.UrlContainerObjInner   {}

@@ -128,14 +128,22 @@ function addTopBtns(Wrap,text)   { // 창들의 상단 타이틀,최소화,닫�
         Wrap.remove();
 
         let checkCodeWrap = document.querySelector(".codeWrap"),   // 코드창 있는지 확인
-            checkCalculator = document.querySelector("#calculatorWrap"),    // 계산기가 있는지 체크
+            checkPlayerWrapWrap = document.querySelector(".playerWrap"),   // 플레이어창 있는지 확인
+            checkCalculatorWrap = document.querySelector("#calculatorWrap"),    // 계산기가 있는지 체크
+            checkWeatherWrap = document.querySelector(".weatherWrap"),    // 날씨창이 있는지 체크
             footerWrap = document.querySelector("#footerWrap");
 
-        if(!checkCalculator){
+        if(!checkCalculatorWrap){
             footerWrap.childNodes[1].style.background= "transparent";
         }
         if(!checkCodeWrap){
             footerWrap.childNodes[2].style.background= "transparent";
+        }
+        if(!checkWeatherWrap)  {
+            footerWrap.childNodes[3].style.background= "transparent";
+        }
+        if(!checkPlayerWrapWrap)  {
+            footerWrap.childNodes[4].style.background= "transparent";
         }
         
     })
@@ -391,7 +399,7 @@ function addPlayer()    {   // 플레이어 생성
     const playerWrap = document.createElement("div"),
             playerContainer = document.createElement("div"),
                 playerContainerUrlBox = document.createElement("div"),
-                    playerContainerUrlInner = document.createElement("div"),
+                    playerContainerUrlInner = document.createElement("form"),
                         playerContainerUrlInnerDiv = document.createElement("div"),
                         playerContainerUrlInnerInput = document.createElement("input"),
                 playerContainerUrlTitel = document.createElement("div"),
@@ -434,14 +442,186 @@ function addPlayer()    {   // 플레이어 생성
 
 
     playerContainerUrlInnerDiv.innerHTML = `<?xml version="1.0" ?><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.11,15.39,8.23,19.27a2.52,2.52,0,0,1-3.5,0,2.47,2.47,0,0,1,0-3.5l3.88-3.88a1,1,0,1,0-1.42-1.42L3.31,14.36a4.48,4.48,0,0,0,6.33,6.33l3.89-3.88a1,1,0,0,0-1.42-1.42ZM20.69,3.31a4.49,4.49,0,0,0-6.33,0L10.47,7.19a1,1,0,1,0,1.42,1.42l3.88-3.88a2.52,2.52,0,0,1,3.5,0,2.47,2.47,0,0,1,0,3.5l-3.88,3.88a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3.88-3.89A4.49,4.49,0,0,0,20.69,3.31ZM8.83,15.17a1,1,0,0,0,.71.29,1,1,0,0,0,.71-.29l4.92-4.92a1,1,0,1,0-1.42-1.42L8.83,13.75A1,1,0,0,0,8.83,15.17Z" fill="#f26600"/></svg>`;
+    playerContainerControllerPrev.innerHTML = `<?xml version="1.0" ?><svg fill="#838383" style="enable-background:new 0 0 24 24;" version="1.1" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="info"/><g id="icons"><path d="M22.2,10.6l-9-5.4c-1-0.6-2.2,0.2-2.2,1.4v3.2L3.2,5.2C2.2,4.6,1,5.4,1,6.6v10.7c0,1.2,1.2,2,2.2,1.4l7.8-4.6   v3.2c0,1.2,1.2,2,2.2,1.4l9-5.4C23.3,12.8,23.3,11.2,22.2,10.6z" id="next"/></g></svg>`;
+    playerContainerControllerNext.innerHTML = `<?xml version="1.0" ?><svg fill="#838383" style="enable-background:new 0 0 24 24;" version="1.1" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="info"/><g id="icons"><path d="M22.2,10.6l-9-5.4c-1-0.6-2.2,0.2-2.2,1.4v3.2L3.2,5.2C2.2,4.6,1,5.4,1,6.6v10.7c0,1.2,1.2,2,2.2,1.4l7.8-4.6   v3.2c0,1.2,1.2,2,2.2,1.4l9-5.4C23.3,12.8,23.3,11.2,22.2,10.6z" id="next"/></g></svg>`;
+    playerContainerControllerOnOff.innerHTML = `<?xml version="1.0" ?><svg fill="#f26600" style="enable-background:new 0 0 24 24;" version="1.1" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="info"/><g id="icons"><path d="M3.9,18.9V5.1c0-1.6,1.7-2.6,3-1.8l12,6.9c1.4,0.8,1.4,2.9,0,3.7l-12,6.9C5.6,21.5,3.9,20.5,3.9,18.9z" id="play"/></g></svg>`
 
     playerWrap.draggable = true;
 
-    var audio = new Audio("music/A Typical Ride Out - Noir Et Blanc Vie.mp3");
-    
-    audio.play();
+    let onOff = false;  // 재생 유무
+    let sec = 0;    // 시간초
+    let audio = new Audio("music/A Typical Ride Out - Noir Et Blanc Vie.mp3");  // 디폴트값의 노래
+    let songCount = 0;  // 플레이 리스트 넘버 체크
+    const songList = [  // 음악 플레이 리스트
+        `music/A Typical Ride Out - Noir Et Blanc Vie.mp3`,
+        `music/Easy Saturday - Bad Snacks.mp3`,
+        `music/Hot Hop Rok - Steve Adams.mp3`,
+        `music/Luly - Text Me Records _ Grandbankss.mp3`,
+        `music/Philly Crew - Danny Kean_Doug Maxwell.mp3`,
+        `music/Realism - Text Me Records _ Grandbankss.mp3`,
+        `music/Studio 2020 - Quincas Moreira.mp3`,
+    ]
 
-    playerContainerUrlInnerDiv.addEventListener("click",(e)=>{
+    let TimeRun = setInterval(() => {   // 시간초 이벤트
+        if(onOff === true){ // 숫자를 시간으로 표기하는 함수
+            sec += 0.01; 
+            let secMin =Math.floor(sec);
+            if(sec >= secMin+0.60){ // 흐르는 시간이 60초가 넘으면 분으로 올려주는 함수
+                sec += 1; 
+                sec = Math.floor(sec);
+            }
+            let defaultSec = ((audio.duration/60).toFixed(2)%1).toFixed(2);
+            let fixDefaultMin = (audio.duration/60).toFixed(2);
+            if(defaultSec >= 0.60)  {
+                defaultSec -= 0.6;
+                fixDefaultMin = Math.floor(fixDefaultMin);
+                fixDefaultMin = fixDefaultMin+1 + defaultSec;
+            }
+            playerContainerUrlTitelTime.innerHTML = `<span>${sec.toFixed(2)}</span> / ${fixDefaultMin}`
+
+            if((sec).toFixed(2) === fixDefaultMin){    // 노래가 끝날 경우
+                sec = 0;
+                audio.pause();
+                nextSong();
+            }
+        }
+    }, 1000);
+
+    function stratAction() {    // 음악 시작버튼 액션
+        if(onOff === false) {   // 스타트
+            audio.play();
+            playerContainerControllerOnOff.innerHTML = `<?xml version="1.0" ?><svg fill="#f26600" style="enable-background:new 0 0 24 24;" version="1.1" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="info"/><g id="icons"><g id="list"><path d="M20,2H4C2.9,2,2,2.9,2,4v4c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V4C22,2.9,21.1,2,20,2z"/><path d="M20,14H4c-1.1,0-2,0.9-2,2v4c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2v-4C22,14.9,21.1,14,20,14z"/></g></g></svg>`
+            playerContainerControllerOnOff.style.transform = "rotate(270deg)";
+        }else{  // 정지
+            audio.pause();
+            playerContainerControllerOnOff.innerHTML = `<?xml version="1.0" ?><svg fill="#f26600" style="enable-background:new 0 0 24 24;" version="1.1" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="info"/><g id="icons"><path d="M3.9,18.9V5.1c0-1.6,1.7-2.6,3-1.8l12,6.9c1.4,0.8,1.4,2.9,0,3.7l-12,6.9C5.6,21.5,3.9,20.5,3.9,18.9z" id="play"/></g></svg>`
+            playerContainerControllerOnOff.style.transform = "rotate(0deg)";
+        }
+        onOff = !onOff; // on off 체인지
+    }
+
+    function playDefaultSet()    {
+        playerContainerUrlTitelP.innerText = `${audio.attributes[1].value.slice(6)}`;   // 노래 제목 
+        playerWrap.children[0].children[0].innerText = `${audio.attributes[1].value.slice(6)}`;
+        audio.addEventListener("loadeddata",(event)=>{   // audio의 데이터가 로드 되었을때 실행
+            let defaultSec = ((audio.duration/60).toFixed(2)%1).toFixed(2);
+            let fixDefaultMin = (audio.duration/60).toFixed(2);
+            if(defaultSec >= 0.60)  {
+                defaultSec -= 0.6;
+                fixDefaultMin = Math.floor(fixDefaultMin);
+                fixDefaultMin = fixDefaultMin+1 + defaultSec;
+            }
+            playerContainerUrlTitelTime.innerText = `${fixDefaultMin}` // 노래의 길이
+        })
+    }
+    playDefaultSet();
+
+    playerWrap.children[0].children[2].addEventListener("click",()=>{   // 닫기 버튼 클릭시 
+        audio.pause();
+        audio.src = "";
+    })
+
+    function nextSong() {   // 다음 버튼 함수 
+        audio.pause();
+        songCount += 1;
+        if(songCount === songList.length) {
+            songCount = 0;
+        }
+        audio.src = `${songList[songCount]}`
+        audio.play();
+        sec = 0;
+        onOff = false;
+        stratAction();
+        playDefaultSet();
+        setInterval(TimeRun);
+    }
+    function prevSong() {   // 이전 버튼 함수
+        audio.pause();
+        songCount -= 1;
+        if(songCount === -1){
+            songCount = songList.length-1;
+        }
+        audio.src = `${songList[songCount]}`
+        audio.play();
+        sec = 0;
+        onOff = false;
+        stratAction();
+        playDefaultSet();
+        setInterval(TimeRun);
+    }
+
+    playerContainerUrlInner.addEventListener("submit",(e)=>{
+        e.preventDefault();
+        let typing = e.target[0].value; // 입력된 url
+
+        playerWrap.style.transform = "rotate(360deg)";  // 이 부분부터는 새로운 영상 공유창을 위한 부분
+        playerContainer.remove();
+
+        const UrlContainer = document.createElement("div"),
+                UrlContainerForm = document.createElement("form"),
+                    UrlContainerFormIcon = document.createElement("div"),
+                    UrlContainerFormInput = document.createElement("input"),
+                UrlContainerObj = document.createElement("div"),
+                    UrlContainerObjInner = document.createElement("div");
+
+        UrlContainer.className = "UrlContainer";
+        UrlContainerForm.className = "UrlContainerForm";
+        UrlContainerFormIcon.className = "UrlContainerFormIcon";
+        UrlContainerFormInput.className = "UrlContainerFormInput";
+        UrlContainerObj.className = "UrlContainerObj";
+        UrlContainerObjInner.className = "UrlContainerObjInner";
+
+        playerWrap.appendChild(UrlContainer);
+            UrlContainer.appendChild(UrlContainerForm);
+                UrlContainerForm.appendChild(UrlContainerFormIcon);
+                UrlContainerForm.appendChild(UrlContainerFormInput);
+            UrlContainer.appendChild(UrlContainerObj);
+                UrlContainerObj.appendChild(UrlContainerObjInner);
+
+        UrlContainerFormIcon.innerHTML= `
+        <?xml version="1.0" ?><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.11,15.39,8.23,19.27a2.52,2.52,0,0,1-3.5,0,2.47,2.47,0,0,1,0-3.5l3.88-3.88a1,1,0,1,0-1.42-1.42L3.31,14.36a4.48,4.48,0,0,0,6.33,6.33l3.89-3.88a1,1,0,0,0-1.42-1.42ZM20.69,3.31a4.49,4.49,0,0,0-6.33,0L10.47,7.19a1,1,0,1,0,1.42,1.42l3.88-3.88a2.52,2.52,0,0,1,3.5,0,2.47,2.47,0,0,1,0,3.5l-3.88,3.88a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3.88-3.89A4.49,4.49,0,0,0,20.69,3.31ZM8.83,15.17a1,1,0,0,0,.71.29,1,1,0,0,0,.71-.29l4.92-4.92a1,1,0,1,0-1.42-1.42L8.83,13.75A1,1,0,0,0,8.83,15.17Z" fill="#f26600"/></svg>`;
+    
+        UrlContainerFormIcon.addEventListener("click",(e)=>{  // url부분 클릭시 이벤트
+            UrlContainerFormIcon.classList.toggle("rotate");
+            UrlContainerFormInput.classList.toggle("open");
+            
+
+        UrlContainerObjInner.innerHTML= `
+            <svg viewBox="0 0 800 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" id="blobSvg">
+                <g transform="translate(148, 19)">
+                    <path fill="#a29bfe">
+                        <animate attributeName="d"
+                            dur="10000s"
+                            repartCount="indefinite"
+                            
+                            vlaue="M411,322Q333,394,230,428.5Q127,463,104,356.5Q81,250,136.5,200Q192,150,251,148.5Q310,147,399.5,198.5Q489,250,411,322Z;
+                                    
+                            M388,356.5Q373,463,264.5,438.5Q156,414,80,332Q4,250,95.5,195.5Q187,141,250,141Q313,141,358,195.5Q403,250,388,356.5Z;
+                            
+                            M387.5,317Q327,384,227,423.5Q127,463,107.5,356.5Q88,250,124,171.5Q160,93,257.5,80.5Q355,68,401.5,159Q448,250,387.5,317Z;
+                            
+                            M390.5,298.5Q306,347,245,355.5Q184,364,112,307Q40,250,87.5,150Q135,50,221.5,99.5Q308,149,391.5,199.5Q475,250,390.5,298.5Z;
+                            
+                            M371.57062,328.47151Q340.70386,406.94302,242.89674,419.64955Q145.08962,432.35608,106.21602,341.17804Q67.34243,250,114.84243,174.71335Q162.34243,99.4267,269.34926,65.84778Q376.35608,32.26885,389.39674,141.13442Q402.43739,250,371.57062,328.47151Z;
+                            
+                            M391.5,317Q327,384,259.5,367.5Q192,351,136.5,300.5Q81,250,133,193.5Q185,137,259.5,120.5Q334,104,395,177Q456,250,391.5,317Z;
+                            
+                            M415,336.5Q350,423,259.5,407Q169,391,116.5,320.5Q64,250,97.5,147.5Q131,45,247,50Q363,55,421.5,152.5Q480,250,415,336.5Z;">
+                        
+                        </animate>
+                    </path>
+                </g>
+            </svg>
+        `
+        })
+    })
+
+    playerContainerControllerOnOff.addEventListener("click",stratAction)    // 재생버튼 이벤트
+
+    playerContainerControllerNext.addEventListener("click",nextSong) // 다음 버튼 이벤트
+    playerContainerControllerPrev.addEventListener("click",prevSong) // 이전 버튼 이벤트
+
+    playerContainerUrlInnerDiv.addEventListener("click",(e)=>{  // url부분 클릭시 이벤트
         playerContainerUrlInnerDiv.classList.toggle("rotate");
         playerContainerUrlInnerInput.classList.toggle("open");
     })
@@ -524,6 +704,7 @@ moveWrapAction();
 
 
 function addWeatherBox()    {   // 날씨 Wrap 생성
+    
     const API_KEY = "c65eec58bb72eba4ba267415b3d37432";
         function getWeather(lat, lng) {
             fetch(
@@ -556,8 +737,6 @@ function addWeatherBox()    {   // 날씨 Wrap 생성
                     weatherWrapContainer.appendChild(weatherWrapTemperature);
                     weatherWrapContainer.appendChild(weatherWrapWeacther);
                     weatherWrapContainer.appendChild(weatherWrapPlace);
-                    
-                    console.dir(json.weather[0]);
 
                     weatherWrapTemperature.innerText = `${temperature.toFixed()}`;
                     if(nowWeather === "Clouds") {   // 구름
@@ -590,6 +769,7 @@ function addWeatherBox()    {   // 날씨 Wrap 생성
         }
         weatherLoadCoords();
 }
+addWeatherBox();
 
 
 function autoText(_, counter = 0)   {
@@ -817,7 +997,12 @@ function autoText(_, counter = 0)   {
         }
         addTextListLi(document.querySelectorAll(`.firstLi`).length+1,`${time}입니다.`);
     });
-    UIBoxInnerDiv3.addEventListener("click",addWeatherBox);
+    UIBoxInnerDiv3.addEventListener("click",()=>{
+        if((footerWrap.className).indexOf("active")){
+            addWeatherBox();
+            footerWrap.childNodes[3].style.background= "rgba(100, 100, 255, 0.3)";
+        }
+    });
     UIBoxInnerDiv4.addEventListener("click",calculator);
 
     // 하단 퀵 버튼 생성 함수
@@ -848,6 +1033,9 @@ function autoText(_, counter = 0)   {
             }else if(Wrapnum === 3) {
                 addWeatherBox();
                 eval(`footerIconWrap${Wrapnum}`).style.background = "rgba(100,100,255,0.3)";
+            }else if(Wrapnum === 4) {
+                addPlayer();
+                eval(`footerIconWrap${Wrapnum}`).style.background = "rgba(100,100,255,0.3)";
             }
         })
     }
@@ -855,7 +1043,7 @@ function autoText(_, counter = 0)   {
     // 화면 하단 퀵 버튼
     footerQuick(1,false,`<?xml version="1.0" ?><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.5,8H6v.5a1,1,0,0,0,2,0V8h.5a1,1,0,0,0,0-2H8V5.5a1,1,0,0,0-2,0V6H5.5a1,1,0,0,0,0,2ZM4.88,19.12a1,1,0,0,0,1.41,0L7,18.41l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41L8.41,17l.71-.71a1,1,0,0,0-1.41-1.41L7,15.59l-.71-.71a1,1,0,0,0-1.41,1.41l.71.71-.71.71A1,1,0,0,0,4.88,19.12ZM20,1H4A3,3,0,0,0,1,4V20a3,3,0,0,0,3,3H20a3,3,0,0,0,3-3V4A3,3,0,0,0,20,1ZM11,21H4a1,1,0,0,1-1-1V13h8Zm0-10H3V4A1,1,0,0,1,4,3h7Zm10,9a1,1,0,0,1-1,1H13V13h8Zm0-9H13V3h7a1,1,0,0,1,1,1Zm-5.5,5.5h3a1,1,0,0,0,0-2h-3a1,1,0,0,0,0,2ZM18.5,6h-3a1,1,0,0,0,0,2h3a1,1,0,0,0,0-2Zm-3,13.5h3a1,1,0,0,0,0-2h-3a1,1,0,0,0,0,2Z" fill="#764ba2"/></svg>`);
     footerQuick(2,true,`<?xml version="1.0" ?><svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M13.325 3.05011L8.66741 20.4323L10.5993 20.9499L15.2568 3.56775L13.325 3.05011Z" fill="#764ba2"/><path d="M7.61197 18.3608L8.97136 16.9124L8.97086 16.8933L3.87657 12.1121L8.66699 7.00798L7.20868 5.63928L1.04956 12.2017L7.61197 18.3608Z" fill="#764ba2"/><path d="M16.388 18.3608L15.0286 16.9124L15.0291 16.8933L20.1234 12.1121L15.333 7.00798L16.7913 5.63928L22.9504 12.2017L16.388 18.3608Z" fill="#764ba2"/></svg>`);
-    footerQuick(3,false,`<?xml version="1.0" ?><svg height="32px" version="1.1" viewBox="0 0 32 32" width="32px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Sunny" stroke="none" stroke-width="1"><g stroke="#764ba2" stroke-width="2" transform="translate(2.000000, 2.000000)"><circle cx="14" cy="14" id="Oval-4" r="8"/><path d="M14,0 L14,3 M23.8994949,4.10050506 L21.7781746,6.22182541 M28,14 L25,14 M23.8994949,23.8994949 L21.7781746,21.7781746 M14,28 L14,25 M4.10050506,23.8994949 L6.22182541,21.7781746 M3.83475851e-17,14 L3,14 M4.10050506,4.10050506 L6.22182541,6.22182541" id="Path-7" stroke-linecap="round"/></g></g></svg>`);
+    footerQuick(3,true,`<?xml version="1.0" ?><svg height="32px" version="1.1" viewBox="0 0 32 32" width="32px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Sunny" stroke="none" stroke-width="1"><g stroke="#764ba2" stroke-width="2" transform="translate(2.000000, 2.000000)"><circle cx="14" cy="14" id="Oval-4" r="8"/><path d="M14,0 L14,3 M23.8994949,4.10050506 L21.7781746,6.22182541 M28,14 L25,14 M23.8994949,23.8994949 L21.7781746,21.7781746 M14,28 L14,25 M4.10050506,23.8994949 L6.22182541,21.7781746 M3.83475851e-17,14 L3,14 M4.10050506,4.10050506 L6.22182541,6.22182541" id="Path-7" stroke-linecap="round"/></g></g></svg>`);
     footerQuick(4,true,`<?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg id="Layer_1" style="enable-background:new 0 0 64 64;" version="1.1" viewBox="0 0 64 64" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style type="text/css">.st0{fill:#764ba2;}</style><g><g id="Icon-Play" transform="translate(128.000000, 278.000000)"><path class="st0" d="M-95.9-222c-13.2,0-23.9-10.7-23.9-23.9s10.7-23.9,23.9-23.9S-72-259.1-72-245.9     S-82.7-222-95.9-222L-95.9-222z M-95.9-267.2c-11.7,0-21.3,9.6-21.3,21.3c0,11.7,9.6,21.3,21.3,21.3s21.3-9.6,21.3-21.3     C-74.6-257.7-84.2-267.2-95.9-267.2L-95.9-267.2z" id="Fill-124"/><path class="st0" d="M-103-233.6v-24.7l21.2,12.4L-103-233.6L-103-233.6z M-100.2-253.4v14.9l12.7-7.4     L-100.2-253.4L-100.2-253.4z" id="Fill-125"/></g></g></svg>`);
 
 }
