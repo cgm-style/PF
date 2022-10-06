@@ -36,6 +36,7 @@ let nextNum = 0,
 const user = navigator.userAgent;   // Pc/Mobile 체크
 let isCheck = false;
 
+
 if ( user.indexOf("iPhone") > -1 || user.indexOf("Android") > -1 ) {
     isCheck = true;
 }
@@ -59,6 +60,32 @@ const mainWrap = document.querySelector("#wrap"),   // 화면 전체 dom
             UIBoxInnerDiv3 = document.createElement("div"),
             UIBoxInnerDiv4 = document.createElement("div");
 
+
+    //  Pf Page load
+    const PfPageWrap = document.createElement("div");
+    PfPageWrap.className = "PfPageWrap";
+
+
+    function addPlayerGuide()    {
+        const playerGuideWrap = document.createElement("div"),
+                playerGuideWrapBg = document.createElement("div"),
+                playerGuideWrapInner = document.createElement("div");
+        
+        playerGuideWrap.className = "playerGuideWrap";
+        playerGuideWrapBg.className = "playerGuideWrapBg";
+        playerGuideWrapInner.className = "playerGuideWrapInner";
+
+        mainWrap.appendChild(playerGuideWrap);
+            playerGuideWrap.appendChild(playerGuideWrapBg);
+            playerGuideWrap.appendChild(playerGuideWrapInner);
+
+        playerGuideWrapInner.innerHTML= `<img src="img/guide.png"/>`;
+
+        playerGuideWrap.addEventListener("click",()=>{
+            playerGuideWrap.remove();
+        })
+    }
+    addPlayerGuide();
 
 function loadBar() {    // 기본 창들 생성
     mainWrapBg.id = "mainWrapBg";
@@ -189,9 +216,9 @@ function addCodeWrap()  {
         codeWrap.appendChild(firstliLast);
             firstliLast.appendChild(firstliLastInput);
             firstliLast.appendChild(firstliLastButton);
-    codeWrap.appendChild(innerContainer);
-    codeWrap.appendChild(stickyBarTop);
-    codeWrap.appendChild(stickyBarBottom);
+    PfPageWrap.appendChild(innerContainer);
+    PfPageWrap.appendChild(stickyBarTop);
+    PfPageWrap.appendChild(stickyBarBottom);
 
     firstliLastButton.innerText = "입력";
     firstliLastInput.autocomplete="off";
@@ -391,15 +418,14 @@ function addCodeWrap()  {
     moveWrapAction();
     codeWrap.draggable = true;
 }
-
 addCodeWrap();
-
 
 function addPlayer()    {   // 플레이어 생성
     const playerWrap = document.createElement("div"),
             playerContainer = document.createElement("div"),
                 playerContainerUrlBox = document.createElement("div"),
                     playerContainerUrlInner = document.createElement("form"),
+                        playerContainerUrlInnerVolume = document.createElement("input"),
                         playerContainerUrlInnerDiv = document.createElement("div"),
                         playerContainerUrlInnerInput = document.createElement("input"),
                 playerContainerUrlTitel = document.createElement("div"),
@@ -415,6 +441,7 @@ function addPlayer()    {   // 플레이어 생성
     playerContainer.className = "playerContainer";
     playerContainerUrlBox.className = "playerContainerUrlBox";
     playerContainerUrlInner.className = "playerContainerUrlInner";
+    playerContainerUrlInnerVolume.className = "playerContainerUrlInnerVolume";
     playerContainerUrlInnerDiv.className = "playerContainerUrlInnerDiv";
     playerContainerUrlInnerInput.className = "playerContainerUrlInnerInput";
     playerContainerUrlTitel.className = "playerContainerUrlTitel";
@@ -430,6 +457,7 @@ function addPlayer()    {   // 플레이어 생성
         playerWrap.appendChild(playerContainer);
             playerContainer.appendChild(playerContainerUrlBox);
                 playerContainerUrlBox.appendChild(playerContainerUrlInner);
+                playerContainerUrlInner.appendChild(playerContainerUrlInnerVolume);
                     playerContainerUrlInner.appendChild(playerContainerUrlInnerDiv);
                     playerContainerUrlInner.appendChild(playerContainerUrlInnerInput);
             playerContainer.appendChild(playerContainerUrlTitel);
@@ -447,6 +475,10 @@ function addPlayer()    {   // 플레이어 생성
     playerContainerControllerOnOff.innerHTML = `<?xml version="1.0" ?><svg fill="#f26600" style="enable-background:new 0 0 24 24;" version="1.1" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="info"/><g id="icons"><path d="M3.9,18.9V5.1c0-1.6,1.7-2.6,3-1.8l12,6.9c1.4,0.8,1.4,2.9,0,3.7l-12,6.9C5.6,21.5,3.9,20.5,3.9,18.9z" id="play"/></g></svg>`
 
     playerWrap.draggable = true;
+    playerContainerUrlInnerVolume.type = "range";
+    playerContainerUrlInnerVolume.value = "50";
+    playerContainerUrlInnerVolume.min = "0";
+    playerContainerUrlInnerVolume.max = "100";
 
     let onOff = false;  // 재생 유무
     let sec = 0;    // 시간초
@@ -461,6 +493,21 @@ function addPlayer()    {   // 플레이어 생성
         `music/Realism - Text Me Records _ Grandbankss.mp3`,
         `music/Studio 2020 - Quincas Moreira.mp3`,
     ]
+
+    playerContainerUrlInnerVolume.addEventListener("input",(e)=>{   // 볼륨 컨트롤 부분
+        
+        let target = e.target
+        if (e.target.type !== 'range') {
+            target = document.querySelector(".playerContainerUrlInnerVolume");
+        } 
+        const min = target.min
+        const max = target.max
+        const val = target.value
+        
+        target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%';   // background-image로 진행바 같은 느낌으로 생성
+        audio.volume = val/100; // 볼륨조절
+        return false;
+    })
 
     let TimeRun = setInterval(() => {   // 시간초 이벤트
         if(onOff === true){ // 숫자를 시간으로 표기하는 함수
@@ -550,9 +597,10 @@ function addPlayer()    {   // 플레이어 생성
         setInterval(TimeRun);
     }
 
-    playerContainerUrlInner.addEventListener("submit",(e)=>{
+    playerContainerUrlInner.addEventListener("submit",(e)=>{    // url 입력시 다시 생성되는 창
         e.preventDefault();
         let typing = e.target[0].value; // 입력된 url
+        let checkTypingUrl = typing.split("/");
 
         playerWrap.style.transform = "rotate(360deg)";  // 이 부분부터는 새로운 영상 공유창을 위한 부분
         playerContainer.remove();
@@ -580,13 +628,15 @@ function addPlayer()    {   // 플레이어 생성
 
         UrlContainerFormIcon.innerHTML= `<?xml version="1.0" ?><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.11,15.39,8.23,19.27a2.52,2.52,0,0,1-3.5,0,2.47,2.47,0,0,1,0-3.5l3.88-3.88a1,1,0,1,0-1.42-1.42L3.31,14.36a4.48,4.48,0,0,0,6.33,6.33l3.89-3.88a1,1,0,0,0-1.42-1.42ZM20.69,3.31a4.49,4.49,0,0,0-6.33,0L10.47,7.19a1,1,0,1,0,1.42,1.42l3.88-3.88a2.52,2.52,0,0,1,3.5,0,2.47,2.47,0,0,1,0,3.5l-3.88,3.88a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3.88-3.89A4.49,4.49,0,0,0,20.69,3.31ZM8.83,15.17a1,1,0,0,0,.71.29,1,1,0,0,0,.71-.29l4.92-4.92a1,1,0,1,0-1.42-1.42L8.83,13.75A1,1,0,0,0,8.83,15.17Z" fill="#f26600"/></svg>`;
         UrlContainerObjInner.innerHTML= `
+        <iframe width="1280" height="720" src="https://www.youtube.com/embed/1ID6pfTViXo" title="JSON (존슨) 은 자바스크립트 문법이 아닙니다" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="1280" height="720" src="${typing}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                 <svg viewBox="0 0 800 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" id="blobSvg">
                     <path fill="#a29bfe">
                         <animate attributeName="d"
-                            dur="10000s"
+                            dur="30s"
                             repeatCount="indefinite"
                             
-                            vlaues="M411,322Q333,394,230,428.5Q127,463,104,356.5Q81,250,136.5,200Q192,150,251,148.5Q310,147,399.5,198.5Q489,250,411,322Z;
+                            values="M411,322Q333,394,230,428.5Q127,463,104,356.5Q81,250,136.5,200Q192,150,251,148.5Q310,147,399.5,198.5Q489,250,411,322Z;
                                     
                             M388,356.5Q373,463,264.5,438.5Q156,414,80,332Q4,250,95.5,195.5Q187,141,250,141Q313,141,358,195.5Q403,250,388,356.5Z;
                             
@@ -624,19 +674,21 @@ function addPlayer()    {   // 플레이어 생성
     moveWrapAction();   // 창 이동 이벤트 재 할당
 }
 addPlayer()
-
 const mainBarEvent = () => {    // 플레이트 컷 이벤트 내용
+    mainWrap.appendChild(PfPageWrap);   // 플레이트 Wrap생성
+
     stickyBarTop.style.transform = "rotate(0deg)";
     stickyBarBottom.style.bottom = "0%"
     stickyBarTop.style.bottom = "12.6%";
-    codeWrap.style.transform = "scale(0.5)rotate(180deg)";
+    mainWrap.style.transform = "scale(0.5)rotate(180deg)";
+    PfPageWrap.style.opacity = "1";
 
     setTimeout(() => {
         stickyBarTop.style.transform = "rotate(90deg)";
         stickyBarBottom.style.bottom = "-14.9%"
         stickyBarTop.style.bottom = "0";
-        codeWrap.style.transform = "scale(1)";
-        firstBg.remove();
+        mainWrap.style.transform = "scale(1)";
+        wrap.innerHTML= "";
         firstPage();
     }, 4000);
     setTimeout(() => {

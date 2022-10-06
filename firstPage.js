@@ -1,6 +1,9 @@
 let menuOpen  = false;
 
 function firstPage()    {
+    mainWrap.style.border = "0px";
+    mainWrap.style.background = "white";
+
     const menuBg = document.createElement("div"),
         menuLine = document.createElement("div"),
             menuLineDiv1 = document.createElement("div"),
@@ -70,7 +73,7 @@ function firstPage()    {
             return false;
         }
 
-        menuBg.appendChild(menuNav);
+        mainWrap.appendChild(menuNav);
         menuNav.appendChild(menuLine);
         menuLine.appendChild(menuLineDiv1);
         menuLine.appendChild(menuLineDiv2);
@@ -107,15 +110,15 @@ function firstPage()    {
 
     menuSpan.innerText = "MENU";
 
-    innerContainer.appendChild(menuBg);
+    mainWrap.appendChild(menuBg);
     menuBg.appendChild(menuSpan);
 
-    const mobileText_X_Value1 = innerContainer.clientWidth/6+5;
-    const mobileText_X_Value2 = innerContainer.clientWidth/10;
+    const mobileText_X_Value1 = mainWrap.clientWidth/6+5;
+    const mobileText_X_Value2 = mainWrap.clientWidth/10;
 
 
     const svgMainText = document.createElement("svg");
-    innerContainer.appendChild(svgMainText);
+    mainWrap.appendChild(svgMainText);
     if(isCheck) {
         svgMainText.outerHTML = `
         <video id="mainText_C_Video" class="mainTextVideo" muted autoplay loop style="height:100%; width: auto;">
@@ -140,9 +143,32 @@ function firstPage()    {
                     <text x="30%" y="66%" textLength="5em" lengthAdjust="spacing" font-size="15vh">
                         PF
                     </text>
-                    <circle id="mouseMoveCursor" x="10%" cx="50" cy="50" r="40"></circle>
+                    <path id="mouseMoveCursor" fill="#a29bfe">
+                        <animate attributeName="d"
+                            dur="10s"
+                            repeatCount="indefinite"
+                            
+                            values="M411,322Q333,394,230,428.5Q127,463,104,356.5Q81,250,136.5,200Q192,150,251,148.5Q310,147,399.5,198.5Q489,250,411,322Z;
+                                    
+                            M388,356.5Q373,463,264.5,438.5Q156,414,80,332Q4,250,95.5,195.5Q187,141,250,141Q313,141,358,195.5Q403,250,388,356.5Z;
+                            
+                            M387.5,317Q327,384,227,423.5Q127,463,107.5,356.5Q88,250,124,171.5Q160,93,257.5,80.5Q355,68,401.5,159Q448,250,387.5,317Z;
+                            
+                            M390.5,298.5Q306,347,245,355.5Q184,364,112,307Q40,250,87.5,150Q135,50,221.5,99.5Q308,149,391.5,199.5Q475,250,390.5,298.5Z;
+                            
+                            M371.57062,328.47151Q340.70386,406.94302,242.89674,419.64955Q145.08962,432.35608,106.21602,341.17804Q67.34243,250,114.84243,174.71335Q162.34243,99.4267,269.34926,65.84778Q376.35608,32.26885,389.39674,141.13442Q402.43739,250,371.57062,328.47151Z;
+                            
+                            M391.5,317Q327,384,259.5,367.5Q192,351,136.5,300.5Q81,250,133,193.5Q185,137,259.5,120.5Q334,104,395,177Q456,250,391.5,317Z;
+                            
+                            M415,336.5Q350,423,259.5,407Q169,391,116.5,320.5Q64,250,97.5,147.5Q131,45,247,50Q363,55,421.5,152.5Q480,250,415,336.5Z;
+                            
+                            M411,322Q333,394,230,428.5Q127,463,104,356.5Q81,250,136.5,200Q192,150,251,148.5Q310,147,399.5,198.5Q489,250,411,322Z;">
+                        
+                        </animate>
+                    </path>
                 </clipPath>
             </svg>
+
         `
     }
     
@@ -167,7 +193,7 @@ function firstPage()    {
         scrollPage1.id = "scrollPage1";
         scrollPage1P.id = "scrollPage1P";
 
-        innerContainer.appendChild(scrollPageWrap);
+        mainWrap.appendChild(scrollPageWrap);
         scrollPageWrap.appendChild(scrollPage1);
         scrollPage1.appendChild(scrollPage1P);
 
@@ -194,57 +220,63 @@ function firstPage()    {
     const mouseMoveMainTitle = document.querySelector("#mouseMoveMainTitle");
     let size = 40;
 
-    innerContainer.addEventListener("mousemove",(e) => { // 마우스 움직임에 따라 이동하는 배경 원 
-        size = mouseMoveCursor.r.baseVal.value;
+    mainWrap.addEventListener("mousemove",(e) => { // 마우스 움직임에 따라 이동하는 배경 원 
+        size = 0;
         let mouseMoveX = e.clientX,
             mouseMoveY = e.clientY;
             setTimeout(() => {
-                mouseMoveCursor.cx.baseVal.value = mouseMoveX;
-                mouseMoveCursor.cy.baseVal.value = mouseMoveY;
-            }, 50);
+                mouseMoveCursor.style.transform = `translateX(${mouseMoveX-230}px)`;
+                mouseMoveCursor.style.transform += ` translateY(${mouseMoveY-230}px)`;
+            }, 30);
+
+            // 움직임에 따라 마우스 크기 변환 하는것은 재구현 필요 - 스케일을 키우는것으로 대체해야할듯함
+        
         let mainTitleX = mouseMoveMainTitle.x.baseVal[0].value,
             maxMainTilteX = mouseMoveMainTitle.clientWidth - mouseMoveMainTitle.x.baseVal[0].value,
             mainTitleY = mouseMoveMainTitle.y.baseVal[0].value,
             maxMainTilteY = mouseMoveMainTitle.clientWidth - mouseMoveMainTitle.y.baseVal[0].value;
         if(mouseMoveX >= mainTitleX && mouseMoveX <= maxMainTilteX+60 && mouseMoveY >= mainTitleY/2 && mouseMoveY <= maxMainTilteY/2) { // 가운데 텍스트 안을 움직일때
             const sizeUpMove = setInterval(() => {
-                if(size === 150)   {
+                if(size.toFixed(1) >= 1.5)   {
                     clearInterval(sizeUpMove);
                     return false;
                 }
-                size = size +1;
-                mouseMoveCursor.r.baseVal.value = `${size}`;
+                size += 0.01;
+                mouseMoveCursor.style.transform = `${mouseMoveCursor.style.transform } scale(${size})`; // 해당 부분 scale이 계속해서 더해지는 오류가 있음 수정필요
             }, 30);
+
+
             cgmStyleWrapMouse.addEventListener("click",(e) => {
                 if(scrollPageOn !== true){  // 스크롤 페이지 실행 함수
                     section2();
                 }
                 scrollPageOn = true;
 
-                if(size === 2000) { // 클릭하여 최대 크기가 되었을때  다시 실행 방지
+                if(Math.floor(size) >= 4) { // 클릭하여 최대 크기가 되었을때  다시 실행 방지
                     return false;
                 }
                 const sizeUpClick = setInterval(() => { // 사이즈 확장
-                    if(size === 2000)   {
+                    if(Math.floor(size) >= 4)   {
                         clearInterval(sizeUpClick);
                         return false;
                     }
-                    size = size +1;
-                    mouseMoveCursor.r.baseVal.value = `${size}`;
+                    size += 0.01;
+                    mouseMoveCursor.style.transform = `${mouseMoveCursor.style.transform } scale(${size})`;
                 }, 25);
             })
         }else { // 가운데 텍스트 외를 움직일때
             const sizeDownMove = setInterval(() => {
-                if(size === 2000) { // 클릭 후 최대 크기가 되어 해당 영역을 움직여도 줄어들지 않도록 방지
+                if(Math.floor(size) >= 4) { // 클릭 후 최대 크기가 되어 해당 영역을 움직여도 줄어들지 않도록 방지
                     return false;
                 }
-                if(size === 40)   { // 최소 크기가 되었을때 이벤트 중지
+                if(Math.floor(size) <= 1)   { // 최소 크기가 되었을때 이벤트 중지
                     clearInterval(sizeDownMove);
                     return false;
                 }
-                size = size -1;
-                mouseMoveCursor.r.baseVal.value = `${size}`;
+                size -= 0.01;
+                mouseMoveCursor.style.transform = `${mouseMoveCursor.style.transform } scale(${size})`;
             }, 30);
+
         }
     })
 

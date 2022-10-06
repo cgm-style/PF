@@ -1,4 +1,5 @@
 *   {margin: 0px;padding: 0px;list-style: none;outline: none; font-family: 'Noto Sans KR', sans-serif;}
+html{background-color:#667eea;}
 
 #wrap   {
     position:fixed;
@@ -9,7 +10,45 @@
     background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border: 70px solid darksalmon;
     box-sizing: border-box;
+    transition: all 0.5s;
 }
+
+.PfPageWrap {
+    position: fixed;
+    width: 120%;
+    height: 120%;
+    right: -10%;
+    top: -10%;
+    z-index: 10;
+    opacity: 0;
+    transition: all 1s;
+    background: white;
+}
+
+.playerGuideWrap {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.playerGuideWrapBg  {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .7);
+}
+.playerGuideWrapInner   {
+    width: 80%;
+    height: 80%;
+    z-index: 5;
+}
+.playerGuideWrapInner img   {width: 100%;}
 
 #footerWrap {
     position: absolute;
@@ -103,7 +142,7 @@
     position: fixed;
     z-index: 1;
     margin-top: -3%;
-    width: 33%;
+    width: 27%;
     font-family: 'Yellowtail', cursive;
     animation: textFlicker 1.5s infinite alternate;
     -webkit-user-select:none;
@@ -195,10 +234,12 @@
     height: 100%;
     background-color: white;
     padding-bottom: 30px;
+    opacity: 0;
+    visibility: hidden;
 }
 
 #stickyBarTop  {
-    width: 101%;
+    width: 103%;
     height: 12.5%;
     background-color: black;
     background-image: repeating-linear-gradient(125deg, transparent, transparent 250px, rgba(255,255,255,0.8) 250px, rgba(255,255,255,0.8) 500px);
@@ -213,7 +254,7 @@
 }
 #stickyBarTop::after   {
     content: "";
-    width: 101%;
+    width: 100%;
     height: 600%;
     background-color: black;
     position: absolute;
@@ -221,7 +262,7 @@
     z-index: 4;
 }
 #stickyBarBottom    {
-    width: 101%;
+    width: 103%;
     height: 12.5%;
     background-color: black;
     background-image: repeating-linear-gradient(55deg, transparent, transparent 250px, rgba(255,255,255,0.8) 250px, rgba(255,255,255,0.8) 500px);
@@ -649,6 +690,30 @@
     justify-content: center;
     align-items: center;
 }
+.playerContainerUrlInnerVolume  {
+    position: absolute;
+    transform: rotate(270deg);
+    left: -10px;
+    width: 75px;
+    height: 9px;
+    bottom: 30px;
+    -webkit-appearance: none;
+	background: #667eea;
+    border-radius: 5px;
+    background-image: linear-gradient(#ff4500, #ff4500);
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+}
+.playerContainerUrlInnerVolume::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 10px;
+    background: #ff494f;
+    box-shadow: 1px 1px 7px #d16a6e;
+    cursor: pointer;
+}
 .playerContainerController div {
     transition: all 0.2s;
     cursor: pointer;
@@ -727,5 +792,30 @@
 .UrlContainerFormInput.open   {
     width: 92%;
 }
-.UrlContainerObj    {}
-.UrlContainerObjInner   {}
+.UrlContainerObj    {
+    position: relative;
+    width: 100%;
+    top: -105px;
+    left: -1px;
+    height: 100%;
+}
+.UrlContainerObjInner   {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.UrlContainerObjInner iframe    {
+    position: absolute;
+    width: 100%;
+    height: 92%;
+    filter: brightness(0.9);
+}
+.UrlContainerObjInner svg   {
+    position: absolute;
+    background: #fffaee;
+    mix-blend-mode: lighten;
+    pointer-events: none;
+}
+.UrlContainerObjInner svg path  {
+    transform: translate(154px, 10px);
+}

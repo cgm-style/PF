@@ -130,6 +130,95 @@
         #menuLineDiv3   {
             left: -137%;
         }
+
+        #menuLine   {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+        .menuLineDiv    {
+            position: absolute;
+            width: 200%;
+            height: 0px;
+            z-index: 100;
+            transform: rotate(37deg);
+            transition: all 0.5s cubic-bezier(.55,0,.1,1);
+            background: dimgray;
+        }
+        #menuLineDiv1   {
+            left: -27%;
+        }
+        #menuLineDiv2   {
+            left: -86%;
+        }
+        #menuLineDiv3   {
+            left: -137%;
+        }
+        #cgmStyleWrap   {
+            transition: all 1s;
+            opacity: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mainTextVideo  {
+            position: absolute;
+            opacity: 0;
+            transition: all 1s;
+            width: 100%;
+        }
+        #mainText_C_Video {
+            -webkit-clip-path: url(#mainText_C);
+            clip-path: url(#mainText_C);
+        }
+        
+        .mainText   {
+            font-weight: bold;
+        }
+
+        .moMainTitle    {
+            z-index: 1;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: white;
+            color: black;
+            mix-blend-mode: lighten;
+            font-size: 8vh;
+            text-align: center;
+            line-height: 1040%;
+            transform: scaleY(1.5);
+        }
+        .moMainTitle span{
+            color: black;
+            position: absolute;
+            top: 55px;
+            font-size: 5vh;
+            left: 30%;
+        }
+
+
+        /* 스크롤 화면 css */
+        #scrollPageWrap   {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+        }
+        #scrollPage1    {
+            position:absolute;
+            top:0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #scrollPage1P   {
+
+        }
     </style>
 
 </head>
