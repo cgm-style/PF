@@ -351,7 +351,7 @@ function addCodeWrap()  {
             addTextListLi(document.querySelectorAll(`.firstLi`).length+1,inputTypingText);
             runEvent = true;
             setTimeout(() => {
-                addTextListLi(document.querySelectorAll(`.firstLi`).length+1,`입력가능한 명력어는 '시간','날씨','추가예정'등이 있습니다.`);
+                addTextListLi(document.querySelectorAll(`.firstLi`).length+1,`입력가능한 명력어는 '시간','날씨','추가예정'등이 있습니다-유튜브 url입력시 재생불가는 해당영상이 퍼가기 불가 영상이기에 막혀있을 가능성이 높습니다.`);
             }, 1000);
             firstliLastEvent.target[0].value="";
             return false
@@ -403,7 +403,7 @@ function addCodeWrap()  {
             addTextListLi(document.querySelectorAll(`.firstLi`).length+1,inputTypingText);
             runEvent = true;
             setTimeout(() => {
-                addTextListLi(document.querySelectorAll(`.firstLi`).length+1,`위 수정한 text를 save&load하는 기능 / text를 save&load하며 위 화면에 띄워주는 기능 / 퀵버튼 리사이징`);
+                addTextListLi(document.querySelectorAll(`.firstLi`).length+1,`위 수정한 text를 save&load하는 기능 / text를 save&load하며 위 화면에 띄워주는 기능`);
             }, 1000);
             firstliLastEvent.target[0].value="";
             return false;
@@ -475,15 +475,20 @@ function addPlayer()    {   // 플레이어 생성
     playerContainerControllerOnOff.innerHTML = `<?xml version="1.0" ?><svg fill="#f26600" style="enable-background:new 0 0 24 24;" version="1.1" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="info"/><g id="icons"><path d="M3.9,18.9V5.1c0-1.6,1.7-2.6,3-1.8l12,6.9c1.4,0.8,1.4,2.9,0,3.7l-12,6.9C5.6,21.5,3.9,20.5,3.9,18.9z" id="play"/></g></svg>`
 
     playerWrap.draggable = true;
+    playerContainerUrlInnerInput.placeholder = "유튜브 url 입력";
     playerContainerUrlInnerVolume.type = "range";
     playerContainerUrlInnerVolume.value = "50";
     playerContainerUrlInnerVolume.min = "0";
     playerContainerUrlInnerVolume.max = "100";
 
     let onOff = false;  // 재생 유무
-    let sec = 0;    // 시간초
     let audio = new Audio("music/A Typical Ride Out - Noir Et Blanc Vie.mp3");  // 디폴트값의 노래
+    let sec = 0; // 노래 진행 시간초
     let songCount = 0;  // 플레이 리스트 넘버 체크
+    let fixDefaultMin = "";
+    
+    audio.autoplay = true;
+    
     const songList = [  // 음악 플레이 리스트
         `music/A Typical Ride Out - Noir Et Blanc Vie.mp3`,
         `music/Easy Saturday - Bad Snacks.mp3`,
@@ -495,6 +500,7 @@ function addPlayer()    {   // 플레이어 생성
     ]
 
     playerContainerUrlInnerVolume.addEventListener("input",(e)=>{   // 볼륨 컨트롤 부분
+        playerWrap.draggable = false;
         
         let target = e.target
         if (e.target.type !== 'range') {
@@ -503,11 +509,25 @@ function addPlayer()    {   // 플레이어 생성
         const min = target.min
         const max = target.max
         const val = target.value
-        
-        target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%';   // background-image로 진행바 같은 느낌으로 생성
+            target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%';   // background-image로 진행바 같은 느낌으로 생성
         audio.volume = val/100; // 볼륨조절
         return false;
     })
+    playerContainerUrlInnerVolume.addEventListener("mouseup",(e)=>{
+        playerWrap.draggable = true;
+    })
+
+    const convertTime = function(time)    { // 노래 시간초 계산하는 아이
+        let mins = Math.floor(time / 60);
+        if (mins < 10) {
+        mins = '0' + String(mins);
+        }
+        let secs = Math.floor(time % 60);
+        if (secs < 10) {
+        secs = '0' + String(secs);
+        }
+        return mins + ':' + secs;
+    }
 
     let TimeRun = setInterval(() => {   // 시간초 이벤트
         if(onOff === true){ // 숫자를 시간으로 표기하는 함수
@@ -517,14 +537,12 @@ function addPlayer()    {   // 플레이어 생성
                 sec += 1; 
                 sec = Math.floor(sec);
             }
-            let defaultSec = ((audio.duration/60).toFixed(2)%1).toFixed(2);
-            let fixDefaultMin = (audio.duration/60).toFixed(2);
-            if(defaultSec >= 0.60)  {
-                defaultSec -= 0.6;
-                fixDefaultMin = Math.floor(fixDefaultMin);
-                fixDefaultMin = fixDefaultMin+1 + defaultSec;
-            }
-            playerContainerUrlTitelTime.innerHTML = `<span>${sec.toFixed(2)}</span> / ${fixDefaultMin}`
+
+            
+
+
+            
+            playerContainerUrlTitelTime.innerHTML = `<span>${convertTime(audio.currentTime)}</span> / ${convertTime(audio.duration)}`
 
             if((sec).toFixed(2) === fixDefaultMin){    // 노래가 끝날 경우
                 sec = 0;
@@ -533,6 +551,12 @@ function addPlayer()    {   // 플레이어 생성
             }
         }
     }, 1000);
+
+    audio.addEventListener("ended",()=>{
+            nowTime = 0;
+            audio.pause();
+            nextSong();
+    })
 
     function stratAction() {    // 음악 시작버튼 액션
         if(onOff === false) {   // 스타트
@@ -551,14 +575,7 @@ function addPlayer()    {   // 플레이어 생성
         playerContainerUrlTitelP.innerText = `${audio.attributes[1].value.slice(6)}`;   // 노래 제목 
         playerWrap.children[0].children[0].innerText = `${audio.attributes[1].value.slice(6)}`;
         audio.addEventListener("loadeddata",(event)=>{   // audio의 데이터가 로드 되었을때 실행
-            let defaultSec = ((audio.duration/60).toFixed(2)%1).toFixed(2);
-            let fixDefaultMin = (audio.duration/60).toFixed(2);
-            if(defaultSec >= 0.60)  {
-                defaultSec -= 0.6;
-                fixDefaultMin = Math.floor(fixDefaultMin);
-                fixDefaultMin = fixDefaultMin+1 + defaultSec;
-            }
-            playerContainerUrlTitelTime.innerText = `${fixDefaultMin}` // 노래의 길이
+            playerContainerUrlTitelTime.innerText = `${convertTime(audio.duration)}` // 노래의 길이
         })
     }
     playDefaultSet();
@@ -574,9 +591,10 @@ function addPlayer()    {   // 플레이어 생성
         if(songCount === songList.length) {
             songCount = 0;
         }
-        audio.src = `${songList[songCount]}`
-        audio.play();
+        audio.src = `${songList[songCount]}`;
         sec = 0;
+        audio.load();
+        audio.play();
         onOff = false;
         stratAction();
         playDefaultSet();
@@ -588,19 +606,41 @@ function addPlayer()    {   // 플레이어 생성
         if(songCount === -1){
             songCount = songList.length-1;
         }
-        audio.src = `${songList[songCount]}`
-        audio.play();
+        audio.src = `${songList[songCount]}`;
         sec = 0;
+        audio.load();
+        audio.play();
         onOff = false;
         stratAction();
         playDefaultSet();
         setInterval(TimeRun);
     }
 
-    playerContainerUrlInner.addEventListener("submit",(e)=>{    // url 입력시 다시 생성되는 창
+    function urlTyping(e)  {
         e.preventDefault();
-        let typing = e.target[0].value; // 입력된 url
-        let checkTypingUrl = typing.split("/");
+
+        let typing = "";
+
+        if(e.target[1]){// 입력된 url
+            typing = e.target[1].value;
+        }else   {
+            typing = e.target[0].value;
+        }
+
+        let checkTypingUrl = "";
+        let fixUrl = checkTypingUrl[checkTypingUrl.length-1];
+
+        if(typing.indexOf("list") != -1){    // 유튜브 url창의 주소 입력시
+            checkTypingUrl = typing.split("/");
+            fixUrl = checkTypingUrl[checkTypingUrl.length-1]
+        }else if(typing.indexOf("?") != -1){
+            checkTypingUrl = typing.split("?");
+            checkTypingUrl = checkTypingUrl[1].slice(2);
+            fixUrl = checkTypingUrl;
+        }else{  // 동영상 주소 복사 입력시
+            checkTypingUrl = typing.split("/");
+            fixUrl = checkTypingUrl[checkTypingUrl.length-1]
+        }
 
         playerWrap.style.transform = "rotate(360deg)";  // 이 부분부터는 새로운 영상 공유창을 위한 부분
         playerContainer.remove();
@@ -628,10 +668,9 @@ function addPlayer()    {   // 플레이어 생성
 
         UrlContainerFormIcon.innerHTML= `<?xml version="1.0" ?><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.11,15.39,8.23,19.27a2.52,2.52,0,0,1-3.5,0,2.47,2.47,0,0,1,0-3.5l3.88-3.88a1,1,0,1,0-1.42-1.42L3.31,14.36a4.48,4.48,0,0,0,6.33,6.33l3.89-3.88a1,1,0,0,0-1.42-1.42ZM20.69,3.31a4.49,4.49,0,0,0-6.33,0L10.47,7.19a1,1,0,1,0,1.42,1.42l3.88-3.88a2.52,2.52,0,0,1,3.5,0,2.47,2.47,0,0,1,0,3.5l-3.88,3.88a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3.88-3.89A4.49,4.49,0,0,0,20.69,3.31ZM8.83,15.17a1,1,0,0,0,.71.29,1,1,0,0,0,.71-.29l4.92-4.92a1,1,0,1,0-1.42-1.42L8.83,13.75A1,1,0,0,0,8.83,15.17Z" fill="#f26600"/></svg>`;
         UrlContainerObjInner.innerHTML= `
-        <iframe width="1280" height="720" src="https://www.youtube.com/embed/1ID6pfTViXo" title="JSON (존슨) 은 자바스크립트 문법이 아닙니다" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <iframe width="1280" height="720" src="${typing}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        <iframe width="1280" height="720" src="//youtube.com/embed/${fixUrl}" title="Cgm Youtube Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                 <svg viewBox="0 0 800 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" id="blobSvg">
-                    <path fill="#a29bfe">
+                    <path fill="black">
                         <animate attributeName="d"
                             dur="30s"
                             repeatCount="indefinite"
@@ -656,11 +695,21 @@ function addPlayer()    {   // 플레이어 생성
                     </path>
                 </svg>
             `
-        UrlContainerFormIcon.addEventListener("click",(e)=>{  // url부분 클릭시 이벤트
+        UrlContainerFormIcon.addEventListener("click",()=>{  // url부분 클릭시 이벤트
             UrlContainerFormIcon.classList.toggle("rotate");
             UrlContainerFormInput.classList.toggle("open");
         })
-    })
+
+        UrlContainerForm.addEventListener("submit",(e)=>{
+            e.preventDefault();
+            UrlContainer.remove();
+            urlTyping(e);
+        })
+    }
+
+
+    playerContainerUrlInner.addEventListener("submit",urlTyping)// url 입력시 다시 생성되는 창
+
 
     playerContainerControllerOnOff.addEventListener("click",stratAction)    // 재생버튼 이벤트
 
@@ -723,7 +772,7 @@ function moveWrapAction(){  // 창 이동 함수
                 })
             })
         }else{
-            move.addEventListener("mousedown", function(e){    // pc 퀵 버튼 부분 move 이벤트
+            move.addEventListener("dragstart", function(e){    // pc 퀵 버튼 부분 move 이벤트
                 moveWrap.forEach((move)=>{  // 클릭한 창 외의 움직이는 창들의 z-index를 4로 하여 뒤로
                     move.style.zIndex = "4";
                 })
