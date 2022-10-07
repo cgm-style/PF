@@ -66,7 +66,7 @@ const mainWrap = document.querySelector("#wrap"),   // 화면 전체 dom
     PfPageWrap.className = "PfPageWrap";
 
 
-    function addPlayerGuide()    {
+    function addPlayerGuide()    {  // 첫 가이드 화면 함수
         const playerGuideWrap = document.createElement("div"),
                 playerGuideWrapBg = document.createElement("div"),
                 playerGuideWrapInner = document.createElement("div");
@@ -85,7 +85,7 @@ const mainWrap = document.querySelector("#wrap"),   // 화면 전체 dom
             playerGuideWrap.remove();
         })
     }
-    addPlayerGuide();
+    // addPlayerGuide(); // 삭제시 가이드 생성
 
 function loadBar() {    // 기본 창들 생성
     mainWrapBg.id = "mainWrapBg";
@@ -121,10 +121,10 @@ function loadBar() {    // 기본 창들 생성
             UIBoxInner.appendChild(UIBoxInnerDiv4);
     
     mainWrapBgText.innerText = "CGM Style";
-    UIBoxInnerDiv1.style = "--i:0;--x:0;--y:0;"
-    UIBoxInnerDiv2.style = "--i:1;--x:2;--y:0;"
-    UIBoxInnerDiv3.style = "--i:2;--x:0;--y:2;"
-    UIBoxInnerDiv4.style = "--i:3;--x:2;--y:2;"
+    UIBoxInnerDiv1.style = "--i:0;--x:0;--y:0;";
+    UIBoxInnerDiv2.style = "--i:1;--x:2;--y:0;";
+    UIBoxInnerDiv3.style = "--i:2;--x:0;--y:2;";
+    UIBoxInnerDiv4.style = "--i:3;--x:2;--y:2;";
     UIBoxInnerDiv1.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M15.5 2.25a.75.75 0 01.75-.75h5.5a.75.75 0 01.75.75v5.5a.75.75 0 01-1.5 0V4.06l-6.22 6.22a.75.75 0 11-1.06-1.06L19.94 3h-3.69a.75.75 0 01-.75-.75z"></path><path d="M2.5 4.25c0-.966.784-1.75 1.75-1.75h8.5a.75.75 0 010 1.5h-8.5a.25.25 0 00-.25.25v15.5c0 .138.112.25.25.25h15.5a.25.25 0 00.25-.25v-8.5a.75.75 0 011.5 0v8.5a1.75 1.75 0 01-1.75 1.75H4.25a1.75 1.75 0 01-1.75-1.75V4.25z"></path></svg>`;
     UIBoxInnerDiv2.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M10.25 0a.75.75 0 000 1.5h1v1.278a9.955 9.955 0 00-5.635 2.276L4.28 3.72a.75.75 0 00-1.06 1.06l1.315 1.316A9.962 9.962 0 002 12.75c0 5.523 4.477 10 10 10s10-4.477 10-10a9.962 9.962 0 00-2.535-6.654L20.78 4.78a.75.75 0 00-1.06-1.06l-1.334 1.334a9.955 9.955 0 00-5.636-2.276V1.5h1a.75.75 0 000-1.5h-3.5zM12 21.25a8.5 8.5 0 100-17 8.5 8.5 0 000 17zm4.03-12.53a.75.75 0 010 1.06l-2.381 2.382a1.75 1.75 0 11-1.06-1.06l2.38-2.382a.75.75 0 011.061 0z"></path></svg>`;
     UIBoxInnerDiv3.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M12 17.5a5.5 5.5 0 100-11 5.5 5.5 0 000 11zm0 1.5a7 7 0 100-14 7 7 0 000 14zm12-7a.75.75 0 01-.75.75h-2.5a.75.75 0 010-1.5h2.5A.75.75 0 0124 12zM4 12a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h2.5A.75.75 0 014 12zm16.485-8.485a.75.75 0 010 1.06l-1.768 1.768a.75.75 0 01-1.06-1.06l1.767-1.768a.75.75 0 011.061 0zM6.343 17.657a.75.75 0 010 1.06l-1.768 1.768a.75.75 0 11-1.06-1.06l1.767-1.768a.75.75 0 011.061 0zM12 0a.75.75 0 01.75.75v2.5a.75.75 0 01-1.5 0V.75A.75.75 0 0112 0zm0 20a.75.75 0 01.75.75v2.5a.75.75 0 01-1.5 0v-2.5A.75.75 0 0112 20zM3.515 3.515a.75.75 0 011.06 0l1.768 1.768a.75.75 0 11-1.06 1.06L3.515 4.575a.75.75 0 010-1.06zm14.142 14.142a.75.75 0 011.06 0l1.768 1.768a.75.75 0 01-1.06 1.06l-1.768-1.767a.75.75 0 010-1.061z"></path></svg>`;
@@ -199,7 +199,6 @@ function addCodeWrap()  {
                 firstliLastButton = document.createElement("button");
 
     firstBg.id = "firstBg";
-
     firstUl.id = "firstUl";
     firstliLast.id = "firstLastLi";
         firstliLastInput.id = "firstliLastInput";
@@ -537,10 +536,6 @@ function addPlayer()    {   // 플레이어 생성
                 sec += 1; 
                 sec = Math.floor(sec);
             }
-
-            
-
-
             
             playerContainerUrlTitelTime.innerHTML = `<span>${convertTime(audio.currentTime)}</span> / ${convertTime(audio.duration)}`
 
@@ -739,11 +734,11 @@ const mainBarEvent = () => {    // 플레이트 컷 이벤트 내용
         mainWrap.style.transform = "scale(1)";
         wrap.innerHTML= "";
         firstPage();
-    }, 4000);
+    }, 2000);
     setTimeout(() => {
         stickyBarTop.remove();
         stickyBarBottom.remove();
-    },5000)
+    },3000)
 
 }
 loadBar();

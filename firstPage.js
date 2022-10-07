@@ -44,7 +44,7 @@ function firstPage()    {
     menuNavLi4A.className = "menuNavLiA";
 
     function addMenu()  {
-        menuNavLi1A.innerText ="Code Page";
+        menuNavLi1A.innerText ="Git Hub";
         menuNavLi1A.setAttribute("data-text",`${menuNavLi1A.innerText}`);
         menuNavLi2A.innerText ="Menu2";
         menuNavLi2A.setAttribute("data-text",`${menuNavLi2A.innerText}`);
@@ -182,35 +182,100 @@ function firstPage()    {
 
     let scrollPageOn = false; // 스크롤 페이지 on 체크 
     function section2() {   // 타이틀 클릭후 나오는 화면
-        let wheelTest = 0;
-        let wheelUp = 0;
+        let wheelValue = 0;
+        let wheelUp = 1;
         let wheelDown = 0;
         const scrollPageWrap = document.createElement("div");
             const scrollPage1 = document.createElement("section");
                 const scrollPage1P = document.createElement("p");
+                const scrollPage2P = document.createElement("p");
+                const scrollPage3P = document.createElement("p");
+                const scrollPage4P = document.createElement("p");
         
         scrollPageWrap.id = "scrollPageWrap";
         scrollPage1.id = "scrollPage1";
-        scrollPage1P.id = "scrollPage1P";
+        scrollPage1P.className = "scrollPageP";
+        scrollPage2P.className = "scrollPageP";
+        scrollPage3P.className = "scrollPageP";
+        scrollPage4P.className = "scrollPageP";
 
         mainWrap.appendChild(scrollPageWrap);
         scrollPageWrap.appendChild(scrollPage1);
         scrollPage1.appendChild(scrollPage1P);
+        scrollPage1.appendChild(scrollPage2P);
+        scrollPage1.appendChild(scrollPage3P);
+        scrollPage1.appendChild(scrollPage4P);
 
 
-        scrollPage1P.innerText = "안녕하세요"
+        scrollPage1P.innerText = "안녕하세요";
+        scrollPage2P.innerText = "제 이름은 최근명입니다.";
+        scrollPage3P.innerText = "다양한 시도 다양한 경험을 중요시하며";
+        scrollPage4P.innerText = "수 많은 실패속에서 성공을 배우는걸 중요시하죠";
 
         scrollPageWrap.addEventListener("wheel",(e) => {    // 마우스 휠의 깊이를 파악하는 함수
             if(e.wheelDeltaY === -120){
-                wheelTest= wheelTest-5;
+                wheelValue= wheelValue+5;
             }else if (e.wheelDeltaY === 120)    {
-                wheelTest= wheelTest+5;
+                wheelValue= wheelValue-5;
             }
 
-            if(wheelTest <= 0 && wheelTest >= 100){   // 첫번째 이벤트
+            function wheelEvent(index){ // 클릭 후 메인 화면 스크롤 텍스트 액션 
+                
+                if(wheelValue <= -5)    {    // 스크롤의 깊이
+                    wheelUp -= 1;
+                    wheelDown = 7;
+                    wheelValue = 100;
+                }else if(wheelValue >= 0 && wheelValue <= 15)    {    // 스크롤의 깊이
+                    wheelDown = 1
+                }else if(wheelValue >= 15 && wheelValue <= 30){
+                    wheelDown = 2
+                }else if(wheelValue >= 30 && wheelValue <= 40){
+                    wheelDown = 3
+                }else if(wheelValue >= 40 && wheelValue <= 60){
+                    wheelDown = 4
+                }else if(wheelValue >= 60 && wheelValue <= 75){
+                    wheelDown = 5
+                }else if(wheelValue >= 75 && wheelValue <= 90){
+                    wheelDown = 6
+                }else if(wheelValue >= 90 && wheelValue <= 100){
+                    wheelDown = 7
+                }else   {
+                    wheelDown = 0;
+                    wheelValue = 0;
+                    wheelUp += 1;
+                }
 
-            }else if(wheelTest <= 100 && wheelTest >= 200)  {
-
+                if(wheelDown === 1) {
+                    index.style.opacity = 0.2
+                    index.style.marginTop = `130px`
+                }else if(wheelDown === 2)   {
+                    index.style.opacity = 0.5
+                    index.style.marginTop = `70px`
+                }else if(wheelDown === 3)   {
+                    index.style.opacity = 0.8
+                    index.style.marginTop = `3px`
+                }else if(wheelDown === 4)   {
+                    index.style.opacity = 1
+                    index.style.marginTop = `0px`
+                }else if(wheelDown === 5)   {
+                    index.style.opacity = 1
+                    index.style.marginTop = `0px`
+                }else if(wheelDown === 6)   {
+                    index.style.opacity = 0.5
+                    index.style.marginTop = `-60px`
+                }else if(wheelDown === 7)   {
+                    index.style.opacity = 0
+                    index.style.marginTop = `-130px`
+                }
+            }
+            if(wheelUp === 1){
+                wheelEvent(scrollPage1P);
+            }else if(wheelUp === 2){
+                wheelEvent(scrollPage2P);
+            }else if(wheelUp === 3){
+                wheelEvent(scrollPage3P);
+            }else if(wheelUp === 4){
+                wheelEvent(scrollPage4P);
             }
         })
     } 
@@ -218,23 +283,19 @@ function firstPage()    {
 
     const mouseMoveCursor = document.querySelector("#mouseMoveCursor");
     const mouseMoveMainTitle = document.querySelector("#mouseMoveMainTitle");
-    let size = 40;
+    let size = 1;
 
     mainWrap.addEventListener("mousemove",(e) => { // 마우스 움직임에 따라 이동하는 배경 원 
-        size = 0;
+        size;
         let mouseMoveX = e.clientX,
             mouseMoveY = e.clientY;
-            setTimeout(() => {
-                mouseMoveCursor.style.transform = `translateX(${mouseMoveX-230}px)`;
-                mouseMoveCursor.style.transform += ` translateY(${mouseMoveY-230}px)`;
-            }, 30);
-
-            // 움직임에 따라 마우스 크기 변환 하는것은 재구현 필요 - 스케일을 키우는것으로 대체해야할듯함
         
         let mainTitleX = mouseMoveMainTitle.x.baseVal[0].value,
             maxMainTilteX = mouseMoveMainTitle.clientWidth - mouseMoveMainTitle.x.baseVal[0].value,
             mainTitleY = mouseMoveMainTitle.y.baseVal[0].value,
             maxMainTilteY = mouseMoveMainTitle.clientWidth - mouseMoveMainTitle.y.baseVal[0].value;
+
+        mouseMoveCursor.style.transform = `translateX(${mouseMoveX-(230*size)}px) translateY(${mouseMoveY-(230*size)}px) scale(${size})`; 
         if(mouseMoveX >= mainTitleX && mouseMoveX <= maxMainTilteX+60 && mouseMoveY >= mainTitleY/2 && mouseMoveY <= maxMainTilteY/2) { // 가운데 텍스트 안을 움직일때
             const sizeUpMove = setInterval(() => {
                 if(size.toFixed(1) >= 1.5)   {
@@ -242,48 +303,45 @@ function firstPage()    {
                     return false;
                 }
                 size += 0.01;
-                mouseMoveCursor.style.transform = `${mouseMoveCursor.style.transform } scale(${size})`; // 해당 부분 scale이 계속해서 더해지는 오류가 있음 수정필요
+                mouseMoveCursor.style.transform = `translateX(${mouseMoveX-(230*size)}px) translateY(${mouseMoveY-(230*size)}px) scale(${size})`;  
             }, 30);
-
-
+            
             cgmStyleWrapMouse.addEventListener("click",(e) => {
                 if(scrollPageOn !== true){  // 스크롤 페이지 실행 함수
                     section2();
                 }
                 scrollPageOn = true;
 
-                if(Math.floor(size) >= 4) { // 클릭하여 최대 크기가 되었을때  다시 실행 방지
+                if(Math.floor(size) >= 20) { // 클릭하여 최대 크기가 되었을때  다시 실행 방지
                     return false;
                 }
                 const sizeUpClick = setInterval(() => { // 사이즈 확장
-                    if(Math.floor(size) >= 4)   {
+                    if(Math.floor(size) >= 20)   {
                         clearInterval(sizeUpClick);
                         return false;
                     }
                     size += 0.01;
-                    mouseMoveCursor.style.transform = `${mouseMoveCursor.style.transform } scale(${size})`;
+                    mouseMoveCursor.style.transform = `translateX(${mouseMoveX-(230*size)}px) translateY(${mouseMoveY-(230*size)}px) scale(${size})`; 
                 }, 25);
             })
         }else { // 가운데 텍스트 외를 움직일때
             const sizeDownMove = setInterval(() => {
-                if(Math.floor(size) >= 4) { // 클릭 후 최대 크기가 되어 해당 영역을 움직여도 줄어들지 않도록 방지
+                if(size >= 4) { // 클릭 후 최대 크기가 되어 해당 영역을 움직여도 줄어들지 않도록 방지
                     return false;
                 }
-                if(Math.floor(size) <= 1)   { // 최소 크기가 되었을때 이벤트 중지
+                if(size <= 1)   { // 최소 크기가 되었을때 이벤트 중지
                     clearInterval(sizeDownMove);
                     return false;
                 }
-                size -= 0.01;
-                mouseMoveCursor.style.transform = `${mouseMoveCursor.style.transform } scale(${size})`;
+                size = size - 0.01;
+                mouseMoveCursor.style.transform = `translateX(${mouseMoveX-(230*size)}px) translateY(${mouseMoveY-(230*size)}px) scale(${size})`; 
             }, 30);
-
         }
     })
 
 
     //버튼 클릭 이벤트
     menuSpan.addEventListener("click",addMenu);
-    menuNavLi1A.addEventListener("click",loadBar);
     menuNavLi1A.addEventListener("click",() => {menuNav.remove();});
     menuNavLi2A.addEventListener("click",() => {menuNav.remove();});
     menuNavLi3A.addEventListener("click",() => {menuNav.remove();});
