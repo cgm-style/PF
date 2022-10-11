@@ -717,7 +717,8 @@ function addPlayer()    {   // 플레이어 생성
     })
     moveWrapAction();   // 창 이동 이벤트 재 할당
 }
-addPlayer()
+addPlayer();
+
 const mainBarEvent = () => {    // 플레이트 컷 이벤트 내용
     mainWrap.appendChild(PfPageWrap);   // 플레이트 Wrap생성
 

@@ -4,7 +4,8 @@ function firstPage()    {
     mainWrap.style.border = "0px";
     mainWrap.style.background = "white";
 
-    const menuBg = document.createElement("div"),
+    const secondSection1 = document.createElement("section"),
+        menuBg = document.createElement("div"),
         menuLine = document.createElement("div"),
             menuLineDiv1 = document.createElement("div"),
             menuLineDiv2 = document.createElement("div"),
@@ -22,7 +23,7 @@ function firstPage()    {
                     menuNavLi4A = document.createElement("a");
     
 
-
+    secondSection1.id = "secondSection1";
     menuBg.id = "menuBg";
     menuLine.id = "menuLine";
     menuLineDiv1.className = "menuLineDiv",
@@ -43,8 +44,10 @@ function firstPage()    {
     menuNavLi3A.className = "menuNavLiA";
     menuNavLi4A.className = "menuNavLiA";
 
+    mainWrap.appendChild(secondSection1);
+
     function addMenu()  {
-        menuNavLi1A.innerText ="Git Hub";
+        menuNavLi1A.innerText ="Git";
         menuNavLi1A.setAttribute("data-text",`${menuNavLi1A.innerText}`);
         menuNavLi2A.innerText ="Menu2";
         menuNavLi2A.setAttribute("data-text",`${menuNavLi2A.innerText}`);
@@ -73,7 +76,7 @@ function firstPage()    {
             return false;
         }
 
-        mainWrap.appendChild(menuNav);
+        secondSection1.appendChild(menuNav);
         menuNav.appendChild(menuLine);
         menuLine.appendChild(menuLineDiv1);
         menuLine.appendChild(menuLineDiv2);
@@ -110,16 +113,16 @@ function firstPage()    {
 
     menuSpan.innerText = "MENU";
 
-    mainWrap.appendChild(menuBg);
+    secondSection1.appendChild(menuBg);
     menuBg.appendChild(menuSpan);
 
-    const mobileText_X_Value1 = mainWrap.clientWidth/6+5;
-    const mobileText_X_Value2 = mainWrap.clientWidth/10;
+    const mobileText_X_Value1 = secondSection1.clientWidth/6+5;
+    const mobileText_X_Value2 = secondSection1.clientWidth/10;
 
 
     const svgMainText = document.createElement("svg");
-    mainWrap.appendChild(svgMainText);
-    if(isCheck) {
+    secondSection1.appendChild(svgMainText);
+    if(isCheck) {   // mo의 경우
         svgMainText.outerHTML = `
         <video id="mainText_C_Video" class="mainTextVideo" muted autoplay loop style="height:100%; width: auto;">
             <source src="https://drive.google.com/uc?export=download&id=1w4ha9y8pkwAnmTl1TZ15tFdavtcnDTS3" type="video/mp4">
@@ -129,7 +132,7 @@ function firstPage()    {
             <span>portFoilo</span>
         </h1>
         `
-    }else{
+    }else{  //pc일 경우
         svgMainText.outerHTML = `
             <video id="mainText_C_Video" class="mainTextVideo" muted autoplay loop>
                 <source src="https://drive.google.com/uc?export=download&id=1gQLzaeViE9JZUNQMLXGPAhAFn6K5sJXm" type="video/mp4">
@@ -168,16 +171,69 @@ function firstPage()    {
                     </path>
                 </clipPath>
             </svg>
-
         `
     }
     
     const cgmStyleWrap = document.querySelector(".mainTextVideo");
-    const cgmStyleWrapMouse = document.querySelector("#cgmStyleWrap")
+    let cgmStyleWrapMouse = document.querySelector("#cgmStyleWrap");
 
-    setTimeout(() => {  // 첫 화면 실행후 텍스트를 자연스럽게 노출
-        cgmStyleWrap.style.opacity = "1";
-    },2000)
+    cgmStyleWrap.style.height = `${window.outerHeight+40}px`; // 추후 height 이벤트를 위한 화면값 주기
+
+    setTimeout(() => {
+        cgmStyleWrap.style.opacity = 1;
+    }, 1500);
+
+    function secondPage()   {
+        const minSec1 = ()=>{
+            cgmStyleWrap.style.height = `300px`;    // 영상창 줄어듬
+            cgmStyleWrapMouse.remove();
+            scrollPageWrap.remove();
+            cgmStyleWrapMouse = document.querySelector("#cgmStyleWrap");
+        }
+        minSec1();
+
+        const secondSection1Wrap = document.createElement("div"),
+              secondSection2 = document.createElement("section"),
+              secondSection3 = document.createElement("section");
+
+        secondSection1.id = "secondSection1";
+        secondSection1Wrap.id = "secondSection1Wrap";
+        secondSection2.id = "secondSection2";
+        secondSection3.id = "secondSection2";
+
+
+        // 섹션 1의 새로생성 되는 창
+        function addPfArea(num,p1,p2,pcimg,moimg)    {    // Pf를 생성하는 재사용 함수
+            mainWrap.appendChild(eval(`secondSection1WrapDiv${num} = document.createElement("div")`));
+                eval(`secondSection1WrapDiv${num}`).appendChild(eval(`secondSection1WrapDiv${num}Text = document.createElement("div")`));
+                    eval(`secondSection1WrapDiv${num}Text`).appendChild(eval(`secondSection1WrapDiv${num}TextP1 = document.createElement("p")`));
+                    eval(`secondSection1WrapDiv${num}Text`).appendChild(eval(`secondSection1WrapDiv${num}TextP2 = document.createElement("p")`));
+                eval(`secondSection1WrapDiv${num}`).appendChild(eval(`secondSection1WrapDiv${num}Pc = document.createElement("div")`));
+                    eval(`secondSection1WrapDiv${num}Pc`).appendChild(eval(`secondSection1WrapDiv${num}PcImg = document.createElement("img")`));
+                eval(`secondSection1WrapDiv${num}`).appendChild(eval(`secondSection1WrapDiv${num}Mo = document.createElement("div")`));
+                    eval(`secondSection1WrapDiv${num}Mo`).appendChild(eval(`secondSection1WrapDiv${num}MoImg = document.createElement("img")`));
+
+            eval(`secondSection1WrapDiv${num}`).className = `secondSection1WrapDiv`;
+            eval(`secondSection1WrapDiv${num}Text`).className = `secondSection1WrapDivText`;
+            eval(`secondSection1WrapDiv${num}TextP1`).className = `secondSection1WrapDivTextP`;
+            eval(`secondSection1WrapDiv${num}TextP2`).className = `secondSection1WrapDivTextP`;
+            eval(`secondSection1WrapDiv${num}Pc`).className = `secondSection1WrapDivPc`;
+            eval(`secondSection1WrapDiv${num}PcImg`).className = `secondSection1WrapDivPcImg`;
+            eval(`secondSection1WrapDiv${num}Mo`).className = `secondSection1WrapDivMo`;
+            eval(`secondSection1WrapDiv${num}MoImg`).className = `secondSection1WrapDivMoImg`;
+
+            
+
+            eval(`secondSection1WrapDiv${num}TextP1`).innerText = `${p1}`;
+            eval(`secondSection1WrapDiv${num}TextP1`).innerText = `${p2}`;
+
+        }
+
+        
+        // Pf생성 부분
+        addPfArea(1,`test50%`,`test내가함`);
+        addPfArea(2,`test150%`,`test인것`);
+    }
 
 
     let scrollPageOn = false; // 스크롤 페이지 on 체크 
@@ -191,6 +247,7 @@ function firstPage()    {
                 const scrollPage2P = document.createElement("p");
                 const scrollPage3P = document.createElement("p");
                 const scrollPage4P = document.createElement("p");
+                const scrollPage5P = document.createElement("p");
         
         scrollPageWrap.id = "scrollPageWrap";
         scrollPage1.id = "scrollPage1";
@@ -198,25 +255,28 @@ function firstPage()    {
         scrollPage2P.className = "scrollPageP";
         scrollPage3P.className = "scrollPageP";
         scrollPage4P.className = "scrollPageP";
+        scrollPage5P.className = "scrollPageP";
 
-        mainWrap.appendChild(scrollPageWrap);
+        secondSection1.appendChild(scrollPageWrap);
         scrollPageWrap.appendChild(scrollPage1);
         scrollPage1.appendChild(scrollPage1P);
         scrollPage1.appendChild(scrollPage2P);
         scrollPage1.appendChild(scrollPage3P);
         scrollPage1.appendChild(scrollPage4P);
+        scrollPage1.appendChild(scrollPage5P);
 
 
         scrollPage1P.innerText = "안녕하세요";
         scrollPage2P.innerText = "제 이름은 최근명입니다.";
         scrollPage3P.innerText = "다양한 시도 다양한 경험을 중요시하며";
-        scrollPage4P.innerText = "수 많은 실패속에서 성공을 배우는걸 중요시하죠";
+        scrollPage4P.innerText = "이를 기반으로한 창의성과 문제 해결력을 기르고 있습니다.";
+        scrollPage5P.innerText = "그렇다면 저에대해 더욱 자세히 설명해볼게요 :)";
 
         scrollPageWrap.addEventListener("wheel",(e) => {    // 마우스 휠의 깊이를 파악하는 함수
-            if(e.wheelDeltaY === -120){
-                wheelValue= wheelValue+5;
+            if(e.wheelDeltaY === -120){ // 휠 이벤트 속도
+                wheelValue= wheelValue+7;
             }else if (e.wheelDeltaY === 120)    {
-                wheelValue= wheelValue-5;
+                wheelValue= wheelValue-7;
             }
 
             function wheelEvent(index){ // 클릭 후 메인 화면 스크롤 텍스트 액션 
@@ -245,30 +305,42 @@ function firstPage()    {
                     wheelUp += 1;
                 }
 
-                if(wheelDown === 1) {
-                    index.style.opacity = 0.2
-                    index.style.marginTop = `130px`
-                }else if(wheelDown === 2)   {
-                    index.style.opacity = 0.5
-                    index.style.marginTop = `70px`
-                }else if(wheelDown === 3)   {
-                    index.style.opacity = 0.8
-                    index.style.marginTop = `3px`
-                }else if(wheelDown === 4)   {
-                    index.style.opacity = 1
-                    index.style.marginTop = `0px`
-                }else if(wheelDown === 5)   {
-                    index.style.opacity = 1
-                    index.style.marginTop = `0px`
-                }else if(wheelDown === 6)   {
-                    index.style.opacity = 0.5
-                    index.style.marginTop = `-60px`
-                }else if(wheelDown === 7)   {
-                    index.style.opacity = 0
-                    index.style.marginTop = `-130px`
+                if(index){
+                    if(wheelDown === 0) {
+                        index.style.opacity = 0
+                        index.style.marginTop = `-130px`
+                    }else if(wheelDown === 1) {
+                        index.style.opacity = 0.2
+                        index.style.marginTop = `130px`
+                    }else if(wheelDown === 2)   {
+                        index.style.opacity = 0.5
+                        index.style.marginTop = `70px`
+                    }else if(wheelDown === 3)   {
+                        index.style.opacity = 0.8
+                        index.style.marginTop = `3px`
+                    }else if(wheelDown === 4)   {
+                        index.style.opacity = 1
+                        index.style.marginTop = `0px`
+                    }else if(wheelDown === 5)   {
+                        index.style.opacity = 1
+                        index.style.marginTop = `0px`
+                    }else if(wheelDown === 6)   {
+                        index.style.opacity = 0.5
+                        index.style.marginTop = `-60px`
+                    }else if(wheelDown === 7)   {
+                        index.style.opacity = 0
+                        index.style.marginTop = `-130px`
+                    }
+                }else   {
+                    wheelUp += 1;
+                    return false;
                 }
+                
             }
-            if(wheelUp === 1){
+            if(wheelUp < 0){
+                wheelUp += 1;
+                wheelEvent(null);
+            }else if(wheelUp === 1){
                 wheelEvent(scrollPage1P);
             }else if(wheelUp === 2){
                 wheelEvent(scrollPage2P);
@@ -276,6 +348,30 @@ function firstPage()    {
                 wheelEvent(scrollPage3P);
             }else if(wheelUp === 4){
                 wheelEvent(scrollPage4P);
+            }else if(wheelUp === 5){
+                wheelEvent(scrollPage5P);
+            }else if(wheelUp === 6){
+                if(document.querySelector(`.secondSection1WrapDiv`)) {
+                    if(wheelValue < 50) { // 5값까지 간후 다시 올라올때
+                        wheelDown = 0;
+                        wheelValue = 0;
+                        wheelUp += 1;
+                    }else if(wheelValue > 50){  // 넘어간 후 다시 돌아올때
+                        wheelDown = 7;
+                        wheelValue = 100;
+                        wheelUp -= 1;
+                    }
+                    return false;
+                }
+                secondPage();
+                wheelDown = 0;
+                wheelValue = 0;
+                wheelUp += 1;
+                e.preventDefault();
+                return false;
+            }else{
+                wheelEvent(null);
+                wheelUp -= 1;
             }
         })
     } 
@@ -285,7 +381,12 @@ function firstPage()    {
     const mouseMoveMainTitle = document.querySelector("#mouseMoveMainTitle");
     let size = 1;
 
-    mainWrap.addEventListener("mousemove",(e) => { // 마우스 움직임에 따라 이동하는 배경 원 
+    secondSection1.addEventListener("mousemove",(e) => { // 마우스 움직임에 따라 이동하는 배경 원 
+        if(!cgmStyleWrapMouse)  {
+            e.preventDefault();
+            return false;
+        }
+
         size;
         let mouseMoveX = e.clientX,
             mouseMoveY = e.clientY;
@@ -296,15 +397,33 @@ function firstPage()    {
             maxMainTilteY = mouseMoveMainTitle.clientWidth - mouseMoveMainTitle.y.baseVal[0].value;
 
         mouseMoveCursor.style.transform = `translateX(${mouseMoveX-(230*size)}px) translateY(${mouseMoveY-(230*size)}px) scale(${size})`; 
+
+
+        function sizeUpMove()   {
+            if(size.toFixed(1) >= 1.5)   {
+                clearInterval(sizeUpMove);
+                sizeEvent = false;
+                return false;
+            }
+                size += 0.1;
+                mouseMoveCursor.style.transform = `translateX(${mouseMoveX-(230*size)}px) translateY(${mouseMoveY-(230*size)}px) scale(${size})`;
+        }
+
+        function sizeDownMove() {
+            if(size >= 4) { // 클릭 후 최대 크기가 되어 해당 영역을 움직여도 줄어들지 않도록 방지
+                return false;
+            }
+            if(size <= 0.6)   { // 최소 크기가 되었을때 이벤트 중지
+                clearInterval(sizeDownMove);
+                sizeEvent = true;
+                return false;
+            }
+                size = size - 0.1;
+                mouseMoveCursor.style.transform = `translateX(${mouseMoveX-(230*size)}px) translateY(${mouseMoveY-(230*size)}px) scale(${size})`; 
+        }
+
         if(mouseMoveX >= mainTitleX && mouseMoveX <= maxMainTilteX+60 && mouseMoveY >= mainTitleY/2 && mouseMoveY <= maxMainTilteY/2) { // 가운데 텍스트 안을 움직일때
-            const sizeUpMove = setInterval(() => {
-                if(size.toFixed(1) >= 1.5)   {
-                    clearInterval(sizeUpMove);
-                    return false;
-                }
-                size += 0.01;
-                mouseMoveCursor.style.transform = `translateX(${mouseMoveX-(230*size)}px) translateY(${mouseMoveY-(230*size)}px) scale(${size})`;  
-            }, 30);
+            setInterval(sizeUpMove(), 30);
             
             cgmStyleWrapMouse.addEventListener("click",(e) => {
                 if(scrollPageOn !== true){  // 스크롤 페이지 실행 함수
@@ -325,17 +444,7 @@ function firstPage()    {
                 }, 25);
             })
         }else { // 가운데 텍스트 외를 움직일때
-            const sizeDownMove = setInterval(() => {
-                if(size >= 4) { // 클릭 후 최대 크기가 되어 해당 영역을 움직여도 줄어들지 않도록 방지
-                    return false;
-                }
-                if(size <= 1)   { // 최소 크기가 되었을때 이벤트 중지
-                    clearInterval(sizeDownMove);
-                    return false;
-                }
-                size = size - 0.01;
-                mouseMoveCursor.style.transform = `translateX(${mouseMoveX-(230*size)}px) translateY(${mouseMoveY-(230*size)}px) scale(${size})`; 
-            }, 30);
+            setInterval(sizeDownMove(), 30);
         }
     })
 
