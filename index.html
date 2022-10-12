@@ -46,6 +46,41 @@
             transition: all 0.5s;
         }
 
+        #scrollHintWrap    {
+            position: fixed;
+            width: 80px;
+            height: 135px;
+            left: 49%;
+            bottom: 20px;
+            border-radius: 40px;
+            background: rgba(210,100,100,0.8);
+            display: flex;
+            justify-content: center;
+            opacity: 0;
+            transition: all 1s;
+            animation:scrollWrap 5s infinite;
+        }
+        #scrollHintInner    {
+            width: 15px;
+            height: 15px;
+            background: white;
+            border-radius: 50%;
+            top: 15px;
+            position: relative;
+            animation:scrollInner 1.5s infinite;
+        }
+        @keyframes scrollInner {
+            0%{top: 15px;}
+            100%{top: 55px;}
+        }
+        @keyframes scrollWrap {
+            0%{opacity: 0.5;}
+            25%{opacity: 1;}
+            50%{opacity: 0.5;}
+            75%{opacity: 1;}
+            100%{opacity: 0.5;}
+        }
+
         #menubtn    {
             position: absolute;
             top: 25px;
@@ -192,6 +227,7 @@
             opacity: 0;
             position: relative;
             z-index: 1;
+            text-align: center;
         }
 
         .mainTextVideo  {
@@ -260,6 +296,141 @@
             margin-top: 150px;
             font-size: 5vh;
             font-weight: bold;
+        }
+
+        /* 스크롤 후 보이는 영역 */
+        #secondSection1Wrap {
+            position: relative;
+            text-align: center;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 5100px;
+            margin-top: 100px;
+            padding-bottom: 150px;
+            padding-left: 50px;
+            transition: left 0.3s;
+        }
+        .secondSection1WrapDiv  {
+            position: relative;
+            transform: skew(0deg, -8deg);
+            width: 350px;
+            height: 550px;
+            margin: 15px;
+            border: 2px solid coral;
+            box-shadow: 10px 10px 0px mediumaquamarine;
+            top: -15px;
+            filter: grayscale(1);
+            transition: all 0.2s;
+        }
+        .secondSection1WrapDiv:hover    {
+            filter: grayscale(0);
+        }
+        .secondSection1WrapDiv::before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0px;
+            box-shadow: 5px 5px 0px coral;
+        }
+        .secondSection1WrapDiv:nth-last-child(2n)   {
+            top: 15px;
+        }
+        .secondSection1WrapDiv:nth-last-child(3n)   {
+            top: -35px;
+        }
+        .secondSection1WrapDiv:nth-last-child(4n)   {
+            top: 0px;
+        }
+        .secondSection1WrapDivText  {padding-top: 20px;}
+        .secondSection1WrapDivTextP {}
+        .secondSection1WrapDivTextP:first-child {
+            font-size: 4vh;
+            font-weight: bold;
+            text-shadow: 3px 3px coral;
+            color: orange;
+            border-bottom: 2px solid coral;
+            padding-bottom: 25px;
+        }
+        .secondSection1WrapDivTextP:nth-of-type(2) {
+            margin-top: 10px;
+            font-size: 2vh;
+            font-weight: normal;
+            float: left;
+            text-align: left;
+            width: 100%;
+            padding-left: 10px;
+        }
+        .secondSection1WrapDivTextP:last-child {
+            font-size: 2vh;
+            margin-top: 0px;
+            float: left;
+            text-align: left;
+            width: 100%;
+            padding-left: 10px;
+        }
+
+        /* hover시 포폴 넘어가는것 */
+        .secondSection1WrapDiv:nth-of-type(1):hover .secondSection1WrapDivPc img    {top:-84vh;}
+        .secondSection1WrapDiv:nth-of-type(1):hover .secondSection1WrapDivMo img    {top:-121vh;}
+        .secondSection1WrapDiv:nth-of-type(2):hover .secondSection1WrapDivPc img    {top:-83vh;}
+        .secondSection1WrapDiv:nth-of-type(2):hover .secondSection1WrapDivMo img    {top:-74vh;}
+        .secondSection1WrapDiv:nth-of-type(3):hover .secondSection1WrapDivPc img    {top:-56vh;}
+        .secondSection1WrapDiv:nth-of-type(3):hover .secondSection1WrapDivMo img    {top:-64vh;}
+        .secondSection1WrapDiv:nth-of-type(4):hover .secondSection1WrapDivPc img    {top:-61vh;}
+        .secondSection1WrapDiv:nth-of-type(4):hover .secondSection1WrapDivMo img    {top:-84vh;}
+        .secondSection1WrapDiv:nth-of-type(5):hover .secondSection1WrapDivPc img    {top:-57vh;}
+        .secondSection1WrapDiv:nth-of-type(5):hover .secondSection1WrapDivMo img    {top:-54vh;}
+        .secondSection1WrapDiv:nth-of-type(6):hover .secondSection1WrapDivPc img    {top:-36vh;}
+        .secondSection1WrapDiv:nth-of-type(6):hover .secondSection1WrapDivMo img    {top:-31vh;}
+        .secondSection1WrapDiv:nth-of-type(9):hover .secondSection1WrapDivPc img    {top:-61vh;}
+        .secondSection1WrapDiv:nth-of-type(9):hover .secondSection1WrapDivMo img    {top:-46vh;}
+        .secondSection1WrapDiv:nth-of-type(10):hover .secondSection1WrapDivPc img    {top:-39vh;}
+        .secondSection1WrapDiv:nth-of-type(10):hover .secondSection1WrapDivMo img    {top:-170vh;}
+        .secondSection1WrapDiv:nth-of-type(11):hover .secondSection1WrapDivPc img    {top:-39vh;}
+        .secondSection1WrapDiv:nth-of-type(11):hover .secondSection1WrapDivMo img    {top:-101vh;}
+
+
+        .secondSection1WrapDivPc    {
+            width: 93%;
+            height: 200px;
+            left: 2%;
+            position: absolute;
+            bottom: 8px;
+            border: 3px solid coral;
+            border-radius: 9px;
+            overflow: hidden;
+            box-shadow: 5px 5px chocolate;
+            background: black;
+        }
+        .secondSection1WrapDivPcImg {
+            width: 100%;
+            position: relative;
+            transition: all 1s;
+            height: auto;
+            top: 0;
+            
+        }
+        .secondSection1WrapDivMo    {
+            width: 25%;
+            height: 150px;
+            right: 5.9%;
+            position: absolute;
+            bottom: 3%;
+            border: 3px solid coral;
+            border-radius: 7px;
+            background: white;
+            overflow: hidden;
+            box-shadow: 5px 5px chocolate;
+        }
+        .secondSection1WrapDivMoImg {
+            width: 100%;
+            position: relative;
+            transition: all 1s;
+            height: auto;
+            top: 0;
         }
     </style>
 
