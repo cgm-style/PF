@@ -27,12 +27,12 @@ function firstPage() {
   menuBg.id = "menuBg";
   menuLine.id = "menuLine";
   menuLineDiv1.className = "menuLineDiv";
-    menuLineDiv2.className = "menuLineDiv";
-    menuLineDiv3.className = "menuLineDiv";
-    menuLineDiv1.id = "menuLineDiv1";
-    menuLineDiv2.id = "menuLineDiv2";
-    menuLineDiv3.id = "menuLineDiv3";
-    menuSpan.id = "menubtn";
+  menuLineDiv2.className = "menuLineDiv";
+  menuLineDiv3.className = "menuLineDiv";
+  menuLineDiv1.id = "menuLineDiv1";
+  menuLineDiv2.id = "menuLineDiv2";
+  menuLineDiv3.id = "menuLineDiv3";
+  menuSpan.id = "menubtn";
   menuNav.id = "menuNav";
   menuNavUl.id = "menuNavUl";
   menuNavLi1.className = "menuNavLi";
@@ -45,7 +45,6 @@ function firstPage() {
   menuNavLi4A.className = "menuNavLiA";
 
   mainWrap.appendChild(secondSection1);
-
 
   function addMenu() {
     menuNavLi1A.innerText = "Git";
@@ -188,7 +187,7 @@ function firstPage() {
     // 두번째 화면에서 스크롤 전부 하락시 나오는 이벤트
     const minSec1 = () => {
       mainWrap.style.position = `absolute`;
-      mainWrap.style.width = `${window.innerWidth-17}px`;
+      mainWrap.style.width = `${window.innerWidth - 17}px`;
       mainWrap.style.height = `1000px`;
       mainWrap.style.overflow = `hidden`;
       secondSection1.style.height = `200px`; // 영상창 줄어듬
@@ -198,7 +197,8 @@ function firstPage() {
       cgmStyleWrap.style.top = `-150px`;
       cgmStyleWrap.style.height = `1000px`;
       cgmStyleWrap.pause();
-      cgmStyleWrap.addEventListener("click", () => {  // 영상 클릭시 재생혹은 정지
+      cgmStyleWrap.addEventListener("click", () => {
+        // 영상 클릭시 재생혹은 정지
         if (videoPlay === true) {
           cgmStyleWrap.play();
         } else {
@@ -227,7 +227,7 @@ function firstPage() {
     mainWrap.appendChild(secondSection1Wrap);
 
     // 섹션 1의 새로생성 되는 창
-    function addPfArea(num, p1, p2,p3, pcimg, moimg) { 
+    function addPfArea(num, p1, p2, p3, pcimg, moimg) {
       // Pf를 생성하는 재사용 함수
       secondSection1Wrap.appendChild(
         eval(`secondSection1WrapDiv${num} = document.createElement("div")`)
@@ -287,78 +287,151 @@ function firstPage() {
       eval(`secondSection1WrapDiv${num}TextP2`).innerText = `${p2}`;
       eval(`secondSection1WrapDiv${num}TextP3`).innerText = `${p3}`;
 
-      eval(`secondSection1WrapDiv${num}PcImg`).src = `/img${pcimg}`;
-      eval(`secondSection1WrapDiv${num}MoImg`).src = `/img${moimg}`;
+      eval(`secondSection1WrapDiv${num}PcImg`).src = `img${pcimg}`;
+      eval(`secondSection1WrapDiv${num}MoImg`).src = `img${moimg}`;
     }
 
     // Pf생성 부분
     setTimeout(() => {
-      addPfArea(1, `paparecipe-KR`, `참여도 : 100%`,`간략 소개 : ----`,`/papa_pc.png`,`/papa_mo.png`);
-      addPfArea(2, `paparecipe-JP`, `참여도 : 100%`,`간략 소개 : ----`,`/papajp_pc.png`,`/papajp_mo.png`);
-      addPfArea(3, `paparecipe-CN`, `참여도 : 100%`,`간략 소개 : ----`,`/papacn_pc.png`,`/papacn_mo.png`);
-      addPfArea(4, `paparecipe-US`, `참여도 : 100%`,`간략 소개 : ----`,`/papaus_pc.png`,`/papaus_mo.png`);
-      addPfArea(5, `inga`, `참여도 : 100%`,`간략 소개 : ----`,`/inga_pc.png`,`/inga_mo.png`);
-      addPfArea(6, `golf does matter`,`참여도 : 100%`,`간략 소개 : ----`,`/gdm_pc.png`,`/gdm_mo.png` );
-      addPfArea(7, `react test coin`,`참여도 : 100%`,`간략 소개 : ----`,`/React-coin_pc.png`,`/React-coin_mo.png` );
-      addPfArea(8, `weather-Todo`,`참여도 : 100%`,`간략 소개 : ----`,`/todoPage_pc.png`,`/todoPage_mo.png`);
-      addPfArea(9, `연세 행복 치과`, `참여도 : 100%`,`간략 소개 : ----`,`/happy_pc.png`,`/happy_mo.png`);
-      addPfArea(10, `법무법인 해성`, `참여도 : 100%`,`간략 소개 : ----`,`/heasung_pc.png`,`/heasung_mo.png`);
-      addPfArea(11, `더울림`, `참여도 : 100%`,`간략 소개 : ----`,`/thewoolim_pc.png`,`/thewoolim_mo.png`);
+      addPfArea(
+        1,
+        `paparecipe-KR`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/papa_pc.png`,
+        `/papa_mo.png`
+      );
+      addPfArea(
+        2,
+        `paparecipe-JP`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/papajp_pc.png`,
+        `/papajp_mo.png`
+      );
+      addPfArea(
+        3,
+        `paparecipe-CN`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/papacn_pc.png`,
+        `/papacn_mo.png`
+      );
+      addPfArea(
+        4,
+        `paparecipe-US`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/papaus_pc.png`,
+        `/papaus_mo.png`
+      );
+      addPfArea(
+        5,
+        `inga`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/inga_pc.png`,
+        `/inga_mo.png`
+      );
+      addPfArea(
+        6,
+        `golf does matter`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/gdm_pc.png`,
+        `/gdm_mo.png`
+      );
+      addPfArea(
+        7,
+        `react test coin`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/React-coin_pc.png`,
+        `/React-coin_mo.png`
+      );
+      addPfArea(
+        8,
+        `weather-Todo`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/todoPage_pc.png`,
+        `/todoPage_mo.png`
+      );
+      addPfArea(
+        9,
+        `연세 행복 치과`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/happy_pc.png`,
+        `/happy_mo.png`
+      );
+      addPfArea(
+        10,
+        `법무법인 해성`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/heasung_pc.png`,
+        `/heasung_mo.png`
+      );
+      addPfArea(
+        11,
+        `더울림`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/thewoolim_pc.png`,
+        `/thewoolim_mo.png`
+      );
     }, 1000);
 
-      let LRScroll = 0; // 스크롤의 깊이
-      secondSection1Wrap.addEventListener("wheel",(e)=>{
-        e.preventDefault();
-        e.stopPropagation();
-        if (e.wheelDeltaY === -120) {
-          LRScroll += 50;
-        } else if (e.wheelDeltaY === 120) {
-          LRScroll -= 50;
-        }
-        if(LRScroll === 2450) {
-          LRScroll = 2400
-          return false;
-        }
-        
-        if(LRScroll <= 0 ){
-          LRScroll = 0;
-        }else if(LRScroll > 0 && LRScroll < 2450){
-          secondSection1Wrap.style.left = `-${LRScroll}px`
-        }else{
-          return false;
-        }
-      })
-  }
+    let LRScroll = 0; // 스크롤의 깊이
+    secondSection1Wrap.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (e.wheelDeltaY === -120) {
+        LRScroll += 50;
+      } else if (e.wheelDeltaY === 120) {
+        LRScroll -= 50;
+      }
+      if (LRScroll === 2450) {
+        LRScroll = 2400;
+        return false;
+      }
 
-  
+      if (LRScroll <= 0) {
+        LRScroll = 0;
+      } else if (LRScroll > 0 && LRScroll < 2450) {
+        secondSection1Wrap.style.left = `-${LRScroll}px`;
+      } else {
+        return false;
+      }
+    });
+  }
 
   let scrollPageOn = false; // 스크롤 페이지 on 체크
   function section2() {
-
-    function scrollHint(){  // 스크롤 힌트를 주는 부분 
+    function scrollHint() {
+      // 스크롤 힌트를 주는 부분
       const scrollHintWrap = document.createElement("div"),
-            scrollHintInner = document.createElement("div");
-  
+        scrollHintInner = document.createElement("div");
+
       scrollHintWrap.id = "scrollHintWrap";
       scrollHintInner.id = "scrollHintInner";
-  
+
       mainWrap.appendChild(scrollHintWrap);
       scrollHintWrap.appendChild(scrollHintInner);
-  
     }
-    
 
     // 타이틀 클릭후 나오는 화면
     let wheelValue = 0,
-        wheelUp = 1,
-        wheelDown = 0;
+      wheelUp = 1,
+      wheelDown = 0;
     const scrollPageWrap = document.createElement("div"),
-          scrollPage1 = document.createElement("section"),
-          scrollPage1P = document.createElement("p"),
-          scrollPage2P = document.createElement("p"),
-          scrollPage3P = document.createElement("p"),
-          scrollPage4P = document.createElement("p"),
-          scrollPage5P = document.createElement("p");
+      scrollPage1 = document.createElement("section"),
+      scrollPage1P = document.createElement("p"),
+      scrollPage2P = document.createElement("p"),
+      scrollPage3P = document.createElement("p"),
+      scrollPage4P = document.createElement("p"),
+      scrollPage5P = document.createElement("p");
 
     scrollPageWrap.id = "scrollPageWrap";
     scrollPage1.id = "scrollPage1";
@@ -385,12 +458,13 @@ function firstPage() {
 
     let scrollHintOnOff = true;
 
-    setTimeout(() => {  // 스크롤 힌트 함수 실행
+    setTimeout(() => {
+      // 스크롤 힌트 함수 실행
       scrollHint();
     }, 1000);
 
     scrollPageWrap.addEventListener("wheel", (e) => {
-      if(scrollHintOnOff === true)  {
+      if (scrollHintOnOff === true) {
         scrollHintWrap.style.opacity = 0;
         scrollHintWrap.remove();
         scrollHintOnOff = false;
@@ -506,7 +580,7 @@ function firstPage() {
   }
 
   const mouseMoveCursor = document.querySelector("#mouseMoveCursor"),
-        mouseMoveMainTitle = document.querySelector("#mouseMoveMainTitle");
+    mouseMoveMainTitle = document.querySelector("#mouseMoveMainTitle");
   let size = 1;
 
   const section1MouseMoveEvent = function (e) {
@@ -558,7 +632,9 @@ function firstPage() {
         return false;
       }
       size = size - 0.1;
-      mouseMoveCursor.style.transform = `translateX(${mouseMoveX - 230 * size}px) translateY(${mouseMoveY - 230 * size}px) scale(${size})`;
+      mouseMoveCursor.style.transform = `translateX(${
+        mouseMoveX - 230 * size
+      }px) translateY(${mouseMoveY - 230 * size}px) scale(${size})`;
     }
 
     if (
