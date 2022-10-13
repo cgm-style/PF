@@ -49,8 +49,10 @@ function firstPage() {
   function addMenu() {
     menuNavLi1A.innerText = "Git";
     menuNavLi1A.setAttribute("data-text", `${menuNavLi1A.innerText}`);
-    menuNavLi2A.innerText = "Menu2";
+    menuNavLi1A.href = `https://github.com/cgm-style`;
+    menuNavLi2A.innerText = "";
     menuNavLi2A.setAttribute("data-text", `${menuNavLi2A.innerText}`);
+    menuNavLi2A.href = `https://github.com/cgm-style/PF`;
     menuNavLi3A.innerText = "Menu3";
     menuNavLi3A.setAttribute("data-text", `${menuNavLi3A.innerText}`);
     menuNavLi4A.innerText = "Menu4";
@@ -123,55 +125,55 @@ function firstPage() {
   if (isCheck) {
     // mo의 경우
     svgMainText.outerHTML = `
-        <video id="mainText_C_Video" class="mainTextVideo" muted autoplay loop style="height:100%; width: auto;">
-            <source src="https://drive.google.com/uc?export=download&id=1w4ha9y8pkwAnmTl1TZ15tFdavtcnDTS3" type="video/mp4">
-        </video>
-        <h1 class="moMainTitle">
-            CGM STYLE<hr/>
-            <span>portFoilo</span>
-        </h1>
-        `;
+      <video id="mainText_C_Video" class="mainTextVideo" muted autoplay loop style="height:100%; width: auto;">
+          <source src="https://drive.google.com/uc?export=download&id=1w4ha9y8pkwAnmTl1TZ15tFdavtcnDTS3" type="video/mp4">
+      </video>
+      <h1 class="moMainTitle">
+          CGM STYLE<hr/>
+          <span>portFoilo</span>
+      </h1>
+      `;
   } else {
     //pc일 경우
     svgMainText.outerHTML = `
-            <video id="mainText_C_Video" class="mainTextVideo" muted autoplay loop>
-                <source src="https://drive.google.com/uc?export=download&id=1gQLzaeViE9JZUNQMLXGPAhAFn6K5sJXm" type="video/mp4">
-            </video>
-            <svg id="cgmStyleWrap" version="1.2" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="cursor:pointer">
-                <title>cgm-style CLick~!</title>
-                <clipPath id="mainText_C" class="mainText">
-                    <text x="6%" id="mouseMoveMainTitle" y="53%" textLength="5em" lengthAdjust="spacing" font-size="35vh">
-                        CGM STYLE
-                    </text>
-                    <text x="30%" y="66%" id="mouseMoveMainSubTitle" textLength="5em" lengthAdjust="spacing" font-size="15vh">
-                        PF
-                    </text>
-                    <path id="mouseMoveCursor" fill="#a29bfe">
-                        <animate attributeName="d"
-                            dur="10s"
-                            repeatCount="indefinite"
-                            
-                            values="M411,322Q333,394,230,428.5Q127,463,104,356.5Q81,250,136.5,200Q192,150,251,148.5Q310,147,399.5,198.5Q489,250,411,322Z;
-                                    
-                            M388,356.5Q373,463,264.5,438.5Q156,414,80,332Q4,250,95.5,195.5Q187,141,250,141Q313,141,358,195.5Q403,250,388,356.5Z;
-                            
-                            M387.5,317Q327,384,227,423.5Q127,463,107.5,356.5Q88,250,124,171.5Q160,93,257.5,80.5Q355,68,401.5,159Q448,250,387.5,317Z;
-                            
-                            M390.5,298.5Q306,347,245,355.5Q184,364,112,307Q40,250,87.5,150Q135,50,221.5,99.5Q308,149,391.5,199.5Q475,250,390.5,298.5Z;
-                            
-                            M371.57062,328.47151Q340.70386,406.94302,242.89674,419.64955Q145.08962,432.35608,106.21602,341.17804Q67.34243,250,114.84243,174.71335Q162.34243,99.4267,269.34926,65.84778Q376.35608,32.26885,389.39674,141.13442Q402.43739,250,371.57062,328.47151Z;
-                            
-                            M391.5,317Q327,384,259.5,367.5Q192,351,136.5,300.5Q81,250,133,193.5Q185,137,259.5,120.5Q334,104,395,177Q456,250,391.5,317Z;
-                            
-                            M415,336.5Q350,423,259.5,407Q169,391,116.5,320.5Q64,250,97.5,147.5Q131,45,247,50Q363,55,421.5,152.5Q480,250,415,336.5Z;
-                            
-                            M411,322Q333,394,230,428.5Q127,463,104,356.5Q81,250,136.5,200Q192,150,251,148.5Q310,147,399.5,198.5Q489,250,411,322Z;">
-                        
-                        </animate>
-                    </path>
-                </clipPath>
-            </svg>
-        `;
+          <video id="mainText_C_Video" class="mainTextVideo" muted autoplay loop>
+              <source src="https://drive.google.com/uc?export=download&id=1gQLzaeViE9JZUNQMLXGPAhAFn6K5sJXm" type="video/mp4">
+          </video>
+          <svg id="cgmStyleWrap" version="1.2" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="cursor:pointer">
+              <title>cgm-style CLick~!</title>
+              <clipPath id="mainText_C" class="mainText">
+                  <text x="6%" id="mouseMoveMainTitle" y="53%" textLength="5em" lengthAdjust="spacing" font-size="35vh">
+                      CGM STYLE
+                  </text>
+                  <text x="30%" y="66%" id="mouseMoveMainSubTitle" textLength="5em" lengthAdjust="spacing" font-size="15vh">
+                      PF
+                  </text>
+                  <path id="mouseMoveCursor" fill="#a29bfe">
+                      <animate attributeName="d"
+                          dur="10s"
+                          repeatCount="indefinite"
+                          
+                          values="M411,322Q333,394,230,428.5Q127,463,104,356.5Q81,250,136.5,200Q192,150,251,148.5Q310,147,399.5,198.5Q489,250,411,322Z;
+                                  
+                          M388,356.5Q373,463,264.5,438.5Q156,414,80,332Q4,250,95.5,195.5Q187,141,250,141Q313,141,358,195.5Q403,250,388,356.5Z;
+                          
+                          M387.5,317Q327,384,227,423.5Q127,463,107.5,356.5Q88,250,124,171.5Q160,93,257.5,80.5Q355,68,401.5,159Q448,250,387.5,317Z;
+                          
+                          M390.5,298.5Q306,347,245,355.5Q184,364,112,307Q40,250,87.5,150Q135,50,221.5,99.5Q308,149,391.5,199.5Q475,250,390.5,298.5Z;
+                          
+                          M371.57062,328.47151Q340.70386,406.94302,242.89674,419.64955Q145.08962,432.35608,106.21602,341.17804Q67.34243,250,114.84243,174.71335Q162.34243,99.4267,269.34926,65.84778Q376.35608,32.26885,389.39674,141.13442Q402.43739,250,371.57062,328.47151Z;
+                          
+                          M391.5,317Q327,384,259.5,367.5Q192,351,136.5,300.5Q81,250,133,193.5Q185,137,259.5,120.5Q334,104,395,177Q456,250,391.5,317Z;
+                          
+                          M415,336.5Q350,423,259.5,407Q169,391,116.5,320.5Q64,250,97.5,147.5Q131,45,247,50Q363,55,421.5,152.5Q480,250,415,336.5Z;
+                          
+                          M411,322Q333,394,230,428.5Q127,463,104,356.5Q81,250,136.5,200Q192,150,251,148.5Q310,147,399.5,198.5Q489,250,411,322Z;">
+                      
+                      </animate>
+                  </path>
+              </clipPath>
+          </svg>
+      `;
   }
 
   const cgmStyleWrap = document.querySelector(".mainTextVideo");
@@ -188,7 +190,7 @@ function firstPage() {
     const minSec1 = () => {
       mainWrap.style.position = `absolute`;
       mainWrap.style.width = `${window.innerWidth - 17}px`;
-      mainWrap.style.height = `auto`;
+      mainWrap.style.height = `1938px`;
       mainWrap.style.overflow = `hidden`;
       secondSection1.style.height = `200px`; // 영상창 줄어듬
       secondSection1.style.overflow = `hidden`;
@@ -215,92 +217,103 @@ function firstPage() {
       cgmStyleWrapMouse = document.querySelector("#cgmStyleWrap"); // 무브영역 재 탐색 하여 이벤트 중지를 하기 위한 영역
     };
     minSec1();
-
-    const secondSection1Wrap = document.createElement("div"),
-      secondSection1WrapP = document.createElement("p"),
-      secondSection2 = document.createElement("section"),
-      secondSection3 = document.createElement("section");
-
-    secondSection1.id = "secondSection1";
-    secondSection1Wrap.id = "secondSection1Wrap";
-    secondSection1WrapP.id = "secondSection1WrapP";
-    secondSection2.id = "secondSection2";
-    secondSection3.id = "secondSection3";
-
-    mainWrap.appendChild(secondSection1Wrap);
-    mainWrap.appendChild(secondSection2);
-    mainWrap.appendChild(secondSection3);
-
-    secondSection1Wrap.appendChild(secondSection1WrapP);
-
-    secondSection1WrapP.innerText = `portfolio`;
-
-    // 섹션 1의 새로생성 되는 창
-    function addPfArea(num, p1, p2, p3, pcimg, moimg) {
-      // Pf를 생성하는 재사용 함수
-      secondSection1Wrap.appendChild(
-        eval(`secondSection1WrapDiv${num} = document.createElement("div")`)
-      );
-      eval(`secondSection1WrapDiv${num}`).appendChild(
-        eval(`secondSection1WrapDiv${num}Text = document.createElement("div")`)
-      );
-      eval(`secondSection1WrapDiv${num}Text`).appendChild(
-        eval(`secondSection1WrapDiv${num}TextP1 = document.createElement("p")`)
-      );
-      eval(`secondSection1WrapDiv${num}Text`).appendChild(
-        eval(`secondSection1WrapDiv${num}TextP2 = document.createElement("p")`)
-      );
-      eval(`secondSection1WrapDiv${num}Text`).appendChild(
-        eval(`secondSection1WrapDiv${num}TextP3 = document.createElement("p")`)
-      );
-      eval(`secondSection1WrapDiv${num}`).appendChild(
-        eval(`secondSection1WrapDiv${num}Pc = document.createElement("div")`)
-      );
-      eval(`secondSection1WrapDiv${num}Pc`).appendChild(
-        eval(`secondSection1WrapDiv${num}PcImg = document.createElement("img")`)
-      );
-      eval(`secondSection1WrapDiv${num}`).appendChild(
-        eval(`secondSection1WrapDiv${num}Mo = document.createElement("div")`)
-      );
-      eval(`secondSection1WrapDiv${num}Mo`).appendChild(
-        eval(`secondSection1WrapDiv${num}MoImg = document.createElement("img")`)
-      );
-
-      eval(`secondSection1WrapDiv${num}`).className = `secondSection1WrapDiv`;
-      eval(
-        `secondSection1WrapDiv${num}Text`
-      ).className = `secondSection1WrapDivText`;
-      eval(
-        `secondSection1WrapDiv${num}TextP1`
-      ).className = `secondSection1WrapDivTextP`;
-      eval(
-        `secondSection1WrapDiv${num}TextP2`
-      ).className = `secondSection1WrapDivTextP`;
-      eval(
-        `secondSection1WrapDiv${num}TextP3`
-      ).className = `secondSection1WrapDivTextP`;
-      eval(
-        `secondSection1WrapDiv${num}Pc`
-      ).className = `secondSection1WrapDivPc`;
-      eval(
-        `secondSection1WrapDiv${num}PcImg`
-      ).className = `secondSection1WrapDivPcImg`;
-      eval(
-        `secondSection1WrapDiv${num}Mo`
-      ).className = `secondSection1WrapDivMo`;
-      eval(
-        `secondSection1WrapDiv${num}MoImg`
-      ).className = `secondSection1WrapDivMoImg`;
-
-      eval(`secondSection1WrapDiv${num}TextP1`).innerText = `${p1}`;
-      eval(`secondSection1WrapDiv${num}TextP2`).innerText = `${p2}`;
-      eval(`secondSection1WrapDiv${num}TextP3`).innerText = `${p3}`;
-
-      eval(`secondSection1WrapDiv${num}PcImg`).src = `img${pcimg}`;
-      eval(`secondSection1WrapDiv${num}MoImg`).src = `img${moimg}`;
-    }
-
     setTimeout(() => {
+      const secondSection1Wrap = document.createElement("div"),
+        secondSection1WrapP = document.createElement("p"),
+        secondSection2 = document.createElement("section"),
+        secondSection3 = document.createElement("section");
+
+      secondSection1.id = "secondSection1";
+      secondSection1Wrap.id = "secondSection1Wrap";
+      secondSection1WrapP.id = "secondSection1WrapP";
+      secondSection2.id = "secondSection2";
+      secondSection3.id = "secondSection3";
+
+      mainWrap.appendChild(secondSection1Wrap);
+      mainWrap.appendChild(secondSection2);
+      mainWrap.appendChild(secondSection3);
+
+      secondSection1Wrap.appendChild(secondSection1WrapP);
+
+      secondSection1WrapP.innerText = `portfolio`;
+
+      // 섹션 1의 새로생성 되는 창
+      function addPfArea(num, p1, p2, p3, pcimg, moimg) {
+        // Pf를 생성하는 재사용 함수
+        secondSection1Wrap.appendChild(
+          eval(`secondSection1WrapDiv${num} = document.createElement("div")`)
+        );
+        eval(`secondSection1WrapDiv${num}`).appendChild(
+          eval(
+            `secondSection1WrapDiv${num}Text = document.createElement("div")`
+          )
+        );
+        eval(`secondSection1WrapDiv${num}Text`).appendChild(
+          eval(
+            `secondSection1WrapDiv${num}TextP1 = document.createElement("p")`
+          )
+        );
+        eval(`secondSection1WrapDiv${num}Text`).appendChild(
+          eval(
+            `secondSection1WrapDiv${num}TextP2 = document.createElement("p")`
+          )
+        );
+        eval(`secondSection1WrapDiv${num}Text`).appendChild(
+          eval(
+            `secondSection1WrapDiv${num}TextP3 = document.createElement("p")`
+          )
+        );
+        eval(`secondSection1WrapDiv${num}`).appendChild(
+          eval(`secondSection1WrapDiv${num}Pc = document.createElement("div")`)
+        );
+        eval(`secondSection1WrapDiv${num}Pc`).appendChild(
+          eval(
+            `secondSection1WrapDiv${num}PcImg = document.createElement("img")`
+          )
+        );
+        eval(`secondSection1WrapDiv${num}`).appendChild(
+          eval(`secondSection1WrapDiv${num}Mo = document.createElement("div")`)
+        );
+        eval(`secondSection1WrapDiv${num}Mo`).appendChild(
+          eval(
+            `secondSection1WrapDiv${num}MoImg = document.createElement("img")`
+          )
+        );
+
+        eval(`secondSection1WrapDiv${num}`).className = `secondSection1WrapDiv`;
+        eval(
+          `secondSection1WrapDiv${num}Text`
+        ).className = `secondSection1WrapDivText`;
+        eval(
+          `secondSection1WrapDiv${num}TextP1`
+        ).className = `secondSection1WrapDivTextP`;
+        eval(
+          `secondSection1WrapDiv${num}TextP2`
+        ).className = `secondSection1WrapDivTextP`;
+        eval(
+          `secondSection1WrapDiv${num}TextP3`
+        ).className = `secondSection1WrapDivTextP`;
+        eval(
+          `secondSection1WrapDiv${num}Pc`
+        ).className = `secondSection1WrapDivPc`;
+        eval(
+          `secondSection1WrapDiv${num}PcImg`
+        ).className = `secondSection1WrapDivPcImg`;
+        eval(
+          `secondSection1WrapDiv${num}Mo`
+        ).className = `secondSection1WrapDivMo`;
+        eval(
+          `secondSection1WrapDiv${num}MoImg`
+        ).className = `secondSection1WrapDivMoImg`;
+
+        eval(`secondSection1WrapDiv${num}TextP1`).innerText = `${p1}`;
+        eval(`secondSection1WrapDiv${num}TextP2`).innerText = `${p2}`;
+        eval(`secondSection1WrapDiv${num}TextP3`).innerText = `${p3}`;
+
+        eval(`secondSection1WrapDiv${num}PcImg`).src = `img${pcimg}`;
+        eval(`secondSection1WrapDiv${num}MoImg`).src = `img${moimg}`;
+      }
+
       // Pf생성 부분
       addPfArea(
         1,
@@ -394,7 +407,7 @@ function firstPage() {
       let LRScroll = 0; // 스크롤의 깊이
       let LRScrollOnOff = false;
       secondSection1Wrap.addEventListener("wheel", (e) => {
-        if(LRScrollOnOff === false) {
+        if (LRScrollOnOff === false) {
           e.preventDefault();
           e.stopPropagation();
         }
@@ -420,31 +433,51 @@ function firstPage() {
         }
       });
 
-      function useSkill(num,img,skill,skillNow) {
-        secondSection2Container.appendChild(eval(`secondSection2Div${num} = document.createElement("div")`));
-        eval(`secondSection2Div${num}`).appendChild(eval(`secondSection2Div${num}BgBox = document.createElement("div")`));
-          eval(`secondSection2Div${num}BgBox`).appendChild(eval(`secondSection2Div${num}BgImg = document.createElement("img")`));
-        eval(`secondSection2Div${num}`).appendChild(eval(`secondSection2Div${num}FtBox = document.createElement("div")`));
-          eval(`secondSection2Div${num}FtBox`).appendChild(eval(`secondSection2Div${num}FtImg = document.createElement("img")`));
-        eval(`secondSection2Div${num}`).appendChild(eval(`secondSection2Div${num}P = document.createElement("p")`));
-  
+      function useSkill(num, img, skill, skillNow) {
+        secondSection2Container.appendChild(
+          eval(`secondSection2Div${num} = document.createElement("div")`)
+        );
+        eval(`secondSection2Div${num}`).appendChild(
+          eval(`secondSection2Div${num}BgBox = document.createElement("div")`)
+        );
+        eval(`secondSection2Div${num}BgBox`).appendChild(
+          eval(`secondSection2Div${num}BgImg = document.createElement("img")`)
+        );
+        eval(`secondSection2Div${num}`).appendChild(
+          eval(`secondSection2Div${num}FtBox = document.createElement("div")`)
+        );
+        eval(`secondSection2Div${num}FtBox`).appendChild(
+          eval(`secondSection2Div${num}FtImg = document.createElement("img")`)
+        );
+        eval(`secondSection2Div${num}`).appendChild(
+          eval(`secondSection2Div${num}P = document.createElement("p")`)
+        );
+
         eval(`secondSection2Div${num}`).className = `secondSection2Div`;
-        eval(`secondSection2Div${num}BgBox`).className = `secondSection2DivBgBox`;
-          eval(`secondSection2Div${num}BgImg`).className = `secondSection2DivBgImg`;
-        eval(`secondSection2Div${num}FtBox`).className = `secondSection2DivFtBox`;
-          eval(`secondSection2Div${num}FtImg`).className = `secondSection2DivFtImg`;
+        eval(
+          `secondSection2Div${num}BgBox`
+        ).className = `secondSection2DivBgBox`;
+        eval(
+          `secondSection2Div${num}BgImg`
+        ).className = `secondSection2DivBgImg`;
+        eval(
+          `secondSection2Div${num}FtBox`
+        ).className = `secondSection2DivFtBox`;
+        eval(
+          `secondSection2Div${num}FtImg`
+        ).className = `secondSection2DivFtImg`;
         eval(`secondSection2Div${num}P`).className = `secondSection2DivP`;
-  
+
         eval(`secondSection2Div${num}BgImg`).src = `img/${img}`;
         eval(`secondSection2Div${num}FtImg`).src = `img/${img}`;
-  
-        eval(`secondSection2Div${num}FtBox`).style.height = `${skill}%`
+
+        eval(`secondSection2Div${num}FtBox`).style.height = `${skill}%`;
         eval(`secondSection2Div${num}FtImg`).style.marginTop = `-${skillNow}%`;
         eval(`secondSection2Div${num}P`).innerText = `${skill}%`;
       }
 
       const secondSection2Title = document.createElement("h2"),
-      secondSection2Container = document.createElement("div");
+        secondSection2Container = document.createElement("div");
 
       secondSection2.appendChild(secondSection2Title);
       secondSection2.appendChild(secondSection2Container);
@@ -454,42 +487,42 @@ function firstPage() {
       secondSection2Title.innerText = `사용언어 & Tool`;
 
       mainWrap.style.cursor = `auto`;
-      useSkill(1,`html5.png`,90,10);
-      useSkill(2,`css3.png`,80,20);
-      useSkill(3,`jquery.png`,80,20);
-      useSkill(4,`js.png`,90,10);
-      useSkill(5,`react.png`,20,80);
-      useSkill(6,`typeSript.png`,20,82);
-      useSkill(7,`git.png`,60,40);
-      useSkill(8,`code.png`,60,40);
-      useSkill(9,`photo.png`,50,50);
-      useSkill(10,`Ai.png`,40,60);
-      useSkill(11,`html5.png`,90,10);
-      useSkill(12,`css3.png`,80,20);
-      useSkill(13,`jquery.png`,80,20);
-      useSkill(14,`js.png`,90,10);
-      useSkill(15,`react.png`,20,80);
-      useSkill(16,`typeSript.png`,20,80);
-      useSkill(17,`git.png`,60,40);
+      useSkill(1, `html5.png`, 90, 10);
+      useSkill(2, `css3.png`, 80, 20);
+      useSkill(3, `jquery.png`, 80, 20);
+      useSkill(4, `js.png`, 90, 10);
+      useSkill(5, `react.png`, 20, 80);
+      useSkill(6, `typeSript.png`, 20, 82);
+      useSkill(7, `git.png`, 60, 40);
+      useSkill(8, `code.png`, 60, 40);
+      useSkill(9, `photo.png`, 50, 50);
+      useSkill(10, `Ai.png`, 40, 60);
+      useSkill(11, `html5.png`, 90, 10);
+      useSkill(12, `css3.png`, 80, 20);
+      useSkill(13, `jquery.png`, 80, 20);
+      useSkill(14, `js.png`, 90, 10);
+      useSkill(15, `react.png`, 20, 80);
+      useSkill(16, `typeSript.png`, 20, 80);
+      useSkill(17, `git.png`, 60, 40);
 
-    function contact()  {
-      const secondSection3P1 = document.createElement("p"),
-            secondSection3P2 = document.createElement("p"),
-            secondSection3P3 = document.createElement("p");
-  
-      secondSection3.appendChild(secondSection3P1);
-      secondSection3.appendChild(secondSection3P2);
-      secondSection3.appendChild(secondSection3P3);
-  
-      secondSection3P1.className = `secondSection3P`;
-      secondSection3P2.className = `secondSection3P`;
-      secondSection3P3.className = `secondSection3P`;
-  
-      secondSection3P1.innerText = `developercgm@gmail.com`;
-      secondSection3P2.innerText = `010-7242-4787`;
-      secondSection3P3.innerText = `CGM-Style`;
-    }
-    contact();
+      function contact() {
+        const secondSection3P1 = document.createElement("p"),
+          secondSection3P2 = document.createElement("p"),
+          secondSection3P3 = document.createElement("p");
+
+        secondSection3.appendChild(secondSection3P1);
+        secondSection3.appendChild(secondSection3P2);
+        secondSection3.appendChild(secondSection3P3);
+
+        secondSection3P1.className = `secondSection3P`;
+        secondSection3P2.className = `secondSection3P`;
+        secondSection3P3.className = `secondSection3P`;
+
+        secondSection3P1.innerText = `developercgm@gmail.com`;
+        secondSection3P2.innerText = `010-7242-4787`;
+        secondSection3P3.innerText = `(c)2022. CGM-Style. All rights reserved.`;
+      }
+      contact();
     }, 1000);
   }
 
