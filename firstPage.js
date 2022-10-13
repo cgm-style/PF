@@ -50,17 +50,19 @@ function firstPage() {
     menuNavLi1A.innerText = "Git";
     menuNavLi1A.setAttribute("data-text", `${menuNavLi1A.innerText}`);
     menuNavLi1A.href = `https://github.com/cgm-style`;
-    menuNavLi2A.innerText = "";
+    menuNavLi2A.innerText = "Home";
     menuNavLi2A.setAttribute("data-text", `${menuNavLi2A.innerText}`);
     menuNavLi2A.href = `https://github.com/cgm-style/PF`;
-    menuNavLi3A.innerText = "Menu3";
+    menuNavLi3A.innerText = "Mail";
     menuNavLi3A.setAttribute("data-text", `${menuNavLi3A.innerText}`);
-    menuNavLi4A.innerText = "Menu4";
+    menuNavLi3A.href = `mailto:developercgm@gmail.com`;
+    menuNavLi4A.innerText = "Tell";
     menuNavLi4A.setAttribute("data-text", `${menuNavLi4A.innerText}`);
+    menuNavLi4A.href = `tel:010-7242-4787`;
 
     if (menuOpen) {
       menuNavUl.style.opacity = 0;
-      menuNavUl.style.top = "25%";
+      menuNavUl.style.top = "13%";
       setTimeout(() => {
         menuLineDiv1.style.height = "0px";
         menuLineDiv1.style.transform = "rotate(37deg)";
@@ -107,7 +109,7 @@ function firstPage() {
     }, 0);
     setTimeout(() => {
       menuNavUl.style.opacity = 1;
-      menuNavUl.style.top = "25%";
+      menuNavUl.style.top = "13%";
     }, 1000);
     menuOpen = true;
   }
@@ -139,40 +141,40 @@ function firstPage() {
           <video id="mainText_C_Video" class="mainTextVideo" muted autoplay loop>
               <source src="https://drive.google.com/uc?export=download&id=1gQLzaeViE9JZUNQMLXGPAhAFn6K5sJXm" type="video/mp4">
           </video>
-          <svg id="cgmStyleWrap" version="1.2" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="cursor:pointer">
-              <title>cgm-style CLick~!</title>
-              <clipPath id="mainText_C" class="mainText">
-                  <text x="6%" id="mouseMoveMainTitle" y="53%" textLength="5em" lengthAdjust="spacing" font-size="35vh">
-                      CGM STYLE
-                  </text>
-                  <text x="30%" y="66%" id="mouseMoveMainSubTitle" textLength="5em" lengthAdjust="spacing" font-size="15vh">
-                      PF
-                  </text>
-                  <path id="mouseMoveCursor" fill="#a29bfe">
-                      <animate attributeName="d"
-                          dur="10s"
-                          repeatCount="indefinite"
-                          
-                          values="M411,322Q333,394,230,428.5Q127,463,104,356.5Q81,250,136.5,200Q192,150,251,148.5Q310,147,399.5,198.5Q489,250,411,322Z;
-                                  
-                          M388,356.5Q373,463,264.5,438.5Q156,414,80,332Q4,250,95.5,195.5Q187,141,250,141Q313,141,358,195.5Q403,250,388,356.5Z;
-                          
-                          M387.5,317Q327,384,227,423.5Q127,463,107.5,356.5Q88,250,124,171.5Q160,93,257.5,80.5Q355,68,401.5,159Q448,250,387.5,317Z;
-                          
-                          M390.5,298.5Q306,347,245,355.5Q184,364,112,307Q40,250,87.5,150Q135,50,221.5,99.5Q308,149,391.5,199.5Q475,250,390.5,298.5Z;
-                          
-                          M371.57062,328.47151Q340.70386,406.94302,242.89674,419.64955Q145.08962,432.35608,106.21602,341.17804Q67.34243,250,114.84243,174.71335Q162.34243,99.4267,269.34926,65.84778Q376.35608,32.26885,389.39674,141.13442Q402.43739,250,371.57062,328.47151Z;
-                          
-                          M391.5,317Q327,384,259.5,367.5Q192,351,136.5,300.5Q81,250,133,193.5Q185,137,259.5,120.5Q334,104,395,177Q456,250,391.5,317Z;
-                          
-                          M415,336.5Q350,423,259.5,407Q169,391,116.5,320.5Q64,250,97.5,147.5Q131,45,247,50Q363,55,421.5,152.5Q480,250,415,336.5Z;
-                          
-                          M411,322Q333,394,230,428.5Q127,463,104,356.5Q81,250,136.5,200Q192,150,251,148.5Q310,147,399.5,198.5Q489,250,411,322Z;">
-                      
-                      </animate>
-                  </path>
-              </clipPath>
-          </svg>
+            <svg id="cgmStyleWrap" version="1.2" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="cursor:pointer">
+                <title>cgm-style CLick~!</title>
+                <clipPath id="mainText_C" class="mainText">
+                    <text x="6%" id="mouseMoveMainTitle" y="53%" textLength="5em" lengthAdjust="spacing" font-size="21em">
+                        CGM STYLE
+                    </text>
+                    <text x="30%" y="66%" id="mouseMoveMainSubTitle" textLength="5em" lengthAdjust="spacing" font-size="15vh">
+                        PF
+                    </text>
+                    <path id="mouseMoveCursor" fill="#a29bfe">
+                        <animate attributeName="d"
+                            dur="10s"
+                            repeatCount="indefinite"
+                            
+                            values="M411,322Q333,394,230,428.5Q127,463,104,356.5Q81,250,136.5,200Q192,150,251,148.5Q310,147,399.5,198.5Q489,250,411,322Z;
+                                    
+                            M388,356.5Q373,463,264.5,438.5Q156,414,80,332Q4,250,95.5,195.5Q187,141,250,141Q313,141,358,195.5Q403,250,388,356.5Z;
+                            
+                            M387.5,317Q327,384,227,423.5Q127,463,107.5,356.5Q88,250,124,171.5Q160,93,257.5,80.5Q355,68,401.5,159Q448,250,387.5,317Z;
+                            
+                            M390.5,298.5Q306,347,245,355.5Q184,364,112,307Q40,250,87.5,150Q135,50,221.5,99.5Q308,149,391.5,199.5Q475,250,390.5,298.5Z;
+                            
+                            M371.57062,328.47151Q340.70386,406.94302,242.89674,419.64955Q145.08962,432.35608,106.21602,341.17804Q67.34243,250,114.84243,174.71335Q162.34243,99.4267,269.34926,65.84778Q376.35608,32.26885,389.39674,141.13442Q402.43739,250,371.57062,328.47151Z;
+                            
+                            M391.5,317Q327,384,259.5,367.5Q192,351,136.5,300.5Q81,250,133,193.5Q185,137,259.5,120.5Q334,104,395,177Q456,250,391.5,317Z;
+                            
+                            M415,336.5Q350,423,259.5,407Q169,391,116.5,320.5Q64,250,97.5,147.5Q131,45,247,50Q363,55,421.5,152.5Q480,250,415,336.5Z;
+                            
+                            M411,322Q333,394,230,428.5Q127,463,104,356.5Q81,250,136.5,200Q192,150,251,148.5Q310,147,399.5,198.5Q489,250,411,322Z;">
+                        
+                        </animate>
+                    </path>
+                </clipPath>
+            </svg>
       `;
   }
 
@@ -198,8 +200,6 @@ function firstPage() {
       secondSection1.style.position = `relative`;
       cgmStyleWrap.style.top = `-150px`;
       cgmStyleWrap.style.height = `1000px`;
-      cgmStyleWrap.style.cursor = "pointer";
-      cgmStyleWrap.pause();
       cgmStyleWrap.addEventListener("click", () => {
         // 영상 클릭시 재생혹은 정지
         if (videoPlay === true) {
@@ -238,10 +238,10 @@ function firstPage() {
       secondSection1WrapP.innerText = `portfolio`;
 
       // 섹션 1의 새로생성 되는 창
-      function addPfArea(num, p1, p2, p3, pcimg, moimg) {
+      function addPfArea(num, p1, p2, p3, pcimg, moimg, url) {
         // Pf를 생성하는 재사용 함수
         secondSection1Wrap.appendChild(
-          eval(`secondSection1WrapDiv${num} = document.createElement("div")`)
+          eval(`secondSection1WrapDiv${num} = document.createElement("a")`)
         );
         eval(`secondSection1WrapDiv${num}`).appendChild(
           eval(
@@ -312,6 +312,9 @@ function firstPage() {
 
         eval(`secondSection1WrapDiv${num}PcImg`).src = `img${pcimg}`;
         eval(`secondSection1WrapDiv${num}MoImg`).src = `img${moimg}`;
+
+        eval(`secondSection1WrapDiv${num}`).href = `${url}`; // 링크 넣기
+        eval(`secondSection1WrapDiv${num}`).target = `_blank`;
       }
 
       // Pf생성 부분
@@ -321,7 +324,8 @@ function firstPage() {
         `참여도 : 100%`,
         `간략 소개 : ----`,
         `/papa_pc.png`,
-        `/papa_mo.png`
+        `/papa_mo.png`,
+        `https://www.paparecipe.com/`
       );
       addPfArea(
         2,
@@ -329,7 +333,8 @@ function firstPage() {
         `참여도 : 100%`,
         `간략 소개 : ----`,
         `/papajp_pc.png`,
-        `/papajp_mo.png`
+        `/papajp_mo.png`,
+        `https://www.paparecipe.jp/`
       );
       addPfArea(
         3,
@@ -337,7 +342,8 @@ function firstPage() {
         `참여도 : 100%`,
         `간략 소개 : ----`,
         `/papacn_pc.png`,
-        `/papacn_mo.png`
+        `/papacn_mo.png`,
+        `https://cn.paparecipe.com/`
       );
       addPfArea(
         4,
@@ -345,7 +351,8 @@ function firstPage() {
         `참여도 : 100%`,
         `간략 소개 : ----`,
         `/papaus_pc.png`,
-        `/papaus_mo.png`
+        `/papaus_mo.png`,
+        `https://abtmall.world/`
       );
       addPfArea(
         5,
@@ -353,7 +360,8 @@ function firstPage() {
         `참여도 : 100%`,
         `간략 소개 : ----`,
         `/inga_pc.png`,
-        `/inga_mo.png`
+        `/inga_mo.png`,
+        `https://ingacos.com/`
       );
       addPfArea(
         6,
@@ -361,7 +369,8 @@ function firstPage() {
         `참여도 : 100%`,
         `간략 소개 : ----`,
         `/gdm_pc.png`,
-        `/gdm_mo.png`
+        `/gdm_mo.png`,
+        `http://golfdoesmatter.com/`
       );
       addPfArea(
         7,
@@ -369,7 +378,8 @@ function firstPage() {
         `참여도 : 100%`,
         `간략 소개 : ----`,
         `/React-coin_pc.png`,
-        `/React-coin_mo.png`
+        `/React-coin_mo.png`,
+        `https://cgm-style.github.io/coinTest/`
       );
       addPfArea(
         8,
@@ -377,7 +387,8 @@ function firstPage() {
         `참여도 : 100%`,
         `간략 소개 : ----`,
         `/todoPage_pc.png`,
-        `/todoPage_mo.png`
+        `/todoPage_mo.png`,
+        `https://cgm-style.github.io/toDoList_clock_-5d-3h-weather-18h/`
       );
       addPfArea(
         9,
@@ -385,7 +396,8 @@ function firstPage() {
         `참여도 : 100%`,
         `간략 소개 : ----`,
         `/happy_pc.png`,
-        `/happy_mo.png`
+        `/happy_mo.png`,
+        `http://www.yonsei-dental.com/`
       );
       addPfArea(
         10,
@@ -393,7 +405,8 @@ function firstPage() {
         `참여도 : 100%`,
         `간략 소개 : ----`,
         `/heasung_pc.png`,
-        `/heasung_mo.png`
+        `/heasung_mo.png`,
+        `http://haesunglaw.co.kr/`
       );
       addPfArea(
         11,
@@ -401,16 +414,14 @@ function firstPage() {
         `참여도 : 100%`,
         `간략 소개 : ----`,
         `/thewoolim_pc.png`,
-        `/thewoolim_mo.png`
+        `/thewoolim_mo.png`,
+        `http://thewoolim.com/`
       );
 
       let LRScroll = 0; // 스크롤의 깊이
-      let LRScrollOnOff = false;
       secondSection1Wrap.addEventListener("wheel", (e) => {
-        if (LRScrollOnOff === false) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
+        e.preventDefault();
+        e.stopPropagation();
         if (e.wheelDeltaY === -120) {
           LRScroll += 50;
         } else if (e.wheelDeltaY === 120) {
@@ -418,15 +429,12 @@ function firstPage() {
         }
         if (LRScroll >= 2050) {
           LRScroll = 2050;
-          LRScrollOnOff = true;
           return false;
         }
 
         if (LRScroll <= 0) {
           LRScroll = 0;
-          LRScrollOnOff = true;
         } else if (LRScroll > 0 && LRScroll < 2050) {
-          LRScrollOnOff = false;
           secondSection1Wrap.style.left = `-${LRScroll}px`;
         } else {
           return false;
@@ -729,7 +737,6 @@ function firstPage() {
       if (size.toFixed(1) >= 1.5) {
         clearInterval(sizeUpMove);
         sizeEvent = false;
-        mainWrap.style.cursor = "pointer";
         return false;
       }
       size += 0.1;
@@ -747,7 +754,6 @@ function firstPage() {
         // 최소 크기가 되었을때 이벤트 중지
         clearInterval(sizeDownMove);
         sizeEvent = true;
-        mainWrap.style.cursor = "auto";
         return false;
       }
       size = size - 0.1;
@@ -763,9 +769,12 @@ function firstPage() {
       mouseMoveY <= maxMainTilteY / 2
     ) {
       // 가운데 텍스트 안을 움직일때
-      setInterval(sizeUpMove(), 30);
+      setInterval(sizeUpMove(), 100);
 
       cgmStyleWrapMouse.addEventListener("click", (e) => {
+        setTimeout(() => {
+          e.target.style.cursor = "auto";
+        }, 1000);
         if (scrollPageOn !== true) {
           // 스크롤 페이지 실행 함수
           section2();
@@ -790,7 +799,7 @@ function firstPage() {
       });
     } else {
       // 가운데 텍스트 외를 움직일때
-      setInterval(sizeDownMove(), 30);
+      setInterval(sizeDownMove(), 100);
     }
   };
   secondSection1.addEventListener("mousemove", (e) => {
