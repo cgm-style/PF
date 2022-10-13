@@ -384,6 +384,12 @@ html{background-color:#667eea;}
     transition-property: width,height,padding;
     background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
 }
+#UIBox .UIBoxInnerDiv   {
+    pointer-events: none;
+}
+#UIBox.active .UIBoxInnerDiv    {
+    pointer-events: all;
+}
 #UIBox.active   {
     padding: 17px;
     padding-top: 21px;
@@ -822,4 +828,108 @@ html{background-color:#667eea;}
 }
 .UrlContainerObjInner svg path  {
     transform: translate(154px, 10px);
+}
+
+/* 모바일 반응 */
+@media (max-width: 767px){  /*모바일*/
+    #wrap   {
+        border: none;
+    }
+    #mainWrapBg {
+        width: 71vmin;
+        height: 71vmin;
+    }
+    #mainWrapBgText {
+        font-size: 6vh;
+        width: 70%;
+        margin-top: -10%;
+    }
+
+    .codeWrap   {
+        height: 40%;
+        width: 80%;
+        top: 45%;
+        right: 8%;
+        padding-bottom: 20px;
+    }
+
+    .playerWrap {
+        width: 95%;
+        height: 35%;
+    }
+    .playerWrap .addTopBtnContainerTitle    {
+        font-size: 13px;
+    }
+    .playerContainerUrlTitelP   {
+        font-size: 2vh;
+    }
+
+    .playerContainerUrlInner {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    .playerContainerUrlInnerInput.open  {
+        width: 80%;
+    }
+    .playerContainerUrlTitel    {
+        height: 20%;
+    }
+    .weatherWrap    {
+        left: 7%;
+    }
+    .UrlContainer   {
+        height: 117%;
+    }
+    .UrlContainerFormInput  {
+        width:54px;
+    }
+    .UrlContainerObjInner   {
+        height: 83%;
+    }
+    #blobSvg    {height: 100%;}
+
+    /* 다음 화면 */
+}
+
+@media (min-width: 768px) and (max-width: 991px) {  /* 테블릿 세로 */
+    .codeWrap   {
+        width: 73%;
+        height: 38%;
+        top: 55%;
+    }
+    #mainWrapBgText {
+        margin-top: -10%;
+        width: 55%;
+    }
+
+    .playerWrap {
+        width: 75%;
+        top: 15%;
+        height: 30%;
+    }
+    .playerContainerUrlTitel   {
+        height: 18%;
+    }
+    .playerContainerUrlTitelP   {
+        font-size: 2vh;
+    }
+
+}
+
+@media (min-width: 992px) and (max-width: 1199px) { /* 테블릿 가로 */
+    .playerWrap .addTopBtnContainerTitle    {
+        font-size: 13px;
+    }
+    .playerContainerUrlTitelP   {
+        font-size: 1.7vh;
+    }
+    .playerContainerUrlInnerInput.open  {
+        width: 80%;
+    }
+    .UrlContainerFormInput  {
+        width: 54px;
+    }
+    #blobSvg    {
+        height: 100%;
+    }
 }
