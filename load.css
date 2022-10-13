@@ -449,7 +449,7 @@ html{background-color:#667eea;}
     content: "바로가기";
 }
 #UIBox.active .UIBoxInnerDiv:nth-of-type(2)::before   {
-    content: "시간보기";
+    content: "플레이어";
 }
 #UIBox.active .UIBoxInnerDiv:nth-of-type(3)::before   {
     content: "날씨보기";
