@@ -307,10 +307,17 @@
             align-items: center;
             flex-wrap: wrap;
             width: 5100px;
-            margin-top: 100px;
+            margin-top: 200px;
             padding-bottom: 150px;
-            padding-left: 50px;
             transition: left 0.3s;
+        }
+        #secondSection1WrapP    {
+            position: sticky;
+            margin-top: -660px;
+            left: 30px;
+            font-size: 4vh;
+            font-weight: bold;
+            color: coral;
         }
         .secondSection1WrapDiv  {
             position: relative;
@@ -373,24 +380,24 @@
         }
 
         /* hover시 포폴 넘어가는것 */
-        .secondSection1WrapDiv:nth-of-type(1):hover .secondSection1WrapDivPc img    {top:-84vh;}
-        .secondSection1WrapDiv:nth-of-type(1):hover .secondSection1WrapDivMo img    {top:-121vh;}
-        .secondSection1WrapDiv:nth-of-type(2):hover .secondSection1WrapDivPc img    {top:-83vh;}
-        .secondSection1WrapDiv:nth-of-type(2):hover .secondSection1WrapDivMo img    {top:-74vh;}
-        .secondSection1WrapDiv:nth-of-type(3):hover .secondSection1WrapDivPc img    {top:-56vh;}
-        .secondSection1WrapDiv:nth-of-type(3):hover .secondSection1WrapDivMo img    {top:-64vh;}
-        .secondSection1WrapDiv:nth-of-type(4):hover .secondSection1WrapDivPc img    {top:-61vh;}
-        .secondSection1WrapDiv:nth-of-type(4):hover .secondSection1WrapDivMo img    {top:-84vh;}
-        .secondSection1WrapDiv:nth-of-type(5):hover .secondSection1WrapDivPc img    {top:-57vh;}
-        .secondSection1WrapDiv:nth-of-type(5):hover .secondSection1WrapDivMo img    {top:-54vh;}
-        .secondSection1WrapDiv:nth-of-type(6):hover .secondSection1WrapDivPc img    {top:-36vh;}
-        .secondSection1WrapDiv:nth-of-type(6):hover .secondSection1WrapDivMo img    {top:-31vh;}
-        .secondSection1WrapDiv:nth-of-type(9):hover .secondSection1WrapDivPc img    {top:-61vh;}
-        .secondSection1WrapDiv:nth-of-type(9):hover .secondSection1WrapDivMo img    {top:-46vh;}
-        .secondSection1WrapDiv:nth-of-type(10):hover .secondSection1WrapDivPc img    {top:-39vh;}
-        .secondSection1WrapDiv:nth-of-type(10):hover .secondSection1WrapDivMo img    {top:-170vh;}
-        .secondSection1WrapDiv:nth-of-type(11):hover .secondSection1WrapDivPc img    {top:-39vh;}
-        .secondSection1WrapDiv:nth-of-type(11):hover .secondSection1WrapDivMo img    {top:-101vh;}
+        .secondSection1WrapDiv:nth-of-type(1):hover .secondSection1WrapDivPc img    {top:-71vh;}
+        .secondSection1WrapDiv:nth-of-type(1):hover .secondSection1WrapDivMo img    {top:-103vh;}
+        .secondSection1WrapDiv:nth-of-type(2):hover .secondSection1WrapDivPc img    {top:-70vh;}
+        .secondSection1WrapDiv:nth-of-type(2):hover .secondSection1WrapDivMo img    {top:-63vh;}
+        .secondSection1WrapDiv:nth-of-type(3):hover .secondSection1WrapDivPc img    {top:-47vh;}
+        .secondSection1WrapDiv:nth-of-type(3):hover .secondSection1WrapDivMo img    {top:-54vh;}
+        .secondSection1WrapDiv:nth-of-type(4):hover .secondSection1WrapDivPc img    {top:-52vh;}
+        .secondSection1WrapDiv:nth-of-type(4):hover .secondSection1WrapDivMo img    {top:-72vh;}
+        .secondSection1WrapDiv:nth-of-type(5):hover .secondSection1WrapDivPc img    {top:-48vh;}
+        .secondSection1WrapDiv:nth-of-type(5):hover .secondSection1WrapDivMo img    {top:-46vh;}
+        .secondSection1WrapDiv:nth-of-type(6):hover .secondSection1WrapDivPc img    {top:-30vh;}
+        .secondSection1WrapDiv:nth-of-type(6):hover .secondSection1WrapDivMo img    {top:-26vh;}
+        .secondSection1WrapDiv:nth-of-type(9):hover .secondSection1WrapDivPc img    {top:-52vh;}
+        .secondSection1WrapDiv:nth-of-type(9):hover .secondSection1WrapDivMo img    {top:-39vh;}
+        .secondSection1WrapDiv:nth-of-type(10):hover .secondSection1WrapDivPc img    {top:-33vh;}
+        .secondSection1WrapDiv:nth-of-type(10):hover .secondSection1WrapDivMo img    {top:-146vh;}
+        .secondSection1WrapDiv:nth-of-type(11):hover .secondSection1WrapDivPc img    {top:-33vh;}
+        .secondSection1WrapDiv:nth-of-type(11):hover .secondSection1WrapDivMo img    {top:-57vh;}
 
 
         .secondSection1WrapDivPc    {
@@ -431,6 +438,87 @@
             transition: all 1s;
             height: auto;
             top: 0;
+        }
+
+        /* 사용 언어 부분 */
+        #secondSection2 {
+            padding-bottom: 60px;
+            background: coral;
+        }
+        #secondSection2Title    {
+            padding: 25px;
+            font-size: 4vh;
+            color: white;
+        }
+        #secondSection2Container    {
+            width: 100%;
+            display: flex;
+            justify-content: left;
+            position: relative;
+            animation: slideSkill 20s linear infinite;
+        }
+
+        .secondSection2Div  {
+            margin: 20px 80px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+        .secondSection2DivP {
+            position: absolute;
+            bottom: -30px;
+            font-size: 2vh;
+            color: white;
+        }
+        .secondSection2DivBgBox {
+            position: relative;
+            filter: grayscale(1);
+            opacity: 0.2;
+        }
+        .secondSection2DivBgImg {width: 125px;}
+        .secondSection2DivFtBox {
+            height: 80%;
+            overflow: hidden;
+            position: absolute;
+            bottom: 0px;
+        }
+        .secondSection2DivFtImg {
+            width: 125px;
+        }
+
+        @keyframes slideSkill {
+            0%{left: 0px;}
+            100%{left:-2850px}
+        }
+
+        #secondSection3 {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: ghostwhite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .secondSection3P   {
+            width: 100%;
+            text-align: center;
+        }
+        #secondSection3 p:nth-of-type(1)    {
+            font-size: 5vh;
+            font-weight: bold;
+            margin-top: 130px;
+        }
+        #secondSection3 p:nth-of-type(2)    {
+            margin-top: -50px;
+            font-size: 3vh;
+        }
+        #secondSection3 p:nth-of-type(3)    {
+            text-align: right;
+            margin-right: 10px;
+            margin-bottom: -30px;
+            font-size: 2vh;
         }
     </style>
 
