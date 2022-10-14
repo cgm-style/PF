@@ -1,0 +1,555 @@
+#secondSection1 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transition: all 0.5s;
+}
+
+#scrollHintWrap    {
+    position: fixed;
+    width: 80px;
+    height: 135px;
+    left: 49%;
+    bottom: 20px;
+    border-radius: 40px;
+    background: rgba(210,100,100,0.8);
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transition: all 1s;
+    animation:scrollWrap 5s infinite;
+}
+#scrollHintInner    {
+    width: 15px;
+    height: 15px;
+    background: white;
+    border-radius: 50%;
+    top: 15px;
+    position: relative;
+    animation:scrollInner 1.5s infinite;
+}
+@keyframes scrollInner {
+    0%{top: 15px;}
+    100%{top: 55px;}
+}
+@keyframes scrollWrap {
+    0%{opacity: 0.5;}
+    25%{opacity: 1;}
+    50%{opacity: 0.5;}
+    75%{opacity: 1;}
+    100%{opacity: 0.5;}
+}
+
+#menubtn    {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    border: 1px solid slategray;
+    border-radius: 5px;
+    font-size: 2vh;
+    font-weight: 600;
+    padding: 4px 8px;
+    cursor: pointer;
+    z-index: 11;
+}
+
+#menuNav    {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    z-index: 10;
+}
+#menuNavUl  {
+    text-align: center;
+    position: relative;
+    top: 25%;
+    transition:all 1s;
+    z-index: 2;
+    text-shadow: 1px 1px 0px black;
+}
+#menuNavUl:hover li a   {
+    color: rgba(245, 245, 245, 0.133);
+}
+.menuNavLi  {
+    
+}
+.menuNavLi:hover a  {
+    color: #fff !important;
+    background: transparent;
+}
+.menuNavLiA {
+    color: rgb(206, 206, 206);
+    text-decoration: none;
+    font-size: 3em;
+    padding: 5px 20px;
+    display: inline-flex;
+    font-weight: 700;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.menuNavLiA:before  {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5em;
+    color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 500px;
+    transition: letter-spacing 0.5s, left 0.5s;
+}
+.menuNavLiA:hover:before {
+    content: attr(data-text);
+    opacity: 1;
+    left: 50%;
+    letter-spacing: 10px;
+    width: 1800px;
+    height: 1800px;
+}
+
+#menuNavUl li:nth-child(4n + 1) a:before {
+    background: #0470fe;
+}
+#menuNavUl li:nth-child(4n + 2) a:before {
+    background: #ff7675;
+}
+#menuNavUl li:nth-child(4n + 3) a:before {
+    background: #1582fe;
+}
+#menuNavUl li:nth-child(4n + 4) a:before {
+    background: #a29bfe;
+}
+
+#menuLine   {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+.menuLineDiv    {
+    position: absolute;
+    width: 200%;
+    height: 0px;
+    z-index: 100;
+    transform: rotate(37deg);
+    transition: all 0.5s cubic-bezier(.55,0,.1,1);
+    background: dimgray;
+}
+#menuLineDiv1   {
+    left: -27%;
+}
+#menuLineDiv2   {
+    left: -86%;
+}
+#menuLineDiv3   {
+    left: -137%;
+}
+
+#menuLine   {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+.menuLineDiv    {
+    position: absolute;
+    width: 200%;
+    height: 0px;
+    z-index: 100;
+    transform: rotate(37deg);
+    transition: all 0.5s cubic-bezier(.55,0,.1,1);
+    background: dimgray;
+}
+#menuLineDiv1   {
+    left: -27%;
+}
+#menuLineDiv2   {
+    left: -86%;
+}
+#menuLineDiv3   {
+    left: -137%;
+}
+#cgmStyleWrap   {
+    transition: all 1s;
+    opacity: 1;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.mainTextVideo  {
+    position: absolute;
+    opacity: 0;
+    transition: all 1s;
+    width: 100%;
+}
+#mainText_C_Video {
+    transition: all 1s;
+    -webkit-clip-path: url(#mainText_C);
+    clip-path: url(#mainText_C);
+}
+
+.mainText   {
+    font-weight: bold;
+}
+
+.moMainTitle    {
+    z-index: 1;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: white;
+    color: black;
+    mix-blend-mode: lighten;
+    font-size: 8vh;
+    text-align: center;
+    line-height: 1040%;
+    transform: scaleY(1);
+    cursor: pointer;
+}
+.moMainTitle span{
+    color: black;
+    position: absolute;
+    top: 55px;
+    font-size: 5vh;
+    left: 30%;
+}
+
+
+/* 스크롤 화면 css */
+#scrollPageWrap   {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+#scrollPage1    {
+    position:relative;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.scrollPageP    {
+    position: absolute;
+    margin-top: 0px;
+    opacity: 0;
+    transition: all 0.5s;
+    margin-top: 150px;
+    font-size: 5vh;
+    font-weight: bold;
+}
+
+/* 스크롤 후 보이는 영역 */
+#secondSection1Wrap {
+    position: relative;
+    text-align: center;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 5100px;
+    margin-top: 200px;
+    padding-bottom: 150px;
+    transition: left 0.3s;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+}
+#secondSection1WrapP    {
+    position: sticky;
+    margin-top: -660px;
+    left: 30px;
+    font-size: 4vh;
+    font-weight: bold;
+    color: coral;
+}
+.secondSection1WrapDiv  {
+    position: relative;
+    transform: skew(0deg, -8deg);
+    width: 300px;
+    height: 450px;
+    margin: 15px;
+    border: 2px solid coral;
+    box-shadow: 10px 10px 0px mediumaquamarine;
+    top: -15px;
+    filter: grayscale(1);
+    transition: all 0.2s;
+    cursor:pointer;
+    text-decoration: none;
+}
+.secondSection1WrapDiv:hover    {
+    filter: grayscale(0);
+}
+.secondSection1WrapDiv::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    box-shadow: 5px 5px 0px coral;
+}
+.secondSection1WrapDiv:nth-last-child(2n)   {
+    top: 15px;
+}
+.secondSection1WrapDiv:nth-last-child(3n)   {
+    top: -35px;
+}
+.secondSection1WrapDiv:nth-last-child(4n)   {
+    top: 0px;
+}
+.secondSection1WrapDivText  {padding-top: 5px;}
+.secondSection1WrapDivTextP {}
+.secondSection1WrapDivTextP:first-child {
+    font-size: 3.5vh;
+    font-weight: bold;
+    text-shadow: 3px 3px coral;
+    color: orange;
+    border-bottom: 2px solid coral;
+    padding-bottom: 15px;
+}
+.secondSection1WrapDivTextP:nth-of-type(2) {
+    margin-top: 10px;
+    font-size: 2vh;
+    font-weight: normal;
+    float: left;
+    text-align: left;
+    width: 100%;
+    padding-left: 10px;
+}
+.secondSection1WrapDivTextP:last-child {
+    font-size: 2vh;
+    margin-top: 0px;
+    float: left;
+    text-align: left;
+    width: 100%;
+    padding-left: 10px;
+}
+
+/* hover시 포폴 넘어가는것 */
+.secondSection1WrapDiv:nth-of-type(1):hover .secondSection1WrapDivPc img    {top:-71vh;}
+.secondSection1WrapDiv:nth-of-type(1):hover .secondSection1WrapDivMo img    {top:-103vh;}
+.secondSection1WrapDiv:nth-of-type(2):hover .secondSection1WrapDivPc img    {top:-70vh;}
+.secondSection1WrapDiv:nth-of-type(2):hover .secondSection1WrapDivMo img    {top:-63vh;}
+.secondSection1WrapDiv:nth-of-type(3):hover .secondSection1WrapDivPc img    {top:-47vh;}
+.secondSection1WrapDiv:nth-of-type(3):hover .secondSection1WrapDivMo img    {top:-54vh;}
+.secondSection1WrapDiv:nth-of-type(4):hover .secondSection1WrapDivPc img    {top:-52vh;}
+.secondSection1WrapDiv:nth-of-type(4):hover .secondSection1WrapDivMo img    {top:-72vh;}
+.secondSection1WrapDiv:nth-of-type(5):hover .secondSection1WrapDivPc img    {top:-48vh;}
+.secondSection1WrapDiv:nth-of-type(5):hover .secondSection1WrapDivMo img    {top:-46vh;}
+.secondSection1WrapDiv:nth-of-type(6):hover .secondSection1WrapDivPc img    {top:-30vh;}
+.secondSection1WrapDiv:nth-of-type(6):hover .secondSection1WrapDivMo img    {top:-26vh;}
+.secondSection1WrapDiv:nth-of-type(9):hover .secondSection1WrapDivPc img    {top:-52vh;}
+.secondSection1WrapDiv:nth-of-type(9):hover .secondSection1WrapDivMo img    {top:-39vh;}
+.secondSection1WrapDiv:nth-of-type(10):hover .secondSection1WrapDivPc img    {top:-33vh;}
+.secondSection1WrapDiv:nth-of-type(10):hover .secondSection1WrapDivMo img    {top:-146vh;}
+.secondSection1WrapDiv:nth-of-type(11):hover .secondSection1WrapDivPc img    {top:-33vh;}
+.secondSection1WrapDiv:nth-of-type(11):hover .secondSection1WrapDivMo img    {top:-57vh;}
+
+
+.secondSection1WrapDivPc    {
+    width: 93%;
+    height: 175px;
+    left: 2%;
+    position: absolute;
+    bottom: 8px;
+    border: 3px solid coral;
+    border-radius: 9px;
+    overflow: hidden;
+    box-shadow: 5px 5px chocolate;
+    background: black;
+}
+.secondSection1WrapDivPcImg {
+    width: 100%;
+    position: relative;
+    transition: all 1s;
+    height: auto;
+    top: 0;
+    
+}
+.secondSection1WrapDivMo    {
+    width: 25%;
+    height: 130px;
+    right: 5.9%;
+    position: absolute;
+    bottom: 3%;
+    border: 3px solid coral;
+    border-radius: 7px;
+    background: white;
+    overflow: hidden;
+    box-shadow: 5px 5px chocolate;
+}
+.secondSection1WrapDivMoImg {
+    width: 100%;
+    position: relative;
+    transition: all 1s;
+    height: auto;
+    top: 0;
+}
+
+/* 사용 언어 부분 */
+#secondSection2 {
+    padding-bottom: 60px;
+    background: coral;
+}
+#secondSection2Title    {
+    padding: 25px;
+    font-size: 4vh;
+    color: white;
+}
+#secondSection2Container    {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    position: relative;
+    animation: slideSkill 20s linear infinite;
+}
+
+.secondSection2Div  {
+    margin: 20px 80px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.secondSection2DivP {
+    position: absolute;
+    bottom: -30px;
+    font-size: 2vh;
+    color: white;
+}
+.secondSection2DivBgBox {
+    position: relative;
+    filter: grayscale(1);
+    opacity: 0.2;
+}
+.secondSection2DivBgImg {width: 125px;}
+.secondSection2DivFtBox {
+    height: 80%;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0px;
+}
+.secondSection2DivFtImg {
+    width: 125px;
+}
+
+@keyframes slideSkill {
+    0%{left: 0px;}
+    100%{left:-2850px}
+}
+
+#secondSection3 {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background: blueviolet;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.secondSection3P   {
+    width: 100%;
+    text-align: center;
+    color:white;
+}
+#secondSection3 p:nth-of-type(1)    {
+    font-size: 5vh;
+    font-weight: bold;
+    margin-top: 130px;
+}
+#secondSection3 p:nth-of-type(2)    {
+    font-size: 3.5vh;
+    margin-top: -125px;
+}
+#secondSection3 p:nth-of-type(3)    {
+    text-align: right;
+    margin-right: 10px;
+    margin-bottom: -30px;
+    font-size: 2vh;
+}
+
+/* 모바일 최적화 */
+.addMoVideoText {
+    position: fixed;
+    text-align: center;
+    color: white;
+    font-size: 3vh;
+    opacity: 0;
+    transition: all 1s;
+    top: 60%;
+}
+
+@media (max-width: 767px){  /*모바일*/
+    #secondSection1Wrap {
+        margin-top: 50px;
+        height: auto;
+        width: 100%;
+        display: inline-block;
+    }
+    #secondSection1WrapP    {
+        margin-top: -75px;
+        margin-bottom: 45px;
+    }
+    .secondSection1WrapDiv  {
+        width: 43%;
+        height: 390px;
+        display: inline-block;
+        margin: 30px 12px;
+        filter: grayscale(0);
+    }
+    .secondSection1WrapDivTextP:first-child {
+        font-size: 2.5vh;
+    }
+    .secondSection1WrapDivPc    {
+        height: 140px;
+    }
+    .secondSection1WrapDivMo    {
+        height: 100px;
+    }
+    #menuLineDiv2   {
+        left: -96%;
+    }
+    #menuLineDiv2   {
+        left: -156%;
+    }
+    #menuLineDiv3   {
+        left: -268%;
+    }
+
+    #secondSection3 p:nth-of-type(1)    {
+        font-size: 3vh;
+    }
+    #secondSection3 p:nth-of-type(2)    {
+        margin-top: -160px;
+        font-size: 2.5vh;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {  /* 테블릿 세로 */
+
+}
+@media (min-width: 992px) and (max-width: 1199px) { /* 테블릿 가로 */
+
+}
