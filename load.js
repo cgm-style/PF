@@ -1219,7 +1219,10 @@ function autoText(_, counter = 0) {
       footerWrap.childNodes[3].style.background = "rgba(100, 100, 255, 0.3)";
     }
   });
-  UIBoxInnerDiv4.addEventListener("click", calculator);
+  UIBoxInnerDiv4.addEventListener("click",()=>{
+      calculator();
+      footerWrap.childNodes[1].style.background = "rgba(100, 100, 255, 0.3)";
+  });
 
   // 하단 퀵 버튼 생성 함수
   function footerQuick(Wrapnum, readyOn, Icon) {
