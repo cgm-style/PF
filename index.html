@@ -257,7 +257,7 @@
             font-size: 8vh;
             text-align: center;
             line-height: 1040%;
-            transform: scaleY(1.5);
+            transform: scaleY(1);
             cursor: pointer;
         }
         .moMainTitle span{
@@ -310,6 +310,11 @@
             margin-top: 200px;
             padding-bottom: 150px;
             transition: left 0.3s;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
         }
         #secondSection1WrapP    {
             position: sticky;
@@ -521,8 +526,61 @@
             font-size: 2vh;
         }
 
+        /* 모바일 최적화 */
+        .addMoVideoText {
+            position: fixed;
+            text-align: center;
+            color: white;
+            font-size: 3vh;
+            opacity: 0;
+            transition: all 1s;
+            top: 60%;
+        }
+
         @media (max-width: 767px){  /*모바일*/
-        
+            #secondSection1Wrap {
+                margin-top: 50px;
+                height: auto;
+                width: 100%;
+                display: inline-block;
+            }
+            #secondSection1WrapP    {
+                margin-top: -75px;
+                margin-bottom: 45px;
+            }
+            .secondSection1WrapDiv  {
+                width: 43%;
+                height: 390px;
+                display: inline-block;
+                margin: 30px 12px;
+                filter: grayscale(0);
+            }
+            .secondSection1WrapDivTextP:first-child {
+                font-size: 2.5vh;
+            }
+            .secondSection1WrapDivPc    {
+                height: 140px;
+            }
+            .secondSection1WrapDivMo    {
+                height: 100px;
+            }
+            #menuLineDiv2   {
+                left: -96%;
+            }
+            #menuLineDiv2   {
+                left: -156%;
+            }
+            #menuLineDiv3   {
+                left: -268%;
+            }
+
+            #secondSection3 p:nth-of-type(1)    {
+                font-size: 3vh;
+            }
+            #secondSection3 p:nth-of-type(2)    {
+                margin-top: -160px;
+                font-size: 2.5vh;
+            }
         }
         @media (min-width: 768px) and (max-width: 991px) {  /* 테블릿 세로 */
         

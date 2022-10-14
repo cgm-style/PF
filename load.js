@@ -41,7 +41,7 @@ let nextNum = 0,
 const user = navigator.userAgent; // Pc/Mobile 체크
 let isCheck = false;
 console.dir(user);
-if (user.indexOf("iPhone") > -1 || user.indexOf("Android") > -1 || user.indexOf("iPad")) {
+if (user.indexOf("iPhone") > -1 || user.indexOf("Android") > -1 || user.indexOf("iPad") > -1) {
   isCheck = true;
 }
 
@@ -800,7 +800,7 @@ const mainBarEvent = () => {
 
   stickyBarTop.style.transform = "rotate(0deg)";
   stickyBarBottom.style.bottom = "0%";
-  stickyBarTop.style.bottom = "12.6%";
+  stickyBarTop.style.bottom = "6.6%";
   mainWrap.style.transform = "scale(0.5)rotate(180deg)";
   PfPageWrap.style.opacity = "1";
 

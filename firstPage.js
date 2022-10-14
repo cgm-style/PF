@@ -58,7 +58,11 @@ function firstPage() {
 
     if (menuOpen) {
       menuNavUl.style.opacity = 0;
-      menuNavUl.style.top = "25%";
+      if (isCheck) {
+        menuNavUl.style.top = "6%";
+      }else{
+        menuNavUl.style.top = "25%";
+      }
       setTimeout(() => {
         menuLineDiv1.style.height = "0px";
         menuLineDiv1.style.transform = "rotate(37deg)";
@@ -126,11 +130,347 @@ function firstPage() {
         <video id="mainText_C_Video" class="mainTextVideo" muted autoplay loop style="height:100%; width: auto;">
             <source src="https://drive.google.com/uc?export=download&id=1w4ha9y8pkwAnmTl1TZ15tFdavtcnDTS3" type="video/mp4">
         </video>
-        <h1 class="moMainTitle">
-            CGM STYLE<hr/>
+        <h1 class="moMainTitle" style="transition:all 2s; top:0px;">
+            CGM STYLE<br/>
             <span>portFoilo</span>
         </h1>
         `;
+      
+      const moMainTitle = document.querySelector(".moMainTitle"),
+            moVideoTextList = [
+              `안녕하세요`,
+              `제 이름은 최근명입니다.`,
+              `다양한 시도 다양한 경험을<br/> 중요시하며`,
+              `이 경험으로 창의성, 문제 해결력을<br/> 기르고 있습니다.`,
+              `제 작업물들을 소개하겠습니다 :)`
+            ];
+
+      
+      
+      secondSection1.style.display = `flex`;
+      secondSection1.style.justifyContent = `center`;
+          
+      function moVideoText(moVideoTextNum)  {
+        const addMoVideoText = document.createElement("p");
+        addMoVideoText.className = "addMoVideoText";
+
+        addMoVideoText.innerHTML = `${moVideoTextList[moVideoTextNum]}`;
+
+        secondSection1.appendChild(addMoVideoText);
+
+        addMoVideoText.style.top = `60%`;
+        addMoVideoText.style.opacity = `0`;
+
+        setTimeout(() => {
+          addMoVideoText.style.top = `50%`;
+          addMoVideoText.style.opacity = `1`;
+        }, 100);
+
+        setTimeout(() => {
+          addMoVideoText.style.top = `40%`;
+          addMoVideoText.style.opacity = `0`;
+        }, 2000);
+        setTimeout(() => {
+          addMoVideoText.remove();
+        }, 3000);
+      }
+
+      let moVideoTextNum = 0; // video text의 넘버
+      
+      moMainTitle.addEventListener("click",(e)=>{
+        moMainTitle.style.top = `-100%`;
+        moMainTitle.style.transform = `none`;
+
+        setTimeout(() => {
+          let textInterval = setInterval(()=>{
+            if(moVideoTextNum >= 5)  {
+              clearInterval(textInterval);
+              moSecondPage();
+              return false
+            }
+            moVideoText(moVideoTextNum);
+            moVideoTextNum += 1;
+          }, 3000);
+        }, 1000);
+      })
+
+      function moSecondPage() {
+        const minSec1 = () => { // text 액션이 전부 나온 후 실행
+          mainWrap.style.position = `absolute`;
+          mainWrap.style.width = `100%`;
+          mainWrap.style.height = `auto`;
+          secondSection1.style.height = `200px`; // 영상창 줄어듬
+          secondSection1.style.overflow = `hidden`;
+          secondSection1.style.marginTop = `70px`;
+          secondSection1.style.position = `relative`;
+          cgmStyleWrap.style.top = `-150px`;
+          cgmStyleWrap.style.width = `100%`;
+          cgmStyleWrap.style.height = `auto`;
+          cgmStyleWrap.style.cursor = "pointer";
+          cgmStyleWrap.addEventListener("click", () => {
+            // 영상 클릭시 재생혹은 정지
+            if (videoPlay === true) {
+              cgmStyleWrap.play();
+            } else {
+              cgmStyleWrap.pause();
+            }
+            videoPlay = !videoPlay;
+          });
+          menuBg.style.position = `fixed`;
+          menuBg.style.top = `0px`;
+          menuBg.style.left = `0px`;
+          menuBg.style.zIndex = `15`;
+          moMainTitle.remove(); // mouse무브 영역 삭제
+        };
+
+        const secondSection1Wrap = document.createElement("div"),
+      secondSection1WrapP = document.createElement("p"),
+      secondSection2 = document.createElement("section"),
+      secondSection3 = document.createElement("section");
+
+    secondSection1.id = "secondSection1";
+    secondSection1Wrap.id = "secondSection1Wrap";
+    secondSection1WrapP.id = "secondSection1WrapP";
+    secondSection2.id = "secondSection2";
+    secondSection3.id = "secondSection3";
+
+    mainWrap.appendChild(secondSection1Wrap);
+    mainWrap.appendChild(secondSection2);
+    mainWrap.appendChild(secondSection3);
+
+    secondSection1Wrap.appendChild(secondSection1WrapP);
+
+    secondSection1WrapP.innerText = `portfolio`;
+
+    // 섹션 1의 새로생성 되는 창
+    function addPfArea(num, p1, p2, p3, pcimg, moimg) {
+      // Pf를 생성하는 재사용 함수
+      secondSection1Wrap.appendChild(
+        eval(`secondSection1WrapDiv${num} = document.createElement("div")`)
+      );
+      eval(`secondSection1WrapDiv${num}`).appendChild(
+        eval(`secondSection1WrapDiv${num}Text = document.createElement("div")`)
+      );
+      eval(`secondSection1WrapDiv${num}Text`).appendChild(
+        eval(`secondSection1WrapDiv${num}TextP1 = document.createElement("p")`)
+      );
+      eval(`secondSection1WrapDiv${num}Text`).appendChild(
+        eval(`secondSection1WrapDiv${num}TextP2 = document.createElement("p")`)
+      );
+      eval(`secondSection1WrapDiv${num}Text`).appendChild(
+        eval(`secondSection1WrapDiv${num}TextP3 = document.createElement("p")`)
+      );
+      eval(`secondSection1WrapDiv${num}`).appendChild(
+        eval(`secondSection1WrapDiv${num}Pc = document.createElement("div")`)
+      );
+      eval(`secondSection1WrapDiv${num}Pc`).appendChild(
+        eval(`secondSection1WrapDiv${num}PcImg = document.createElement("img")`)
+      );
+      eval(`secondSection1WrapDiv${num}`).appendChild(
+        eval(`secondSection1WrapDiv${num}Mo = document.createElement("div")`)
+      );
+      eval(`secondSection1WrapDiv${num}Mo`).appendChild(
+        eval(`secondSection1WrapDiv${num}MoImg = document.createElement("img")`)
+      );
+
+      eval(`secondSection1WrapDiv${num}`).className = `secondSection1WrapDiv`;
+      eval(
+        `secondSection1WrapDiv${num}Text`
+      ).className = `secondSection1WrapDivText`;
+      eval(
+        `secondSection1WrapDiv${num}TextP1`
+      ).className = `secondSection1WrapDivTextP`;
+      eval(
+        `secondSection1WrapDiv${num}TextP2`
+      ).className = `secondSection1WrapDivTextP`;
+      eval(
+        `secondSection1WrapDiv${num}TextP3`
+      ).className = `secondSection1WrapDivTextP`;
+      eval(
+        `secondSection1WrapDiv${num}Pc`
+      ).className = `secondSection1WrapDivPc`;
+      eval(
+        `secondSection1WrapDiv${num}PcImg`
+      ).className = `secondSection1WrapDivPcImg`;
+      eval(
+        `secondSection1WrapDiv${num}Mo`
+      ).className = `secondSection1WrapDivMo`;
+      eval(
+        `secondSection1WrapDiv${num}MoImg`
+      ).className = `secondSection1WrapDivMoImg`;
+
+      eval(`secondSection1WrapDiv${num}TextP1`).innerText = `${p1}`;
+      eval(`secondSection1WrapDiv${num}TextP2`).innerText = `${p2}`;
+      eval(`secondSection1WrapDiv${num}TextP3`).innerText = `${p3}`;
+
+      eval(`secondSection1WrapDiv${num}PcImg`).src = `img${pcimg}`;
+      eval(`secondSection1WrapDiv${num}MoImg`).src = `img${moimg}`;
+    }
+
+    setTimeout(() => {
+      // Pf생성 부분
+      addPfArea(
+        1,
+        `paparecipe-KR`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/papa_pc.png`,
+        `/papa_mo.png`
+      );
+      addPfArea(
+        2,
+        `paparecipe-JP`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/papajp_pc.png`,
+        `/papajp_mo.png`
+      );
+      addPfArea(
+        3,
+        `paparecipe-CN`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/papacn_pc.png`,
+        `/papacn_mo.png`
+      );
+      addPfArea(
+        4,
+        `paparecipe-US`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/papaus_pc.png`,
+        `/papaus_mo.png`
+      );
+      addPfArea(
+        5,
+        `inga`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/inga_pc.png`,
+        `/inga_mo.png`
+      );
+      addPfArea(
+        6,
+        `golf does matter`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/gdm_pc.png`,
+        `/gdm_mo.png`
+      );
+      addPfArea(
+        7,
+        `react test coin`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/React-coin_pc.png`,
+        `/React-coin_mo.png`
+      );
+      addPfArea(
+        8,
+        `weather-Todo`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/todoPage_pc.png`,
+        `/todoPage_mo.png`
+      );
+      addPfArea(
+        9,
+        `연세 행복 치과`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/happy_pc.png`,
+        `/happy_mo.png`
+      );
+      addPfArea(
+        10,
+        `법무법인 해성`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/heasung_pc.png`,
+        `/heasung_mo.png`
+      );
+      addPfArea(
+        11,
+        `더울림`,
+        `참여도 : 100%`,
+        `간략 소개 : ----`,
+        `/thewoolim_pc.png`,
+        `/thewoolim_mo.png`
+      );
+
+      function useSkill(num,img,skill,skillNow) {
+        secondSection2Container.appendChild(eval(`secondSection2Div${num} = document.createElement("div")`));
+        eval(`secondSection2Div${num}`).appendChild(eval(`secondSection2Div${num}BgBox = document.createElement("div")`));
+          eval(`secondSection2Div${num}BgBox`).appendChild(eval(`secondSection2Div${num}BgImg = document.createElement("img")`));
+        eval(`secondSection2Div${num}`).appendChild(eval(`secondSection2Div${num}FtBox = document.createElement("div")`));
+          eval(`secondSection2Div${num}FtBox`).appendChild(eval(`secondSection2Div${num}FtImg = document.createElement("img")`));
+        eval(`secondSection2Div${num}`).appendChild(eval(`secondSection2Div${num}P = document.createElement("p")`));
+  
+        eval(`secondSection2Div${num}`).className = `secondSection2Div`;
+        eval(`secondSection2Div${num}BgBox`).className = `secondSection2DivBgBox`;
+          eval(`secondSection2Div${num}BgImg`).className = `secondSection2DivBgImg`;
+        eval(`secondSection2Div${num}FtBox`).className = `secondSection2DivFtBox`;
+          eval(`secondSection2Div${num}FtImg`).className = `secondSection2DivFtImg`;
+        eval(`secondSection2Div${num}P`).className = `secondSection2DivP`;
+  
+        eval(`secondSection2Div${num}BgImg`).src = `img/${img}`;
+        eval(`secondSection2Div${num}FtImg`).src = `img/${img}`;
+  
+        eval(`secondSection2Div${num}FtBox`).style.height = `${skill}%`
+        eval(`secondSection2Div${num}FtImg`).style.marginTop = `-${skillNow}%`;
+        eval(`secondSection2Div${num}P`).innerText = `${skill}%`;
+      }
+
+      const secondSection2Title = document.createElement("h2"),
+      secondSection2Container = document.createElement("div");
+
+      secondSection2.appendChild(secondSection2Title);
+      secondSection2.appendChild(secondSection2Container);
+      secondSection2Title.id = `secondSection2Title`;
+      secondSection2Container.id = `secondSection2Container`;
+
+      secondSection2Title.innerText = `사용언어 & Tool`;
+
+      mainWrap.style.cursor = `auto`;
+      useSkill(1,`html5.png`,90,10);
+      useSkill(2,`css3.png`,80,20);
+      useSkill(3,`jquery.png`,80,20);
+      useSkill(4,`js.png`,90,10);
+      useSkill(5,`react.png`,20,80);
+      useSkill(6,`typeSript.png`,20,82);
+      useSkill(7,`git.png`,60,40);
+      useSkill(8,`code.png`,60,40);
+      useSkill(9,`photo.png`,50,50);
+      useSkill(10,`Ai.png`,40,60);
+      useSkill(11,`html5.png`,90,10);
+      useSkill(12,`css3.png`,80,20);
+      useSkill(13,`jquery.png`,80,20);
+      useSkill(14,`js.png`,90,10);
+      useSkill(15,`react.png`,20,80);
+      useSkill(16,`typeSript.png`,20,80);
+      useSkill(17,`git.png`,60,40);
+
+    function contact()  {
+      const secondSection3P1 = document.createElement("p"),
+            secondSection3P2 = document.createElement("p"),
+            secondSection3P3 = document.createElement("p");
+  
+      secondSection3.appendChild(secondSection3P1);
+      secondSection3.appendChild(secondSection3P2);
+      secondSection3.appendChild(secondSection3P3);
+  
+      secondSection3P1.className = `secondSection3P`;
+      secondSection3P2.className = `secondSection3P`;
+      secondSection3P3.className = `secondSection3P`;
+  
+      secondSection3P1.innerText = `developercgm@gmail.com`;
+      secondSection3P2.innerText = `010-7242-4787`;
+      secondSection3P3.innerText = `CGM-Style`;
+    }
+    contact();
+    }, 1000);
+        minSec1();
+      }
   } else {
     //pc일 경우
     svgMainText.outerHTML = `
@@ -391,34 +731,36 @@ function firstPage() {
         `/thewoolim_mo.png`
       );
 
-      let LRScroll = 0; // 스크롤의 깊이
-      let LRScrollOnOff = false;
-      secondSection1Wrap.addEventListener("wheel", (e) => {
-        if(LRScrollOnOff === false) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-        if (e.wheelDeltaY === -120) {
-          LRScroll += 50;
-        } else if (e.wheelDeltaY === 120) {
-          LRScroll -= 50;
-        }
-        if (LRScroll >= 2050) {
-          LRScroll = 2050;
-          LRScrollOnOff = true;
-          return false;
-        }
+      if(!isCheck){
+        let LRScroll = 0; // 스크롤의 깊이
+        let LRScrollOnOff = false;
+        secondSection1Wrap.addEventListener("wheel", (e) => { // PF영역 휠 이벤트시 가로 슬라이드
+          if(LRScrollOnOff === false) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          if (e.wheelDeltaY === -120) {
+            LRScroll += 50;
+          } else if (e.wheelDeltaY === 120) {
+            LRScroll -= 50;
+          }
+          if (LRScroll >= 2050) {
+            LRScroll = 2050;
+            LRScrollOnOff = true;
+            return false;
+          }
 
-        if (LRScroll <= 0) {
-          LRScroll = 0;
-          LRScrollOnOff = true;
-        } else if (LRScroll > 0 && LRScroll < 2050) {
-          LRScrollOnOff = false;
-          secondSection1Wrap.style.left = `-${LRScroll}px`;
-        } else {
-          return false;
-        }
-      });
+          if (LRScroll <= 0) {
+            LRScroll = 0;
+            LRScrollOnOff = true;
+          } else if (LRScroll > 0 && LRScroll < 2050) {
+            LRScrollOnOff = false;
+            secondSection1Wrap.style.left = `-${LRScroll}px`;
+          } else {
+            return false;
+          }
+        });
+      }
 
       function useSkill(num,img,skill,skillNow) {
         secondSection2Container.appendChild(eval(`secondSection2Div${num} = document.createElement("div")`));
@@ -538,8 +880,7 @@ function firstPage() {
     scrollPage1P.innerText = "안녕하세요";
     scrollPage2P.innerText = "제 이름은 최근명입니다.";
     scrollPage3P.innerText = "다양한 시도 다양한 경험을 중요시하며";
-    scrollPage4P.innerText =
-      "이를 기반으로한 창의성과 문제 해결력을 기르고 있습니다.";
+    scrollPage4P.innerText = "이를 기반으로 창의성과 문제 해결력을 기르고 있습니다.";
     scrollPage5P.innerText = "그렇다면 저에대해 더욱 자세히 설명해볼게요 :)";
 
     let scrollHintOnOff = true;

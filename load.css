@@ -888,7 +888,19 @@ html{background-color:#667eea;}
     }
     #blobSvg    {height: 100%;}
 
-    /* 다음 화면 */
+    #stickyBarTop  {
+        height: 6.5%;
+        background-image: repeating-linear-gradient(125deg, transparent, transparent 36px, rgba(255,255,255,0.8) 11px, rgba(255,255,255,0.8) 115px);
+    }
+    #stickyBarTop::after   {
+        height: 1400%;
+        top: -1400%;
+    }
+    #stickyBarBottom    {
+        height: 6.5%;
+        background-image: repeating-linear-gradient(55deg, transparent, transparent 36px, rgba(255,255,255,0.8) 11px, rgba(255,255,255,0.8) 115px);
+    }
+    
 }
 
 @media (min-width: 768px) and (max-width: 991px) {  /* 테블릿 세로 */
