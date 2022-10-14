@@ -803,6 +803,11 @@ const mainBarEvent = () => {
   stickyBarTop.style.bottom = "6.6%";
   mainWrap.style.transform = "scale(0.5)rotate(180deg)";
   PfPageWrap.style.opacity = "1";
+  if(isCheck){
+    stickyBarTop.style.bottom = "6.6%";
+  }else {
+    stickyBarTop.style.bottom = "12.6%";
+  }
 
   setTimeout(() => {
     stickyBarTop.style.transform = "rotate(90deg)";
