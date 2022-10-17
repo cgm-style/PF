@@ -815,6 +815,7 @@ const mainBarEvent = () => {
     stickyBarTop.style.bottom = "0";
     mainWrap.style.transform = "scale(1)";
     wrap.innerHTML = "";
+
     firstPage();
   }, 2000);
   setTimeout(() => {
@@ -835,20 +836,27 @@ function moveWrapAction() {
     // moveWrap이라는 클래스를 가지면 움직일수있음
     if (isCheck === true) {
       move.addEventListener("touchstart", function (e) {
+        
         // 모바일 퀵 버튼 부분 move 이벤트
-        move.style.zIndex = "5";
+        move.style.zIndex = "4";
+        this.style.zIndex = "5";
         let shiftX =
-            e.changedTouches[0].clientX - move.getBoundingClientRect().left,
-          shiftY =
-            e.changedTouches[0].clientY - move.getBoundingClientRect().top;
+              e.changedTouches[0].clientX - this.getBoundingClientRect().left,
+            shiftY =
+              e.changedTouches[0].clientY - this.getBoundingClientRect().top,
+            traget = null;
+        move.addEventListener("touchmove", function (e) {
+          if(e.stopPropagation) e.stopPropagation();
+          if(e.preventDefault) e.preventDefault();
+          e.cancelBubble=true;
+          e.returnValue=false;
 
-        this.parentElement.addEventListener("touchmove", function (e) {
-          move.style.left = e.changedTouches[0].pageX - shiftX + "px";
-          move.style.top = e.changedTouches[0].pageY - shiftY + "px";
+          this.style.left = e.changedTouches[0].pageX - shiftX + "px";
+          this.style.top = e.changedTouches[0].pageY - shiftY + "px";
         });
 
         this.addEventListener("touchend", function (e) {
-          move.style.zIndex = "4";
+          this.style.zIndex = "4";
         });
       });
     } else {
@@ -860,19 +868,19 @@ function moveWrapAction() {
         });
         this.style.zIndex = "5";
 
-        let shiftX = e.clientX + 80 - move.getBoundingClientRect().left,
-          shiftY = e.clientY + 70 - move.getBoundingClientRect().top;
+        let shiftX = e.clientX + 80 - this.getBoundingClientRect().left,
+          shiftY = e.clientY + 70 - this.getBoundingClientRect().top;
 
-        move.style.cursor = "grabbing";
+        this.style.cursor = "grabbing";
 
         this.addEventListener("dragover", function (e) {
-          move.style.cursor = "grabbing";
-          move.style.left = e.pageX - shiftX + 10 + "px";
-          move.style.top = e.pageY - shiftY + "px";
+          this.style.cursor = "grabbing";
+          this.style.left = e.pageX - shiftX + 10 + "px";
+          this.style.top = e.pageY - shiftY + "px";
         });
 
         this.addEventListener("mouseup", function () {
-          move.style.cursor = "pointer";
+          this.style.cursor = "pointer";
           e.stopImmediatePropagation;
         });
       });

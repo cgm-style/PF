@@ -320,7 +320,7 @@
 .secondSection1WrapDiv:nth-last-child(4n)   {
     top: 0px;
 }
-.secondSection1WrapDivText  {padding-top: 5px;}
+.secondSection1WrapDivText  {padding-top: 5px; color: black;}
 .secondSection1WrapDivTextP {}
 .secondSection1WrapDivTextP:first-child {
     font-size: 3.5vh;
@@ -340,11 +340,11 @@
     padding-left: 10px;
 }
 .secondSection1WrapDivTextP:last-child {
-    font-size: 2vh;
+    font-size: 1.8vh;
     margin-top: 0px;
     float: left;
     text-align: left;
-    width: 100%;
+    width: 96%;
     padding-left: 10px;
 }
 
@@ -500,6 +500,7 @@
     opacity: 0;
     transition: all 1s;
     top: 60%;
+    text-shadow: 1px 1px 5px;
 }
 
 @media (max-width: 767px){  /*모바일*/
@@ -508,6 +509,7 @@
         height: auto;
         width: 100%;
         display: inline-block;
+        padding-bottom: 50px;
     }
     #secondSection1WrapP    {
         margin-top: -75px;
@@ -515,7 +517,7 @@
     }
     .secondSection1WrapDiv  {
         width: 43%;
-        height: 390px;
+        height: 420px;
         display: inline-block;
         margin: 30px 12px;
         filter: grayscale(0);
@@ -545,6 +547,11 @@
     #secondSection3 p:nth-of-type(2)    {
         margin-top: -160px;
         font-size: 2.5vh;
+    }
+    
+    .secondSection1WrapDivTextP:last-child  {
+        width:90%;
+        font-size:1.5vh;
     }
 }
 @media (min-width: 768px) and (max-width: 991px) {  /* 테블릿 세로 */
