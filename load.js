@@ -40,7 +40,11 @@ let nextNum = 0,
 
 const user = navigator.userAgent; // Pc/Mobile 체크
 let isCheck = false;
-if (user.indexOf("iPhone") > -1 || user.indexOf("Android") > -1 || user.indexOf("iPad") > -1) {
+if (
+  user.indexOf("iPhone") > -1 ||
+  user.indexOf("Android") > -1 ||
+  user.indexOf("iPad") > -1
+) {
   isCheck = true;
 }
 
@@ -154,10 +158,11 @@ function addTopBtns(Wrap, text) {
 
   addTopBtnContainerTitle.innerText = `${text}`;
 
-  setTimeout(() => {  // 창이 여러개 켜질경우 제목 옆에 (숫자)를 넣어줌으로 몇개의 창이 생성되었는지 보여주는 값
+  setTimeout(() => {
+    // 창이 여러개 켜질경우 제목 옆에 (숫자)를 넣어줌으로 몇개의 창이 생성되었는지 보여주는 값
     let checkWrapNum = addTopBtnContainer.parentElement.classList[0];
     let WrapNumTitle = document.querySelectorAll(`.${checkWrapNum}`);
-    if(WrapNumTitle.length >= 2)  {
+    if (WrapNumTitle.length >= 2) {
       addTopBtnContainerTitle.innerText = `${text}(${WrapNumTitle.length})`;
     }
   }, 50);
@@ -636,16 +641,30 @@ function addPlayer() {
     onOff = !onOff; // on off 체인지
   }
 
-  function playDefaultSet() { // 이부분임
-    playerContainerUrlTitelP.innerText = `${audio.attributes[1].value.slice(6)}`; // 노래 제목
-    playerWrap.children[0].children[0].innerText = `${audio.attributes[1].value.slice(6)}`;
+  function playDefaultSet() {
+    // 이부분임
+    playerContainerUrlTitelP.innerText = `${audio.attributes[1].value.slice(
+      6
+    )}`; // 노래 제목
+    playerWrap.children[0].children[0].innerText = `${audio.attributes[1].value.slice(
+      6
+    )}`;
 
-    setTimeout(() => {  // 창이 여러개 켜질경우 제목 옆에 (숫자)를 넣어줌으로 몇개의 창이 생성되었는지 보여주는 값 (player)는 노래 제목이 들어가야 함으로 별개의 함수로 다시 설정
-      let checkPlayerWrapNum = playerContainerUrlTitelP.parentElement.parentElement.parentElement.classList[0];
-      let PlayerWrapNumTitle = document.querySelectorAll(`.${checkPlayerWrapNum}`);
-      if(PlayerWrapNumTitle.length >= 2)  {
-        playerContainerUrlTitelP.innerText = `${audio.attributes[1].value.slice(6)}(${PlayerWrapNumTitle.length})`; // 노래 제목
-        playerWrap.children[0].children[0].innerText = `${audio.attributes[1].value.slice(6)}(${PlayerWrapNumTitle.length})`;
+    setTimeout(() => {
+      // 창이 여러개 켜질경우 제목 옆에 (숫자)를 넣어줌으로 몇개의 창이 생성되었는지 보여주는 값 (player)는 노래 제목이 들어가야 함으로 별개의 함수로 다시 설정
+      let checkPlayerWrapNum =
+        playerContainerUrlTitelP.parentElement.parentElement.parentElement
+          .classList[0];
+      let PlayerWrapNumTitle = document.querySelectorAll(
+        `.${checkPlayerWrapNum}`
+      );
+      if (PlayerWrapNumTitle.length >= 2) {
+        playerContainerUrlTitelP.innerText = `${audio.attributes[1].value.slice(
+          6
+        )}(${PlayerWrapNumTitle.length})`; // 노래 제목
+        playerWrap.children[0].children[0].innerText = `${audio.attributes[1].value.slice(
+          6
+        )}(${PlayerWrapNumTitle.length})`;
       }
     }, 50);
     audio.addEventListener("loadeddata", (event) => {
@@ -695,20 +714,22 @@ function addPlayer() {
   }
 
   function urlTyping(e) {
-    if(e.type === "submit"){  // 보낸 이벤트가 submit한 이벤트 일 경우 submit막기
+    if (e.type === "submit") {
+      // 보낸 이벤트가 submit한 이벤트 일 경우 submit막기
       e.preventDefault();
     }
 
     let typing = "";
 
-    if(e.type != undefined){  // submit값은 .target으로 아이콘을 클릭한 값은 바로 값을 입력
+    if (e.type != undefined) {
+      // submit값은 .target으로 아이콘을 클릭한 값은 바로 값을 입력
       if (e.target[1]) {
         // 입력된 url
         typing = e.target[1].value;
-      }else {
+      } else {
         typing = e.target[0].value;
       }
-    }else {
+    } else {
       typing = e;
     }
 
@@ -782,12 +803,14 @@ function addPlayer() {
             </path>
         </svg>
     `;
-    playerWrap.children[0].children[0].innerText = `youtube Player`;  // youtube player 부분
+    playerWrap.children[0].children[0].innerText = `youtube Player`; // youtube player 부분
 
-    UrlContainerFormIcon.addEventListener("click", () => {  // 새로 생성된 youtube창 url 부분 클릭
+    UrlContainerFormIcon.addEventListener("click", () => {
+      // 새로 생성된 youtube창 url 부분 클릭
       UrlContainerFormIcon.classList.toggle("rotate");
       UrlContainerFormInput.classList.toggle("open");
-      if(UrlContainerFormInput.value != ""){// 엔터가 아닌 url 아이콘 부분 클릭해도 넘어가도록 
+      if (UrlContainerFormInput.value != "") {
+        // 엔터가 아닌 url 아이콘 부분 클릭해도 넘어가도록
         UrlContainer.remove();
         urlTyping(UrlContainerFormInput.value);
       }
@@ -807,17 +830,20 @@ function addPlayer() {
   playerContainerControllerNext.addEventListener("click", nextSong); // 다음 버튼 이벤트
   playerContainerControllerPrev.addEventListener("click", prevSong); // 이전 버튼 이벤트
 
-  playerContainerUrlInnerDiv.addEventListener("click", (e) => { // 기존 영역 url아이콘 클릭시 이벤트
+  playerContainerUrlInnerDiv.addEventListener("click", (e) => {
+    // 기존 영역 url아이콘 클릭시 이벤트
     // url부분 클릭시 이벤트
     playerContainerUrlInnerDiv.classList.toggle("rotate");
     playerContainerUrlInnerInput.classList.toggle("open");
-    if(playerContainerUrlInnerInput.value != ""){ // 엔터가 아닌 url 아이콘 부분 클릭해도 넘어가도록 
+    if (playerContainerUrlInnerInput.value != "") {
+      // 엔터가 아닌 url 아이콘 부분 클릭해도 넘어가도록
       urlTyping(playerContainerUrlInnerInput.value);
     }
   });
   moveWrapAction(); // 창 이동 이벤트 재 할당
 }
-if (isCheck === false) {//pc일때만 플레이어 기본 생성
+if (isCheck === false) {
+  //pc일때만 플레이어 기본 생성
   addPlayer();
 }
 
@@ -830,9 +856,9 @@ const mainBarEvent = () => {
   stickyBarTop.style.bottom = "6.6%";
   mainWrap.style.transform = "scale(0.5)rotate(180deg)";
   PfPageWrap.style.opacity = "1";
-  if(isCheck){
+  if (isCheck) {
     stickyBarTop.style.bottom = "6.6%";
-  }else {
+  } else {
     stickyBarTop.style.bottom = "12.6%";
   }
 
@@ -863,20 +889,19 @@ function moveWrapAction() {
     // moveWrap이라는 클래스를 가지면 움직일수있음
     if (isCheck === true) {
       move.addEventListener("touchstart", function (e) {
-        
         // 모바일 퀵 버튼 부분 move 이벤트
         move.style.zIndex = "4";
         this.style.zIndex = "5";
         let shiftX =
-              e.changedTouches[0].clientX - this.getBoundingClientRect().left,
-            shiftY =
-              e.changedTouches[0].clientY - this.getBoundingClientRect().top,
-            traget = null;
+            e.changedTouches[0].clientX - this.getBoundingClientRect().left,
+          shiftY =
+            e.changedTouches[0].clientY - this.getBoundingClientRect().top,
+          traget = null;
         move.addEventListener("touchmove", function (e) {
-          if(e.stopPropagation) e.stopPropagation();
-          if(e.preventDefault) e.preventDefault();
-          e.cancelBubble=true;
-          e.returnValue=false;
+          if (e.stopPropagation) e.stopPropagation();
+          if (e.preventDefault) e.preventDefault();
+          e.cancelBubble = true;
+          e.returnValue = false;
 
           this.style.left = e.changedTouches[0].pageX - shiftX + "px";
           this.style.top = e.changedTouches[0].pageY - shiftY + "px";
@@ -993,7 +1018,6 @@ function addWeatherBox() {
 if (isCheck === false) {
   addWeatherBox();
 }
-
 
 function autoText(_, counter = 0) {
   // 계산기 부분
@@ -1174,9 +1198,10 @@ function autoText(_, counter = 0) {
           value = value.slice(1, value.length);
         }
         calculatorAnswerValue.push(value, set);
-        setTimeout(() => {  // 계산값에 대한 현재 입력되어 있는 값
+        setTimeout(() => {
+          // 계산값에 대한 현재 입력되어 있는 값
           calculatorHintWrap.style.paddingRight = `5px`;
-          calculatorHintWrap.innerText = `${calculatorAnswerValue[0]}${calculatorAnswerValue[1]}`
+          calculatorHintWrap.innerText = `${calculatorAnswerValue[0]}${calculatorAnswerValue[1]}`;
           calculatorInput.value = "";
         }, 100);
       } else if (!isNaN(set)) {
@@ -1230,7 +1255,7 @@ function autoText(_, counter = 0) {
           }
         }
         calculatorHintWrap.style.paddingRight = 0;
-        calculatorHintWrap.innerText = "";  // 힌트 삭제
+        calculatorHintWrap.innerText = ""; // 힌트 삭제
         calculatorInput.value = calculatorAnswerValue; // 연산된 값 출력
         calculatorAnswerValue = []; // 출력후 값으 저장되었던 배열 삭제
       }
@@ -1238,6 +1263,8 @@ function autoText(_, counter = 0) {
     calculatorLi1.addEventListener("click", function (e) {
       // 초기화 버튼 액션
       calculatorAnswerValue = [];
+      calculatorHintWrap.style.paddingRight = 0;
+      calculatorHintWrap.innerText = ""; // 힌트 삭제
       setTimeout(() => {
         calculatorInput.value = "";
       }, 10);
@@ -1261,9 +1288,9 @@ function autoText(_, counter = 0) {
       footerWrap.childNodes[3].style.background = "rgba(100, 100, 255, 0.3)";
     }
   });
-  UIBoxInnerDiv4.addEventListener("click",()=>{
-      calculator();
-      footerWrap.childNodes[1].style.background = "rgba(100, 100, 255, 0.3)";
+  UIBoxInnerDiv4.addEventListener("click", () => {
+    calculator();
+    footerWrap.childNodes[1].style.background = "rgba(100, 100, 255, 0.3)";
   });
 
   // 하단 퀵 버튼 생성 함수
@@ -1313,8 +1340,8 @@ function autoText(_, counter = 0) {
   // 화면 하단 퀵 버튼
   if (isCheck === false) {
     footerQuick(
-      1,  // 순서
-      false,  // 하단 퀵바에서 true시 기본 선택으로 바뀜
+      1, // 순서
+      false, // 하단 퀵바에서 true시 기본 선택으로 바뀜
       `<?xml version="1.0" ?><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.5,8H6v.5a1,1,0,0,0,2,0V8h.5a1,1,0,0,0,0-2H8V5.5a1,1,0,0,0-2,0V6H5.5a1,1,0,0,0,0,2ZM4.88,19.12a1,1,0,0,0,1.41,0L7,18.41l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41L8.41,17l.71-.71a1,1,0,0,0-1.41-1.41L7,15.59l-.71-.71a1,1,0,0,0-1.41,1.41l.71.71-.71.71A1,1,0,0,0,4.88,19.12ZM20,1H4A3,3,0,0,0,1,4V20a3,3,0,0,0,3,3H20a3,3,0,0,0,3-3V4A3,3,0,0,0,20,1ZM11,21H4a1,1,0,0,1-1-1V13h8Zm0-10H3V4A1,1,0,0,1,4,3h7Zm10,9a1,1,0,0,1-1,1H13V13h8Zm0-9H13V3h7a1,1,0,0,1,1,1Zm-5.5,5.5h3a1,1,0,0,0,0-2h-3a1,1,0,0,0,0,2ZM18.5,6h-3a1,1,0,0,0,0,2h3a1,1,0,0,0,0-2Zm-3,13.5h3a1,1,0,0,0,0-2h-3a1,1,0,0,0,0,2Z" fill="#764ba2"/></svg>`
     );
     footerQuick(
@@ -1332,7 +1359,7 @@ function autoText(_, counter = 0) {
       true,
       `<?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg id="Layer_1" style="enable-background:new 0 0 64 64;" version="1.1" viewBox="0 0 64 64" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style type="text/css">.st0{fill:#764ba2;}</style><g><g id="Icon-Play" transform="translate(128.000000, 278.000000)"><path class="st0" d="M-95.9-222c-13.2,0-23.9-10.7-23.9-23.9s10.7-23.9,23.9-23.9S-72-259.1-72-245.9     S-82.7-222-95.9-222L-95.9-222z M-95.9-267.2c-11.7,0-21.3,9.6-21.3,21.3c0,11.7,9.6,21.3,21.3,21.3s21.3-9.6,21.3-21.3     C-74.6-257.7-84.2-267.2-95.9-267.2L-95.9-267.2z" id="Fill-124"/><path class="st0" d="M-103-233.6v-24.7l21.2,12.4L-103-233.6L-103-233.6z M-100.2-253.4v14.9l12.7-7.4     L-100.2-253.4L-100.2-253.4z" id="Fill-125"/></g></g></svg>`
     );
-  }else{
+  } else {
     footerQuick(
       1,
       false,

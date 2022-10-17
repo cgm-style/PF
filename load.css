@@ -485,7 +485,7 @@ html{background-color:#667eea;}
 
 .calculatorWrap {
     width: 320px;
-    height:509px;
+    height:auto;
     position: absolute;
     left: 30px;
     top: 10%;
@@ -500,7 +500,7 @@ html{background-color:#667eea;}
     border: 3px solid gray;
 }
 .calculatorWrapCotainer {
-    height: 485px;
+    height: auto;
     overflow: hidden;
     border-radius: 0px;
     transition: all 0.5s;
