@@ -683,15 +683,21 @@ function addPlayer() {
   }
 
   function urlTyping(e) {
-    e.preventDefault();
+    if(e.type === "submit"){  // 보낸 이벤트가 submit한 이벤트 일 경우 submit막기
+      e.preventDefault();
+    }
 
     let typing = "";
 
-    if (e.target[1]) {
-      // 입력된 url
-      typing = e.target[1].value;
-    } else {
-      typing = e.target[0].value;
+    if(e.type != undefined){  // submit값은 .target으로 아이콘을 클릭한 값은 바로 값을 입력
+      if (e.target[1]) {
+        // 입력된 url
+        typing = e.target[1].value;
+      }else {
+        typing = e.target[0].value;
+      }
+    }else {
+      typing = e;
     }
 
     let checkTypingUrl = "";
@@ -765,10 +771,14 @@ function addPlayer() {
         </svg>
     `;
     playerWrap.children[0].children[0].innerText = `youtube Player`;  // youtube player 부분
-    UrlContainerFormIcon.addEventListener("click", () => {
-      // url부분 클릭시 이벤트
+
+    UrlContainerFormIcon.addEventListener("click", () => {  // 새로 생성된 youtube창 url 부분 클릭
       UrlContainerFormIcon.classList.toggle("rotate");
       UrlContainerFormInput.classList.toggle("open");
+      if(UrlContainerFormInput.value != ""){// 엔터가 아닌 url 아이콘 부분 클릭해도 넘어가도록 
+        UrlContainer.remove();
+        urlTyping(UrlContainerFormInput.value);
+      }
     });
 
     UrlContainerForm.addEventListener("submit", (e) => {
@@ -785,10 +795,15 @@ function addPlayer() {
   playerContainerControllerNext.addEventListener("click", nextSong); // 다음 버튼 이벤트
   playerContainerControllerPrev.addEventListener("click", prevSong); // 이전 버튼 이벤트
 
-  playerContainerUrlInnerDiv.addEventListener("click", (e) => {
+  playerContainerUrlInnerDiv.addEventListener("click", (e) => { // 기존 영역 url아이콘 클릭시 이벤트
     // url부분 클릭시 이벤트
     playerContainerUrlInnerDiv.classList.toggle("rotate");
     playerContainerUrlInnerInput.classList.toggle("open");
+    console.log(playerContainerUrlInnerInput.value);
+    if(playerContainerUrlInnerInput.value != ""){ // 엔터가 아닌 url 아이콘 부분 클릭해도 넘어가도록 
+      console.log("작동");
+      urlTyping(playerContainerUrlInnerInput.value);
+    }
   });
   moveWrapAction(); // 창 이동 이벤트 재 할당
 }
