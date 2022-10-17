@@ -516,20 +516,22 @@
         margin-bottom: 45px;
     }
     .secondSection1WrapDiv  {
-        width: 43%;
-        height: 420px;
+        width: 90%;
+        height: 380px;
         display: inline-block;
-        margin: 30px 12px;
+        margin: 15px 12px;
+        top: 0px !important;
         filter: grayscale(0);
+        background: linen;
     }
     .secondSection1WrapDivTextP:first-child {
         font-size: 2.5vh;
     }
     .secondSection1WrapDivPc    {
-        height: 140px;
+        height: 190px;
     }
     .secondSection1WrapDivMo    {
-        height: 100px;
+        height: 160px;
     }
     #menuLineDiv2   {
         left: -96%;
@@ -541,11 +543,16 @@
         left: -268%;
     }
 
+    #secondSection3 {
+        height: 230px;
+        padding-bottom: 10px;
+    }
     #secondSection3 p:nth-of-type(1)    {
         font-size: 3vh;
+        margin-top:63px
     }
     #secondSection3 p:nth-of-type(2)    {
-        margin-top: -160px;
+        margin-top: -41px;
         font-size: 2.5vh;
     }
     
