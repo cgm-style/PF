@@ -455,7 +455,7 @@ function firstPage() {
       secondSection2Title.innerText = `사용언어 & Tool`;
 
       mainWrap.style.cursor = `auto`;
-      useSkill(1,`html5.png`,90,10);
+      useSkill(1,`html5.png`,90,10);  // 넘버,이미지,내 기술%,남은 빈칸
       useSkill(2,`css3.png`,80,20);
       useSkill(3,`jquery.png`,80,20);
       useSkill(4,`js.png`,90,10);
@@ -668,7 +668,7 @@ function firstPage() {
 
     setTimeout(() => {
       // Pf생성 부분
-      addPfArea(
+      addPfArea(  // 넘버,타이틀글자,참여도,간략소개,pc이미지,mo이미지,연결링크
         1,
         `paparecipe-KR`,
         `참여도 : 100%`,

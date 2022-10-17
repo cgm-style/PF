@@ -227,7 +227,7 @@ function addCodeWrap() {
 
   firstliLastButton.innerText = "입력";
   firstliLastInput.autocomplete = "off";
-  firstliLastInput.placeholder = "'자세히보기'또는 '도움말'이라고 입력해주세요";
+  firstliLastInput.placeholder = "'포폴보기'또는 '도움말'이라고 입력해주세요";
 
   function autoTyping(text, textContainer, textNum) {
     // 넘겨받을 텍스트, 해당 텍스트를 보여줄 dom,중지할 이벤트 이름
@@ -350,7 +350,7 @@ function addCodeWrap() {
 
     let inputTypingText = firstliLastEvent.target[0].value;
 
-    if (inputTypingText === "자세히보기") {
+    if (inputTypingText === "포폴보기") {
       mainBarEvent();
       return false;
     }
@@ -532,6 +532,7 @@ function addPlayer() {
 
   let onOff = false; // 재생 유무
   let audio = new Audio("music/A Typical Ride Out - Noir Et Blanc Vie.mp3"); // 디폴트값의 노래
+  audio.pause();
   let sec = 0; // 노래 진행 시간초
   let songCount = 0; // 플레이 리스트 넘버 체크
   let fixDefaultMin = "";
