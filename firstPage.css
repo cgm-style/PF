@@ -414,6 +414,7 @@
 #secondSection2 {
     padding-bottom: 60px;
     background: coral;
+    overflow: hidden;
 }
 #secondSection2Title    {
     padding: 25px;
