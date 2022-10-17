@@ -500,7 +500,7 @@
     opacity: 0;
     transition: all 1s;
     top: 60%;
-    text-shadow: 1px 1px 5px;
+    text-shadow: 1px 1px 5px black;
 }
 
 @media (max-width: 767px){  /*모바일*/
@@ -541,6 +541,12 @@
     }
     #menuLineDiv3   {
         left: -268%;
+    }
+
+    .menuNavLiA:before  {
+        font-size: 3em;
+        left: 50%;
+
     }
 
     #secondSection3 {

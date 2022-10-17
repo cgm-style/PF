@@ -40,7 +40,6 @@ let nextNum = 0,
 
 const user = navigator.userAgent; // Pc/Mobile 체크
 let isCheck = false;
-console.dir(user);
 if (user.indexOf("iPhone") > -1 || user.indexOf("Android") > -1 || user.indexOf("iPad") > -1) {
   isCheck = true;
 }
@@ -153,7 +152,15 @@ function addTopBtns(Wrap, text) {
   addTopBtnContainer.appendChild(addTopBtnContainerMin);
   addTopBtnContainer.appendChild(addTopBtnContainerClose);
 
-  addTopBtnContainerTitle.innerText = text; // 창의 이름
+  addTopBtnContainerTitle.innerText = `${text}`;
+
+  setTimeout(() => {  // 창이 여러개 켜질경우 제목 옆에 (숫자)를 넣어줌으로 몇개의 창이 생성되었는지 보여주는 값
+    let checkWrapNum = addTopBtnContainer.parentElement.classList[0];
+    let WrapNumTitle = document.querySelectorAll(`.${checkWrapNum}`);
+    if(WrapNumTitle.length >= 2)  {
+      addTopBtnContainerTitle.innerText = `${text}(${WrapNumTitle.length})`;
+    }
+  }, 50);
 
   addTopBtnContainerClose.addEventListener("click", () => {
     // 닫기버튼 클릭시
@@ -629,13 +636,18 @@ function addPlayer() {
     onOff = !onOff; // on off 체인지
   }
 
-  function playDefaultSet() {
-    playerContainerUrlTitelP.innerText = `${audio.attributes[1].value.slice(
-      6
-    )}`; // 노래 제목
-    playerWrap.children[0].children[0].innerText = `${audio.attributes[1].value.slice(
-      6
-    )}`;
+  function playDefaultSet() { // 이부분임
+    playerContainerUrlTitelP.innerText = `${audio.attributes[1].value.slice(6)}`; // 노래 제목
+    playerWrap.children[0].children[0].innerText = `${audio.attributes[1].value.slice(6)}`;
+
+    setTimeout(() => {  // 창이 여러개 켜질경우 제목 옆에 (숫자)를 넣어줌으로 몇개의 창이 생성되었는지 보여주는 값 (player)는 노래 제목이 들어가야 함으로 별개의 함수로 다시 설정
+      let checkPlayerWrapNum = playerContainerUrlTitelP.parentElement.parentElement.parentElement.classList[0];
+      let PlayerWrapNumTitle = document.querySelectorAll(`.${checkPlayerWrapNum}`);
+      if(PlayerWrapNumTitle.length >= 2)  {
+        playerContainerUrlTitelP.innerText = `${audio.attributes[1].value.slice(6)}(${PlayerWrapNumTitle.length})`; // 노래 제목
+        playerWrap.children[0].children[0].innerText = `${audio.attributes[1].value.slice(6)}(${PlayerWrapNumTitle.length})`;
+      }
+    }, 50);
     audio.addEventListener("loadeddata", (event) => {
       // audio의 데이터가 로드 되었을때 실행
       playerContainerUrlTitelTime.innerText = `${convertTime(audio.duration)}`; // 노래의 길이
@@ -799,9 +811,7 @@ function addPlayer() {
     // url부분 클릭시 이벤트
     playerContainerUrlInnerDiv.classList.toggle("rotate");
     playerContainerUrlInnerInput.classList.toggle("open");
-    console.log(playerContainerUrlInnerInput.value);
     if(playerContainerUrlInnerInput.value != ""){ // 엔터가 아닌 url 아이콘 부분 클릭해도 넘어가도록 
-      console.log("작동");
       urlTyping(playerContainerUrlInnerInput.value);
     }
   });
@@ -990,6 +1000,7 @@ function autoText(_, counter = 0) {
   function calculator() {
     const calculatorWrap = document.createElement("div"),
       calculatorWrapCotainer = document.createElement("div"),
+      calculatorHintWrap = document.createElement("p"),
       calculatorForm = document.createElement("form"),
       calculatorInput = document.createElement("input"),
       calculatorPad = document.createElement("div"),
@@ -1012,13 +1023,14 @@ function autoText(_, counter = 0) {
       calculatorLi16 = document.createElement("li"),
       calculatorLi17 = document.createElement("li");
 
-    calculatorWrap.id = "calculatorWrap";
-    calculatorWrap.className = "moveWrap";
-    calculatorWrapCotainer.id = "calculatorWrapCotainer";
-    calculatorForm.id = "calculatorForm";
-    calculatorInput.id = "calculatorInput";
-    calculatorPad.id = "calculatorPad";
-    calculatorUl.id = "calculatorUl";
+    calculatorWrap.className = "calculatorWrap";
+    calculatorWrap.className += " moveWrap";
+    calculatorWrapCotainer.className = "calculatorWrapCotainer";
+    calculatorHintWrap.className = `calculatorHintWrap`;
+    calculatorForm.className = "calculatorForm";
+    calculatorInput.className = "calculatorInput";
+    calculatorPad.className = "calculatorPad";
+    calculatorUl.className = "calculatorUl";
     calculatorLi1.className = "calculatorLi";
     calculatorLi2.className = "calculatorLi";
     calculatorLi3.className = "calculatorLi";
@@ -1062,6 +1074,7 @@ function autoText(_, counter = 0) {
     addTopBtns(calculatorWrap, "calculator", 2);
     mainWrap.appendChild(calculatorWrap);
     calculatorWrap.appendChild(calculatorWrapCotainer);
+    calculatorForm.appendChild(calculatorHintWrap);
     calculatorWrapCotainer.appendChild(calculatorForm);
     calculatorForm.appendChild(calculatorInput);
     calculatorWrapCotainer.appendChild(calculatorPad);
@@ -1161,7 +1174,9 @@ function autoText(_, counter = 0) {
           value = value.slice(1, value.length);
         }
         calculatorAnswerValue.push(value, set);
-        setTimeout(() => {
+        setTimeout(() => {  // 계산값에 대한 현재 입력되어 있는 값
+          calculatorHintWrap.style.paddingRight = `5px`;
+          calculatorHintWrap.innerText = `${calculatorAnswerValue[0]}${calculatorAnswerValue[1]}`
           calculatorInput.value = "";
         }, 100);
       } else if (!isNaN(set)) {
@@ -1214,6 +1229,8 @@ function autoText(_, counter = 0) {
             calculatorAnswerValue.shift();
           }
         }
+        calculatorHintWrap.style.paddingRight = 0;
+        calculatorHintWrap.innerText = "";  // 힌트 삭제
         calculatorInput.value = calculatorAnswerValue; // 연산된 값 출력
         calculatorAnswerValue = []; // 출력후 값으 저장되었던 배열 삭제
       }
