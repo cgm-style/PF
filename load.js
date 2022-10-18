@@ -980,19 +980,23 @@ function addWeatherBox() {
         weatherWrapContainer.appendChild(weatherWrapPlace);
 
         weatherWrapTemperature.innerText = `${temperature.toFixed()}`;
-        if (nowWeather === "Clouds") {
+
+        if(nowWeather.indexOf("rain") === 0) {
+          console.log("작동")
+        }
+        if (nowWeather.indexOf("Clouds") === 0) {
           // 구름
           weatherWrapWeacther.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
-        } else if (nowWeather.indexOf("rain")) {
+        } else if (nowWeather.indexOf("rain") === 0) {
           // 비
           weatherWrapWeacther.innerHTML = `<i class="fa-solid fa-cloud-rain"></i>`;
-        } else if (nowWeather.indexOf("sun")) {
+        } else if (nowWeather.indexOf("sun") === 0 || nowWeather.indexOf("Clear") === 0) {
           // 맑음
           weatherWrapWeacther.innerHTML = `<i class="fa-solid fa-sun"></i>`;
-        } else if (nowWeather.indexOf("snow")) {
+        } else if (nowWeather.indexOf("snow") === 0) {
           // 눈
           weatherWrapWeacther.innerHTML = `<i class="fa-solid fa-snowflake"></i>`;
-        } else if (nowWeather.indexOf("strom")) {
+        } else if (nowWeather.indexOf("strom") === 0) {
           // 천둥
           weatherWrapWeacther.innerHTML = `<i class="fa-solid fa-cloud-rain"></i>`;
         }
