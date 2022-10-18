@@ -138,7 +138,7 @@ function firstPage() {
         <video id="mainText_C_Video" class="mainTextVideo" muted autoplay loop style="height:100%; width: auto;">
             <source src="https://drive.google.com/uc?export=download&id=1w0nvTwk7Gztd1i8IQwDWsUQjc-oLXxpH" type="video/mp4">
         </video>
-        <h1 class="moMainTitle" style="transition:all 2s; top:0px;">
+        <h1 class="moMainTitle" style="transition:all 2s; top:0px; opacity:0;">
             CGM STYLE<br/>
             <span>portFoilo</span>
             <span style="margin-top: 45px; font-weight: 300; left: 39%;">Click!</span>
@@ -157,6 +157,10 @@ function firstPage() {
       
       secondSection1.style.display = `flex`;
       secondSection1.style.justifyContent = `center`;
+
+      setTimeout(() => {
+        moMainTitle.style.opacity = 1;
+      }, 1000);
           
       function moVideoText(moVideoTextNum)  {
         const addMoVideoText = document.createElement("p");
