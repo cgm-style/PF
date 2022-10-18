@@ -1288,7 +1288,7 @@ function autoText(_, counter = 0) {
     );
   });
   UIBoxInnerDiv3.addEventListener("click", () => {
-    if (footerWrap.className.indexOf("active")) {
+    if (footerWrap.className.indexOf("active")===0) {
       addWeatherBox();
       footerWrap.childNodes[3].style.background = "rgba(100, 100, 255, 0.3)";
     }
