@@ -13,6 +13,25 @@ html{background-color:#667eea;}
     transition: all 0.5s;
 }
 
+.moNavconClickHint  {
+    position: absolute;
+    color: white;
+    font-weight: 100;
+    font-size: 20px;
+    left: 10px;
+    top: 100px;
+    font-family: monospace;
+    animation: naviconHintText 4s infinite alternate;
+}
+
+@keyframes naviconHintText {
+    0%{opacity: 0;}
+    25%{opacity: 0.7;}
+    50%{opacity: 0;}
+    75%{opacity: 0.7;}
+    100%{opacity: 0;}
+}
+
 .PfPageWrap {
     position: fixed;
     width: 120%;
@@ -611,8 +630,8 @@ html{background-color:#667eea;}
 /* 플레이어 css */
 .playerWrap {
     position: absolute;
-    width: 30%;
-    height: 40%;
+    width: 28%;
+    height: 35%;
     top: 49%;
     left: 2%;
     z-index: 2;
@@ -689,13 +708,29 @@ html{background-color:#667eea;}
 }
 .playerContainerUrlTitel    {
     position: relative;
-    width: 100%;
+    width: 90%;
     height: 30%;
+    margin: 0 auto;
     text-align: center;
+    overflow: hidden;
 }
-.playerContainerUrlTitelP   {
+.playerContainerUrlTitelDiv {
+    position: relative;
+    width: 250%;
+    animation: playerTitle 8s linear infinite;
+}
+
+@keyframes playerTitle {
+    0%{left: 0;}
+    100%{left: -124%;}
+}
+
+.playerContainerUrlTitelP,.playerContainerUrlTitelP2   {
     font-size: 2.5vh;
     color: coral;
+    float: left;
+    margin: 0 2.5% 0 0;
+    width: 47%;
 }
 .playerContainerUrlTitelTime    {}
 .playerContainerController  {
@@ -854,6 +889,11 @@ html{background-color:#667eea;}
         margin-top: -10%;
     }
 
+    .moNavconClickHint  {
+        top: 30px;
+        left: 110px;
+    }
+
     .codeWrap   {
         height: 40%;
         width: 80%;
@@ -863,13 +903,14 @@ html{background-color:#667eea;}
     }
 
     .playerWrap {
-        width: 95%;
+        width: 90%;
         height: 35%;
+        left: 5%;
     }
     .playerWrap .addTopBtnContainerTitle    {
         font-size: 13px;
     }
-    .playerContainerUrlTitelP   {
+    .playerContainerUrlTitelP,.playerContainerUrlTitelP2   {
         font-size: 2vh;
     }
 
@@ -909,6 +950,8 @@ html{background-color:#667eea;}
         height: 6.5%;
         background-image: repeating-linear-gradient(55deg, transparent, transparent 36px, rgba(255,255,255,0.8) 11px, rgba(255,255,255,0.8) 115px);
     }
+
+    
     
 }
 
@@ -931,7 +974,7 @@ html{background-color:#667eea;}
     .playerContainerUrlTitel   {
         height: 18%;
     }
-    .playerContainerUrlTitelP   {
+    .playerContainerUrlTitelP,.playerContainerUrlTitelP2   {
         font-size: 2vh;
     }
 
@@ -941,7 +984,7 @@ html{background-color:#667eea;}
     .playerWrap .addTopBtnContainerTitle    {
         font-size: 13px;
     }
-    .playerContainerUrlTitelP   {
+    .playerContainerUrlTitelP,.playerContainerUrlTitelP2   {
         font-size: 1.7vh;
     }
     .playerContainerUrlInnerInput.open  {

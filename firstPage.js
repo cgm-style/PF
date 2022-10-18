@@ -141,6 +141,7 @@ function firstPage() {
         <h1 class="moMainTitle" style="transition:all 2s; top:0px;">
             CGM STYLE<br/>
             <span>portFoilo</span>
+            <span style="margin-top: 45px; font-weight: 300; left: 39%;">Click!</span>
         </h1>
         `;
       
@@ -152,7 +153,6 @@ function firstPage() {
               `이 경험으로 창의성, 문제 해결력을<br/> 기르고 있습니다.`,
               `제 작업물들을 소개하겠습니다 :)`
             ];
-
       
       
       secondSection1.style.display = `flex`;

@@ -54,6 +54,7 @@ const mainWrap = document.querySelector("#wrap"), // 화면 전체 dom
   mainWrapBgTree = document.createElement("div"),
   mainWrapBgLines = document.createElement("div"),
   mainWrapBgText = document.createElement("p"),
+  moNavconClickHint = document.createElement("p"),
   footerWrap = document.createElement("div"), // 화면 하단의 footer
   footerWrapTime = document.createElement("div"),
   innerContainer = document.createElement("div"), // 실제 화면에서 보여지는 영역
@@ -99,6 +100,7 @@ function loadBar() {
   mainWrapBgTree.id = "mainWrapBgTree";
   mainWrapBgLines.id = "mainWrapBgLines";
   mainWrapBgText.id = "mainWrapBgText";
+  moNavconClickHint.className = "moNavconClickHint";
   footerWrap.id = "footerWrap";
   footerWrapTime.id = "footerWrapTime";
   stickyBarTop.id = "stickyBarTop"; // 각 dom마다 컨트롤 하기 쉽게 선택자 입력
@@ -114,6 +116,7 @@ function loadBar() {
 
   mainWrap.appendChild(footerWrap);
   footerWrap.appendChild(footerWrapTime);
+  mainWrap.appendChild(moNavconClickHint);
   mainWrap.appendChild(mainWrapBg);
   mainWrapBg.appendChild(mainWrapBgGradient);
   mainWrapBg.appendChild(mainWrapBgTree);
@@ -126,6 +129,7 @@ function loadBar() {
   UIBoxInner.appendChild(UIBoxInnerDiv3);
   UIBoxInner.appendChild(UIBoxInnerDiv4);
 
+  moNavconClickHint.innerText = "Click The Icon";
   mainWrapBgText.innerText = "CGM Style";
   UIBoxInnerDiv1.style = "--i:0;--x:0;--y:0;";
   UIBoxInnerDiv2.style = "--i:1;--x:2;--y:0;";
@@ -491,7 +495,9 @@ function addPlayer() {
     playerContainerUrlInnerDiv = document.createElement("div"),
     playerContainerUrlInnerInput = document.createElement("input"),
     playerContainerUrlTitel = document.createElement("div"),
+    playerContainerUrlTitelDiv = document.createElement("div"),
     playerContainerUrlTitelP = document.createElement("p"),
+    playerContainerUrlTitelP2 = document.createElement("p"),
     playerContainerUrlTitelTime = document.createElement("p"),
     playerContainerController = document.createElement("div"),
     playerContainerControllerPrev = document.createElement("div"),
@@ -507,7 +513,9 @@ function addPlayer() {
   playerContainerUrlInnerDiv.className = "playerContainerUrlInnerDiv";
   playerContainerUrlInnerInput.className = "playerContainerUrlInnerInput";
   playerContainerUrlTitel.className = "playerContainerUrlTitel";
+  playerContainerUrlTitelDiv.className = "playerContainerUrlTitelDiv";
   playerContainerUrlTitelP.className = "playerContainerUrlTitelP";
+  playerContainerUrlTitelP2.className = "playerContainerUrlTitelP2";
   playerContainerUrlTitelTime.className = "playerContainerUrlTitelTime";
   playerContainerController.className = "playerContainerController";
   playerContainerControllerPrev.className = "playerContainerControllerPrev";
@@ -523,7 +531,9 @@ function addPlayer() {
   playerContainerUrlInner.appendChild(playerContainerUrlInnerDiv);
   playerContainerUrlInner.appendChild(playerContainerUrlInnerInput);
   playerContainer.appendChild(playerContainerUrlTitel);
-  playerContainerUrlTitel.appendChild(playerContainerUrlTitelP);
+  playerContainerUrlTitel.appendChild(playerContainerUrlTitelDiv);
+  playerContainerUrlTitelDiv.appendChild(playerContainerUrlTitelP);
+  playerContainerUrlTitelDiv.appendChild(playerContainerUrlTitelP2);
   playerContainerUrlTitel.appendChild(playerContainerUrlTitelTime);
   playerContainer.appendChild(playerContainerController);
   playerContainerController.appendChild(playerContainerControllerPrev);
@@ -643,28 +653,21 @@ function addPlayer() {
 
   function playDefaultSet() {
     // 이부분임
-    playerContainerUrlTitelP.innerText = `${audio.attributes[1].value.slice(
-      6
-    )}`; // 노래 제목
+    playerContainerUrlTitelP.innerText = `${audio.attributes[1].value.slice(6 )}`; // 노래 제목
+    playerContainerUrlTitelP2.innerText = `${audio.attributes[1].value.slice(6 )}`; // 노래 제목
     playerWrap.children[0].children[0].innerText = `${audio.attributes[1].value.slice(
       6
     )}`;
 
     setTimeout(() => {
       // 창이 여러개 켜질경우 제목 옆에 (숫자)를 넣어줌으로 몇개의 창이 생성되었는지 보여주는 값 (player)는 노래 제목이 들어가야 함으로 별개의 함수로 다시 설정
-      let checkPlayerWrapNum =
-        playerContainerUrlTitelP.parentElement.parentElement.parentElement
-          .classList[0];
-      let PlayerWrapNumTitle = document.querySelectorAll(
-        `.${checkPlayerWrapNum}`
-      );
+      let checkPlayerWrapNum = playerContainerUrlTitelP.parentElement.parentElement.parentElement.classList[0];
+      let PlayerWrapNumTitle = document.querySelectorAll(`.${checkPlayerWrapNum}`);
+
       if (PlayerWrapNumTitle.length >= 2) {
-        playerContainerUrlTitelP.innerText = `${audio.attributes[1].value.slice(
-          6
-        )}(${PlayerWrapNumTitle.length})`; // 노래 제목
-        playerWrap.children[0].children[0].innerText = `${audio.attributes[1].value.slice(
-          6
-        )}(${PlayerWrapNumTitle.length})`;
+        playerContainerUrlTitelP.innerText = `${audio.attributes[1].value.slice(6)}(${PlayerWrapNumTitle.length})`; // 노래 제목
+        playerContainerUrlTitelP2.innerText = `${audio.attributes[1].value.slice(6)}(${PlayerWrapNumTitle.length})`; // 노래 제목
+        playerWrap.children[0].children[0].innerText = `${audio.attributes[1].value.slice(6)}(${PlayerWrapNumTitle.length})`;
       }
     }, 50);
     audio.addEventListener("loadeddata", (event) => {
@@ -880,6 +883,7 @@ loadBar();
 
 UIBox.addEventListener("click", function (e) {
   UIBox.classList.toggle("active");
+  moNavconClickHint.remove();
 });
 
 function moveWrapAction() {
@@ -914,10 +918,7 @@ function moveWrapAction() {
     } else {
       move.addEventListener("dragstart", function (e) {
         // pc 퀵 버튼 부분 move 이벤트
-        moveWrap.forEach((move) => {
-          // 클릭한 창 외의 움직이는 창들의 z-index를 4로 하여 뒤로
-          move.style.zIndex = "4";
-        });
+        move.style.zIndex = "4";
         this.style.zIndex = "5";
 
         let shiftX = e.clientX + 80 - this.getBoundingClientRect().left,
