@@ -861,7 +861,7 @@ html{background-color:#667eea;}
 .UrlContainerObjInner iframe    {
     position: absolute;
     width: 90%;
-    height: 99%;
+    height: 92%;
     left: 5%;
     filter: brightness(0.9);
 }
