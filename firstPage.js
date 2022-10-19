@@ -841,19 +841,20 @@ function firstPage() {
       useSkill(2,`css3.png`,80,20);
       useSkill(3,`jquery.png`,80,20);
       useSkill(4,`js.png`,90,10);
-      useSkill(5,`react.png`,20,80);
-      useSkill(6,`typeSript.png`,20,82);
-      useSkill(7,`git.png`,60,40);
-      useSkill(8,`code.png`,60,40);
-      useSkill(9,`photo.png`,50,50);
-      useSkill(10,`Ai.png`,40,60);
-      useSkill(11,`html5.png`,90,10);
-      useSkill(12,`css3.png`,80,20);
-      useSkill(13,`jquery.png`,80,20);
-      useSkill(14,`js.png`,90,10);
-      useSkill(15,`react.png`,20,80);
-      useSkill(16,`typeSript.png`,20,80);
-      useSkill(17,`git.png`,60,40);
+      useSkill(5,`sass.png`,50,50);
+      useSkill(6,`react.png`,20,80);
+      useSkill(7,`typeSript.png`,20,82);
+      useSkill(8,`git.png`,60,40);
+      useSkill(9,`code.png`,60,40);
+      useSkill(10,`photo.png`,50,50);
+      useSkill(11,`Ai.png`,40,60);
+      useSkill(12,`html5.png`,90,10);
+      useSkill(13,`css3.png`,80,20);
+      useSkill(14,`jquery.png`,80,20);
+      useSkill(15,`js.png`,90,10);
+      useSkill(16,`sass.png`,50,50);
+      useSkill(17,`react.png`,20,80);
+      useSkill(18,`typeSript.png`,20,80);
 
     function contact()  {
       const secondSection3P1 = document.createElement("p"),
