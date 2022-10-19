@@ -665,8 +665,8 @@ function addPlayer() {
       let PlayerWrapNumTitle = document.querySelectorAll(`.${checkPlayerWrapNum}`);
 
       if (PlayerWrapNumTitle.length >= 2) {
-        playerContainerUrlTitelP.innerText = `${audio.attributes[1].value.slice(6)}(${PlayerWrapNumTitle.length})`; // 노래 제목
-        playerContainerUrlTitelP2.innerText = `${audio.attributes[1].value.slice(6)}(${PlayerWrapNumTitle.length})`; // 노래 제목
+        playerContainerUrlTitelP.innerText = `${audio.attributes[1].value.slice(6)}`; // 노래 제목
+        playerContainerUrlTitelP2.innerText = `${audio.attributes[1].value.slice(6)}`; // 노래 제목
         playerWrap.children[0].children[0].innerText = `${audio.attributes[1].value.slice(6)}(${PlayerWrapNumTitle.length})`;
       }
     }, 50);
@@ -1282,10 +1282,8 @@ function autoText(_, counter = 0) {
       footerWrap.childNodes[4].style.background = "rgba(100, 100, 255, 0.3)";
   });
   UIBoxInnerDiv3.addEventListener("click", () => {
-    if (footerWrap.className.indexOf("active")===0) {
       addWeatherBox();
       footerWrap.childNodes[3].style.background = "rgba(100, 100, 255, 0.3)";
-    }
   });
   UIBoxInnerDiv4.addEventListener("click", () => {
     calculator();
