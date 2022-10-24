@@ -243,7 +243,7 @@ function addCodeWrap() {
 
   firstliLastButton.innerText = "입력";
   firstliLastInput.autocomplete = "off";
-  firstliLastInput.placeholder = "'포폴보기'또는 '도움말'이라고 입력해주세요";
+  firstliLastInput.placeholder = "'도움말'또는 '포폴보기'이라고 입력해주세요";
 
   function autoTyping(text, textContainer, textNum) {
     // 넘겨받을 텍스트, 해당 텍스트를 보여줄 dom,중지할 이벤트 이름

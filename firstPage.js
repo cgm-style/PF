@@ -1156,16 +1156,12 @@ function firstPage() {
 
   //버튼 클릭 이벤트
   menuSpan.addEventListener("click", addMenu);
-  menuNavLi1A.addEventListener("click", () => {
-    menuNav.remove();
+  /*menuNavLi1A.addEventListener("click", () => { nav의 이벤트
   });
   menuNavLi2A.addEventListener("click", () => {
-    menuNav.remove();
   });
   menuNavLi3A.addEventListener("click", () => {
-    menuNav.remove();
   });
   menuNavLi4A.addEventListener("click", () => {
-    menuNav.remove();
-  });
+  });*/
 }
