@@ -36,7 +36,17 @@ let nextNum = 0,
     timeStyle: "full",
   }).format(new Date()),
   calculatorAnswerValue = [],
-  calculatorSet = false;
+  calculatorSet = false,
+  songList = [
+    // 음악 플레이 리스트
+    `music/A Typical Ride Out - Noir Et Blanc Vie.mp3`,
+    `music/Easy Saturday - Bad Snacks.mp3`,
+    `music/Hot Hop Rok - Steve Adams.mp3`,
+    `music/Luly - Text Me Records _ Grandbankss.mp3`,
+    `music/Philly Crew - Danny Kean_Doug Maxwell.mp3`,
+    `music/Realism - Text Me Records _ Grandbankss.mp3`,
+    `music/Studio 2020 - Quincas Moreira.mp3`,
+  ];
 
 const user = navigator.userAgent; // Pc/Mobile 체크
 let isCheck = false;
@@ -50,6 +60,7 @@ if (
 
 const mainWrap = document.querySelector("#wrap"), // 화면 전체 dom
   mainWrapBg = document.createElement("div"),
+  themaWrap = document.createElement("div"),
   mainWrapBgGradient = document.createElement("div"),
   mainWrapBgTree = document.createElement("div"),
   mainWrapBgLines = document.createElement("div"),
@@ -96,6 +107,7 @@ function addPlayerGuide() {
 function loadBar() {
   // 기본 창들 생성
   mainWrapBg.id = "mainWrapBg";
+  themaWrap.id = "themaWrap";
   mainWrapBgGradient.id = "mainWrapBgGradient";
   mainWrapBgTree.id = "mainWrapBgTree";
   mainWrapBgLines.id = "mainWrapBgLines";
@@ -115,6 +127,7 @@ function loadBar() {
   innerContainer.id = "innerContainer";
 
   mainWrap.appendChild(footerWrap);
+  mainWrap.appendChild(themaWrap);
   footerWrap.appendChild(footerWrapTime);
   mainWrap.appendChild(moNavconClickHint);
   mainWrap.appendChild(mainWrapBg);
@@ -181,7 +194,7 @@ function addTopBtns(Wrap, text) {
       checkWeatherWrap = document.querySelector(".weatherWrap"), // 날씨창이 있는지 체크
       footerWrap = document.querySelector("#footerWrap");
 
-    if (!checkCalculatorWrap) {
+    if (!checkCalculatorWrap) { // 배경 투명
       footerWrap.childNodes[1].style.background = "transparent";
     }
     if (!checkCodeWrap) {
@@ -485,6 +498,128 @@ function addCodeWrap() {
 }
 addCodeWrap();
 
+themaWrap.addEventListener("click",()=>{
+  themaWrap.classList.toggle("active");
+})
+
+function addThema(themaNum,themaTitle,themaMainColor,themaSubColor,bgImg,bgImgBlack,bgColor){  // 테마 변경 부분 | 테마넘버,테마이름,메인컬러,서브컬러,중앙이미지,중앙이미지흑백,중앙배경색
+  themaWrap.appendChild(eval(`themaContainer${themaNum} = document.createElement("div")`));
+  eval(`themaContainer${themaNum}`).appendChild(eval(`themaContainer${themaNum}Inner = document.createElement("div")`));
+  eval(`themaContainer${themaNum}`).appendChild(eval(`themaContainer${themaNum}Title = document.createElement("p")`));
+  eval(`themaContainer${themaNum}Inner`).appendChild(eval(`themaContainer${themaNum}Color1 = document.createElement("div")`));
+  eval(`themaContainer${themaNum}Inner`).appendChild(eval(`themaContainer${themaNum}Color2 = document.createElement("div")`));
+
+  eval(`themaContainer${themaNum}`).className = `themaContainer`;
+  eval(`themaContainer${themaNum}Title`).className = `themaContainerTitle`;
+  eval(`themaContainer${themaNum}Inner`).className = `themaContainerInner`;
+  eval(`themaContainer${themaNum}Color1`).className = `themaContainerColor`;
+  eval(`themaContainer${themaNum}Color2`).className = `themaContainerColor`;
+
+  eval(`themaContainer${themaNum}Title`).innerText = themaTitle;
+  eval(`themaContainer${themaNum}Color1`).style.background = themaMainColor;
+  eval(`themaContainer${themaNum}Color2`).style.background = themaSubColor;
+
+  eval(`themaContainer${themaNum}`).addEventListener("click",()=>{  //  테마 색상대로 실질적 변경
+    mainWrap.style.border = `70px solid ${themaSubColor}`;  // 메인 border색상
+    mainWrap.style.background = `${themaMainColor}`;  // 메인 배경색상
+
+    mainWrapBgTree.style.backgroundImage = `url(${bgImg})`; // 메인 중앙 이미지
+    if(bgImgBlack === false){
+      mainWrapBgTree.style.filter = `blur(.5px)`; // 메인 중앙 이미지 흑백 처리
+    }else if(bgImgBlack === true){
+      mainWrapBgTree.style.filter = `brightness(0%) blur(.5px)`;
+    }
+    mainWrapBgGradient.style.backgroundImage= bgColor; // 메인 중앙 배경 컬러
+    mainWrapBg.style.boxShadow = `0px 0px 50px 0px ${themaSubColor}`;
+
+    const testOut = document.styleSheets[5];  // 텍스트 쉐도우
+    for(i=0;i <= testOut.rules.length-1; i++){
+      if(testOut.rules[i].cssText.indexOf("@keyframes textFlicker") != -1){ 
+        testOut.rules[i].appendRule(`0%, 18%, 22%, 25%, 53%, 57%, 100% {
+          text-shadow:
+          0 0 4px #fff,
+          0 0 11px #fff,
+          0 0 19px #fff,
+          0 0 40px ${themaSubColor} ,
+          0 0 80px ${themaSubColor} ,
+          0 0 90px ${themaSubColor} ,
+          0 0 100px ${themaSubColor} ,
+          0 0 150px ${themaSubColor} ;
+        }`)
+      }
+    }
+
+    const addThemaStyle = document.createElement("style");
+    document.head.appendChild(addThemaStyle);
+    // 각 테마마다 눌렸을때
+    if(themaNum === 1)  {
+      // 테마 스타일 변경
+      addThemaStyle.innerHTML=`
+        .codeWrap,.weatherWrap,.calculatorWrap {border: 3px solid rgb(253, 203, 241);}
+        #firstBg,.weatherWrapContainer,.playerContainer,.playerWrap .addTopBtnContainer  {background: rgb(255, 245, 228)}
+        #firstliLastInput,.calculatorLi {background: rgb(255, 245, 228); color: hotpink; border: 0px;}
+        .calculatorInput  {background:rgb(255, 245, 228); color:hotpink; border-bottom:2px solid hotpink}
+        .addTopBtnContainer {background:rgb(253, 203, 241);}
+        .weatherWrapPlace {color:rgb(253, 203, 241)}
+        .playerWrap {border:1px solid rgb(255, 245, 228);
+          box-shadow :
+          0 2px 2px rgb(253, 203, 241 / 25%),
+          0 4px 4px rgb(253, 203, 241 / 20%),
+          0 8px 8px rgb(253, 203, 241 / 15%),
+          0 16px 16px rgb(253, 203, 241 / 10%),
+          0 24px 24px rgb(253, 203, 241 / 5%)
+        }
+        #footerWrap {background: pink;}
+        .weatherWrapTemperature,.weatherWrapWeacther i {background-image:${themaMainColor}}
+        #firstBg::-webkit-scrollbar {background-color: hotpink;}
+        #firstliLastButton  {background:hotpink;}
+        .firstLi  {color: hotpink;}
+        .firstLiDiv {border-right: 1px solid indianred;}
+      `
+      // 노래 리스트 변경
+      songList = [
+        `music/Spring Fling - TrackTribe.mp3`,
+        `music/English Country Garden - Aaron Kenny.mp3`,
+        `music/No.9_Esther’s Waltz - Esther Abrami.mp3`,
+        `music/Swans In Flight - Asher Fulero.mp3`
+      ]
+    }else if (themaNum === 2){
+      addThemaStyle.innerHTML=`
+        .codeWrap,.weatherWrap,.calculatorWrap {border: 3px solid #4facfe;}
+        #firstBg,.weatherWrapContainer,.playerContainer,.playerWrap .addTopBtnContainer  {background: #E1FFEE}
+        #firstliLastInput,.calculatorLi {background: #E1FFEE; color: #68e0cf; border: 0px;}
+        .calculatorInput  {background:#E1FFEE; color:#68e0cf; border-bottom:2px solid #68e0cf}
+        .addTopBtnContainer {background:#4facfe;}
+        .weatherWrapPlace,.playerContainerUrlTitelP,.playerContainerUrlTitelP2 {color:#4facfe}
+        .playerWrap {border:1px solid #E1FFEE;
+          box-shadow :
+            0 2px 2px rgb(253 203 241 / 25%),
+            0 4px 4px rgb(253 203 241 / 20%),
+            0 8px 8px rgb(253 203 241 / 15%),
+            0 16px 16px rgb(253 203 241 / 10%),
+            0 24px 24px rgb(253 203 241 / 5%);
+        }
+        .playerContainerControllerOnOff svg,.playerContainerUrlInnerDiv svg path {fill:#4facfe;}
+        .playerContainerControllerOnOff,.playerContainerUrlInnerDiv {border:2px solid #4facfe;}
+        #footerWrap {background: #68e0cf;}
+        .weatherWrapTemperature,.weatherWrapWeacther i,.playerContainerControllerNext,.playerContainerControllerPrev {background-image:${themaMainColor}}
+        #firstBg::-webkit-scrollbar {background-color: #68e0cf;}
+        #firstliLastButton  {background:#68e0cf;}
+        .firstLi  {color: #68e0cf;}
+        .firstLiDiv {border-right: 1px solid #68e0cf;}
+      `
+    }
+    
+  })
+}
+addThema(1,"Spring",`linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%)`,"#FFF5E4",`/img/Spring.png`,true,`linear-gradient(-20deg, #ddd6f3 0%, #faaca8 100%, #faaca8 100%)`);
+addThema(2,"Summer",`linear-gradient(to right, #4facfe 0%, #00f2fe 100%)`,"#E1FFEE",`/img/Summer.png`,true,`linear-gradient(to top, #209cff 0%, #68e0cf 100%)`);
+addThema(3,"Fall",`linear-gradient(to right, #594545 0%, #9E7676 100%)`,"#D0B8A8",`/img/Fall.png`,true,`linear-gradient(to top, #c79081 0%, #dfa579 100%)`);
+addThema(3,"Winter",`linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)`,"#f5f7fa",`/img/Winter.png`,true,`linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)`);
+addThema(4,"Halloween",`linear-gradient(45deg, #420516 0%, #000000 100%)`,"#FF7600",`/img/Halloween.png`,true,`linear-gradient(-60deg, #ff5858 0%, #f09819 100%)`);
+addThema(5,"Christmas",`linear-gradient(45deg, #E84A5F 0%, #A20A0A 100%)`,"#4E9525",`/img/Christmas.png`,false,`linear-gradient(120deg, #f6d365 0%, #fda085 100%)`);
+addThema(6,"yourChoise","black","black");
+
 function addPlayer() {
   // 플레이어 생성
   const playerWrap = document.createElement("div"),
@@ -560,17 +695,6 @@ function addPlayer() {
   let fixDefaultMin = "";
 
   audio.autoplay = true;
-
-  const songList = [
-    // 음악 플레이 리스트
-    `music/A Typical Ride Out - Noir Et Blanc Vie.mp3`,
-    `music/Easy Saturday - Bad Snacks.mp3`,
-    `music/Hot Hop Rok - Steve Adams.mp3`,
-    `music/Luly - Text Me Records _ Grandbankss.mp3`,
-    `music/Philly Crew - Danny Kean_Doug Maxwell.mp3`,
-    `music/Realism - Text Me Records _ Grandbankss.mp3`,
-    `music/Studio 2020 - Quincas Moreira.mp3`,
-  ];
 
   playerContainerUrlInnerVolume.addEventListener("input", (e) => {
     // 볼륨 컨트롤 부분
@@ -652,7 +776,6 @@ function addPlayer() {
   }
 
   function playDefaultSet() {
-    // 이부분임
     playerContainerUrlTitelP.innerText = `${audio.attributes[1].value.slice(6 )}`; // 노래 제목
     playerContainerUrlTitelP2.innerText = `${audio.attributes[1].value.slice(6 )}`; // 노래 제목
     playerWrap.children[0].children[0].innerText = `${audio.attributes[1].value.slice(
@@ -890,12 +1013,12 @@ function moveWrapAction() {
   // 창 이동 함수
   let moveWrap = document.querySelectorAll(".moveWrap");
   moveWrap.forEach((move) => {
+    move.style.zIndex = "4";
     // moveWrap이라는 클래스를 가지면 움직일수있음
     if (isCheck === true) {
       move.addEventListener("touchstart", function (e) {
         // 모바일 퀵 버튼 부분 move 이벤트
-        move.style.zIndex = "4";
-        this.style.zIndex = "5";
+        move.style.zIndex = "5";
         let shiftX =
             e.changedTouches[0].clientX - this.getBoundingClientRect().left,
           shiftY =
@@ -918,8 +1041,7 @@ function moveWrapAction() {
     } else {
       move.addEventListener("dragstart", function (e) {
         // pc 퀵 버튼 부분 move 이벤트
-        move.style.zIndex = "4";
-        this.style.zIndex = "5";
+        move.style.zIndex = "5";
 
         let shiftX = e.clientX + 80 - this.getBoundingClientRect().left,
           shiftY = e.clientY + 70 - this.getBoundingClientRect().top;
@@ -1137,7 +1259,10 @@ function autoText(_, counter = 0) {
         allKey.style.background = "dimgrey";
         setTimeout(() => {
           allKey.style.background = `linear-gradient(135deg, #2a2a2a, #000000)`;
-        }, 100);
+        }, 50);
+        setTimeout(()=>{
+          allKey.style.background = "";
+        },100)
       });
     });
 

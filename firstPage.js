@@ -383,7 +383,7 @@ function firstPage() {
         7,
         `react test coin`,
         `#React #Css #JavaScript #Github #API`,
-        `간략 소개 : create react app을 통하여 생성이 되었으며 처음으로 react로 생성해본 페이지 입니다. react를 git에 올리는 방법이나 기초 문법등을 연습한 페이지 입니다.`,
+        `간략 소개 : create react app을 통하여 생성이 되었으며 react로 git에 배포까지 해봤던 페이지 입니다. react를 git에 올리는 방법이나 기초 문법등을 연습한 페이지 입니다.`,
         `/React-coin_pc.png`,
         `/React-coin_mo.png`,
         `https://cgm-style.github.io/coinTest/`
@@ -754,7 +754,7 @@ function firstPage() {
         `http://www.yonsei-dental.com/`
       );
       addPfArea(
-        10,
+        10, 
         `법무법인 해성`,
         `#Html #Css #Jquery #Plugin #반응형`,
         `간략 소개 : 첫 회사에서 진행한 사이트로 카페24에서 하드코딩으로 제작된 페이지입니다. 처음으로 클라이언트와 직접 소통하며 니즈를 파악하고 진행한 페이지입니다.`,
@@ -1083,9 +1083,7 @@ function firstPage() {
         return false;
       }
       size += 0.1;
-      mouseMoveCursor.style.transform = `translateX(${
-        mouseMoveX - 230 * size
-      }px) translateY(${mouseMoveY - 230 * size}px) scale(${size})`;
+      mouseMoveCursor.style.transform = `translateX(${mouseMoveX - 230 * size}px) translateY(${mouseMoveY - 230 * size}px) scale(${size})`;
     }
 
     function sizeDownMove() {
