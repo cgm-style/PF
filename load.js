@@ -502,7 +502,7 @@ themaWrap.addEventListener("click",()=>{
   themaWrap.classList.toggle("active");
 })
 
-function addThema(themaNum,themaTitle,themaMainColor,themaSubColor,bgImg,bgImgBlack,bgColor){  // 테마 변경 부분 | 테마넘버,테마이름,메인컬러,서브컬러,중앙이미지,중앙이미지흑백,중앙배경색
+function addThema(themaNum,themaTitle,themaMainColor,themaSubColor,bgImg,bgImgBlack,bgColor,thmeaCssColor1,thmeaCssColor2,thmeaCssColor3){  // 테마 변경 부분 | 테마넘버,테마이름,메인컬러,서브컬러,중앙이미지,중앙이미지흑백,중앙배경색
   themaWrap.appendChild(eval(`themaContainer${themaNum} = document.createElement("div")`));
   eval(`themaContainer${themaNum}`).appendChild(eval(`themaContainer${themaNum}Inner = document.createElement("div")`));
   eval(`themaContainer${themaNum}`).appendChild(eval(`themaContainer${themaNum}Title = document.createElement("p")`));
@@ -551,73 +551,89 @@ function addThema(themaNum,themaTitle,themaMainColor,themaSubColor,bgImg,bgImgBl
 
     const addThemaStyle = document.createElement("style");
     document.head.appendChild(addThemaStyle);
-    // 각 테마마다 눌렸을때
-    if(themaNum === 1)  {
-      // 테마 스타일 변경
-      addThemaStyle.innerHTML=`
-        .codeWrap,.weatherWrap,.calculatorWrap {border: 3px solid rgb(253, 203, 241);}
-        #firstBg,.weatherWrapContainer,.playerContainer,.playerWrap .addTopBtnContainer  {background: rgb(255, 245, 228)}
-        #firstliLastInput,.calculatorLi {background: rgb(255, 245, 228); color: hotpink; border: 0px;}
-        .calculatorInput  {background:rgb(255, 245, 228); color:hotpink; border-bottom:2px solid hotpink}
-        .addTopBtnContainer {background:rgb(253, 203, 241);}
-        .weatherWrapPlace {color:rgb(253, 203, 241)}
-        .playerWrap {border:1px solid rgb(255, 245, 228);
-          box-shadow :
-          0 2px 2px rgb(253, 203, 241 / 25%),
-          0 4px 4px rgb(253, 203, 241 / 20%),
-          0 8px 8px rgb(253, 203, 241 / 15%),
-          0 16px 16px rgb(253, 203, 241 / 10%),
-          0 24px 24px rgb(253, 203, 241 / 5%)
-        }
-        #footerWrap {background: pink;}
-        .weatherWrapTemperature,.weatherWrapWeacther i {background-image:${themaMainColor}}
-        #firstBg::-webkit-scrollbar {background-color: hotpink;}
-        #firstliLastButton  {background:hotpink;}
-        .firstLi  {color: hotpink;}
-        .firstLiDiv {border-right: 1px solid indianred;}
-      `
-      // 노래 리스트 변경
-      songList = [
-        `music/Spring Fling - TrackTribe.mp3`,
-        `music/English Country Garden - Aaron Kenny.mp3`,
-        `music/No.9_Esther’s Waltz - Esther Abrami.mp3`,
-        `music/Swans In Flight - Asher Fulero.mp3`
-      ]
-    }else if (themaNum === 2){
-      addThemaStyle.innerHTML=`
-        .codeWrap,.weatherWrap,.calculatorWrap {border: 3px solid #4facfe;}
-        #firstBg,.weatherWrapContainer,.playerContainer,.playerWrap .addTopBtnContainer  {background: #E1FFEE}
-        #firstliLastInput,.calculatorLi {background: #E1FFEE; color: #68e0cf; border: 0px;}
-        .calculatorInput  {background:#E1FFEE; color:#68e0cf; border-bottom:2px solid #68e0cf}
-        .addTopBtnContainer {background:#4facfe;}
-        .weatherWrapPlace,.playerContainerUrlTitelP,.playerContainerUrlTitelP2 {color:#4facfe}
-        .playerWrap {border:1px solid #E1FFEE;
-          box-shadow :
-            0 2px 2px rgb(253 203 241 / 25%),
-            0 4px 4px rgb(253 203 241 / 20%),
-            0 8px 8px rgb(253 203 241 / 15%),
-            0 16px 16px rgb(253 203 241 / 10%),
-            0 24px 24px rgb(253 203 241 / 5%);
-        }
-        .playerContainerControllerOnOff svg,.playerContainerUrlInnerDiv svg path {fill:#4facfe;}
-        .playerContainerControllerOnOff,.playerContainerUrlInnerDiv {border:2px solid #4facfe;}
-        #footerWrap {background: #68e0cf;}
-        .weatherWrapTemperature,.weatherWrapWeacther i,.playerContainerControllerNext,.playerContainerControllerPrev {background-image:${themaMainColor}}
-        #firstBg::-webkit-scrollbar {background-color: #68e0cf;}
-        #firstliLastButton  {background:#68e0cf;}
-        .firstLi  {color: #68e0cf;}
-        .firstLiDiv {border-right: 1px solid #68e0cf;}
-      `
+    // 테마 스타일 변경
+    addThemaStyle.innerHTML=`
+      .codeWrap,.weatherWrap,.calculatorWrap {border: 3px solid rgb(${thmeaCssColor1});}
+      #firstBg,.weatherWrapContainer,.playerContainer,.playerWrap .addTopBtnContainer  {background: rgb(${thmeaCssColor2})}
+      #firstliLastInput,.calculatorLi {background: rgb(${thmeaCssColor2}); color: rgb(${thmeaCssColor3}); border: 0px;}
+      .calculatorInput  {background:rgb(${thmeaCssColor2}); color:rgb(${thmeaCssColor3}); border-bottom:2px solid rgb(${thmeaCssColor3})}
+      .addTopBtnContainer {background:rgb(${thmeaCssColor1});}
+      .weatherWrapPlace {color:rgb(${thmeaCssColor1})}
+      .playerWrap {border:1px solid rgb(${thmeaCssColor2});
+        box-shadow :
+        0 2px 2px rgb(${thmeaCssColor1} / 25%),
+        0 4px 4px rgb(${thmeaCssColor1} / 20%),
+        0 8px 8px rgb(${thmeaCssColor1} / 15%),
+        0 16px 16px rgb(${thmeaCssColor1} / 10%),
+        0 24px 24px rgb(${thmeaCssColor1} / 5%)
+      }
+      .playerContainerControllerOnOff svg,.playerContainerUrlInnerDiv svg path {fill:rgb(${thmeaCssColor1});}
+      .playerContainerControllerOnOff,.playerContainerUrlInnerDiv {border:2px solid rgb(${thmeaCssColor1});}
+      #footerWrap {background: rgb(${thmeaCssColor3});}
+      .weatherWrapTemperature,.weatherWrapWeacther i,.playerWrap .addTopBtnContainerTitle {background-image:${themaMainColor}}
+      #firstBg::-webkit-scrollbar {background-color: rgb(${thmeaCssColor3});}
+      .footerIconWrapDiv svg path {fill:rgb(${thmeaCssColor2})}
+      .footerIconWrapDiv svg g  {stroke:rgb(${thmeaCssColor2})}
+      #firstliLastButton  {background:rgb(${thmeaCssColor3});}
+      .firstLi,.playerContainerUrlTitelP, .playerContainerUrlTitelP2  {color: rgb(${thmeaCssColor3});}
+      .firstLiDiv {border-right: 1px solid rgb(${thmeaCssColor3});}
+    `
+    let springSongList = [  // 계절마다 플레이 리스트
+      `music/Spring Fling - TrackTribe.mp3`,
+      `music/English Country Garden - Aaron Kenny.mp3`,
+      `music/No.9_Esther’s Waltz - Esther Abrami.mp3`,
+      `music/Swans In Flight - Asher Fulero.mp3`
+    ],
+    summerSongLise = [
+      `music/Meet & Fun! - Ofshane.mp3`,
+      `music/Uh Oh - Slynk.mp3`,
+      `music/Chunk - Quincas Moreira.mp3`,
+      `music/Blue Nude - Verified Picasso.mp3`
+    ],
+    fallSongLise = [
+      `music/In Memory of Jean Talon - The Mini Vandals.mp3`,
+      `music/Meeka - Steve Adams.mp3`,
+      `music/Frolic - E's Jammy Jams.mp3`,
+      `music/Sea of Ancestry - Jesse Gallagher.mp3`
+    ],
+    winterSongLise = [
+      `music/In Memory of Jean Talon - The Mini Vandals.mp3`,
+      `music/Meeka - Steve Adams.mp3`,
+      `music/Frolic - E's Jammy Jams.mp3`,
+      `music/Sea of Ancestry - Jesse Gallagher.mp3`
+    ],
+    halloweenSongLise = [
+      `music/In Memory of Jean Talon - The Mini Vandals.mp3`,
+      `music/Meeka - Steve Adams.mp3`,
+      `music/Frolic - E's Jammy Jams.mp3`,
+      `music/Sea of Ancestry - Jesse Gallagher.mp3`
+    ],
+    christmasSongLise = [
+      `music/In Memory of Jean Talon - The Mini Vandals.mp3`,
+      `music/Meeka - Steve Adams.mp3`,
+      `music/Frolic - E's Jammy Jams.mp3`,
+      `music/Sea of Ancestry - Jesse Gallagher.mp3`
+    ];
+
+    themaNumCheck = { // if문의 다른 활용법을 위한 오브젝트 장점 else if문이 길어지면 else if () {}이런식의 문이 많아지나 이 방법은 키: 값 만 적으면 가능하기에 유지보수와 보기에 편함
+      1 : songList = springSongList,
+      2 : songList = summerSongLise,
+      3 : songList = fallSongLise,
+      4 : songList = winterSongLise,
+      5 : songList = halloweenSongLise,
+      6 : songList = christmasSongLise
     }
+
+    themaNumCheck[themaNum] // 유사 if문 실행
     
   })
 }
-addThema(1,"Spring",`linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%)`,"#FFF5E4",`/img/Spring.png`,true,`linear-gradient(-20deg, #ddd6f3 0%, #faaca8 100%, #faaca8 100%)`);
-addThema(2,"Summer",`linear-gradient(to right, #4facfe 0%, #00f2fe 100%)`,"#E1FFEE",`/img/Summer.png`,true,`linear-gradient(to top, #209cff 0%, #68e0cf 100%)`);
-addThema(3,"Fall",`linear-gradient(to right, #594545 0%, #9E7676 100%)`,"#D0B8A8",`/img/Fall.png`,true,`linear-gradient(to top, #c79081 0%, #dfa579 100%)`);
-addThema(3,"Winter",`linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)`,"#f5f7fa",`/img/Winter.png`,true,`linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)`);
-addThema(4,"Halloween",`linear-gradient(45deg, #420516 0%, #000000 100%)`,"#FF7600",`/img/Halloween.png`,true,`linear-gradient(-60deg, #ff5858 0%, #f09819 100%)`);
-addThema(5,"Christmas",`linear-gradient(45deg, #E84A5F 0%, #A20A0A 100%)`,"#4E9525",`/img/Christmas.png`,false,`linear-gradient(120deg, #f6d365 0%, #fda085 100%)`);
+addThema(1,"Spring",`linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%)`,"#FFF5E4",`/img/Spring.png`,true,`linear-gradient(-20deg, #ddd6f3 0%, #faaca8 100%, #faaca8 100%)`,"253, 203, 241","255, 245, 228","255, 153, 255");
+addThema(2,"Summer",`linear-gradient(to right, #4facfe 0%, #00f2fe 100%)`,"#E1FFEE",`/img/Summer.png`,true,`linear-gradient(to top, #209cff 0%, #68e0cf 100%)`,`79, 172, 254`,`225, 255, 238`,`104, 224, 207`);
+addThema(3,"Fall",`linear-gradient(to right, #594545 0%, #9E7676 100%)`,"#D0B8A8",`/img/Fall.png`,true,`linear-gradient(to top, #c79081 0%, #dfa579 100%)`,`89,	69,	69`,`208,	184,	168`,`186, 124, 43`);
+addThema(3,"Winter",`linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)`,"#f5f7fa",`/img/Winter.png`,true,`linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)`,`161,	196,	253`,`245,	247,	250`,`142,	197,	252`);
+addThema(4,"Halloween",`linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)`,"#FF7600",`/img/Halloween.png`,true,`linear-gradient(-60deg, #ff5858 0%, #f09819 100%)`,`66,	5,	22`,`255,	118,	0`,`165, 42, 25`);
+addThema(5,"Christmas",`linear-gradient(45deg, #E84A5F 0%, #A20A0A 100%)`,"#4E9525",`/img/Christmas.png`,false,`linear-gradient(120deg, #f6d365 0%, #fda085 100%)`,`232,	74,	95`,`78,	149,	37`,`253,	205,	51`);
 addThema(6,"yourChoise","black","black");
 
 function addPlayer() {
