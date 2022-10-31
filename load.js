@@ -597,22 +597,22 @@ function addThema(themaNum,themaTitle,themaMainColor,themaSubColor,bgImg,bgImgBl
       `music/Sea of Ancestry - Jesse Gallagher.mp3`
     ],
     winterSongLise = [
-      `music/In Memory of Jean Talon - The Mini Vandals.mp3`,
-      `music/Meeka - Steve Adams.mp3`,
-      `music/Frolic - E's Jammy Jams.mp3`,
-      `music/Sea of Ancestry - Jesse Gallagher.mp3`
+      `music/The Thought of You - TrackTribe.mp3`,
+      `music/Cocktail Hour - Aaron Kenny.mp3`,
+      `music/Walk Through the Park - TrackTribe.mp3`,
+      `music/Home for the Holidays - TrackTribe.mp3`
     ],
     halloweenSongLise = [
-      `music/In Memory of Jean Talon - The Mini Vandals.mp3`,
-      `music/Meeka - Steve Adams.mp3`,
-      `music/Frolic - E's Jammy Jams.mp3`,
-      `music/Sea of Ancestry - Jesse Gallagher.mp3`
+      `music/Bay Street Billionaires - Squadda B.mp3`,
+      `music/Diggy - Patrick Patrikios.mp3`,
+      `music/Oaxacan Tradition - Jimena Contreras.mp3`,
+      `music/Skeleton Dance - Myuu.mp3`
     ],
     christmasSongLise = [
-      `music/In Memory of Jean Talon - The Mini Vandals.mp3`,
-      `music/Meeka - Steve Adams.mp3`,
-      `music/Frolic - E's Jammy Jams.mp3`,
-      `music/Sea of Ancestry - Jesse Gallagher.mp3`
+      `music/Snow Princess - Jimena Contreras.mp3`,
+      `music/Christmas Village - Aaron Kenny.mp3`,
+      `music/Home for the Holidays - TrackTribe.mp3`,
+      `music/Christmas Homecoming - Aaron Kenny.mp3`
     ];
 
     themaNumCheck = { // if문의 다른 활용법을 위한 오브젝트 장점 else if문이 길어지면 else if () {}이런식의 문이 많아지나 이 방법은 키: 값 만 적으면 가능하기에 유지보수와 보기에 편함
