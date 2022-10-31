@@ -31,6 +31,8 @@ function askForCoords() {
 let nextNum = 0,
   runEvent = false,
   loadText = true,
+  audio = new Audio("music/A Typical Ride Out - Noir Et Blanc Vie.mp3"), // 디폴트값의 노래
+  themaOn = false,
   time = Intl.DateTimeFormat("kr", {
     dateStyle: "full",
     timeStyle: "full",
@@ -502,140 +504,6 @@ themaWrap.addEventListener("click",()=>{
   themaWrap.classList.toggle("active");
 })
 
-function addThema(themaNum,themaTitle,themaMainColor,themaSubColor,bgImg,bgImgBlack,bgColor,thmeaCssColor1,thmeaCssColor2,thmeaCssColor3){  // 테마 변경 부분 | 테마넘버,테마이름,메인컬러,서브컬러,중앙이미지,중앙이미지흑백,중앙배경색
-  themaWrap.appendChild(eval(`themaContainer${themaNum} = document.createElement("div")`));
-  eval(`themaContainer${themaNum}`).appendChild(eval(`themaContainer${themaNum}Inner = document.createElement("div")`));
-  eval(`themaContainer${themaNum}`).appendChild(eval(`themaContainer${themaNum}Title = document.createElement("p")`));
-  eval(`themaContainer${themaNum}Inner`).appendChild(eval(`themaContainer${themaNum}Color1 = document.createElement("div")`));
-  eval(`themaContainer${themaNum}Inner`).appendChild(eval(`themaContainer${themaNum}Color2 = document.createElement("div")`));
-
-  eval(`themaContainer${themaNum}`).className = `themaContainer`;
-  eval(`themaContainer${themaNum}Title`).className = `themaContainerTitle`;
-  eval(`themaContainer${themaNum}Inner`).className = `themaContainerInner`;
-  eval(`themaContainer${themaNum}Color1`).className = `themaContainerColor`;
-  eval(`themaContainer${themaNum}Color2`).className = `themaContainerColor`;
-
-  eval(`themaContainer${themaNum}Title`).innerText = themaTitle;
-  eval(`themaContainer${themaNum}Color1`).style.background = themaMainColor;
-  eval(`themaContainer${themaNum}Color2`).style.background = themaSubColor;
-
-  eval(`themaContainer${themaNum}`).addEventListener("click",()=>{  //  테마 색상대로 실질적 변경
-    mainWrap.style.border = `70px solid ${themaSubColor}`;  // 메인 border색상
-    mainWrap.style.background = `${themaMainColor}`;  // 메인 배경색상
-
-    mainWrapBgTree.style.backgroundImage = `url(${bgImg})`; // 메인 중앙 이미지
-    if(bgImgBlack === false){
-      mainWrapBgTree.style.filter = `blur(.5px)`; // 메인 중앙 이미지 흑백 처리
-    }else if(bgImgBlack === true){
-      mainWrapBgTree.style.filter = `brightness(0%) blur(.5px)`;
-    }
-    mainWrapBgGradient.style.backgroundImage= bgColor; // 메인 중앙 배경 컬러
-    mainWrapBg.style.boxShadow = `0px 0px 50px 0px ${themaSubColor}`;
-
-    const testOut = document.styleSheets[5];  // 텍스트 쉐도우
-    for(i=0;i <= testOut.rules.length-1; i++){
-      if(testOut.rules[i].cssText.indexOf("@keyframes textFlicker") != -1){ 
-        testOut.rules[i].appendRule(`0%, 18%, 22%, 25%, 53%, 57%, 100% {
-          text-shadow:
-          0 0 4px #fff,
-          0 0 11px #fff,
-          0 0 19px #fff,
-          0 0 40px ${themaSubColor} ,
-          0 0 80px ${themaSubColor} ,
-          0 0 90px ${themaSubColor} ,
-          0 0 100px ${themaSubColor} ,
-          0 0 150px ${themaSubColor} ;
-        }`)
-      }
-    }
-
-    const addThemaStyle = document.createElement("style");
-    document.head.appendChild(addThemaStyle);
-    // 테마 스타일 변경
-    addThemaStyle.innerHTML=`
-      .codeWrap,.weatherWrap,.calculatorWrap {border: 3px solid rgb(${thmeaCssColor1});}
-      #firstBg,.weatherWrapContainer,.playerContainer,.playerWrap .addTopBtnContainer  {background: rgb(${thmeaCssColor2})}
-      #firstliLastInput,.calculatorLi {background: rgb(${thmeaCssColor2}); color: rgb(${thmeaCssColor3}); border: 0px;}
-      .calculatorInput  {background:rgb(${thmeaCssColor2}); color:rgb(${thmeaCssColor3}); border-bottom:2px solid rgb(${thmeaCssColor3})}
-      .addTopBtnContainer {background:rgb(${thmeaCssColor1});}
-      .weatherWrapPlace {color:rgb(${thmeaCssColor1})}
-      .playerWrap {border:1px solid rgb(${thmeaCssColor2});
-        box-shadow :
-        0 2px 2px rgb(${thmeaCssColor1} / 25%),
-        0 4px 4px rgb(${thmeaCssColor1} / 20%),
-        0 8px 8px rgb(${thmeaCssColor1} / 15%),
-        0 16px 16px rgb(${thmeaCssColor1} / 10%),
-        0 24px 24px rgb(${thmeaCssColor1} / 5%)
-      }
-      .playerContainerControllerOnOff svg,.playerContainerUrlInnerDiv svg path {fill:rgb(${thmeaCssColor1});}
-      .playerContainerControllerOnOff,.playerContainerUrlInnerDiv {border:2px solid rgb(${thmeaCssColor1});}
-      #footerWrap {background: rgb(${thmeaCssColor3});}
-      .weatherWrapTemperature,.weatherWrapWeacther i,.playerWrap .addTopBtnContainerTitle {background-image:${themaMainColor}}
-      #firstBg::-webkit-scrollbar {background-color: rgb(${thmeaCssColor3});}
-      .footerIconWrapDiv svg path {fill:rgb(${thmeaCssColor2})}
-      .footerIconWrapDiv svg g  {stroke:rgb(${thmeaCssColor2})}
-      #firstliLastButton  {background:rgb(${thmeaCssColor3});}
-      .firstLi,.playerContainerUrlTitelP, .playerContainerUrlTitelP2  {color: rgb(${thmeaCssColor3});}
-      .firstLiDiv {border-right: 1px solid rgb(${thmeaCssColor3});}
-    `
-    let springSongList = [  // 계절마다 플레이 리스트
-      `music/Spring Fling - TrackTribe.mp3`,
-      `music/English Country Garden - Aaron Kenny.mp3`,
-      `music/No.9_Esther’s Waltz - Esther Abrami.mp3`,
-      `music/Swans In Flight - Asher Fulero.mp3`
-    ],
-    summerSongLise = [
-      `music/Meet & Fun! - Ofshane.mp3`,
-      `music/Uh Oh - Slynk.mp3`,
-      `music/Chunk - Quincas Moreira.mp3`,
-      `music/Blue Nude - Verified Picasso.mp3`
-    ],
-    fallSongLise = [
-      `music/In Memory of Jean Talon - The Mini Vandals.mp3`,
-      `music/Meeka - Steve Adams.mp3`,
-      `music/Frolic - E's Jammy Jams.mp3`,
-      `music/Sea of Ancestry - Jesse Gallagher.mp3`
-    ],
-    winterSongLise = [
-      `music/The Thought of You - TrackTribe.mp3`,
-      `music/Cocktail Hour - Aaron Kenny.mp3`,
-      `music/Walk Through the Park - TrackTribe.mp3`,
-      `music/Home for the Holidays - TrackTribe.mp3`
-    ],
-    halloweenSongLise = [
-      `music/Bay Street Billionaires - Squadda B.mp3`,
-      `music/Diggy - Patrick Patrikios.mp3`,
-      `music/Oaxacan Tradition - Jimena Contreras.mp3`,
-      `music/Skeleton Dance - Myuu.mp3`
-    ],
-    christmasSongLise = [
-      `music/Snow Princess - Jimena Contreras.mp3`,
-      `music/Christmas Village - Aaron Kenny.mp3`,
-      `music/Home for the Holidays - TrackTribe.mp3`,
-      `music/Christmas Homecoming - Aaron Kenny.mp3`
-    ];
-
-    themaNumCheck = { // if문의 다른 활용법을 위한 오브젝트 장점 else if문이 길어지면 else if () {}이런식의 문이 많아지나 이 방법은 키: 값 만 적으면 가능하기에 유지보수와 보기에 편함
-      1 : songList = springSongList,
-      2 : songList = summerSongLise,
-      3 : songList = fallSongLise,
-      4 : songList = winterSongLise,
-      5 : songList = halloweenSongLise,
-      6 : songList = christmasSongLise
-    }
-
-    themaNumCheck[themaNum] // 유사 if문 실행
-    
-  })
-}
-addThema(1,"Spring",`linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%)`,"#FFF5E4",`/img/Spring.png`,true,`linear-gradient(-20deg, #ddd6f3 0%, #faaca8 100%, #faaca8 100%)`,"253, 203, 241","255, 245, 228","255, 153, 255");
-addThema(2,"Summer",`linear-gradient(to right, #4facfe 0%, #00f2fe 100%)`,"#E1FFEE",`/img/Summer.png`,true,`linear-gradient(to top, #209cff 0%, #68e0cf 100%)`,`79, 172, 254`,`225, 255, 238`,`104, 224, 207`);
-addThema(3,"Fall",`linear-gradient(to right, #594545 0%, #9E7676 100%)`,"#D0B8A8",`/img/Fall.png`,true,`linear-gradient(to top, #c79081 0%, #dfa579 100%)`,`89,	69,	69`,`208,	184,	168`,`186, 124, 43`);
-addThema(3,"Winter",`linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)`,"#f5f7fa",`/img/Winter.png`,true,`linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)`,`161,	196,	253`,`245,	247,	250`,`142,	197,	252`);
-addThema(4,"Halloween",`linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)`,"#FF7600",`/img/Halloween.png`,true,`linear-gradient(-60deg, #ff5858 0%, #f09819 100%)`,`66,	5,	22`,`255,	118,	0`,`165, 42, 25`);
-addThema(5,"Christmas",`linear-gradient(45deg, #E84A5F 0%, #A20A0A 100%)`,"#4E9525",`/img/Christmas.png`,false,`linear-gradient(120deg, #f6d365 0%, #fda085 100%)`,`232,	74,	95`,`78,	149,	37`,`253,	205,	51`);
-addThema(6,"yourChoise","black","black");
-
 function addPlayer() {
   // 플레이어 생성
   const playerWrap = document.createElement("div"),
@@ -704,7 +572,6 @@ function addPlayer() {
   playerContainerUrlInnerVolume.max = "100";
 
   let onOff = false; // 재생 유무
-  let audio = new Audio("music/A Typical Ride Out - Noir Et Blanc Vie.mp3"); // 디폴트값의 노래
   audio.pause();
   let sec = 0; // 노래 진행 시간초
   let songCount = 0; // 플레이 리스트 넘버 체크
@@ -983,7 +850,151 @@ function addPlayer() {
     }
   });
   moveWrapAction(); // 창 이동 이벤트 재 할당
+
+  function addThema(themaNum,themaTitle,themaMainColor,themaSubColor,bgImg,bgImgBlack,bgColor,thmeaCssColor1,thmeaCssColor2,thmeaCssColor3){  // 테마 변경 부분 | 테마넘버,테마이름,메인컬러,서브컬러,중앙이미지,중앙이미지흑백,중앙배경색
+    if(themaOn === true){
+      return false;
+    }
+    
+    themaWrap.appendChild(eval(`themaContainer${themaNum} = document.createElement("div")`));
+    eval(`themaContainer${themaNum}`).appendChild(eval(`themaContainer${themaNum}Inner = document.createElement("div")`));
+    eval(`themaContainer${themaNum}`).appendChild(eval(`themaContainer${themaNum}Title = document.createElement("p")`));
+    eval(`themaContainer${themaNum}Inner`).appendChild(eval(`themaContainer${themaNum}Color1 = document.createElement("div")`));
+    eval(`themaContainer${themaNum}Inner`).appendChild(eval(`themaContainer${themaNum}Color2 = document.createElement("div")`));
+  
+    eval(`themaContainer${themaNum}`).className = `themaContainer`;
+    eval(`themaContainer${themaNum}Title`).className = `themaContainerTitle`;
+    eval(`themaContainer${themaNum}Inner`).className = `themaContainerInner`;
+    eval(`themaContainer${themaNum}Color1`).className = `themaContainerColor`;
+    eval(`themaContainer${themaNum}Color2`).className = `themaContainerColor`;
+  
+    eval(`themaContainer${themaNum}Title`).innerText = themaTitle;
+    eval(`themaContainer${themaNum}Color1`).style.background = themaMainColor;
+    eval(`themaContainer${themaNum}Color2`).style.background = themaSubColor;
+  
+    eval(`themaContainer${themaNum}`).addEventListener("click",()=>{  //  테마 색상대로 실질적 변경
+      mainWrap.style.border = `70px solid ${themaSubColor}`;  // 메인 border색상
+      mainWrap.style.background = `${themaMainColor}`;  // 메인 배경색상
+  
+      mainWrapBgTree.style.backgroundImage = `url(${bgImg})`; // 메인 중앙 이미지
+      if(bgImgBlack === false){
+        mainWrapBgTree.style.filter = `blur(.5px)`; // 메인 중앙 이미지 흑백 처리
+      }else if(bgImgBlack === true){
+        mainWrapBgTree.style.filter = `brightness(0%) blur(.5px)`;
+      }
+      mainWrapBgGradient.style.backgroundImage= bgColor; // 메인 중앙 배경 컬러
+      mainWrapBg.style.boxShadow = `0px 0px 50px 0px ${themaSubColor}`;
+  
+      const testOut = document.styleSheets[5];  // 텍스트 쉐도우
+      for(i=0;i <= testOut.rules.length-1; i++){
+        if(testOut.rules[i].cssText.indexOf("@keyframes textFlicker") != -1){ 
+          testOut.rules[i].appendRule(`0%, 18%, 22%, 25%, 53%, 57%, 100% {
+            text-shadow:
+            0 0 4px #fff,
+            0 0 11px #fff,
+            0 0 19px #fff,
+            0 0 40px ${themaSubColor} ,
+            0 0 80px ${themaSubColor} ,
+            0 0 90px ${themaSubColor} ,
+            0 0 100px ${themaSubColor} ,
+            0 0 150px ${themaSubColor} ;
+          }`)
+        }
+      }
+  
+      const addThemaStyle = document.createElement("style");
+      document.head.appendChild(addThemaStyle);
+      // 테마 스타일 변경
+      addThemaStyle.innerHTML=`
+        .codeWrap,.weatherWrap,.calculatorWrap {border: 3px solid rgb(${thmeaCssColor1});}
+        #firstBg,.weatherWrapContainer,.playerContainer,.playerWrap .addTopBtnContainer  {background: rgb(${thmeaCssColor2})}
+        #firstliLastInput,.calculatorLi {background: rgb(${thmeaCssColor2}); color: rgb(${thmeaCssColor3}); border: 0px;}
+        .calculatorInput  {background:rgb(${thmeaCssColor2}); color:rgb(${thmeaCssColor3}); border-bottom:2px solid rgb(${thmeaCssColor3})}
+        .addTopBtnContainer {background:rgb(${thmeaCssColor1});}
+        .weatherWrapPlace {color:rgb(${thmeaCssColor1})}
+        .playerWrap {border:1px solid rgb(${thmeaCssColor2});
+          box-shadow :
+          0 2px 2px rgb(${thmeaCssColor1} / 25%),
+          0 4px 4px rgb(${thmeaCssColor1} / 20%),
+          0 8px 8px rgb(${thmeaCssColor1} / 15%),
+          0 16px 16px rgb(${thmeaCssColor1} / 10%),
+          0 24px 24px rgb(${thmeaCssColor1} / 5%)
+        }
+        .playerContainerControllerOnOff svg,.playerContainerUrlInnerDiv svg path {fill:rgb(${thmeaCssColor1});}
+        .playerContainerControllerOnOff,.playerContainerUrlInnerDiv {border:2px solid rgb(${thmeaCssColor1});}
+        #footerWrap {background: rgb(${thmeaCssColor3});}
+        .weatherWrapTemperature,.weatherWrapWeacther i,.playerWrap .addTopBtnContainerTitle {background-image:${themaMainColor}}
+        #firstBg::-webkit-scrollbar {background-color: rgb(${thmeaCssColor3});}
+        .footerIconWrapDiv svg path {fill:rgb(${thmeaCssColor2})}
+        .footerIconWrapDiv svg g  {stroke:rgb(${thmeaCssColor2})}
+        #firstliLastButton  {background:rgb(${thmeaCssColor3});}
+        .firstLi,.playerContainerUrlTitelP, .playerContainerUrlTitelP2  {color: rgb(${thmeaCssColor3});}
+        .firstLiDiv {border-right: 1px solid rgb(${thmeaCssColor3});}
+      `
+      let springSongList = [  // 계절마다 플레이 리스트
+        `music/Spring Fling - TrackTribe.mp3`,
+        `music/English Country Garden - Aaron Kenny.mp3`,
+        `music/No.9_Esther’s Waltz - Esther Abrami.mp3`,
+        `music/Swans In Flight - Asher Fulero.mp3`
+      ],
+      summerSongLise = [
+        `music/Meet & Fun! - Ofshane.mp3`,
+        `music/Uh Oh - Slynk.mp3`,
+        `music/Chunk - Quincas Moreira.mp3`,
+        `music/Blue Nude - Verified Picasso.mp3`
+      ],
+      fallSongLise = [
+        `music/In Memory of Jean Talon - The Mini Vandals.mp3`,
+        `music/Meeka - Steve Adams.mp3`,
+        `music/Frolic - E's Jammy Jams.mp3`,
+        `music/Sea of Ancestry - Jesse Gallagher.mp3`
+      ],
+      winterSongLise = [
+        `music/The Thought of You - TrackTribe.mp3`,
+        `music/Cocktail Hour - Aaron Kenny.mp3`,
+        `music/Walk Through the Park - TrackTribe.mp3`,
+        `music/Home for the Holidays - TrackTribe.mp3`
+      ],
+      halloweenSongLise = [
+        `music/Diggy - Patrick Patrikios.mp3`,
+        `music/Bay Street Billionaires - Squadda B.mp3`,
+        `music/Oaxacan Tradition - Jimena Contreras.mp3`,
+        `music/Skeleton Dance - Myuu.mp3`
+      ],
+      christmasSongLise = [
+        `music/Snow Princess - Jimena Contreras.mp3`,
+        `music/Christmas Village - Aaron Kenny.mp3`,
+        `music/Home for the Holidays - TrackTribe.mp3`,
+        `music/Christmas Homecoming - Aaron Kenny.mp3`
+      ];
+  
+      themaNumCheck = { // if문의 다른 활용법을 위한 오브젝트 장점 else if문이 길어지면 else if () {}이런식의 문이 많아지나 이 방법은 키: 값 만 적으면 가능하기에 유지보수와 보기에 편함
+        1 : springSongList,
+        2 : summerSongLise,
+        3 : fallSongLise,
+        4 : winterSongLise,
+        5 : halloweenSongLise,
+        6 : christmasSongLise
+      }
+      
+      songList = themaNumCheck[themaNum]; // 다른 방식의 else if 문 사용 songlist 교체 
+      nextSong();
+    })
+  }
+  if(themaOn === false){
+    addThema(1,"Spring",`linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%)`,"#FFF5E4",`/img/Spring.png`,true,`linear-gradient(-20deg, #ddd6f3 0%, #faaca8 100%, #faaca8 100%)`,"253, 203, 241","255, 245, 228","255, 153, 255");
+    addThema(2,"Summer",`linear-gradient(to right, #4facfe 0%, #00f2fe 100%)`,"#E1FFEE",`/img/Summer.png`,true,`linear-gradient(to top, #209cff 0%, #68e0cf 100%)`,`79, 172, 254`,`225, 255, 238`,`104, 224, 207`);
+    addThema(3,"Fall",`linear-gradient(to right, #594545 0%, #9E7676 100%)`,"#D0B8A8",`/img/Fall.png`,true,`linear-gradient(to top, #c79081 0%, #dfa579 100%)`,`89,	69,	69`,`208,	184,	168`,`186, 124, 43`);
+    addThema(4,"Winter",`linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)`,"#f5f7fa",`/img/Winter.png`,true,`linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)`,`161,	196,	253`,`245,	247,	250`,`142,	197,	252`);
+    addThema(5,"Halloween",`linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)`,"#FF7600",`/img/Halloween.png`,true,`linear-gradient(-60deg, #ff5858 0%, #f09819 100%)`,`66,	5,	22`,`255,	118,	0`,`165, 42, 25`);
+    addThema(6,"Christmas",`linear-gradient(45deg, #E84A5F 0%, #A20A0A 100%)`,"#4E9525",`/img/Christmas.png`,false,`linear-gradient(120deg, #f6d365 0%, #fda085 100%)`,`232,	74,	95`,`78,	149,	37`,`253,	205,	51`);
+    addThema(7,"yourChoise","black","black");
+    themaOn = true;
+  }
+  
 }
+
+
 if (isCheck === false) {
   //pc일때만 플레이어 기본 생성
   addPlayer();
