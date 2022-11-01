@@ -214,7 +214,9 @@ function firstPage() {
           secondSection1.style.height = `200px`; // 영상창 줄어듬
           secondSection1.style.overflow = `hidden`;
           secondSection1.style.marginTop = `70px`;
-          secondSection1.style.position = `relative`;
+          setTimeout(() => {
+            secondSection1.style.position = `relative`;
+          }, 500);
           cgmStyleWrap.style.top = `-150px`;
           cgmStyleWrap.style.width = `100%`;
           cgmStyleWrap.style.height = `auto`;
@@ -460,21 +462,21 @@ function firstPage() {
 
       mainWrap.style.cursor = `auto`;
       useSkill(1,`html5.png`,90,10);  // 넘버,이미지,내 기술%,남은 빈칸
-      useSkill(2,`css3.png`,80,20);
+      useSkill(2,`css3.png`,90,10);
       useSkill(3,`jquery.png`,80,20);
       useSkill(4,`js.png`,90,10);
-      useSkill(5,`react.png`,20,80);
+      useSkill(5,`react.png`,30,70);
       useSkill(6,`typeSript.png`,20,82);
       useSkill(7,`git.png`,60,40);
-      useSkill(8,`code.png`,60,40);
-      useSkill(9,`photo.png`,50,50);
+      useSkill(8,`code.png`,70,30);
+      useSkill(9,`photo.png`,60,40);
       useSkill(10,`Ai.png`,40,60);
       useSkill(11,`html5.png`,90,10);
-      useSkill(12,`css3.png`,80,20);
+      useSkill(12,`css3.png`,90,10);
       useSkill(13,`jquery.png`,80,20);
       useSkill(14,`js.png`,90,10);
-      useSkill(15,`react.png`,20,80);
-      useSkill(16,`typeSript.png`,20,80);
+      useSkill(15,`react.png`,30,70);
+      useSkill(16,`typeSript.png`,20,82);
       useSkill(17,`git.png`,60,40);
 
     function contact()  {
