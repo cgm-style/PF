@@ -851,7 +851,7 @@ function addPlayer() {
   });
   moveWrapAction(); // 창 이동 이벤트 재 할당
 
-  function addThema(themaNum,themaTitle,themaMainColor,themaSubColor,bgImg,bgImgBlack,bgColor,thmeaCssColor1,thmeaCssColor2,thmeaCssColor3){  // 테마 변경 부분 | 테마넘버,테마이름,메인컬러,서브컬러,중앙이미지,중앙이미지흑백,중앙배경색
+  function addThema(themaNum,themaTitle,themaMainColor,themaSubColor,bgImg,bgImgBlack,bgColor,thmeaCssColor1,thmeaCssColor2,thmeaCssColor3){  
     if(themaOn === true){
       return false;
     }
@@ -905,6 +905,7 @@ function addPlayer() {
       const addThemaStyle = document.createElement("style");
       document.head.appendChild(addThemaStyle);
       // 테마 스타일 변경
+      let thmeaCssColorReplace = thmeaCssColor1.replace(/\,/g,"");
       addThemaStyle.innerHTML=`
         .codeWrap,.weatherWrap,.calculatorWrap {border: 3px solid rgb(${thmeaCssColor1});}
         #firstBg,.weatherWrapContainer,.playerContainer,.playerWrap .addTopBtnContainer  {background: rgb(${thmeaCssColor2})}
@@ -914,11 +915,11 @@ function addPlayer() {
         .weatherWrapPlace {color:rgb(${thmeaCssColor1})}
         .playerWrap {border:1px solid rgb(${thmeaCssColor2});
           box-shadow :
-          0 2px 2px rgb(${thmeaCssColor1} / 25%),
-          0 4px 4px rgb(${thmeaCssColor1} / 20%),
-          0 8px 8px rgb(${thmeaCssColor1} / 15%),
-          0 16px 16px rgb(${thmeaCssColor1} / 10%),
-          0 24px 24px rgb(${thmeaCssColor1} / 5%)
+          0 2px 2px rgb(${thmeaCssColorReplace} / 25%),
+          0 4px 4px rgb(${thmeaCssColorReplace} / 20%),
+          0 8px 8px rgb(${thmeaCssColorReplace} / 15%),
+          0 16px 16px rgb(${thmeaCssColorReplace} / 10%),
+          0 24px 24px rgb(${thmeaCssColorReplace} / 5%)
         }
         .playerContainerControllerOnOff svg,.playerContainerUrlInnerDiv svg path {fill:rgb(${thmeaCssColor1});}
         .playerContainerControllerOnOff,.playerContainerUrlInnerDiv {border:2px solid rgb(${thmeaCssColor1});}
@@ -981,7 +982,7 @@ function addPlayer() {
       nextSong();
     })
   }
-  if(themaOn === false){
+  if(themaOn === false){// 테마 변경 부분 | 테마넘버,테마타이틀,포인트서브컬러,서브컬러,중앙이미지,중앙이미지흑백여부,중앙배경색,진한컬러,연한컬러,중간컬러
     addThema(1,"Spring",`linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%)`,"#FFF5E4",`/img/Spring.png`,true,`linear-gradient(-20deg, #ddd6f3 0%, #faaca8 100%, #faaca8 100%)`,"253, 203, 241","255, 245, 228","255, 153, 255");
     addThema(2,"Summer",`linear-gradient(to right, #4facfe 0%, #00f2fe 100%)`,"#E1FFEE",`/img/Summer.png`,true,`linear-gradient(to top, #209cff 0%, #68e0cf 100%)`,`79, 172, 254`,`225, 255, 238`,`104, 224, 207`);
     addThema(3,"Fall",`linear-gradient(to right, #594545 0%, #9E7676 100%)`,"#D0B8A8",`/img/Fall.png`,true,`linear-gradient(to top, #c79081 0%, #dfa579 100%)`,`89,	69,	69`,`208,	184,	168`,`186, 124, 43`);
