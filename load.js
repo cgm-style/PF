@@ -983,12 +983,12 @@ function addPlayer() {
     })
   }
   if(themaOn === false){// 테마 변경 부분 | 테마넘버,테마타이틀,포인트서브컬러,서브컬러,중앙이미지,중앙이미지흑백여부,중앙배경색,진한컬러,연한컬러,중간컬러
-    addThema(1,"Spring",`linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%)`,"#FFF5E4",`/img/Spring.png`,true,`linear-gradient(-20deg, #ddd6f3 0%, #faaca8 100%, #faaca8 100%)`,"253, 203, 241","255, 245, 228","255, 153, 255");
-    addThema(2,"Summer",`linear-gradient(to right, #4facfe 0%, #00f2fe 100%)`,"#E1FFEE",`/img/Summer.png`,true,`linear-gradient(to top, #209cff 0%, #68e0cf 100%)`,`79, 172, 254`,`225, 255, 238`,`104, 224, 207`);
-    addThema(3,"Fall",`linear-gradient(to right, #594545 0%, #9E7676 100%)`,"#D0B8A8",`/img/Fall.png`,true,`linear-gradient(to top, #c79081 0%, #dfa579 100%)`,`89,	69,	69`,`208,	184,	168`,`186, 124, 43`);
-    addThema(4,"Winter",`linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)`,"#f5f7fa",`/img/Winter.png`,true,`linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)`,`161,	196,	253`,`245,	247,	250`,`142,	197,	252`);
-    addThema(5,"Halloween",`linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)`,"#FF7600",`/img/Halloween.png`,true,`linear-gradient(-60deg, #ff5858 0%, #f09819 100%)`,`66,	5,	22`,`255,	118,	0`,`165, 42, 25`);
-    addThema(6,"Christmas",`linear-gradient(45deg, #E84A5F 0%, #A20A0A 100%)`,"#4E9525",`/img/Christmas.png`,false,`linear-gradient(120deg, #f6d365 0%, #fda085 100%)`,`232,	74,	95`,`78,	149,	37`,`253,	205,	51`);
+    addThema(1,"Spring",`linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%)`,"#FFF5E4",`/PF/img/Spring.png`,true,`linear-gradient(-20deg, #ddd6f3 0%, #faaca8 100%, #faaca8 100%)`,"253, 203, 241","255, 245, 228","255, 153, 255");
+    addThema(2,"Summer",`linear-gradient(to right, #4facfe 0%, #00f2fe 100%)`,"#E1FFEE",`/PF/img/Summer.png`,true,`linear-gradient(to top, #209cff 0%, #68e0cf 100%)`,`79, 172, 254`,`225, 255, 238`,`104, 224, 207`);
+    addThema(3,"Fall",`linear-gradient(to right, #594545 0%, #9E7676 100%)`,"#D0B8A8",`/PF/img/Fall.png`,true,`linear-gradient(to top, #c79081 0%, #dfa579 100%)`,`89,	69,	69`,`208,	184,	168`,`186, 124, 43`);
+    addThema(4,"Winter",`linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)`,"#f5f7fa",`/PF/img/Winter.png`,true,`linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)`,`161,	196,	253`,`245,	247,	250`,`142,	197,	252`);
+    addThema(5,"Halloween",`linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)`,"#FF7600",`/PF/img/Halloween.png`,true,`linear-gradient(-60deg, #ff5858 0%, #f09819 100%)`,`66,	5,	22`,`255,	118,	0`,`165, 42, 25`);
+    addThema(6,"Christmas",`linear-gradient(45deg, #E84A5F 0%, #A20A0A 100%)`,"#4E9525",`/PF/img/Christmas.png`,false,`linear-gradient(120deg, #f6d365 0%, #fda085 100%)`,`232,	74,	95`,`78,	149,	37`,`253,	205,	51`);
     addThema(7,"yourChoise","black","black");
     themaOn = true;
   }
@@ -1130,10 +1130,7 @@ function addWeatherBox() {
         weatherWrapContainer.appendChild(weatherWrapPlace);
 
         weatherWrapTemperature.innerText = `${temperature.toFixed()}`;
-
-        if(nowWeather.indexOf("rain") === 0) {
-          console.log("작동")
-        }
+        console.log(nowWeather);
         if (nowWeather.indexOf("Clouds") === 0) {
           // 구름
           weatherWrapWeacther.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
@@ -1149,6 +1146,10 @@ function addWeatherBox() {
         } else if (nowWeather.indexOf("strom") === 0) {
           // 천둥
           weatherWrapWeacther.innerHTML = `<i class="fa-solid fa-cloud-rain"></i>`;
+        } else if (nowWeather.indexOf("Mist") === 0) {
+          // 안개
+          weatherWrapWeacther.innerHTML = `<i class="fa-solid fa-smog"></i>`;
+          console.log("실행");
         }
         weatherWrapPlace.innerText = `${place}`;
 
