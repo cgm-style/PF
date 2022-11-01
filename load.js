@@ -926,6 +926,7 @@ function addPlayer() {
         #footerWrap {background: rgb(${thmeaCssColor3});}
         .weatherWrapTemperature,.weatherWrapWeacther i,.playerWrap .addTopBtnContainerTitle {background-image:${themaMainColor}}
         #firstBg::-webkit-scrollbar {background-color: rgb(${thmeaCssColor3});}
+        #firstBg::-webkit-scrollbar-thumb {background-color: rgb(${thmeaCssColor3});}
         .footerIconWrapDiv svg path {fill:rgb(${thmeaCssColor2})}
         .footerIconWrapDiv svg g  {stroke:rgb(${thmeaCssColor2})}
         #firstliLastButton  {background:rgb(${thmeaCssColor3});}
@@ -989,17 +990,12 @@ function addPlayer() {
     addThema(4,"Winter",`linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)`,"#f5f7fa",`/PF/img/Winter.png`,true,`linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)`,`161,	196,	253`,`245,	247,	250`,`142,	197,	252`);
     addThema(5,"Halloween",`linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)`,"#FF7600",`/PF/img/Halloween.png`,true,`linear-gradient(-60deg, #ff5858 0%, #f09819 100%)`,`66,	5,	22`,`255,	118,	0`,`165, 42, 25`);
     addThema(6,"Christmas",`linear-gradient(45deg, #E84A5F 0%, #A20A0A 100%)`,"#4E9525",`/PF/img/Christmas.png`,false,`linear-gradient(120deg, #f6d365 0%, #fda085 100%)`,`232,	74,	95`,`78,	149,	37`,`253,	205,	51`);
-    addThema(7,"yourChoise","black","black");
     themaOn = true;
   }
   
 }
 
-
-if (isCheck === false) {
-  //pc일때만 플레이어 기본 생성
-  addPlayer();
-}
+addPlayer();
 
 const mainBarEvent = () => {
   // 플레이트 컷 이벤트 내용
@@ -1041,10 +1037,13 @@ function moveWrapAction() {
   // 창 이동 함수
   let moveWrap = document.querySelectorAll(".moveWrap");
   moveWrap.forEach((move) => {
-    move.style.zIndex = "4";
     // moveWrap이라는 클래스를 가지면 움직일수있음
     if (isCheck === true) {
       move.addEventListener("touchstart", function (e) {
+        
+        moveWrap.forEach((moveZindex)=>{
+          moveZindex.style.zIndex = 4;
+        })
         // 모바일 퀵 버튼 부분 move 이벤트
         move.style.zIndex = "5";
         let shiftX =
@@ -1063,12 +1062,15 @@ function moveWrapAction() {
         });
 
         this.addEventListener("touchend", function (e) {
-          this.style.zIndex = "4";
+          this.style.zIndex = "5";
         });
       });
     } else {
       move.addEventListener("dragstart", function (e) {
         // pc 퀵 버튼 부분 move 이벤트
+        moveWrap.forEach((moveZindex)=>{
+          moveZindex.style.zIndex = 4;
+        })
         move.style.zIndex = "5";
 
         let shiftX = e.clientX + 80 - this.getBoundingClientRect().left,

@@ -224,6 +224,7 @@ html{background-color:#667eea;}
     filter:
         brightness(0%)
         blur(.5px);
+    pointer-events: none;
 }
 #mainWrapBgLines    {
     position: absolute;
@@ -238,6 +239,7 @@ html{background-color:#667eea;}
         transparent 5.25%
     );
     animation: lines linear infinite .75s;
+    pointer-events: none;
 }
 #mainWrapBgText {
     font-size: 8vh;
@@ -963,7 +965,7 @@ html{background-color:#667eea;}
 /* 모바일 반응 */
 @media (max-width: 767px){  /*모바일*/
     #wrap   {
-        border: none;
+        border: none !important;
     }
     #mainWrapBg {
         width: 71vmin;
@@ -973,6 +975,16 @@ html{background-color:#667eea;}
         font-size: 6vh;
         width: 70%;
         margin-top: -10%;
+    }
+    #themaWrap  {
+        right: 30px;
+        top: 30px;
+        width: 45px;
+        height: 45px;
+    }
+    #themaWrap.active   {
+        width: 80%;
+        height: 80%;
     }
 
     .moNavconClickHint  {
@@ -992,6 +1004,8 @@ html{background-color:#667eea;}
         width: 90%;
         height: 40%;
         left: 5%;
+        top: 30%;
+        z-index: 1;
     }
     .playerWrap .addTopBtnContainerTitle    {
         font-size: 13px;
