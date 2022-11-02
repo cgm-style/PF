@@ -1369,6 +1369,7 @@ function autoText(_, counter = 0) {
       } else if (!isNaN(set)) {
         calculatorSet = false;
       }
+
       if (set === "=") {
         // 계산 결과 도출 이벤트
         calculatorAnswerValue.push(value);
@@ -1419,7 +1420,7 @@ function autoText(_, counter = 0) {
         calculatorHintWrap.style.paddingRight = 0;
         calculatorHintWrap.innerText = ""; // 힌트 삭제
         calculatorInput.value = calculatorAnswerValue; // 연산된 값 출력
-        calculatorAnswerValue = []; // 출력후 값으 저장되었던 배열 삭제
+        calculatorAnswerValue = []; // 출력 후 값이 저장되었던 배열 삭제
       }
     }
     calculatorLi1.addEventListener("click", function (e) {
