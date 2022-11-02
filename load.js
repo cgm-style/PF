@@ -1287,7 +1287,6 @@ function autoText(_, counter = 0) {
     let allKey = document.querySelectorAll(".calculatorLi"); // 계산기 클릭시 색 변경 이벤트
     allKey.forEach((allKey) => {
       allKey.addEventListener("click", function () {
-        allKey.style.background = "dimgrey";
         setTimeout(() => {
           allKey.style.background = `linear-gradient(135deg, #2a2a2a, #000000)`;
         }, 50);
@@ -1328,7 +1327,6 @@ function autoText(_, counter = 0) {
         }
         allKey.forEach((allKey) => {
           if (downKey === allKey.innerText) {
-            allKey.style.background = "dimgrey";
             setTimeout(() => {
               allKey.style.background = `linear-gradient(135deg, #2a2a2a, #000000)`;
             }, 50);
