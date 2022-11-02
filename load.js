@@ -1331,6 +1331,9 @@ function autoText(_, counter = 0) {
             allKey.style.background = "dimgrey";
             setTimeout(() => {
               allKey.style.background = `linear-gradient(135deg, #2a2a2a, #000000)`;
+            }, 50);
+            setTimeout(() => {
+              allKey.style.background = ``;
             }, 100);
           }
         });
