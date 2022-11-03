@@ -1132,7 +1132,6 @@ function addWeatherBox() {
         weatherWrapContainer.appendChild(weatherWrapPlace);
 
         weatherWrapTemperature.innerText = `${temperature.toFixed()}`;
-        console.log(nowWeather);
         if (nowWeather.indexOf("Clouds") === 0) {
           // 구름
           weatherWrapWeacther.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
@@ -1151,7 +1150,6 @@ function addWeatherBox() {
         } else if (nowWeather.indexOf("Mist") === 0) {
           // 안개
           weatherWrapWeacther.innerHTML = `<i class="fa-solid fa-smog"></i>`;
-          console.log("실행");
         }
         weatherWrapPlace.innerText = `${place}`;
 
@@ -1440,7 +1438,6 @@ function autoText(_, counter = 0) {
       footerWrap.childNodes[4].style.background = "rgba(100, 100, 255, 0.3)";
   });
   UIBoxInnerDiv3.addEventListener("click", () => {
-      console.log("작동중");
       addWeatherBox();
       footerWrap.childNodes[3].style.background = "rgba(100, 100, 255, 0.3)";
   });
