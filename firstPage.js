@@ -127,9 +127,6 @@ function firstPage() {
   secondSection1.appendChild(menuBg);
   menuBg.appendChild(menuSpan);
 
-  const mobileText_X_Value1 = secondSection1.clientWidth / 6 + 5,
-        mobileText_X_Value2 = secondSection1.clientWidth / 10;
-
   const svgMainText = document.createElement("svg");
   secondSection1.appendChild(svgMainText);
   if (isCheck) {
