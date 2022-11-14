@@ -380,6 +380,15 @@ function firstPage() {
       );
       addPfArea(
         7,
+        `react Movie`,
+        `#React #Sass #JavaScript #Github #API #OnePage`,
+        `간략 소개 : create react app을 통하여 생성 하였으며 PC 원페이지로 제작되었습니다. 기초 react문법을 활용하며 공부하기 위해 만든 페이지로 영화 소개를 위한 페이지입니다.`,
+        `/ReactMovie-pc.png`,
+        `/ReactMovie-mo.png`,
+        `https://cgm-style.github.io/React-movie/`
+      );
+      addPfArea(
+        8,
         `react test coin`,
         `#React #Css #JavaScript #Github #API`,
         `간략 소개 : create react app을 통하여 생성이 되었으며 react로 git에 배포까지 해봤던 페이지 입니다. react를 git에 올리는 방법이나 기초 문법등을 연습한 페이지 입니다.`,
@@ -388,7 +397,7 @@ function firstPage() {
         `https://cgm-style.github.io/coinTest/`
       );
       addPfArea(
-        8,
+        9,
         `weather-Todo`,
         `#Html #Css #JavaScript #LocalStorage #Github`,
         `간략 소개 : Local Storage을 사용한 페이지로 cookie가 아닌 스토리지를 최대한 사용한 페이지 입니다. 스토리지에 다양한 데이터를 저장하고 불러오는 연습등을 진행하였습니다.`,
@@ -397,7 +406,7 @@ function firstPage() {
         `https://cgm-style.github.io/toDoList_clock_-5d-3h-weather-18h/`
       );
       addPfArea(
-        9,
+        10,
         `연세 행복 치과`,
         `#Html #Css #Jquery #Plugin`,
         `간략 소개 : 첫 회사에서 진행한 사이트로 카페24 기반이나 호스팅만 기반으로 하여 하드코딩으로 제작된 페이지입니다. php를 이용하여 제작이 되었습니다.`,
@@ -406,7 +415,7 @@ function firstPage() {
         `http://www.yonsei-dental.com/`
       );
       addPfArea(
-        10,
+        11,
         `법무법인 해성`,
         `#Html #Css #Jquery #Plugin #반응형`,
         `간략 소개 : 첫 회사에서 진행한 사이트로 카페24에서 하드코딩으로 제작된 페이지입니다. 처음으로 클라이언트와 직접 소통하며 니즈를 파악하고 진행한 페이지입니다.`,
@@ -415,7 +424,7 @@ function firstPage() {
         `http://haesunglaw.co.kr/`
       );
       addPfArea(
-        11,
+        12,
         `더울림`,
         `#Html #Css #Jquery #Plugin #반응형`,
         `간략 소개 : 첫 회사에 입사 후 처음으로 진행했던 페이지로 그때 당시에 사용하였던 제이쿼리로 다양한 플러그인들을 사용하여 제작한 페이지 입니다.`,
