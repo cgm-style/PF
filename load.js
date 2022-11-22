@@ -1323,6 +1323,15 @@ function autoText(_, counter = 0) {
           // enter의 값을 = 랑 같도록 설정
           downKey = "=";
         }
+        if (downKey === "c"||downKey === "C") {
+          // c를 초기화랑 같도록 설정
+          calculatorAnswerValue = [];
+          calculatorHintWrap.style.paddingRight = 0;
+          calculatorHintWrap.innerText = ""; // 힌트 삭제
+          setTimeout(() => {
+            calculatorInput.value = "";
+          }, 10);
+        }
         allKey.forEach((allKey) => {
           if (downKey === allKey.innerText) {
             setTimeout(() => {
@@ -1339,8 +1348,15 @@ function autoText(_, counter = 0) {
     });
 
     function calculatorAnswer(value, set) {
-      let = checkText = /[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
-      if (set === "+" || set === "-" || set === "*" || set === "/" || checkText.test(value)) {
+      let = checkText = /[ㄱ-ㅎ|가-힣|a-b|d-z|A-B|D-Z|]+$/;
+
+      if(checkText.test(value)) {
+        alert("올바른 값을 입력해주세요");
+          calculatorInput.value = "";
+          calculatorSet = true;
+          return false;
+      }
+      if (set === "+" || set === "-" || set === "*" || set === "/") {
         // 이상한 입력값 막기
         if (calculatorSet === true) {
           alert("올바른 값을 입력해주세요");
