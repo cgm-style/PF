@@ -1339,7 +1339,8 @@ function autoText(_, counter = 0) {
     });
 
     function calculatorAnswer(value, set) {
-      if (set === "+" || set === "-" || set === "*" || set === "/") {
+      let = checkText = /[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
+      if (set === "+" || set === "-" || set === "*" || set === "/" || checkText.test(value)) {
         // 이상한 입력값 막기
         if (calculatorSet === true) {
           alert("올바른 값을 입력해주세요");
