@@ -605,7 +605,7 @@ function firstPage() {
     mainWrap.appendChild(secondSection1Wrap);
     mainWrap.appendChild(secondSection2);
     mainWrap.appendChild(secondSection3);
-
+    
     secondSection1Wrap.appendChild(secondSection1WrapP);
 
     secondSection1WrapP.innerText = `portfolio`;
@@ -622,7 +622,7 @@ function firstPage() {
       eval(`secondSection1WrapDiv${num}Text`).appendChild(
         eval(`secondSection1WrapDiv${num}TextP1 = document.createElement("p")`)
       );
-      eval(`secondSection1WrapDiv${num}Text`).appendChild(
+      eval(`secondSection1WrapDiv${num}Text`).appendChild(  
         eval(`secondSection1WrapDiv${num}TextP2 = document.createElement("p")`)
       );
       eval(`secondSection1WrapDiv${num}Text`).appendChild(
